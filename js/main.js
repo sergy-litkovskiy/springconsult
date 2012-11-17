@@ -208,45 +208,6 @@ var _sendLandingAjaxPost = function($form, formFieldsList, $messBox, ajaxParams)
         };
     });
   
-////////////////////////////////////////////////////////////////
-//article subscribe container show  
-//    $("#article_subscribe").click(function(){
-//        var $containerForm  = $('#article_subscribe_form'),
-//            $form           = $('form', $containerForm);
-//           
-//        $('input[type=text]', $form).val('');
-//        $('label.error', $form).remove();
-//        
-//        showOverlay($containerForm);
-//    });
-    
-////////////////////////////////////////////////////////////////
-//article subscribe container close 
-//    $('input.subscribe_close').live('click', function(){
-//        var $this = $(this).parent().parent().parent().parent().parent().parent();
-//
-//        $this.overlay().close();
-//        return false;
-//    });
-    
-////////////////////////////////////////////////////////////////
-//send article subscribe letter
-//    $(".subscribe_action").click(function(){
-//      
-//        var $containerForm  = $('#article_subscribe_form'),
-//            $subscribeForm  = $('form.article_subscribe_form', $containerForm),
-//            $messBox        = $('#subscribe_mess'),
-//            name            = $('input#name', $subscribeForm),
-//            email           = $('input#email', $subscribeForm),
-//            formFieldsList  = 'input#name,input#email',
-//            ajaxParams      = {'data'           : {"name" : name.val() ,"email" : email.val()},
-//                                'url'           : '/subscribe/send',
-//                                'onSuccessMess' : "<p class='success'>Спасибо за подписку!<br>На Ваш e-mail отправлено письмо для подтверждения вашей подписки. Проверьте Ваш почтовый ящик - папку Входящие и СПАМ.</p>"
-//                              };
-//                              
-//            sendMessage($subscribeForm, ajaxParams, $messBox, formFieldsList, {}, $containerForm);
-//    });  
-//    
     
 ////////////////////////////////////////////////////////////////
 //send contact_form message
