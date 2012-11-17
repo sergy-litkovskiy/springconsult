@@ -1,0 +1,97 @@
+a.multiSelect {
+	background: #FFF url(dropdown.blue.png) right center no-repeat;
+	border: solid 1px #D9FEB8;
+	padding-right: 20px;
+	position: relative;
+	cursor: default;
+	text-decoration: none;
+/*	color: black;*/
+    font-size: 9pt;
+	display: -moz-inline-stack;
+	display: inline-block;
+	vertical-align: top;
+}
+
+a.multiSelect:link, a.multiSelect:visited, a.multiSelect:hover, a.multiSelect:active {
+	color: black;
+	text-decoration: none;
+}
+
+a.multiSelect span
+{
+	margin: 1px 0px 1px 3px;
+	overflow: hidden;
+	display: -moz-inline-stack;
+	display: inline-block;
+	white-space: nowrap;
+    color: #008000;
+    width: 155px;
+    text-align: left;
+}
+
+a.multiSelect.hover {
+	background-image: url(dropdown.blue.hover.png);
+}
+
+a.multiSelect.active, 
+a.multiSelect.focus {
+	border: inset 1px #000;
+}
+
+a.multiSelect.active {
+	background-image: url(dropdown.blue.active.png);
+}
+
+.multiSelectOptions {
+	margin-top: -1px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	border: solid 1px #B2B2B2;
+	background: #FFF;
+    width: 150px;
+}
+
+.multiSelectOptions LABEL {
+	padding: 0px 2px;
+	display: block;
+	white-space: nowrap;
+    text-align: left;
+    font-size: 8pt;
+    color: #333333;
+    line-height: 1em;
+}
+
+.multiSelectOptions LABEL.optGroup
+{
+	font-weight: bold;
+}
+
+.multiSelectOptions .optGroupContainer LABEL
+{
+/*	padding-left: 10px;*/
+}
+
+.multiSelectOptions.optGroupHasCheckboxes .optGroupContainer LABEL
+{
+/*	padding-left: 18px;*/
+}
+
+.multiSelectOptions input{
+	vertical-align: middle;
+}
+
+.multiSelectOptions LABEL.checked {
+	background-color: #D9FEB8;
+}
+
+.multiSelectOptions LABEL.selectAll {
+	border-bottom: dotted 1px #CCC;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+
+}
+
+.multiSelectOptions LABEL.hover {
+	background-color: #3399ff;
+	color: white;
+}

@@ -1,0 +1,72 @@
+2012-11-08 23:28:57	array (
+  'id' => 462,
+  'name' => 'testing',
+  'email' => 'avdik88@mail.ru',
+  'confirmed' => '1',
+  'unsubscribed' => 0,
+)
+2012-11-08 23:28:57	subscribe article
+2012-11-08 23:28:57	_showPopUpAlreadySubscribed
+2012-11-08 23:28:57	array (
+  'id' => 462,
+  'name' => 'testing',
+  'email' => 'avdik88@mail.ru',
+  'confirmed' => '1',
+  'unsubscribed' => 0,
+)
+2012-11-08 23:28:57	array (
+  'id' => '462',
+  'name' => 'testing',
+  'email' => 'avdik88@mail.ru',
+  'confirmed' => '1',
+  'unsubscribed' => '0',
+  'created_at' => '2012-11-08 23:28:57',
+)
+2012-11-08 23:28:57	subscribe article
+2012-11-08 23:28:57	_showPopUpAlreadySubscribed
+2012-11-08 23:28:57	array (
+  'id' => '462',
+  'name' => 'testing',
+  'email' => 'avdik88@mail.ru',
+  'confirmed' => '1',
+  'unsubscribed' => '0',
+  'created_at' => '2012-11-08 23:28:57',
+)
+2012-11-08 23:28:58	$this->result
+2012-11-08 23:28:58	array (
+  'success' => true,
+  'message' => '<p class=\'error\'>Ошибка при попытке отправить AdminSubscribeEmailMessage</p>',
+  'data' => NULL,
+  'popup' => NULL,
+)
+2012-11-08 23:28:58	$this->result
+2012-11-08 23:28:58	array (
+  'success' => true,
+  'message' => '<p class=\'error\'>Ошибка при попытке отправить AdminSubscribeEmailMessage</p>',
+  'data' => NULL,
+  'popup' => NULL,
+)
+2012-11-08 23:29:54	array (
+  'id' => 463,
+  'name' => 'test',
+  'email' => 'avdik454@mail.ru',
+  'confirmed' => '1',
+  'unsubscribed' => 0,
+)
+2012-11-08 23:29:54	subscribe article
+2012-11-08 23:29:54	_showPopUpAlreadySubscribed
+2012-11-08 23:29:54	array (
+  'id' => 463,
+  'name' => 'test',
+  'email' => 'avdik454@mail.ru',
+  'confirmed' => '1',
+  'unsubscribed' => 0,
+)
+2012-11-08 23:29:54	$this->result
+2012-11-08 23:29:54	array (
+  'success' => true,
+  'message' => NULL,
+  'data' => '<p class=\'subscribe_success\'>Добрый день, test!<br/>
+                                    Вы успешно подписались на рассылку статей по личной эффективности с сайта Spring Consult.</p>',
+  'popup' => true,
+)

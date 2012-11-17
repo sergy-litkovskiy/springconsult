@@ -1,0 +1,14 @@
+
+RewriteEngine on
+
+
+
+
+RewriteCond %{HTTP_HOST} ^mail.werner-partners.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www.mail.werner-partners.com$
+RewriteRule ^/?$ "https\:\/\/mail\.google\.com\/a\/werner\-partners\.com" [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^mail.werner.ua$ [OR]
+RewriteCond %{HTTP_HOST} ^www.mail.werner.ua$
+RewriteRule ^/?$ "https\:\/\/mail\.google\.com\/a\/werner\-partners\.com" [R=301,L]
+
