@@ -63,7 +63,6 @@ class Index extends CI_Controller
                 'subscribe'     => $this->load->view('blocks/subscribe', count($this->subscribe) ? $this->subscribe : null, true));
 
        $this->load->view('layout', $data);
-
     }
 
 
