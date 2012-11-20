@@ -132,12 +132,12 @@ $route['frontend/finishsubscribe/(:num)/recip/(:num)']      = 'index/output_subs
 $route['news/page/(:num)']                                  = 'index/index/$1';
 $route['finishsubscribe/(:any)']                            = 'index/finish_subscribe/$1';
 $route['show/(:any)']                                       = 'index/show/$1';
-$route['landing/(:any)']                                    = 'index/show_landing_page/$1';
-$route['landing_subscribe']                                 = 'index/ajax_landing_subscribe';
-$route['landing_articles/(:any)']                           = 'index/show_landing_article/$1';
-$route['sale/(:any)']                                       = 'index/sale/$1';
+$route['landing/(:any)']                                    = 'landing/show_landing_page/$1';
+$route['landing_subscribe']                                 = 'landing/ajax_landing_subscribe';
+$route['landing_articles/(:any)']                           = 'landing/show_landing_article/$1';
+$route['sale/(:any)']                                       = 'sale/sale/$1';
 
-$route['salestatus/(:any)']                                 = 'index/sale_payment/$1';
+$route['salestatus/(:any)']                                 = 'sale/sale_payment/$1';
 $route['success/sale']                                      = 'index/success_sale';
 $route['faild/sale']                                        = 'index/faild_sale';
 

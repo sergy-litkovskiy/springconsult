@@ -205,7 +205,7 @@ class Index extends CI_Controller
 
 
 	 
-    private function _prepareRulesSubscribeForm()
+    protected function _prepareRulesSubscribeForm()
     {
         return array(
                     array(
@@ -218,17 +218,17 @@ class Index extends CI_Controller
                     'rules'	=> 'required|valid_email')
                     );
     }
-	
-	
-	
-    private function _trySubscribeProcess($data)
+
+
+
+    protected function _trySubscribeProcess($data)
     {
         $data['created_at']  = date('Y-m-d H:i:s');
 
         if(!isset($_REQUEST['subscribe_id'])){
             $data['confirmed'] = STATUS_ON;            
         }
-        $recipientDataArr = $this->_getRecipientData($data);
+        $recipientDataArr = $this->index_model->getRecipientData($data);
         Common::assertTrue($recipientDataArr['id'], "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>");
 
         $data['subscribe_name'] = isset($_REQUEST['subscribe_name']) ? trim(strip_tags($_REQUEST['subscribe_name'])) : '';
@@ -245,35 +245,9 @@ class Index extends CI_Controller
         return;
     }
 
-	
-	
-    private function _getRecipientData($data)
-    {
-        $recipientDataArr = array();
-        $recipientDataArr = $this->index_model->getRecipientIdByEmail($data['email']);
 
-        if(!count($recipientDataArr)){
-            $data['confirmed']      = isset($data['confirmed']) ? $data['confirmed'] : STATUS_OFF;
-            $data['unsubscribed']   = STATUS_OFF;
 
-            $recipientDataArr['id']        	= $this->index_model->addInTable($data, 'recipients');
-            Common::assertTrue($recipientDataArr['id'], "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>");            
-            $recipientDataArr['name']           = $data['name'];
-            $recipientDataArr['email']          = $data['email'];
-            $recipientDataArr['confirmed']	= $data['confirmed'] == STATUS_ON ? STATUS_ON : STATUS_OFF;
-            $recipientDataArr['unsubscribed']	= 0;
-            
-            if($data['confirmed'] == STATUS_ON){
-                $this->_tryUnisenderSubscribe($recipientDataArr);
-            }
-        }
-
-        return $recipientDataArr;
-    }
-	
-	
-    
-    private function _freeProductProcess($data, $recipientDataArr, $hashLink)
+    protected function _freeProductProcess($data, $recipientDataArr, $hashLink)
     {
         if($recipientDataArr['confirmed'] == STATUS_ON){
             $this->_showPopUpHashLink($hashLink);
@@ -282,10 +256,10 @@ class Index extends CI_Controller
             $this->_subscribeMailProcess($data, $recipientDataArr, $hashLink);
         }
     }
-    
-    
-    
-    private function _subscribeArticlesProcess($data, $recipientDataArr)
+
+
+
+    protected function _subscribeArticlesProcess($data, $recipientDataArr)
     {
         $this->_trySendSubscribeAdminMail($data);
         return $this->_showPopUpAlreadySubscribed($recipientDataArr);
@@ -298,10 +272,10 @@ class Index extends CI_Controller
 //            $this->_subscribeMailProcess($data, $recipientDataArr, $hashLink);
 //        }
     }
-    
-    
-	
-    private function _showPopUpHashLink($hashLink)
+
+
+
+    protected function _showPopUpHashLink($hashLink)
     {
         $urlParts   = explode('/', $hashLink);
         $hash       = $urlParts[count($urlParts)-1];
@@ -318,8 +292,8 @@ class Index extends CI_Controller
     }
 
 
-    
-    private function _showPopUpAlreadySubscribed($recipientDataArr)
+
+    protected function _showPopUpAlreadySubscribed($recipientDataArr)
     {
         $this->result["popup"] 	= true;
         $this->result["success"] = true;
@@ -331,10 +305,10 @@ class Index extends CI_Controller
 
         return $this->result;
     }
-    
-    
 
-    private function _subscribeMailProcess($data, $recipientDataArr, $hashLink)
+
+
+    protected function _subscribeMailProcess($data, $recipientDataArr, $hashLink)
     {
         $this->_trySendSubscribeMail($data, $recipientDataArr, $hashLink);
         try{
@@ -347,7 +321,7 @@ class Index extends CI_Controller
 
 
 
-    private function _trySendSubscribeMail($data, $recipientDataArr, $hashLink)
+    protected function _trySendSubscribeMail($data, $recipientDataArr, $hashLink)
     {
         $messId = $data['subscribe_id'] > 0 ? $this->index_model->sendFreeProductSubscribeEmailMessage($data, $recipientDataArr, $hashLink) : $this->index_model->sendArticleSubscribeConfirmationEmailMessage($recipientDataArr, $hashLink);
         Common::assertTrue($messId, "<p class='error'>К сожалению, письмо с сылкой на материал не было отправлено.<br/>Пожалуйста, попробуйте еще раз</p>");
@@ -357,7 +331,7 @@ class Index extends CI_Controller
 
 
 
-    private function _trySendSubscribeAdminMail($data)
+    protected function _trySendSubscribeAdminMail($data)
     {
         $messId = $this->index_model->sendAdminSubscribeEmailMessage($data);
         Common::assertTrue($messId, "<p class='error'>Ошибка при попытке отправить AdminSubscribeEmailMessage</p>");
@@ -365,7 +339,7 @@ class Index extends CI_Controller
 
 
 
-    private function _tryAddMailHistory($data, $recipientDataArr)
+    protected function _tryAddMailHistory($data, $recipientDataArr)
     {
         $dataMailHistory['subscribe_id']    = $data['subscribe_id'];
         $dataMailHistory['recipients_id']   = $recipientDataArr['id'];
@@ -404,29 +378,12 @@ class Index extends CI_Controller
         $this->index_model->updateInTable($recipientId, $updateDataRecipient, 'recipients');
         $recipientDataArr = $this->index_model->getFromTableByParams(array('id' => $recipientId), 'recipients');
         if($recipientDataArr[0]){
-            $this->_tryUnisenderSubscribe($recipientDataArr[0]);
+            $this->index_model->tryUnisenderSubscribe($recipientDataArr[0]);
         }
         return (array('url' => $linksPackerData['url'], 'subscribe_id' => $linksPackerData['subscribe_id'],'recipient_id' => $recipientId));
     }
 
 
-    
-    private function _tryUnisenderSubscribe($recipientDataArr)
-    {
-        $postArr = array (
-            'api_key'               => UNISENDERAPIKEY,
-            'list_ids'              => UNISENDERMAINLISTID,
-            'fields[email]'         => $recipientDataArr['email'],
-            'fields[Name]'          => $recipientDataArr['name'],
-            'fields[confirmed]'     => $recipientDataArr['confirmed'],
-            'fields[unsubscribed]'  => $recipientDataArr['unsubscribed'],
-            'double_optin'          => "3"
-        );
-
-        startCurlExec($postArr, 'http://api.unisender.com/ru/api/subscribe?format=json'); 
-    }
-    
-    
 
     public function show_finish_subscribe($finishSubscribeProcessDataArr)
     {
@@ -558,94 +515,8 @@ class Index extends CI_Controller
     }
 
     
-    
-    public function show_landing_page($code)
-    {
-        $landingPageData = $this->index_model->getLandingPageByUnique($code);
-      
-        if(!count($landingPageData)) redirect('/index');        
-        $this->data_arr       = array(
-            'title'             => SITE_TITLE.' - landing page',
-            'meta_keywords'	=> $this->defaultDescription,
-            'meta_description'	=> $this->defaultKeywords,
-            'content'           => $landingPageData
-        );
 
-       $data = array(
-             'content'       => $this->load->view('blocks/landing_page', $this->data_arr, true),
-             'subscribe'     => $this->load->view('blocks/landing_subscribe', $this->data_arr, true));
-       $this->load->view('layout_landing', $data);
-    }
-
-    
-    
-    public function show_landing_article($id)
-    {
-        $landingArticleData = $this->index_model->getLandingArticleById($id);
-      
-        if(!$landingArticleData) redirect('/index');   
-        $this->data_menu      = array('menu' => $this->arrMenu,'current_url' => $this->urlArr[count($this->urlArr)-1]);        
-        $this->data_arr       = array(
-            'title'             => SITE_TITLE.' - закрытая система мероприятий',
-            'meta_keywords'	=> $this->defaultDescription,
-            'meta_description'	=> $this->defaultKeywords,
-            'content'           => $landingArticleData
-        );
-
-       $data = array(
-             'menu'          => $this->load->view(MENU, $this->data_menu, true),           
-             'content'       => $this->load->view('blocks/landing_article', $this->data_arr, true),
-             'downloads'     => $this->load->view('blocks/landing_downloads', $this->data_arr, true));
-       $this->load->view('layout_landing_articles', $data);
-    }
-    
-    
-    
-    public function ajax_landing_subscribe()
-    {
-        $data = array();
-        $data['name']  = trim(strip_tags($_REQUEST['name']));
-        $data['email'] = trim(strip_tags($_REQUEST['email']));
-        $data['created_at'] = date('Y-m-d H:i:s');
-
-        return $this->check_valid_landing_form($data);
-    }
-
-
-
-    public function check_valid_landing_form($data)
-    {
-        try{
-            $rules      = $this->_prepareRulesSubscribeForm();
-            $this->_checkValid($rules);
-            $data['confirmed'] = STATUS_ON;
-            $arrRecipientData               = $this->_getRecipientData($data);
-            $landingData['landing_page_id'] = trim(strip_tags($_REQUEST['landing_page_id']));  
-            $landingData['recipients_id']   = $arrRecipientData['id'];
-            $landingData['date_visited']    = date('Y-m-d H:i:s');
-            $arrLandingStatisticsData       = $this->index_model->getFromTableByParams(array('landing_page_id' => $landingData['landing_page_id'], 'recipients_id' => $landingData['recipients_id']), 'landing_statistics');
-          
-            Common::assertFalse(count($arrLandingStatisticsData), "Вы уже зарегистрированы на данное мероприятие!");  
-            $landingStatisticsId        = $this->index_model->addInTable($landingData, 'landing_statistics');            
-            Common::assertTrue($landingStatisticsId, "<p class='error'>К сожалению, регистрация прошла неудачно.<br/>Пожалуйста, попробуйте еще раз</p>");
-            $landingPageData = $this->index_model->getFromTableByParams(array('id' => $landingData['landing_page_id']), 'landing_page');
-            $data['text'] = '<p>Новая подписка на треннинг : "'.trim(strip_tags($_REQUEST['title'])).'"</p>';
-
-            $this->index_model->sendLandingSubscribeEmailMessage($landingPageData[0], $arrRecipientData);
-            $this->index_model->sendEmailMessage($data);
-            
-            $this->result['success'] = "<p class='success'>Спасибо за регистрацию!<br/>На Ваш почтовый ящик была отправлена подробная инструкция<br/>(проверьте папку Входящие и СПАМ)</p>";
-        } catch (Exception $e){
-            $this->result['message'] = $e->getMessage();
-        }
-
-        print json_encode($this->result);
-        exit;
-    }
-    
-    
-     
-    private function _checkValid($rules)
+    protected function _checkValid($rules)
     {
         $isValid = $this->form_validation->set_rules($rules);
         Common::assertTrue($isValid, "<p class='error'>Форма заполнена неверно</p>");
@@ -655,7 +526,7 @@ class Index extends CI_Controller
 
 
 
-    private function _prepareRulesContactForm()
+    protected function _prepareRulesContactForm()
     {
          return array(  'field'	=> 'text',
                         'label'	=> 'Сообщение',
@@ -663,56 +534,6 @@ class Index extends CI_Controller
     }
 
     
-    
-    public function ajax_get_landing_mp3()
-    {
-        $data = array();
-        $data['email']              = trim(strip_tags($_REQUEST['email']));
-        $data['landing_page_id']    = trim(strip_tags($_REQUEST['landing_page_id']));
-        $data['landing_article_id'] = trim(strip_tags($_REQUEST['landing_article_id']));
-      
-        return $this->check_valid_download_form($data);
-    }
-
-
-
-    public function check_valid_download_form($data)
-    {
-        try{
-            $rules      = $this->_prepareRulesDownloadForm();
-            $this->_checkValid($rules);
-
-            $landingArticleData   = $this->index_model->getLandingArticleData($data);
-            Common::assertTrue(count($landingArticleData), "<p class='error'>К сожалению, введенный E-mail<br/> 
-                                                            не регистрирован на данное мероприятие<br/> 
-                                                            и не может получить доступ к скачиванию материала.</p>");            
-
-            $this->result['data']       = "<p class='success'>Чтобы скачать материал по теме<br/>  
-                                            <b>'".$landingArticleData['title']."'</b><br/>
-                                            перейдите по ссылке:<br> 
-                                            <a href='".base_url().$landingArticleData['link_mp3']."'>'".base_url().$landingArticleData['link_mp3']."'</a><br/> 
-                                            и воспользуйтесь паролем<br/> 
-                                            <b>".$landingArticleData['password_mp3']."</b></p>";
-            $this->result['success']    = true;            
-        } catch (Exception $e){
-            $this->result['message'] = $e->getMessage();
-        }
-
-        print json_encode($this->result);
-        exit;
-    }
-    
-    
-    
-    private function _prepareRulesDownloadForm()
-    {
-         return array(  'field'	=> 'email',
-                        'label'	=> 'Email не заполнен',
-                        'rules'	=> 'required|email');
-    }
-    
-    
-
     public function show_rss()
     {
         $articlesArr = null;
@@ -890,167 +711,29 @@ class Index extends CI_Controller
     }
 
 
-    
-    public function sale($slug)
-    {
-//       $this->data_menu      = array('menu' => $this->arrMenu,'current_url' => $this->urlArr[count($this->urlArr)-1]);
-       $salePageArr          = $this->index_model->getFromTableByParams(array('slug' => $slug, 'status' => STATUS_ON), 'sale_page');
-       if(count($salePageArr) < 1)  redirect('/index');
-       $saleProductsArr      = $this->index_model->getArrWhere('sale_products', 
-                                                                array('sale_page_id' => $salePageArr[0]['id'], 'status' => STATUS_ON), 
-                                                                '', '' , 'sequence_num');
-       $title                = count($salePageArr) > 0 ? $salePageArr[0]['title'] : 'sale page';
-       $this->data_arr       = array(
-             'title'         	=> SITE_TITLE.' - '.$title
-            ,'meta_keywords'	=> $this->defaultDescription
-            ,'meta_description'	=> $this->defaultKeywords
-            ,'content'       	=> $salePageArr[0]
-            ,'sale_products'    => count($saleProductsArr) > 0 ? $saleProductsArr : null
-            ,'payment_form'     => $this->load->view('blocks/payment_form', '', true)
-       );
 
-       $data = array('content' => $this->load->view('index/show_sale', $this->data_arr, true));
-       $this->load->view('layout_sale', $data);
-
-    }
-    
-    
-    
-    public function ajax_payment_registration()
-    {
-        $recipinetDataArr = $saleHistoryArr = array();
-        $recipinetDataArr['name']       = trim(strip_tags($_REQUEST['name']));
-        $recipinetDataArr['email']      = trim(strip_tags($_REQUEST['email']));
-        $recipinetDataArr['created_at'] = date('Y-m-d H:i:s');
-        $recipinetDataArr['confirmed']  = STATUS_ON;
-        
-        $saleHistoryArr['created_at']       = date('Y-m-d H:i:s');
-        $saleHistoryArr['sale_products_id'] = trim(strip_tags($_REQUEST['sale_products_id']));
-
-        return $this->check_valid_payment_registration($recipinetDataArr, $saleHistoryArr);
-    }
-
-
-
-    public function check_valid_payment_registration($recipinetDataArr, $saleHistoryArr)
-    {
-        $recipient = $errLogData = array();
-        try{
-            $rules      = $this->_prepareRulesSubscribeForm();
-            $this->_checkValid($rules);
-            
-            $recipient  = $this->_getRecipientData($recipinetDataArr);
-            $saleHistoryArr['recipients_id'] = $recipient['id'];
-            $saleHistoryId = $this->index_model->addInTable($saleHistoryArr, 'sale_history');
-            Common::assertTrue($saleHistoryId, "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>");              
-
-            $this->result["success"]    = true;
-            $this->result["data"]       = array('sale_history_id' => $saleHistoryId, 'recipients_id' => $recipient['id']);
-        } catch (Exception $e){
-            $this->result['message'] = $e->getMessage();
-            
-            $errLogData['resource_id']  = ERROR_PAYMENT_REGISTRATION;
-            $errLogData['text']         = $e->getMessage()." - Продающая страница: ".$saleHistoryArr['sale_products_id']."(".$recipinetDataArr['name']." - ".$recipinetDataArr['email'].")";
-            $errLogData['created_at']   = date('Y-m-d H:i:s');
-            $this->index_model->addInTable($errLogData, 'error_log');
-        }
-
-        print json_encode($this->result);
-        exit;
-    }
-    
-  
-    
-    public function sale_payment($saleStatusId)
-    {
-        $paymentData    = $paymentUpdateRules = array();
-        list($paymentData, $paymentUpdateRules) = $this->_makePaymentDataFromRequest();
-        $saleShopId     = trim(strip_tags($_REQUEST['ik_shop_id']));
-         try{
-            Common::assertTrue($saleStatusId == SALESTATUSID, 'Sale status ID:'.$saleStatusId.' is wrong');
-            Common::assertTrue($saleShopId == SALESHOPID, 'Sale shop ID:'.$saleShopId.' is wrong');
-            Common::assertTrue(count($paymentData), 'Данных(paymentData) для апдейта не достаточно');
-            Common::assertTrue(count($paymentUpdateRules), 'Данных(paymentUpdateRules) для апдейта не достаточно');
-
-            $updateResult = $this->index_model->updateSaleHistoryByParams($paymentData, $paymentUpdateRules);
-            Common::assertTrue($updateResult, "Sale history table was not updated by: id-".$paymentUpdateRules['sale_history_id'].'|sale_products_id-'.$paymentUpdateRules['sale_history_id'].'|recipients_id-'.$paymentUpdateRules['recipients_id']);              
-            $paymentData['payment_description'] = trim(strip_tags($_REQUEST['ik_payment_desc']));
-        } catch (Exception $e){
-            $errLogData['resource_id']  = ERROR_PAYMENT_CALLBACK;
-            $errLogData['text']         = $e->getMessage()." - Продающая страница: ".$saleHistoryArr['sale_products_id']."(".$recipinetDataArr['name']." - ".$recipinetDataArr['email'].")";
-            $errLogData['created_at']   = date('Y-m-d H:i:s');
-            $this->index_model->addInTable($errLogData, 'error_log');
-        }
-    }
-    
-    
-    
-    private function _makePaymentDataFromRequest()
-    {
-        $paymentData['payment_system']      = trim(strip_tags($_REQUEST['ik_paysystem_alias']));
-        $paymentData['payment_state']       = trim(strip_tags($_REQUEST['ik_payment_state']));
-        $paymentData['payment_trans_id']    = trim(strip_tags($_REQUEST['ik_trans_id']));
-        $paymentData['payment_date']        = date('Y-m-d H:m:s', trim(strip_tags($_REQUEST['ik_payment_timestamp'])));
-        
-        $recipSaleIdArr = explode('|', trim(strip_tags($_REQUEST['ik_baggage_fields'])));
-        $paymentUpdateRules['recipients_id']    = $recipSaleIdArr[0];
-        $paymentUpdateRules['sale_history_id']  = $recipSaleIdArr[1];
-        $paymentUpdateRules['sale_products_id'] = trim(strip_tags($_REQUEST['ik_payment_id']));
-        
-        return array($paymentData, $paymentUpdateRules);
-    }
-    
-    
-    
-    public function success_sale()
-    {
-       $this->data_arr       = array(
-             'title'         	=> SITE_TITLE.' - успешная оплата услуг'
-            ,'meta_keywords'	=> $this->defaultDescription
-            ,'meta_description'	=> $this->defaultKeywords
-            ,'content'       	=> "сообщение"
-       );
-       $this->data_menu = array('menu'          => $this->arrMenu, 
-                                'current_url'   => $this->urlArr[count($this->urlArr)-1]);
-       
-       $data = array('content'  => $this->load->view('index/show_success_sale', $this->data_arr, true),
-                     'menu'     => $this->load->view(MENU, $this->data_menu, true));
-       $this->load->view('layout_sale', $data);
-    }
-    
-    
-    
-    public function faild_sale()
-    {
-Common::debugLogProd('faild_sale'); 
-Common::debugLogProd($_REQUEST);
-        redirect('/index');
-    }
-    
-    
-    
-    private function _prepareMenu()
+    protected function _prepareMenu()
     {
        return $this->menu_model->childs;
     }
 
 
-    
-    private function _getAforizmus()
+
+    protected function _getAforizmus()
     {
         return $this->index_model->getAforizmusByRandom();
     }
 
 
 
-    private function _prepareSubscribe()
+    protected function _prepareSubscribe()
     {
        return array('subscribeArr' => $this->index_model->getSubscribe());
     }
-    
-    
-    
-    private function _getCloudsTag()
+
+
+
+    protected function _getCloudsTag()
     {
         return $this->index_model->getCloudsTag();
     }

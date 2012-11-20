@@ -1046,5 +1046,46 @@ class Index_model extends Crud
         
         return $result;        
     }
-    
+
+
+
+    public function tryUnisenderSubscribe($recipientDataArr)
+    {
+        $postArr = array (
+            'api_key'               => UNISENDERAPIKEY,
+            'list_ids'              => UNISENDERMAINLISTID,
+            'fields[email]'         => $recipientDataArr['email'],
+            'fields[Name]'          => $recipientDataArr['name'],
+            'fields[confirmed]'     => $recipientDataArr['confirmed'],
+            'fields[unsubscribed]'  => $recipientDataArr['unsubscribed'],
+            'double_optin'          => "3"
+        );
+
+        startCurlExec($postArr, 'http://api.unisender.com/ru/api/subscribe?format=json');
+    }
+
+
+    public function getRecipientData($data)
+    {
+        $recipientDataArr = array();
+        $recipientDataArr = $this->getRecipientIdByEmail($data['email']);
+
+        if(!count($recipientDataArr)){
+            $data['confirmed']      = isset($data['confirmed']) ? $data['confirmed'] : STATUS_OFF;
+            $data['unsubscribed']   = STATUS_OFF;
+
+            $recipientDataArr['id']        	= $this->addInTable($data, 'recipients');
+            Common::assertTrue($recipientDataArr['id'], "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>");
+            $recipientDataArr['name']           = $data['name'];
+            $recipientDataArr['email']          = $data['email'];
+            $recipientDataArr['confirmed']	= $data['confirmed'] == STATUS_ON ? STATUS_ON : STATUS_OFF;
+            $recipientDataArr['unsubscribed']	= 0;
+
+            if($data['confirmed'] == STATUS_ON){
+                $this->tryUnisenderSubscribe($recipientDataArr);
+            }
+        }
+
+        return $recipientDataArr;
+    }
 }
