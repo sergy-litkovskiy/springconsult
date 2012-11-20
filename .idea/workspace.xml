@@ -15,6 +15,8 @@
       <change type="DELETED" beforePath="D:\projects\springconsult.my\system\language\russian\unit_test_lang.php" afterPath="" />
       <change type="DELETED" beforePath="D:\projects\springconsult.my\system\language\russian\upload_lang.php" afterPath="" />
       <change type="DELETED" beforePath="D:\projects\springconsult.my\system\libraries\Security.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/routes.php" afterPath="$PROJECT_DIR$/application/config/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/sale.php" afterPath="$PROJECT_DIR$/application/controllers/sale.php" />
     </list>
     <ignored path="springconsult.my.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,7 +39,7 @@
       <file leaf-file-name="index.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="1" selection-start="161" selection-end="161" vertical-scroll-proportion="0.13027295">
+            <state line="8" column="1" selection-start="161" selection-end="161" vertical-scroll-proportion="-7.2171216">
               <folding />
             </state>
           </provider>
@@ -46,7 +48,7 @@
       <file leaf-file-name="sale.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/sale.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="175" column="27" selection-start="7441" selection-end="7441" vertical-scroll-proportion="-7.673077">
+            <state line="24" column="0" selection-start="533" selection-end="533" vertical-scroll-proportion="12.115385">
               <folding />
             </state>
           </provider>
@@ -85,7 +87,7 @@
       <file leaf-file-name="routes.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/config/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="139" column="67" selection-start="8384" selection-end="8384" vertical-scroll-proportion="-20.222221">
+            <state line="137" column="77" selection-start="8315" selection-end="8315" vertical-scroll-proportion="-18.666666">
               <folding />
             </state>
           </provider>
@@ -105,10 +107,10 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/application/models/index_model.php" />
-        <option value="$PROJECT_DIR$/application/config/routes.php" />
         <option value="$PROJECT_DIR$/application/controllers/landing.php" />
-        <option value="$PROJECT_DIR$/application/controllers/sale.php" />
         <option value="$PROJECT_DIR$/application/controllers/index.php" />
+        <option value="$PROJECT_DIR$/application/config/routes.php" />
+        <option value="$PROJECT_DIR$/application/controllers/sale.php" />
       </list>
     </option>
   </component>
@@ -418,13 +420,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="67" selection-start="8384" selection-end="8384" vertical-scroll-proportion="-20.222221">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/index_model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1062" column="0" selection-start="40005" selection-end="40005" vertical-scroll-proportion="-1.7692307">
@@ -442,16 +437,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="137" column="77" selection-start="8315" selection-end="8315" vertical-scroll-proportion="-18.666666">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/sale.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="175" column="27" selection-start="7441" selection-end="7441" vertical-scroll-proportion="-7.673077">
+        <state line="24" column="0" selection-start="533" selection-end="533" vertical-scroll-proportion="12.115385">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="1" selection-start="161" selection-end="161" vertical-scroll-proportion="0.13027295">
+        <state line="8" column="1" selection-start="161" selection-end="161" vertical-scroll-proportion="-7.2171216">
           <folding />
         </state>
       </provider>

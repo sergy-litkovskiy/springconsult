@@ -135,11 +135,11 @@ $route['show/(:any)']                                       = 'index/show/$1';
 $route['landing/(:any)']                                    = 'landing/show_landing_page/$1';
 $route['landing_subscribe']                                 = 'landing/ajax_landing_subscribe';
 $route['landing_articles/(:any)']                           = 'landing/show_landing_article/$1';
-$route['sale/(:any)']                                       = 'sale/sale/$1';
+$route['sale/(:any)']                                       = 'sale/sale_show/$1';
 
 $route['salestatus/(:any)']                                 = 'sale/sale_payment/$1';
-$route['success/sale']                                      = 'index/success_sale';
-$route['faild/sale']                                        = 'index/faild_sale';
+$route['success/sale']                                      = 'sale/success_sale';
+$route['faild/sale']                                        = 'sale/faild_sale';
 
 $route['(:any)/(:num)']                                     = 'index/show_detail/$1/$2';
 

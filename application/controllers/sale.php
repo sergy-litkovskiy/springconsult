@@ -20,7 +20,7 @@ class Sale extends CI_Controller
     }
 
 
-    public function sale($slug)
+    public function sale_show($slug)
     {
         $salePageArr          = $this->index_model->getFromTableByParams(array('slug' => $slug, 'status' => STATUS_ON), 'sale_page');
         if(count($salePageArr) < 1)  redirect('/index');
