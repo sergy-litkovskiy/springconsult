@@ -45,16 +45,13 @@ class Index extends CI_Controller
        $contentArr          = $this->index_model->getNewsList($pagerParam);
        $title               = count($contentArr) > 0 ? $contentArr[0]['slug_title'] : null;
      
-       $this->data_arr      = array(
-             'title'         	=> SITE_TITLE.' - '.$title
-            ,'aforizmus'        => $this->aforizmus
-            ,'meta_keywords'	=> $contentArr[0]['meta_keywords'] ? $contentArr[0]['meta_keywords'] : $this->defaultDescription
-            ,'meta_description'	=> $contentArr[0]['meta_description'] ? $contentArr[0]['meta_description'] : $this->defaultKeywords
-            ,'content'       	=> $contentArr
-            ,'pager'         	=> $pager
-            ,'current_page'     => $currentPage
-            ,'disqus'           => show_disqus()
-       );
+       $this->data_arr      = array_merge($this->_getDataArrForAction($title, $contentArr),
+                                   array(
+                                     'content'       	=> $contentArr
+                                    ,'pager'         	=> $pager
+                                    ,'current_page'     => $currentPage
+                                    ,'disqus'           => show_disqus()
+                               ));
 
        $data = array(
                 'menu'          => $this->load->view(MENU, $this->data_menu, true),
@@ -75,20 +72,17 @@ class Index extends CI_Controller
        $materialsArr         = $this->index_model->getContentFromTableByMenuId('materials', $contentArr[0]['id']);
        $title                = count($contentArr) > 0 ? $contentArr[0]['slug'] : null;
 
-       $this->data_arr       = array(
-             'title'         	=> SITE_TITLE.' - '.$title
-            ,'titleFB'         	=> SITE_TITLE.' - '.(count($contentArr) > 0 && $contentArr[0]['title']) ? $contentArr[0]['title'] : $title 
-            ,'imgFB'         	=> (count($contentArr) > 0 && $contentArr[0]['text']) ? $this->_getFirstImgFromText($contentArr[0]['text']) : 'spring_logo.png' 
-            ,'aforizmus'        => $this->aforizmus
-            ,'meta_keywords'	=> (count($contentArr) > 0 && $contentArr[0]['meta_keywords']) ? $contentArr[0]['meta_keywords'] : $this->defaultDescription
-            ,'meta_description'	=> (count($contentArr) > 0 && $contentArr[0]['meta_description']) ? $contentArr[0]['meta_description'] : $this->defaultKeywords
-            ,'content'       	=> $contentArr[0]
-            ,'articles'       	=> $articlesArr
-            ,'materials'       	=> $materialsArr
-            ,'contact_form'    	=> $slug == 'contacts' ? $this->load->view('blocks/contact_form', $this->contactFormArr, true) : null
-            ,'is_article'	=> false
-            ,'disqus'           => $slug == 'reviews' ? show_disqus() : null
-       );
+        $this->data_arr      = array_merge($this->_getDataArrForAction($title, $contentArr),
+                                    array(
+                                    'titleFB'         	=> SITE_TITLE.' - '.(count($contentArr) > 0 && $contentArr[0]['title']) ? $contentArr[0]['title'] : $title
+                                    ,'imgFB'         	=> (count($contentArr) > 0 && $contentArr[0]['text']) ? $this->_getFirstImgFromText($contentArr[0]['text']) : 'spring_logo.png'
+                                    ,'content'       	=> $contentArr[0]
+                                    ,'articles'       	=> $articlesArr
+                                    ,'materials'       	=> $materialsArr
+                                    ,'contact_form'    	=> $slug == 'contacts' ? $this->load->view('blocks/contact_form', $this->contactFormArr, true) : null
+                                    ,'is_article'	    => false
+                                    ,'disqus'           => $slug == 'reviews' ? show_disqus() : null
+                                ));
 
        $data = array(
              'menu'          => $this->load->view(MENU, $this->data_menu, true),
@@ -108,19 +102,16 @@ class Index extends CI_Controller
        if(count($contentArr) < 1)  redirect('/index');
        $title                = count($contentArr) > 0 ? $slug.' - '.$contentArr[0]['slug'] : null;
 
-       $this->data_arr       = array(
-             'title'         	=> SITE_TITLE.' - '.$title
-            ,'titleFB'         	=> SITE_TITLE.' - '.(count($contentArr) > 0 && $contentArr[0]['title']) ? $contentArr[0]['title'] : $title 
-            ,'imgFB'         	=> (count($contentArr) > 0 && $contentArr[0]['text']) ? $this->_getFirstImgFromText($contentArr[0]['text']) : 'spring_logo.png' 
-            ,'aforizmus'        => $this->aforizmus
-            ,'meta_keywords'	=> (count($contentArr) > 0 && $contentArr[0]['meta_keywords']) ? $contentArr[0]['meta_keywords'] : $this->defaultDescription
-            ,'meta_description'	=> (count($contentArr) > 0 && $contentArr[0]['meta_description']) ? $contentArr[0]['meta_description'] : $this->defaultKeywords
-            ,'content'       	=> $contentArr[0]
-            ,'articles'       	=> null
-            ,'materials'       	=> null
-            ,'is_article'	=> true
-            ,'disqus'           => show_disqus()
-       );
+        $this->data_arr      = array_merge($this->_getDataArrForAction($title, $contentArr),
+                                array(
+                                     'titleFB'         	=> SITE_TITLE.' - '.(count($contentArr) > 0 && $contentArr[0]['title']) ? $contentArr[0]['title'] : $title
+                                    ,'imgFB'         	=> (count($contentArr) > 0 && $contentArr[0]['text']) ? $this->_getFirstImgFromText($contentArr[0]['text']) : 'spring_logo.png'
+                                    ,'content'       	=> $contentArr[0]
+                                    ,'articles'       	=> null
+                                    ,'materials'       	=> null
+                                    ,'is_article'	    => true
+                                    ,'disqus'           => show_disqus()
+                                ));
 
        $data = array(
              'menu'          => $this->load->view(MENU, $this->data_menu, true),
@@ -148,21 +139,19 @@ class Index extends CI_Controller
         $this->data_menu     = array('menu' => $this->arrMenu,'current_url' => $this->urlArr[count($this->urlArr)-1]);
         $contentArr          = $this->index_model->getArticlesListByTagId($pagerParam, $tagMasterId);
         $contentArr          = count($contentArr) > 0 ? $contentArr : null;
+        $title               = 'статьи';
         if($contentArr){
             foreach($contentArr as $key => $content){
                 $contentArr[$key]['slug_title'] = 'Статьи';
             }
         }
-        $this->data_arr      = array(
-             'title'         	=> SITE_TITLE.' - статьи'
-            ,'aforizmus'        => $this->aforizmus
-            ,'meta_keywords'	=> $this->defaultDescription
-            ,'meta_description'	=> $this->defaultKeywords
-            ,'content'       	=> $contentArr
-            ,'pager'         	=> $pager
-            ,'current_page'     => $currentPage
-            ,'disqus'           => show_disqus()
-        );
+        $this->data_arr      = array_merge($this->_getDataArrForAction($title, $contentArr),
+                                array(
+                                     'content'       	=> $contentArr
+                                    ,'pager'         	=> $pager
+                                    ,'current_page'     => $currentPage
+                                    ,'disqus'           => show_disqus()
+                                ));
 
         $data = array(
                 'menu'          => $this->load->view(MENU, $this->data_menu, true),
@@ -250,10 +239,10 @@ class Index extends CI_Controller
     protected function _freeProductProcess($data, $recipientDataArr, $hashLink)
     {
         if($recipientDataArr['confirmed'] == STATUS_ON){
-            $this->_showPopUpHashLink($hashLink);
+            return $this->_showPopUpHashLink($hashLink);
         } else {
             $this->result["success"] = true;
-            $this->_subscribeMailProcess($data, $recipientDataArr, $hashLink);
+            return $this->_subscribeMailProcess($data, $recipientDataArr, $hashLink);
         }
     }
 
@@ -281,7 +270,7 @@ class Index extends CI_Controller
         $hash       = $urlParts[count($urlParts)-1];
         $finishSubscribeProcessData = $this->_finishSubscribeProcess($hash);
 
-        $this->result["popup"] 	= true;
+//        $this->result["popup"] 	= true;
         $this->result["success"] = true;        
         $this->result["data"] 	= "<p class='subscribe_success'>Материалы бесплатного продукта<br/>
                                     Вы можете скачать прямо сейчас:<br/>
@@ -295,7 +284,7 @@ class Index extends CI_Controller
 
     protected function _showPopUpAlreadySubscribed($recipientDataArr)
     {
-        $this->result["popup"] 	= true;
+//        $this->result["popup"] 	= true;
         $this->result["success"] = true;
 //        $this->result["data"] 	= "<p class='subscribe_success'>Добрый день, ".$recipientDataArr['name']."!<br/>
 //                                    Вы уже подписаны на рассылку статей по личной эффективности с сайта Spring Consult.<br/>
@@ -391,14 +380,14 @@ class Index extends CI_Controller
         $recipientData              = $this->index_model->getRecipientIdById($finishSubscribeProcessDataArr['recipient_id']);
         $subscribeId                = $finishSubscribeProcessDataArr['subscribe_id'];
         $finishSubscribeTamplate    = $subscribeId > 0 ? 'index/finish_free_product_subscribe' : 'index/finish_articles_subscribe';
-      
+
         $this->data_arr             = array(
                                  'title'         	=> SITE_TITLE.' - subscribe'
-                                ,'aforizmus'            => $this->aforizmus
+                                ,'aforizmus'        => $this->aforizmus
                                 ,'meta_keywords'	=> $this->defaultDescription
                                 ,'meta_description'	=> $this->defaultKeywords
                                 ,'recipient_data'  	=> $recipientData
-                                ,'url'                  => $finishSubscribeProcessDataArr['url']
+                                ,'url'              => $finishSubscribeProcessDataArr['url']
         );
 
         $data = array(
@@ -533,172 +522,21 @@ class Index extends CI_Controller
                         'rules'	=> 'required|xss_clean');
     }
 
-    
-    public function show_rss()
+
+
+    protected function _getDataArrForAction($title, $contentArr)
     {
-        $articlesArr = null;
-        $rssTotalArr = $rssItemsArr = array();
-        //set limit of articles's amount
-        $params = array(
-            'limit' => 3
+        return array(
+        'title'         	=> SITE_TITLE.' - '.$title
+
+        ,'aforizmus'        => $this->aforizmus
+        ,'meta_keywords'	=> (count($contentArr) > 0 && $contentArr[0]['meta_keywords']) ? $contentArr[0]['meta_keywords'] : $this->defaultDescription
+        ,'meta_description'	=> (count($contentArr) > 0 && $contentArr[0]['meta_description']) ? $contentArr[0]['meta_description'] : $this->defaultKeywords
         );
-       
-        $articlesArr = $this->index_model->getArticlesForRssByParams($params);
-
-        foreach($articlesArr as $key => $item){
-            $rssItemsArr[$key]['title']       = $item['title'];
-            $rssItemsArr[$key]['link']        = 'http://'.$_SERVER['SERVER_NAME'].'/articles/'.$item['id'];
-            $rssItemsArr[$key]['description'] = Common::cutString($item['text'], 60);
-        }
-        $rssTotalArr = array(
-             'rss_channel_title'        => 'Последние статьи сайта Spring Consulting'
-            ,'rss_channel_link'         => 'http://'.$_SERVER['SERVER_NAME']
-            ,'rss_channel_description'  => 'На нашем сайте Вы сможете найти .'
-            ,'rss_channel_language'     => 'ru'
-            ,'rss_channel_copyright'    => '&copy; Copyright Spring consulting'
-
-            ,'rss_logo_url'             => 'http://'.$_SERVER['SERVER_NAME'].'/spring_logo.png'
-            ,'rss_logo_title'           => 'Spring Consulting'
-            ,'rss_logo_link'            => 'http://'.$_SERVER['SERVER_NAME']
-
-            ,'arr_rss_items'            => $rssItemsArr
-        );
-
-        header("Content-type: application/xml");
-        //header("Content-Disposition: inline; filename=prestige_rss.xml");
-
-        print $this->_makeXmlRss($rssTotalArr);
-        exit;
-    }
-    
-    
-    
-    private function _makeXmlRss($rssTotalArr)
-    {
-
-        $xw = new xmlWriter();
-        $xw->openMemory();
-
-        $xw->startDocument('1.0', 'UTF-8');
-        //set atribute 'version' for element 'rss'
-        //<rss version = '2.0'>
-        $xw->startAttribute("version");
-        $xw->startElement("rss");
-        $xw->writeAttribute("version", "2.0");
-        $xw->endAttribute();
-            //<channel>
-            $xw->startElement('channel');
-                //<title>value</title>
-                $xw->writeElement('title', $rssTotalArr['rss_channel_title']);
-                //<link>value</link>
-                $xw->writeElement('link', $rssTotalArr['rss_channel_link']);
-                //<description>value</description>
-                $xw->writeElement('description', $rssTotalArr['rss_channel_description']);
-                //<language>value</language>
-                $xw->writeElement('language', $rssTotalArr['rss_channel_language']);
-                //<copyright>value</copyright>
-                $xw->writeElement('copyright', $rssTotalArr['rss_channel_copyright']);
-                //<image>
-                $xw->startElement('image');
-                    //<title>value</title>
-                    $xw->writeElement('url', $rssTotalArr['rss_logo_url']);
-                    //<link>value</link>
-                    $xw->writeElement('title', $rssTotalArr['rss_logo_title']);
-                    //<description>value</description>
-                    $xw->writeElement('link', $rssTotalArr['rss_logo_link']);
-                //</image>
-                $xw->endElement();
-                foreach ($rssTotalArr['arr_rss_items'] as $item) {
-                    //<item>
-                    $xw->startElement('item');
-                        //<title>value</title>
-                        $xw->writeElement('title', $item['title']);
-                        //<link>value</link>
-                        $xw->writeElement('link', $item['link']);
-                        //<description>value</description>
-                        $xw->writeElement('description', $item['description']);
-                        //<guid>value</guid>
-                        $xw->writeElement('guid', $item['link']);
-                    //</item>
-                    $xw->endElement();
-                }
-            //</channel>
-            $xw->endElement();
-        //</rss>
-        $xw->endElement();
-
-        $xw->endDocument();
-
-        return $xw->outputMemory(true);
-    }
-    
-    
-     
-    public function search()
-    {
-        $searchText = (isset($_REQUEST['search_text']) && $_REQUEST['search_text']) ? $_REQUEST['search_text']: null;
-
-        try{
-            Common::assertTrue($searchText, 'Вы не ввели посковое предписание!');
-            $searchText = xss_clean(strip_image_tags(trim($_REQUEST['search_text'])));
-
-            $this->data_menu      = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr)-1]);
-            $contentArr           = $this->index_model->getSearchContent($searchText);
-            $searchResult         = $this->_prepareSearchResult($contentArr, $searchText);
-
-            $this->data_arr       = array(
-                    'title'         	=> 'Springconsulting - search result'
-                    ,'aforizmus'        => $this->aforizmus
-                    ,'meta_keywords'	=> $this->defaultDescription
-                    ,'meta_description'	=> $this->defaultKeywords
-                    ,'content'       	=> $searchResult
-                    ,'searching_text' 	=> $searchText
-                    ,'empty_result' 	=> count($searchResult) < 1 ? 'К сожалению, по вашему запросу ничего не найдено' : null
-            );
-
-            $data = array(
-                    'menu'          => $this->load->view(MENU, $this->data_menu, true),
-                    'content'       => $this->load->view('blocks/search_result', $this->data_arr, true),
-                    'cloud_tag'     => $this->load->view('blocks/cloud_tag', $this->cloudsTag, true),
-                    'subscribe'     => $this->load->view('blocks/subscribe', count($this->subscribe) ? $this->subscribe : null, true));
-            $this->load->view('layout', $data);
-        } catch (Exception $e) {
-            redirect(base_url());
-        }
     }
 
 
 
-    private function _prepareSearchResult($contentArr, $searchText)
-    {
-        $searchResult = array();
-        foreach($contentArr as $blockName => $blockArr){
-            foreach($blockArr as $key => $val){
-                if(isset($val['text'])){
-                    $val['text'] = $this->_backlightText($val['text'], $searchText);
-                }
-                $searchResult[$blockName][$key] = $val;
-            }
-        }
-        return $searchResult;
-    }
-
-
-
-    private function _backlightText($text, $searchText)
-    {
-        /*ищем слова совпадения в возвращаемом тексте*/
-        $textCut = strstr($text,$searchText);
-
-        /*обрезаем до 20 слов начиная со слова-совпадения*/
-        $textCutLink = Common::cutString($textCut, 20);
-
-        /*подсвечиваем совпадения с искомым словом*/
-        return str_replace($searchText, "<font style='color:green'><b>".$searchText."</b></font>", $textCutLink );
-    }
-
-    
-    
     private function _getFirstImgFromText($text)
     {
         $matches = array();

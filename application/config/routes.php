@@ -119,7 +119,7 @@ $route['backend/(:any)']                          = 'admin/index_admin/show/$1';
 ////////////////////FRONTEND////////////////////////////
 $route['contact_form/send']                                 = 'index/ajax_send_contact_form';
 $route['search']                                            = 'index/search';
-$route['rss']                                               = 'index/show_rss';
+$route['rss']                                               = 'rss/show_rss';
 $route['sitemap']                                           = 'index/sitemap';
 $route['show/news']                                         = 'index';
 //$route['frontend/unsubscribe/re/(:num)']                    = 'index/unsubscribe_finish/$1';
@@ -132,9 +132,11 @@ $route['frontend/finishsubscribe/(:num)/recip/(:num)']      = 'index/output_subs
 $route['news/page/(:num)']                                  = 'index/index/$1';
 $route['finishsubscribe/(:any)']                            = 'index/finish_subscribe/$1';
 $route['show/(:any)']                                       = 'index/show/$1';
+$route['ajax_get_landing_mp3']                              = 'landing/ajax_get_landing_mp3';
 $route['landing/(:any)']                                    = 'landing/show_landing_page/$1';
 $route['landing_subscribe']                                 = 'landing/ajax_landing_subscribe';
 $route['landing_articles/(:any)']                           = 'landing/show_landing_article/$1';
+$route['ajax_payment_registration']                         = 'sale/ajax_payment_registration';
 $route['sale/(:any)']                                       = 'sale/sale_show/$1';
 
 $route['salestatus/(:any)']                                 = 'sale/sale_payment/$1';

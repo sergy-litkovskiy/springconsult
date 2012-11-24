@@ -63,6 +63,9 @@
         </div>
     </div>
 </body>
+<script>
+    SPRING.Core.startAll();
+</script>
 </html>
 
 

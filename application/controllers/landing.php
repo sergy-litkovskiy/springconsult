@@ -27,7 +27,7 @@ class Landing extends CI_Controller
         if(!count($landingPageData)) redirect('/index');        
         $this->data_arr       = array(
             'title'             => SITE_TITLE.' - landing page',
-            'meta_keywords'	=> $this->defaultDescription,
+            'meta_keywords'	    => $this->defaultDescription,
             'meta_description'	=> $this->defaultKeywords,
             'content'           => $landingPageData
         );
@@ -48,7 +48,7 @@ class Landing extends CI_Controller
         $this->data_menu      = array('menu' => $this->arrMenu,'current_url' => $this->urlArr[count($this->urlArr)-1]);        
         $this->data_arr       = array(
             'title'             => SITE_TITLE.' - закрытая система мероприятий',
-            'meta_keywords'	=> $this->defaultDescription,
+            'meta_keywords'	    => $this->defaultDescription,
             'meta_description'	=> $this->defaultKeywords,
             'content'           => $landingArticleData
         );
@@ -80,13 +80,13 @@ class Landing extends CI_Controller
             $rules      = $this->_prepareRulesSubscribeForm();
             $this->_checkValid($rules);
             $data['confirmed'] = STATUS_ON;
+
             $arrRecipientData               = $this->index_model->getRecipientData($data);
-            $landingData['landing_page_id'] = trim(strip_tags($_REQUEST['landing_page_id']));  
+            $landingData['landing_page_id'] = trim(strip_tags($_REQUEST['landing_page_id']));
             $landingData['recipients_id']   = $arrRecipientData['id'];
             $landingData['date_visited']    = date('Y-m-d H:i:s');
             $arrLandingStatisticsData       = $this->index_model->getFromTableByParams(array('landing_page_id' => $landingData['landing_page_id'], 'recipients_id' => $landingData['recipients_id']), 'landing_statistics');
-          
-            Common::assertFalse(count($arrLandingStatisticsData), "Вы уже зарегистрированы на данное мероприятие!");  
+            Common::assertFalse(count($arrLandingStatisticsData), "Вы уже зарегистрированы на данное мероприятие!");
             $landingStatisticsId        = $this->index_model->addInTable($landingData, 'landing_statistics');            
             Common::assertTrue($landingStatisticsId, "<p class='error'>К сожалению, регистрация прошла неудачно.<br/>Пожалуйста, попробуйте еще раз</p>");
             $landingPageData = $this->index_model->getFromTableByParams(array('id' => $landingData['landing_page_id']), 'landing_page');
@@ -95,7 +95,8 @@ class Landing extends CI_Controller
             $this->index_model->sendLandingSubscribeEmailMessage($landingPageData[0], $arrRecipientData);
             $this->index_model->sendEmailMessage($data);
             
-            $this->result['success'] = "<p class='success'>Спасибо за регистрацию!<br/>На Ваш почтовый ящик была отправлена подробная инструкция<br/>(проверьте папку Входящие и СПАМ)</p>";
+            $this->result['success'] = true;
+            $this->result['data']    = "<p class='success'>Спасибо за регистрацию!<br/>На Ваш почтовый ящик была отправлена подробная инструкция<br/>(проверьте папку Входящие и СПАМ)</p>";
         } catch (Exception $e){
             $this->result['message'] = $e->getMessage();
         }
@@ -121,7 +122,7 @@ class Landing extends CI_Controller
     public function check_valid_download_form($data)
     {
         try{
-            $rules      = $this->_prepareRulesDownloadForm();
+            $rules = $this->_prepareRulesDownloadForm();
             $this->_checkValid($rules);
 
             $landingArticleData   = $this->index_model->getLandingArticleData($data);

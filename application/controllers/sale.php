@@ -29,7 +29,7 @@ class Sale extends CI_Controller
                                         '', '' , 'sequence_num');
         $title                = count($salePageArr) > 0 ? $salePageArr[0]['title'] : 'sale page';
         $this->data_arr       = array(
-            'title'         	=> SITE_TITLE.' - '.$title
+        'title'         	=> SITE_TITLE.' - '.$title
         ,'meta_keywords'	=> $this->defaultDescription
         ,'meta_description'	=> $this->defaultKeywords
         ,'content'       	=> $salePageArr[0]
@@ -133,7 +133,7 @@ class Sale extends CI_Controller
     public function success_sale()
     {
         $this->data_arr       = array(
-            'title'         	=> SITE_TITLE.' - успешная оплата услуг'
+        'title'         	=> SITE_TITLE.' - успешная оплата услуг'
         ,'meta_keywords'	=> $this->defaultDescription
         ,'meta_description'	=> $this->defaultKeywords
         ,'content'       	=> "сообщение"

@@ -62,7 +62,7 @@ SPRING.Sandbox = function(core, module_selector){
         Config: {
             get: function(prop, def) {
                 if (_config.hasOwnProperty(prop)) return _config[prop];
-                return (def != undefined) ? def : undefined;
+                return (def !== undefined) ? def : undefined;
             }
         },
 
@@ -74,11 +74,14 @@ SPRING.Sandbox = function(core, module_selector){
         Subscribe : {
             subscribe : function(data, onSuccess, onError) {
                 _self.request('/index/ajax_send_subscribe', data, onSuccess, onError);
+            },
+            landingSubscribe : function(data, onSuccess, onError) {
+                _self.request('/landing_subscribe', data, onSuccess, onError);
             }
         },
         Payment : {
             registration : function(data, onSuccess, onError) {
-                _self.request('/index/ajax_payment_registration', data, onSuccess, onError);
+                _self.request('/ajax_payment_registration', data, onSuccess, onError);
             }
         },
         Mailer : {
@@ -88,7 +91,7 @@ SPRING.Sandbox = function(core, module_selector){
         },
         Landing : {
             getLandingResourceMp3 : function(data, onSuccess, onError) {
-                _self.request('/index/ajax_get_landing_mp3', data, onSuccess, onError);
+                _self.request('/ajax_get_landing_mp3', data, onSuccess, onError);
             }
         },
         Menu : {

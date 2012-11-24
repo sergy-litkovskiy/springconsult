@@ -74,14 +74,14 @@ $(document).ready(function(){
                                 top: "40%",
                                 load: true
                             }).load();
-    }
+    };
     
     
     var ajaxSumbitHandler = function($form, formFieldsList, $messBox, message){
                                 $(formFieldsList, $form).val('');
                                 $messBox.html('<a class="close"></a>' + message);
                                 showOverlay($messBox);
-    }
+    };
     
     
     var _sendAjaxPost = function($form, formFieldsList, $messBox, ajaxParams){
@@ -139,76 +139,9 @@ $(document).ready(function(){
                 return false;
             }
         });
-    }
-
-////////////////////////////////////////////////////////////////
-//send subscribe from landing page
-var _sendLandingAjaxPost = function($form, formFieldsList, $messBox, ajaxParams){
-                $.ajax({
-                    type: "POST",
-                    url: ajaxParams.url,
-                    data: ajaxParams.data,
-                    dataType: 'json',
-                    success: function(msg){
-                        $loader.fadeOut().unmask();
-                        if(msg.success !== null){
-                            window.location.href = 'http://' + location.hostname + '/landing/confirm';
-                        }
-                        if(msg.message !== null){
-                            ajaxSumbitHandler($form, formFieldsList, $messBox, msg.message);
-                        }
-                        
-                        $loader.fadeOut().unmask();
-
-                            $('a#success').click(function(){
-                                $('#subscribe_mess').fadeOut('slow');
-                                $('#exposeMask').remove();
-                            });
-
-                            $('a.close').live('click', function(){
-                                var $this = $(this).parent();
-                                $this.overlay().close();
-                            });
-                    }
-                });
     };
-    
-    $("#landing_form input.try_landing_subscribe").click(function(e){
-        e.preventDefault();
-        var $subscribeForm  = $('#landing_form'),
-            $messBox        = $('#subscribe_mess'),
-            name            = $('input#name', $subscribeForm).val(),
-            email           = $('input#email', $subscribeForm).val(),
-            landingPageId   = $('input#page_id', $subscribeForm).val(),
-            title           = $('input#title', $subscribeForm).val(),
-            formFieldsList  = 'input#name,input#email',
-            ajaxParams      = {'data'           : {"name" : name ,"email" : email, "title" : title, "landing_page_id" : landingPageId},
-                                'url'           : '/landing_subscribe',
-                                'onSuccessMess' : "<p class='success'>Спасибо за регистрацию!<br/>На Ваш почтовый ящик была отправлена подробная инструкция<br/>(проверьте папку Входящие и СПАМ)"
-                              };
 
-        var message_validator = $subscribeForm.validate({
-            rules: {
-                    name:  "required"
-                    ,email: {required: true,
-                                email: true
-                            }
-                   },
-            messages: {
-                        name: "Введите имя"
-                        ,email : {required: "Введите e-mail",
-                                    email : "Неверный формат e-mail"
-                                }
-                        }
-        });
-        
-        if($subscribeForm.valid()){
-            $loader.show().mask();
-            _sendLandingAjaxPost($subscribeForm, formFieldsList, $messBox, ajaxParams);
-        };
-    });
-  
-    
+
 ////////////////////////////////////////////////////////////////
 //send contact_form message
     $("input.add_mess").click(function(){

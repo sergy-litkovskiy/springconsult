@@ -1,4 +1,4 @@
-function SubscribeBoxModule() {
+function LandingSubscribeBoxModule() {
     return function(sb){
         var $overlayContainer           = {},
             $overlayMessageContainer    = {},
@@ -10,31 +10,31 @@ function SubscribeBoxModule() {
             _loaderContainer;
 
 
-        var _init   = function(){
+        var _init   = function () {
             sb.$('input[type=text]').val('');
         };
         
         
-        var _assignValidator = function() {
-             _validator = _currentForm.validate({
-                    rules: {
-                        recip_name: {
-                            required: true,
-                            minlength: 3
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        }
+        var _assignValidator = function(){
+            _validator = _currentForm.validate({
+                rules: {
+                    recip_name: {
+                        required: true,
+                        minlength: 3
                     },
-                    messages: {
-                        recip_name: {
-                            required: emptyFieldMess,
-                            minlength: tooShortFieldMess
-                        },
-                        email: {
-                            required: emptyFieldMess,
-                            email: emailNotValid
+                    email: {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                    recip_name: {
+                        required: emptyFieldMess,
+                        minlength: tooShortFieldMess
+                    },
+                    email: {
+                        required: emptyFieldMess,
+                        email: emailNotValid
                     }
                 }
             });
@@ -45,20 +45,20 @@ function SubscribeBoxModule() {
             return {             
                 name            : _currentForm.find('input[name=recip_name]').val(),
                 email           : _currentForm.find('input[name=email]').val(),
-                subscribe_name  : _currentForm.find('input[name=subscribe_name]').val(),
-                subscribe_id    : _currentForm.find('input[name=subscribe_id]').val()
+                landing_page_id : _currentForm.find('input#page_id').val(),
+                title           : _currentForm.find('input#title').val()
             };
         };
 
         
         var _onSuccess = function(data){
             _loaderContainer.hide();
-            _currentForm.find('.add_subscribe').fadeIn();
+            _currentForm.find('.try_landing_subscribe').fadeIn();
             $overlayMessageContainer = sb.UI.showMessage(data);
             $($overlayMessageContainer).find('div.close').click(
                 function(){
-                    sb.$self().find('input[name=email]').val('');                    
-                    window.location.reload();
+                    _init();
+                    window.location.href = 'http://' + location.hostname + '/landing/confirm';
                 }
             );
         };
@@ -66,15 +66,21 @@ function SubscribeBoxModule() {
         
         var _onError = function(message){
             _loaderContainer.hide();
-            _currentForm.find('.add_subscribe').fadeIn();            
-            $overlayMessageContainer = sb.UI.showError('<p class="error">' + message + '</p>'); 
+            _currentForm.find('.try_landing_subscribe').fadeIn();
+            $overlayMessageContainer = sb.UI.showError('<p class="error">' + message + '</p>');
+            $($overlayMessageContainer).find('div.close').click(
+                function(){
+                    _init();
+                    window.location.reload();
+                }
+            );
         };
         
         
         var _trySubmitDownloadForm = function(downloadFormData){
             _loaderContainer = sb.$('#loader');
-            _currentForm.find('.add_subscribe').fadeOut().before(_loaderContainer.fadeIn());
-            sb.Subscribe.subscribe(downloadFormData, _onSuccess, _onError);
+            _currentForm.find('.try_landing_subscribe').fadeOut().before(_loaderContainer.fadeIn());
+            sb.Subscribe.landingSubscribe(downloadFormData, _onSuccess, _onError);
         };
 
         
@@ -88,7 +94,7 @@ function SubscribeBoxModule() {
     
         
         var _bindEvents = function() {  
-            sb.bind('.add_subscribe', 'click', _onClickSubmit);
+            sb.bind('.try_landing_subscribe', 'click', _onClickSubmit);
         };
         
         return {
@@ -98,5 +104,5 @@ function SubscribeBoxModule() {
             },
             destroy : function(){ }
         };
-    }
+    };
 }
