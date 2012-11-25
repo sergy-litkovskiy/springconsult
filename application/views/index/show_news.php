@@ -37,14 +37,16 @@
             <img id="img_loader" src="/img/img_main/ajax-loader.gif" alt="Loading"/>
         </div>
     </div>
-    <?php foreach ($content as $key => $item):?>
-    <p class="title"><span class="date"><?php echo Common::getDate(@$item['date']);?></span><?php echo @$item['title'];?></p>
-        <div class="short_text">
-            <?php echo @$item['text'];?>
-            <span class='article_id' id="article_<?php echo $key;?>"><?php echo @$item['id'];?></span>
-        </div>
-    <p><a class="comments_count" href="<?php echo base_url();?>articles/<?php echo @$item['id'];?>#disqus_thread" data-disqus-identifier="article_<?php echo @$item['id'];?>_identifier"></a></p>
-    <?php endforeach;?>
+    <div id="content-text-short">
+        <?php foreach ($content as $key => $item):?>
+            <p class="title"><span class="date"><?php echo Common::getDate(@$item['date']);?></span><?php echo @$item['title'];?></p>
+                <div class="short_text">
+                    <?php echo @$item['text'];?>
+                    <span class='article_id' id="article_<?php echo $key;?>"><?php echo @$item['id'];?></span>
+                </div>
+            <p><a class="comments_count" href="<?php echo base_url();?>articles/<?php echo @$item['id'];?>#disqus_thread" data-disqus-identifier="article_<?php echo @$item['id'];?>_identifier"></a></p>
+        <?php endforeach;?>
+    </div>
     <div class="clear">&nbsp;</div>
     <?php echo $pager ? $pager : null;?>
     
@@ -54,6 +56,8 @@
 </div>
 <?php echo $disqus ? $disqus : null;?>
 <script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/article_subscribe.js"></script>
+<script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/short_text_list.js"></script>
 <script>
-        SPRING.Core.registerModule("article_subscribe", ArticleSubscribeModule()); 
+        SPRING.Core.registerModule("article_subscribe", ArticleSubscribeModule());
+        SPRING.Core.registerModule("content-text-short", ShortTextListModule());
 </script>  

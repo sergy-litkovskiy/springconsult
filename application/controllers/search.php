@@ -20,7 +20,7 @@ class Search extends CI_Controller
     }
 
 
-    public function search()
+    public function search_result()
     {
         $searchText = (isset($_REQUEST['search_text']) && $_REQUEST['search_text']) ? $_REQUEST['search_text']: null;
 
@@ -45,8 +45,8 @@ class Search extends CI_Controller
             $data = array(
                 'menu'          => $this->load->view(MENU, $this->data_menu, true),
                 'content'       => $this->load->view('blocks/search_result', $this->data_arr, true),
-                'cloud_tag'     => $this->load->view('blocks/cloud_tag', $this->cloudsTag, true),
-                'subscribe'     => $this->load->view('blocks/subscribe', count($this->subscribe) ? $this->subscribe : null, true));
+                'cloud_tag'     => $this->load->view('blocks/cloud_tag', $this->_getCloudsTag(), true),
+                'subscribe'     => $this->load->view('blocks/subscribe', count($this->_prepareSubscribe()) ? $this->_prepareSubscribe() : null, true));
             $this->load->view('layout', $data);
         } catch (Exception $e) {
             redirect(base_url());
@@ -89,4 +89,15 @@ class Search extends CI_Controller
         return $this->menu_model->childs;
     }
 
+
+    protected function _prepareSubscribe()
+    {
+        return array('subscribeArr' => $this->index_model->getSubscribe());
+    }
+
+
+    protected function _getCloudsTag()
+    {
+        return array('tags' =>  $this->index_model->getCloudsTag());
+    }
 }

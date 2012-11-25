@@ -494,7 +494,8 @@ class Index extends CI_Controller
             $messId                 = $this->index_model->sendEmailMessage($data);
             Common::assertTrue($messId, "<p class='error'>К сожалению, сообщение не было отправлено.<br/>Пожалуйста, попробуйте еще раз</p>");
 
-            $this->result['success'] = $messId;
+            $this->result['success']    = true;
+            $this->result['data']       = "<p class='success'>Сообщение успешно отправлено!</p>";
         } catch (Exception $e){
             $this->result['message'] = $e->getMessage();
         }

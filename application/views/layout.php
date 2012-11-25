@@ -5,6 +5,7 @@
 
 <head>
     <?php echo head_htm();?>
+    <script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/search.js"></script>
 </head>
 <body  onload="ODKL.init();">
 <div id="fb-root"></div>
@@ -83,8 +84,9 @@
     </div>
 </body>
 <script>
-        SPRING.Core.startAll();
-</script>      
+    SPRING.Core.registerModule("search_form", SearchModule());
+    SPRING.Core.startAll();
+</script>
 </html>
 
 

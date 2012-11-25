@@ -118,7 +118,7 @@ $route['backend/(:any)']                          = 'admin/index_admin/show/$1';
 
 ////////////////////FRONTEND////////////////////////////
 $route['contact_form/send']                                 = 'index/ajax_send_contact_form';
-$route['search']                                            = 'index/search';
+$route['search']                                            = 'search/search_result';
 $route['rss']                                               = 'rss/show_rss';
 $route['sitemap']                                           = 'index/sitemap';
 $route['show/news']                                         = 'index';
