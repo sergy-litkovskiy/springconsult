@@ -319,72 +319,7 @@ class Index_model extends Crud
         return $block_status->result_array();
     }
 
-
     
-    public function getSearchContent($text)
-    {
-        $searchResultArr = array();
-        
-        $searchingText = mb_convert_case($text, MB_CASE_LOWER, "UTF-8");
-        
-        $searchResultArr['menuArr']         = $this->_getSearchMenuSql($searchingText);
-        $searchResultArr['articlesArr']     = $this->_getSearchArticlesSql($searchingText);
-        $searchResultArr['materialsArr']    = $this->_getSearchMaterialsSql($searchingText);
-
-        return $searchResultArr;
-    }
-
-
-    
-    private function _getSearchMenuSql($searchingText)
-    {
-        $sql  = $this->_prepareSearchMainSqlSelect('menu');
-        $sql .= $this->_prepareSearchMainSqlWhere($searchingText);
-        $queryMenu = $this->db->query($sql);
-        
-        return $queryMenu->result_array();
-    }
-
-
-
-    private function _getSearchArticlesSql($searchingText)
-    {
-        $sql  = $this->_prepareSearchMainSqlSelect('articles');
-        $sql .= $this->_prepareSearchMainSqlWhere($searchingText);
-        $queryArticles = $this->db->query($sql);
-
-        return $queryArticles->result_array();
-    }
-
-
-
-    private function _getSearchMaterialsSql($searchingText)
-    {
-        $sql  = $this->_prepareSearchMainSqlSelect('materials');
-        $sql .= " AND (LOWER(rus_name) REGEXP '^".$searchingText."' OR LOWER(rus_name) REGEXP ' ".$searchingText."' OR LOWER(rus_name) REGEXP '>".$searchingText."')";
-        $queryArticles = $this->db->query($sql);
-
-        return $queryArticles->result_array();
-    }
-
-
-
-    private function _prepareSearchMainSqlSelect($table)
-    {
-        return "SELECT * FROM ".$table." WHERE status = ".STATUS_ON;
-    }
-
-
-
-    private function _prepareSearchMainSqlWhere($searchingText)
-    {
-        return " AND ((LOWER(title) REGEXP '^".$searchingText."' OR LOWER(text) REGEXP '^".$searchingText."') 
-            OR (LOWER(title) REGEXP ' ".$searchingText."' OR LOWER(text) REGEXP ' ".$searchingText."')
-            OR (LOWER(title) REGEXP '>".$searchingText."' OR LOWER(text) REGEXP '>".$searchingText."'))";
-    }
-
-
-
     public function getRecipientIdByEmail($email)
     {
         $qweryResult = $this->getFromTableByParams(array('email' => $email), 'recipients');
@@ -416,7 +351,6 @@ class Index_model extends Crud
     }
 
 	
-	
     public function hashProcess($data, $recipientId)
     {
         $linkspackerData                    = array();
@@ -436,7 +370,6 @@ class Index_model extends Crud
     }
 
 
-    
     public function getLinksPackerDataByHash($hash)
     {
         $qweryResult = $this->getFromTableByParams(array('hash' => $hash), 'links_packer');
@@ -444,7 +377,6 @@ class Index_model extends Crud
 
         return $result;
     }
-
 
 
     public function getSubscribeDataArrById($id)
@@ -456,228 +388,6 @@ class Index_model extends Crud
     }
 
 
-    
-    public function sendAdminSubscribeEmailMessage($data)
-    {
-        $type   = $data['subscribe_id'] > 0 ? "'Free product subscribe action( ".$data['subscribe_name']." )'" : "'Articles subscribe action'";
-        $message = "Type of message: ".$type."<br/>\r\n 
-                    Date: ".date('Y-m-d')." / Time ".date('H:i:s')."<br/>\r\n
-                    Subscriber: ".$data['name']." (email of author :".$data['email'].")\r\n";
-
-        return $this->_sendAdminEmailMessage($message);
-    }
-
-
-
-    public function sendAdminErrorEmailMessage($errorMess)
-    {
-        $message = "Type of message: 'Error message'<br/>\r\n 
-                    Date: ".date('Y-m-d')." / Time ".date('H:i:s')."<br/>\r\n
-                    Message error: ".$errorMess.")<br/>\r\n";
-
-        return $this->_sendAdminEmailMessage($message);
-    }
-
-
-    
-    public function sendEmailMessage($data)
-    {
-        $message = "Type of message: 'Message from contact form'<br/>\r\n 
-                    Date: ".date('Y-m-d')." / Time ".date('H:i:s')."<br/>\r\n
-                    Message from: ".$data['name']." (email of author :".$data['email'].").<br/>\r\n
-                    Message: ".@$data['text'].".\r\n";
-
-        return $this->_sendAdminEmailMessage($message);
-    }
-    
-
-    private function _sendAdminEmailMessage($message)
-    {
-        $headers    = $this->_getMailHeader();
-        $email      = SUPERADMIN_EMAIL;
-        $subject    = "Message from Springconsulting site for admin";
-        $isMailSent = mail($email, $subject, $message, $headers);
-
-        return $isMailSent;
-    }
-
-    
-    public function sendLandingSubscribeEmailMessage($landingPageData, $recipientDataArr)
-    {
-        $headers    = $this->_getMailHeader();
-        $email      = $recipientDataArr['email'];
-        $subject    = "Ваша регистрация на '".$landingPageData['title']."'";
-        $body       = "<p>Добрый день, ".$recipientDataArr['name']."!</p>";
-        $body      .= $landingPageData['letter_text'];
-        $message    = $this->_getEmailTamplate($body);
-       
-        $isMailSent = mail($email, $subject, $message, $headers);
-
-        return $isMailSent;
-    }
-    
-    
-
-    public function sendFreeProductSubscribeEmailMessage($data, $recipientDataArr, $hashLink)
-    {
-        $headers    = $this->_getMailHeader();
-        $email      = $recipientDataArr['email'];
-        $subject    = "Подписка на бесплатный продукт от Springconsulting";
-        $body       = '<p><b>Здравствуйте, '.$recipientDataArr['name'].'!</b></p>
-                                        
-                        <p>На Ваш email '.date("d-m-Y").' была оформлена подписка на получение бесплатного доступа к следующим материалам : < <b>'.$data['subscribe_name'].'</b> >(Автор: Литковская Елена, Spring Consulting)</p>
-						
-						<p> Чтобы скачать бесплатный материал, пожалуйста, перейдите по ссылке – <a href="'.$hashLink.'">'.$hashLink.'</a></p>
-                        
-                        <p>В случае, если Вы НЕ подписывались на получение указанного материала, то просто не реагируйте на это письмо и Ваш email-адрес автоматически будет исключен из списка рассылки.</p>
-
-                        <p>С наилучшими пожеланиями,</p>
-                        <p>Команда Spring Consulting</p>';
-        $message    = $this->_getEmailTamplate($body);
-        
-        $isMailSent = mail($email, $subject, $message, $headers);
-
-        return $isMailSent;
-    }
-    
-    
-    
-    public function sendArticleSubscribeConfirmationEmailMessage($recipientDataArr, $hashLink)
-    {
-        $headers    = $this->_getMailHeader();
-        $email      = $recipientDataArr['email'];
-        $subject    = "Подписка на получение новых статей от Springconsulting";
-        $body       = '<p><b>Здравствуйте, '.$recipientDataArr['name'].'!</b></p>
-                                        
-                        <p>На Ваш email '.date("d-m-Y").' была оформлена подписка на получение новых статей по личной эффективности от коуча <a href="'.base_url().'show/about_me">Литковской Елены</a>.</p>
-
-                        <p> Подтвердите подписку на получение новых статей, перейдя по ссылке – <a href="'.$hashLink.'">'.$hashLink.'</a></p>
-
-                        <p>В случае, если Вы НЕ подписывались на получение указанных материалов, то просто не реагируйте на это письмо, и Ваш email-адрес автоматически будет исключен из списка рассылки.</p>
-
-                        <p>С наилучшими пожеланиями,</p>
-                        <p>Команда <a href="'.base_url().'">Spring Consulting</a></p>';
-        $message    = $this->_getEmailTamplate($body);
-        
-        $isMailSent = mail($email, $subject, $message, $headers);
-
-        return $isMailSent;
-    }
-    
-    
-    
-    public function sendArticlesSubscribedEmail($recipient, $articleDetail, $unsubscribeLink)
-    {
-        $headers    = $this->_getMailHeader();
-        $email      = $recipient['email'];
-        $subject    = "Новая статья на сайте Spring Сonsulting";
-        $body       = '<p><b>Добрый день, '.$recipient['name'].'!</b></p>
-                                        
-                        <p>Для вас новая статья <b>"'.$articleDetail['title'].'"</b> на сайте "Spring Сonsulting",<br> 
-                        читайте здесь: <a href="'.base_url().'articles/'.$articleDetail['id'].'">'.base_url().'articles/'.$articleDetail['id'].'</a></p> 
-                        
-                        <p><i><a style="color:#58753E; text-decoration: none; " href="'.base_url().'articles/'.$articleDetail['id'].'">'.Common::cutString($articleDetail['text'], 100).'</a></i></p>
-
-                        <p>Продолжение читайте здесь: <a href="'.base_url().'articles/'.$articleDetail['id'].'">'.base_url().'articles/'.$articleDetail['id'].'</a></p>
-
-                        <p>Приятного вам чтения!</p>
-
-                        <p>Литковская Елена и команда <a href="'.base_url().'">Spring Consulting</a></p>
-                        <hr>    
-                        <p style="font-size:8pt">Вы получили это письмо в рамках рассылки компании  "Spring Сonsulting". 
-                        Если по определенным причинам Вы не желаете в дальнейшем получать от нас информационные сообщения, вы можете отписаться от рассылки <a style="color:blue" href="'.$unsubscribeLink.'">'.$unsubscribeLink.'</a>.
-                        </p>';
-        $message    = $this->_getEmailTamplate($body);
-        
-        $isMailSent = mail($email, $subject, $message, $headers);
-
-        return $isMailSent;
-    }
-    
-    
-        
-    public function getUnisenderSubscribeEmailTpl($articleDetail)
-    {
-        $baseUrl = base_url().'logo_top.png';
-        return '
-            <table border="0" cellpadding="0" cellspacing="0" width="650" align="left">
-                    <tr>
-                        <td style="background:#D8FDB7; vertical-align:top; width: 66px">
-                            <img width="66" src="'.$baseUrl.'" />
-                        </td>
-                        <td style="padding: 1px 1px 5px 10px;; vertical-align:top">            
-                            <p><b>Добрый день, {{Name}}!</b></p>
-
-                            <p>Для вас новая статья <b>"'.$articleDetail['title'].'"</b> на сайте "Spring Сonsulting",<br> 
-                            читайте здесь: <a href="'.base_url().'articles/'.$articleDetail['id'].'">'.base_url().'articles/'.$articleDetail['id'].'</a></p> 
-
-                            <p><i><a style="color:#58753E; text-decoration: none; " href="'.base_url().'articles/'.$articleDetail['id'].'">'.Common::cutString($articleDetail['text'], 100).'</a></i></p>
-
-                            <p>Продолжение читайте здесь: <a href="'.base_url().'articles/'.$articleDetail['id'].'">'.base_url().'articles/'.$articleDetail['id'].'</a></p>
-
-                            <p>Приятного вам чтения!</p>
-
-                            <p>Литковская Елена и команда <a href="'.base_url().'">Spring Consulting</a></p>
-                            <hr>    
-                            <p style="font-size:8pt">Вы получили это письмо в рамках рассылки компании  "Spring Сonsulting". 
-                            Если по определенным причинам Вы не желаете в дальнейшем получать от нас информационные сообщения, вы можете отписаться от рассылки перейдя по ссылке ниже.
-                            </p>
-                        </td>
-                    </tr>
-            </table>';
-    }
-    
-    
-    
-    private function _getEmailTamplate($body)
-    {
-        return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-                        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
-                        <head>
-                            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-                            <title>SpringConsult</title>
-                        </head>
-                        <body>
-                            <table border="0" cellpadding="0" cellspacing="0" width="650" align="center">
-                                <tr>
-                                    <td style="background:#D8FDB7; vertical-align:top; width: 66px">
-                                        <img width="66" src="'.base_url().'logo_top.png" alt="SpringConsult" />
-                                    </td>
-                                    <td style="padding: 1px 1px 5px 10px;; vertical-align:top">
-                                        '.$body.'
-                                    </td>
-                                 </tr>
-                            </table>
-                        </body>
-                            <style type="text/css">
-                                body {
-                                    margin: 0;
-                                    background: #fff;
-                                    font-size: 14px;
-                                }
-                                p { margin-bottom: 16px; font-size: 10pt; color:#4E4E4E}
-                                a {color:red; font-size:10pt}
-                                a:hover { text-decoration: none; }
-                                td {height:250; vertical-align: top}
-                                table {border: solid 1px #B4D795;}
-                            </style>
-                        </html>';
-    }
-    
-    
-
-    private function _getMailHeader()
-    {
-        $headers  = "MIME-Version: 1.0\r\n";
-        $headers .= "Content-type: text/html; charset=utf-8\r\n";
-        $headers .= "From: spring@springconsult.com.ua \r\n";
-        
-        return $headers;
-        
-    }
-    
-    
-	
     public function delFromTableByParams($assignsArr, $oldAssignMenuId)
     {
         $this ->db->where($assignsArr['assignFieldName'], $assignsArr['id']);
@@ -917,116 +627,7 @@ class Index_model extends Crud
         
         return $arrAssignedTag;
     }
-   
-    
-    ////////////////LANDING PAGE/////////////////////
-    public function getLandingPageByUnique($unique)
-    {
-        $qweryResult = $this->getFromTableByParams(array('unique' => $unique, 'status' => STATUS_ON), 'landing_page');
-        $result      = $qweryResult ? $qweryResult[0] : null;
 
-        return $result;        
-    }
-    
-    
-    public function getLandingRegistredRecipients($landingPageId, $specMailerHistoryDate = null)
-    {
-        $additionRule = $specMailerHistoryDate ? " AND landing_statistics.date_visited <= '$specMailerHistoryDate'": null;
-        $query = $this->db->query("SELECT
-                                recipients.name, recipients.email
-                            FROM
-                                recipients
-                            INNER JOIN
-                                landing_statistics
-                            ON
-                                landing_statistics.recipients_id = recipients.id
-                            AND
-                                landing_statistics.landing_page_id = $landingPageId" . $additionRule);
-        return $query->result_array();
-    }
- 
-    
-    
-    public function sendSpecMailerEmail($recipientDataArr, $data)
-    {
-        $headers    = $this->_getMailHeader();
-        $email      = $recipientDataArr['email'];
-        $subject    = $data['theme'];
-        $body       = "<p><b>Здравствуйте, ".$recipientDataArr['name']."!</b></p>
-                       ".$data['text']."   
-                        <p>Читайте подробнее в статье <b>'".$data['articles_title']."'</b> <br/>на сайте Spring Сonsulting: <a href='".$data['article_link']."'>".$data['article_link']."</a></p>
-                        <p>С наилучшими пожеланиями,</p>
-                        <p>Команда <a href='".base_url()."'>Spring Consulting</a></p>";
-        $message    = $this->_getEmailTamplate($body);
-        $isMailSent = mail($email, $subject, $message, $headers);
-
-        return $isMailSent;
-    }
-    
-    
-    
-    public function getSpecMailerStatistics($landingPageId)
-    {
-        $query = $this->db->query("SELECT
-                                spec_mailer_history.*,
-                                landing_page.title AS landing_page_title,
-                                articles.title AS articles_title
-                            FROM
-                                spec_mailer_history
-                            LEFT JOIN
-                                landing_page
-                            ON
-                                landing_page.id = spec_mailer_history.landing_page_id
-                            LEFT JOIN
-                                articles
-                            ON
-                                articles.id = spec_mailer_history.articles_id
-                            WHERE
-                                spec_mailer_history.landing_page_id = $landingPageId
-                            ORDER BY
-                                spec_mailer_history.created_at DESC");
-        return $query->result_array();        
-    }
-    
-    
-    
-    public function getLandingArticleById($id)
-    {
-        $qweryResult = $this->getFromTableByParams(array('id' => $id, 'status' => STATUS_ON), 'landing_articles');
-        $result      = $qweryResult ? $qweryResult[0] : null;
-
-        return $result;          
-    }
-    
-    
-    
-    public function getLandingArticleData($data)
-    {
-        $query = $this->db->query("SELECT
-                                landing_articles.*
-                            FROM
-                                landing_articles
-                            INNER JOIN
-                                landing_statistics
-                            ON
-                                landing_statistics.landing_page_id = landing_articles.landing_page_id
-                            INNER JOIN
-                                recipients
-                            ON
-                                recipients.id = landing_statistics.recipients_id
-                            AND
-                                recipients.email = '".$data['email']."'
-                            WHERE
-                                landing_articles.id = ".$data['landing_article_id']."
-                                AND 
-                                landing_articles.landing_page_id = ".$data['landing_page_id']);
-        $qweryResult = $query->result_array();        
-        $result      = $qweryResult ? $qweryResult[0] : null;
-
-        return $result;        
-    }
-    
-    
     
     public function updateSaleHistoryByParams($paymentData, $paymentUpdateRules)
     {
@@ -1046,7 +647,6 @@ class Index_model extends Crud
         
         return $result;        
     }
-
 
 
     public function tryUnisenderSubscribe($recipientDataArr)

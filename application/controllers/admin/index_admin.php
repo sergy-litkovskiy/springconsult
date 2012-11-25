@@ -354,7 +354,7 @@ class Index_admin extends CI_Controller
 //                $historyId = $this->index_model->addInTable($data, 'articles_subscribe_mail_history');
 //                Common::assertTrue($historyId, 'Ошибка! Не произошла запись в articles_subscribe_mail_history');
 //
-//                $isSent = $this->index_model->sendArticlesSubscribedEmail($recipient, $articleDetail, $unsubscribeLink);
+//                $isSent = $this->mailer_model->sendArticlesSubscribedEmail($recipient, $articleDetail, $unsubscribeLink);
 //                Common::assertTrue($isSent, 'Ошибка! Письмо для подписчика '.$recipient['name'].' ('.$recipient['email'].') не было отправлено');
 //
 //                $sentMailCounter++;
@@ -381,7 +381,7 @@ class Index_admin extends CI_Controller
             'subject'       => "Новая статья на сайте Spring Сonsulting",
             'wrap_type'     => 'left',
             'list_id'       => UNISENDERMAINLISTID,
-            'body'          => $this->index_model->getUnisenderSubscribeEmailTpl($articleDetail)
+            'body'          => $this->mailer_model->getUnisenderSubscribeEmailTpl($articleDetail)
         );
 
         $result = startCurlExec($postArr, 'http://api.unisender.com/ru/api/createEmailMessage?format=json');   
@@ -827,7 +827,7 @@ class Index_admin extends CI_Controller
         $title          = "Редактировать лэндинги";
         $landingList    = $this->index_model->getListFromTable('landing_page');
         foreach($landingList as $key => $landing){
-            $landingList[$key]['registred_list'] = $this->index_model->getLandingRegistredRecipients($landing['id']);
+            $landingList[$key]['registred_list'] = $this->landing_model->getLandingRegistredRecipients($landing['id']);
         }
        
         $this->data_arr     = array(
@@ -1109,7 +1109,7 @@ class Index_admin extends CI_Controller
         try{
             $this->_assertSpecMailerData($data);
 
-            $recipientsSpecMailerArr    = $this->index_model->getLandingRegistredRecipients($data['landing_page_id']);
+            $recipientsSpecMailerArr    = $this->landing_model->getLandingRegistredRecipients($data['landing_page_id']);
             Common::assertTrue(count($recipientsSpecMailerArr), 'Не найден ни один подписчик для отправки');
   
             $data['created_at'] = date('Y-m-d H:i:s');
@@ -1155,7 +1155,7 @@ class Index_admin extends CI_Controller
         $errLogData = array();
          foreach($recipientsSpecMailerArr as $recipient){
              try{
-                $isSent = $this->index_model->sendSpecMailerEmail($recipient, $data);
+                $isSent = $this->mailer_model->sendSpecMailerEmail($recipient, $data);
                 Common::assertTrue($isSent, 'Ошибка! Письмо для подписчика '.$recipient['name'].' ('.$recipient['email'].') не было отправлено');
                 $sentMailCounter++;
              } catch (Exception $e){
@@ -1175,10 +1175,9 @@ class Index_admin extends CI_Controller
     {
         $title          = "Статистика спец. рассылки";
         if($landingPageId){
-            $specMailerHistoryArr    = $this->index_model->getSpecMailerStatistics($landingPageId);
-
+            $specMailerHistoryArr    = $this->landing_model->getSpecMailerStatistics($landingPageId);
             foreach($specMailerHistoryArr as $key => $specMailerHistory){
-                $specMailerHistoryArr[$key]['registred_list'] = $this->index_model->getLandingRegistredRecipients($specMailerHistory['landing_page_id'], $specMailerHistory['created_at']);
+                $specMailerHistoryArr[$key]['registred_list'] = $this->landing_model->getLandingRegistredRecipients($specMailerHistory['landing_page_id'], $specMailerHistory['created_at']);
             }
 
             $this->data_arr     = array(
@@ -1350,8 +1349,9 @@ class Index_admin extends CI_Controller
     {
         $title          = "Продукты для продажи";
         $salePageArr     = $this->index_model->getListFromTable('sale_page');
-        $saleProductsArr = $this->index_model->getArrWhere('sale_products', array(), '', '' , 'sequence_num');
-                
+        $saleProductsArr = $this->index_model->getListFromTable('sale_products');
+//        $saleProductsArr = $this->index_model->getArrWhere('sale_products', array(), '', '' , 'sequence_num');
+
         foreach($saleProductsArr as $i => $saleProducts){   
             foreach($salePageArr as $key => $salePage){
                 if($saleProducts['sale_page_id'] == $salePage['id']){

@@ -274,13 +274,13 @@ $(document).ready(function(){
             return false;
         }
         return true;
-    }
+    };
     
     
     var ajaxSumbitHandler = function($messBox, message){
         $messBox.html(message);  
         showOverlay($messBox);
-    }
+    };
 
 
     var showOverlay = function($messBox){
@@ -293,7 +293,7 @@ $(document).ready(function(){
                 window.location.reload(true);
             }
         });
-    }
+    };
     
      $('a.edit_aforizmus').live('click', function(e){
         e.preventDefault();

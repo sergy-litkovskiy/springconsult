@@ -29,7 +29,7 @@ class Search extends CI_Controller
             $searchText = xss_clean(strip_image_tags(trim($_REQUEST['search_text'])));
 
             $this->data_menu      = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr)-1]);
-            $contentArr           = $this->index_model->getSearchContent($searchText);
+            $contentArr           = $this->search_model->getSearchContent($searchText);
             $searchResult         = $this->_prepareSearchResult($contentArr, $searchText);
 
             $this->data_arr       = array(

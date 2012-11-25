@@ -71,7 +71,7 @@ function SpecMailerContainerModule() {
             return {             
                 theme           : $('input[name=theme]', $overlayContainer).val(),
                 text            : _text,
-                landingPageId   : $('input[name=landing]', $overlayContainer).val(),
+                landingPageId   : $('input[name=landing]:checked', $overlayContainer).val(),
                 articleId       : _articleId,
                 articleTitle    : _articleTitle,
                 isLanding       : _isLanding
@@ -86,12 +86,12 @@ function SpecMailerContainerModule() {
                     window.location.reload();
                 }
             );
-        }
+        };
         
         
         var _onError = function(message){
             $overlayMessageContainer = sb.UI.showError('<p class="error">' + message + '</p>'); 
-        }
+        };
         
         
         var _trySubmitCatalogForm = function(specMailerData){
