@@ -23,7 +23,7 @@ class Index extends CI_Controller
        $this->subscribe         = $this->_prepareSubscribe();
        $this->aforizmus         = $this->_getAforizmus();
        $this->contactFormArr    = array('contact_form' => array('name' => null, 'email' => null, 'text' => null));
-       $this->result            = array("success" => null, "message" => null, "data" => null, "popup" => null);     
+       $this->result            = array("success" => null, "message" => null, "data" => null);
        $this->urlArr            = explode('/',$_SERVER['REQUEST_URI']);
        $this->cloudsTag         = array('tags' => $this->_getCloudsTag()); 
     }
@@ -270,7 +270,6 @@ class Index extends CI_Controller
         $hash       = $urlParts[count($urlParts)-1];
         $finishSubscribeProcessData = $this->_finishSubscribeProcess($hash);
 
-//        $this->result["popup"] 	= true;
         $this->result["success"] = true;        
         $this->result["data"] 	= "<p class='subscribe_success'>Материалы бесплатного продукта<br/>
                                     Вы можете скачать прямо сейчас:<br/>
@@ -284,7 +283,6 @@ class Index extends CI_Controller
 
     protected function _showPopUpAlreadySubscribed($recipientDataArr)
     {
-//        $this->result["popup"] 	= true;
         $this->result["success"] = true;
 //        $this->result["data"] 	= "<p class='subscribe_success'>Добрый день, ".$recipientDataArr['name']."!<br/>
 //                                    Вы уже подписаны на рассылку статей по личной эффективности с сайта Spring Consult.<br/>

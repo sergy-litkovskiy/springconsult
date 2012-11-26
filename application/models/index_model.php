@@ -688,4 +688,20 @@ class Index_model extends Crud
 
         return $recipientDataArr;
     }
+
+
+    public function prepareUrl($urlArr)
+    {
+        $countUrl = count($urlArr) - 1;
+        $url = '';
+
+        for($i = 1; $i <= $countUrl; $i++){
+            $url .= $urlArr[$i];
+            if($i < ($countUrl)){
+                $url .= '/';
+            }
+        }
+
+        return $url;
+    }
 }
