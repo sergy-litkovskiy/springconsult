@@ -132,7 +132,15 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('crud', 'index_model', 'edit_menu_model', 'menu_model',  'login_model');
+$autoload['model'] = array(
+                        'crud',
+                        'index_model',
+                        'edit_menu_model',
+                        'menu_model',
+                        'login_model',
+                        'search_model',
+                        'mailer_model',
+                        'landing_model');
 
 
 /*

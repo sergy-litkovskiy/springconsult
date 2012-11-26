@@ -111,6 +111,8 @@ class Crud extends CI_Model {
 
     public function getArrWhere($table, $params, $limit, $offset , $order_by = false)
     {
+fb($table);
+fb($params);
         $order_by ? $this->db->order_by($order_by) : false;
         $query = $this->db->get_where($table, $params, $limit, $offset);
 

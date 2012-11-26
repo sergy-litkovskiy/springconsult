@@ -94,6 +94,11 @@ SPRING.Sandbox = function(core, module_selector){
                 _self.request('/ajax_get_landing_mp3', data, onSuccess, onError);
             }
         },
+        Contacts : {
+            sendContactMessage : function(data, onSuccess, onError) {
+                _self.request('/contact_form/send', data, onSuccess, onError);
+            }
+        },
         Menu : {
             addOrUpdate : function(data, onSuccess, onError) {
                 _self.request('/admin/index_admin/ajax_menu_edit', data, onSuccess, onError);

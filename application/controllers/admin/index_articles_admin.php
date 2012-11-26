@@ -215,7 +215,7 @@ class Index_articles_admin extends CI_Controller
             $unsubscribeLink = $this->index_model->unsubscribeHashProcess($recipient['id']);
             Common::assertTrue($unsubscribeLink, 'Ошибка! Не был сформирован url для отказа от подписки');
             
-            $isSent = $this->index_model->sendArticlesSubscribedEmail($recipient, $articleDetail, $unsubscribeLink);
+            $isSent = $this->mailer_model->sendArticlesSubscribedEmail($recipient, $articleDetail, $unsubscribeLink);
             Common::assertTrue($isSent, 'Ошибка! Письмо для подписчика '.$recipient['name'].' ('.$recipient['email'].') не было отправлено');
             $data = array('articles_id'     => $articleDetail['id']
                          ,'recipients_id'   => $recipient['id']

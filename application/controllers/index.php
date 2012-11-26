@@ -304,7 +304,7 @@ class Index extends CI_Controller
             $this->_trySendSubscribeAdminMail($data);
             $this->_tryAddMailHistory($data, $recipientDataArr);
         } catch (Exception $e){
-            $this->index_model->sendAdminErrorEmailMessage($e->getMessage());
+            $this->mailer_model->sendAdminErrorEmailMessage($e->getMessage());
         }
     }
 
@@ -312,7 +312,7 @@ class Index extends CI_Controller
 
     protected function _trySendSubscribeMail($data, $recipientDataArr, $hashLink)
     {
-        $messId = $data['subscribe_id'] > 0 ? $this->index_model->sendFreeProductSubscribeEmailMessage($data, $recipientDataArr, $hashLink) : $this->index_model->sendArticleSubscribeConfirmationEmailMessage($recipientDataArr, $hashLink);
+        $messId = $data['subscribe_id'] > 0 ? $this->mailer_model->sendFreeProductSubscribeEmailMessage($data, $recipientDataArr, $hashLink) : $this->mailer_model->sendArticleSubscribeConfirmationEmailMessage($recipientDataArr, $hashLink);
         Common::assertTrue($messId, "<p class='error'>К сожалению, письмо с сылкой на материал не было отправлено.<br/>Пожалуйста, попробуйте еще раз</p>");
         $this->result['success'] = true;
         $this->result["data"] = "<p class='success'>Спасибо за подписку!<br>На Ваш e-mail отправлено письмо для подтверждения вашей подписки. Проверьте Ваш почтовый ящик - папку Входящие и СПАМ.</p>";            
@@ -322,7 +322,7 @@ class Index extends CI_Controller
 
     protected function _trySendSubscribeAdminMail($data)
     {
-        $messId = $this->index_model->sendAdminSubscribeEmailMessage($data);
+        $messId = $this->mailer_model->sendAdminSubscribeEmailMessage($data);
         Common::assertTrue($messId, "<p class='error'>Ошибка при попытке отправить AdminSubscribeEmailMessage</p>");
     }
 
@@ -491,10 +491,11 @@ class Index extends CI_Controller
             $this->_checkValid($rules);
 
             $data['created_at']     = date('Y-m-d');
-            $messId                 = $this->index_model->sendEmailMessage($data);
+            $messId                 = $this->mailer_model->sendEmailMessage($data);
             Common::assertTrue($messId, "<p class='error'>К сожалению, сообщение не было отправлено.<br/>Пожалуйста, попробуйте еще раз</p>");
 
-            $this->result['success'] = $messId;
+            $this->result['success']    = true;
+            $this->result['data']       = "<p class='success'>Сообщение успешно отправлено!</p>";
         } catch (Exception $e){
             $this->result['message'] = $e->getMessage();
         }

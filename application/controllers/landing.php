@@ -22,7 +22,7 @@ class Landing extends CI_Controller
 
     public function show_landing_page($code)
     {
-        $landingPageData = $this->index_model->getLandingPageByUnique($code);
+        $landingPageData = $this->landing_model->getLandingPageByUnique($code);
       
         if(!count($landingPageData)) redirect('/index');        
         $this->data_arr       = array(
@@ -42,7 +42,7 @@ class Landing extends CI_Controller
     
     public function show_landing_article($id)
     {
-        $landingArticleData = $this->index_model->getLandingArticleById($id);
+        $landingArticleData = $this->landing_model->getLandingArticleById($id);
       
         if(!$landingArticleData) redirect('/index');   
         $this->data_menu      = array('menu' => $this->arrMenu,'current_url' => $this->urlArr[count($this->urlArr)-1]);        
@@ -92,8 +92,8 @@ class Landing extends CI_Controller
             $landingPageData = $this->index_model->getFromTableByParams(array('id' => $landingData['landing_page_id']), 'landing_page');
             $data['text'] = '<p>Новая подписка на треннинг : "'.trim(strip_tags($_REQUEST['title'])).'"</p>';
 
-            $this->index_model->sendLandingSubscribeEmailMessage($landingPageData[0], $arrRecipientData);
-            $this->index_model->sendEmailMessage($data);
+            $this->mailer_model->sendLandingSubscribeEmailMessage($landingPageData[0], $arrRecipientData);
+            $this->mailer_model->sendEmailMessage($data);
             
             $this->result['success'] = true;
             $this->result['data']    = "<p class='success'>Спасибо за регистрацию!<br/>На Ваш почтовый ящик была отправлена подробная инструкция<br/>(проверьте папку Входящие и СПАМ)</p>";
@@ -125,7 +125,7 @@ class Landing extends CI_Controller
             $rules = $this->_prepareRulesDownloadForm();
             $this->_checkValid($rules);
 
-            $landingArticleData   = $this->index_model->getLandingArticleData($data);
+            $landingArticleData   = $this->landing_model->getLandingArticleData($data);
             Common::assertTrue(count($landingArticleData), "<p class='error'>К сожалению, введенный E-mail<br/> 
                                                             не регистрирован на данное мероприятие<br/> 
                                                             и не может получить доступ к скачиванию материала.</p>");            
