@@ -64,6 +64,7 @@ class Material_admin extends CI_Controller
     {
         $materials          = array(0);
         $assignMaterials    = array();
+        $assignTagArr       = array();
         $title              = "Добавить статью";
         if($id){
             $materials          = $this->index_model->getMaterialDetailsAdmin($id);
@@ -75,8 +76,9 @@ class Material_admin extends CI_Controller
                 $assignMaterials = $assignMaterials[$id];
             }
             $title          = "Редактировать материал";
+            $assignTagArr   = $this->index_model->getAssignTagArr($id, 'materials_tag', 'materials_id');
         }
-        $assignTagArr       = $this->index_model->getAssignTagArr($id, 'materials_tag', 'materials_id');
+
         $contentArr         = $materials[0] ? $materials[0] : $this->emptyMaterialsArr;
         $url                = $this->index_model->prepareUrl($this->urlArr);
         $contentArr['url']  = $url;
@@ -108,7 +110,7 @@ class Material_admin extends CI_Controller
 
         try{
             if($_FILES['file_path']['size'] > 0){
-                $fileName = $this->_tryUploadFile($_FILES['file_path'], $uploadPath);
+                $fileName = $this->index_model->tryUploadFile($_FILES['file_path'], $uploadPath);
             }
 
             $assignMenuIdArr = isset($_REQUEST['menu']) && $_REQUEST['menu'] ? $_REQUEST['menu'] : array() ;
@@ -181,7 +183,7 @@ class Material_admin extends CI_Controller
 
     public function material_drop()
     {
-        return $this->_dropWithFile('materials');
+        return $this->index_model->dropWithFile('materials');
     }
 
 

@@ -115,12 +115,10 @@ $(document).ready(function(){
         var message_validator = $("#back_form_landing").validate({
             rules: {
                  title:     'required',
-                 page_text: 'required',
                  unique:    'required'
             },
             messages: {
                  title:     'Enter title',
-                 page_text: 'Enter text',
                  unique:    'Enter unique key'
             }
         });

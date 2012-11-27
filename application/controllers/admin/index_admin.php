@@ -144,7 +144,7 @@ class Index_admin extends CI_Controller
 
         try{
             if($_FILES['img_path']['size'] > 0){
-                $fileName = $this->_tryUploadFile($_FILES['img_path'], $imgUploadPath);
+                $fileName = $this->index_model->tryUploadFile($_FILES['img_path'], $imgUploadPath);
             }
             //if($_FILES['material_path']['size'] > 0){
 //                $materialName = $this->_tryUploadFile($_FILES['material_path'], $materialUploadPath);
@@ -238,7 +238,7 @@ class Index_admin extends CI_Controller
 
     public function subscribe_drop()
     {
-        return $this->_dropWithFile('subscribe');
+        return $this->index_model->dropWithFile('subscribe');
     }
     
 ////////////////////////////////AFORIZMUS//////////////////////////
@@ -410,34 +410,6 @@ class Index_admin extends CI_Controller
         return $contentAndAssignArr;
     }
     
-
-    private function _tryUploadFile($fileUploading, $uploadPath)
-    {
-        return Fileloader::loadFile($fileUploading['name'], $uploadPath, $fileUploading['tmp_name']);
-    }
-
-
-    private function _dropWithFile($dirTableName)
-    {
-        $error = null;
-        try{
-            $filename   = isset($_REQUEST['filename']) && $_REQUEST['filename'] ? $_REQUEST['filename'] : null;
-            $id         = isset($_REQUEST['id']) && $_REQUEST['id'] ? $_REQUEST['id'] : null;
-            Common::assertTrue($id, 'Id not set');
-            Common::assertTrue($filename, 'Filename not set');
-            
-            if(file_exists('./'.$dirTableName.'/'.$filename)){
-               unlink('./'.$dirTableName.'/'.$filename);
-            }
-           $isDeleted = $this->index_model->delFromTable($id, $dirTableName);
-           Common::assertTrue($isDeleted, 'Not deleted');
-
-        } catch(Exception $e){
-            $error = $e->getMessage();
-        }
-       print json_encode($error);
-    }
-
 
     public function ajax_change_status()
     {

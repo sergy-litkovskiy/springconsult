@@ -24,9 +24,11 @@ class Sale extends CI_Controller
     {
         $salePageArr          = $this->index_model->getFromTableByParams(array('slug' => $slug, 'status' => STATUS_ON), 'sale_page');
         if(count($salePageArr) < 1)  redirect('/index');
-        $saleProductsArr      = $this->index_model->getArrWhere('sale_products',
+        $saleProductsArr      = $this->index_model->getArrWhere(
+                                        'sale_products',
                                         array('sale_page_id' => $salePageArr[0]['id'], 'status' => STATUS_ON),
-                                        '', '' , 'sequence_num');
+                                        '' , 'sequence_num');
+
         $title                = count($salePageArr) > 0 ? $salePageArr[0]['title'] : 'sale page';
         $this->data_arr       = array(
         'title'         	=> SITE_TITLE.' - '.$title

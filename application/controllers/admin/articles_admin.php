@@ -61,12 +61,12 @@ class Articles_admin extends CI_Controller
         $contentArr['url']  = $url;
 
         $this->data_arr     = array(
-            'title'            => $title
-        ,'content'          => $contentArr
-        ,'menu_items'       => $this->edit_menu_model->childs
-        ,'assign_articles'  => $assignArticles
-        ,'assign_tag_arr'   => $assignTagArr
-        ,'message'          => $this->message
+            'title'             => $title
+            ,'content'          => $contentArr
+            ,'menu_items'       => $this->edit_menu_model->childs
+            ,'assign_articles'  => $assignArticles
+            ,'assign_tag_arr'   => $assignTagArr
+            ,'message'          => $this->message
         );
 
         $data = array(
@@ -84,16 +84,18 @@ class Articles_admin extends CI_Controller
         $assignMenuIdArr    = isset($_REQUEST['menu']) && $_REQUEST['menu'] ? $_REQUEST['menu'] : array() ;
         $oldAssignMenuId    = isset($_REQUEST['old_assign_id']) && $_REQUEST['old_assign_id'] ? $_REQUEST['old_assign_id'] : array();
         $arrArticlesTag     = json_decode($_REQUEST['json_encode_tag_arr']);
-
+//fb($arrArticlesTag);
+//exit;
         try{
             $this->_formValidation();
             $data = $this->_prepareArticleDataForAddUpdate($_REQUEST);
 
             if($id){
                 $params ['id']  = $id;
-                $dataUpdate = array('num_sequence'    => $_REQUEST['num_sequence']
-                ,'status'         => $_REQUEST['status']
-                ,'is_sent_mail'   => $_REQUEST['is_sent_mail']);
+                $dataUpdate = array(
+                    'num_sequence'    => $_REQUEST['num_sequence']
+                    ,'status'         => $_REQUEST['status']
+                    ,'is_sent_mail'   => $_REQUEST['is_sent_mail']);
                 $data = array_merge($data, $dataUpdate);
                 $this->assignsArr = array(
                     'assignMenuIdArr'      => $assignMenuIdArr

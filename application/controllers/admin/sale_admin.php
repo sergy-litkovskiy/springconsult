@@ -48,7 +48,7 @@ class Sale_admin extends CI_Controller
     {
         $title              = "Продающие страницы";
         $salePageArr        = $this->index_model->getListFromTable('sale_page');
-        $saleProductsArr    = $this->index_model->getArrWhere('sale_products', array(), '', '' , 'sequence_num');
+        $saleProductsArr    = $this->index_model->getArrWhere('sale_products', array(), '' , 'sequence_num');
 
         foreach($salePageArr as $key => $salePage){
             foreach($saleProductsArr as $i => $saleProducts){
