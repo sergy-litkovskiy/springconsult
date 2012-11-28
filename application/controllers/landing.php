@@ -38,8 +38,7 @@ class Landing extends CI_Controller
        $this->load->view('layout_landing', $data);
     }
 
-    
-    
+
     public function show_landing_article($id)
     {
         $landingArticleData = $this->landing_model->getLandingArticleById($id);
@@ -59,8 +58,7 @@ class Landing extends CI_Controller
              'downloads'     => $this->load->view('blocks/landing_downloads', $this->data_arr, true));
        $this->load->view('layout_landing_articles', $data);
     }
-    
-    
+
     
     public function ajax_landing_subscribe()
     {
@@ -71,7 +69,6 @@ class Landing extends CI_Controller
 
         return $this->check_valid_landing_form($data);
     }
-
 
 
     public function check_valid_landing_form($data)
@@ -106,7 +103,6 @@ class Landing extends CI_Controller
     }
     
 
-    
     public function ajax_get_landing_mp3()
     {
         $data = array();
@@ -116,7 +112,6 @@ class Landing extends CI_Controller
       
         return $this->check_valid_download_form($data);
     }
-
 
 
     public function check_valid_download_form($data)
@@ -144,8 +139,7 @@ class Landing extends CI_Controller
         print json_encode($this->result);
         exit;
     }
-    
-    
+
     
     private function _prepareRulesDownloadForm()
     {
@@ -153,7 +147,6 @@ class Landing extends CI_Controller
                         'label'	=> 'Email не заполнен',
                         'rules'	=> 'required|email');
     }
-
 
 
     protected function _prepareRulesSubscribeForm()

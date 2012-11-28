@@ -688,4 +688,49 @@ class Index_model extends Crud
 
         return $recipientDataArr;
     }
+
+
+    public function prepareUrl($urlArr)
+    {
+        $countUrl = count($urlArr) - 1;
+        $url = '';
+
+        for($i = 1; $i <= $countUrl; $i++){
+            $url .= $urlArr[$i];
+            if($i < ($countUrl)){
+                $url .= '/';
+            }
+        }
+
+        return $url;
+    }
+
+
+    public function tryUploadFile($fileUploading, $uploadPath)
+    {
+        return Fileloader::loadFile($fileUploading['name'], $uploadPath, $fileUploading['tmp_name']);
+    }
+
+
+
+    public function dropWithFile($dirTableName)
+    {
+        $error = null;
+        try{
+            $filename   = isset($_REQUEST['filename']) && $_REQUEST['filename'] ? $_REQUEST['filename'] : null;
+            $id         = isset($_REQUEST['id']) && $_REQUEST['id'] ? $_REQUEST['id'] : null;
+            Common::assertTrue($id, 'Id not set');
+            Common::assertTrue($filename, 'Filename not set');
+
+            if(file_exists('./'.$dirTableName.'/'.$filename)){
+                unlink('./'.$dirTableName.'/'.$filename);
+            }
+            $isDeleted = $this->delFromTable($id, $dirTableName);
+            Common::assertTrue($isDeleted, 'Not deleted');
+
+        } catch(Exception $e){
+            $error = $e->getMessage();
+        }
+        print json_encode($error);
+    }
 }

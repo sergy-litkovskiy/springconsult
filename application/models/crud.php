@@ -109,13 +109,27 @@ class Crud extends CI_Model {
     }
 	
 
-    public function getArrWhere($table, $params, $limit, $offset , $order_by = false)
+    public function getArrWhere($table, $params, $limit, $order_by = false)
     {
-fb($table);
-fb($params);
-        $order_by ? $this->db->order_by($order_by) : false;
-        $query = $this->db->get_where($table, $params, $limit, $offset);
+        $orderBy = $order_by ? " ORDER BY ".$order_by : false;
+        $sqlLimit = $limit ? " LIMIT ".$limit : false;
+        $sqlWhere = count($params) ? $this->_makeSqlWhereFromParams($params) : null;
 
+        $query = $this->db->query("SELECT * FROM ".$table.$sqlWhere.$orderBy.$sqlLimit."");
         return $query->result_array();
+    }
+
+
+    private function _makeSqlWhereFromParams(array $params)
+    {
+        $sqlWhere = " WHERE";
+        $paramsCount = count($params);
+        $count = 1;
+        foreach($params as $col => $val){
+            $sqlAnd = ( $count < $paramsCount ) ? "AND" : null;
+            $sqlWhere .= " " . $col ." = '". $val ."' ".$sqlAnd;
+            $count++;
+        }
+        return $sqlWhere;
     }
 }

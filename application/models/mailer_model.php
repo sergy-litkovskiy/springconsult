@@ -124,7 +124,7 @@ class Mailer_model extends Crud
     {
         $headers    = $this->_getMailHeader();
         $email      = $recipient['email'];
-        $subject    = "Новая статья на сайте Spring Сonsulting";
+        $subject    = $articleDetail['title'];
         $body       = '<p><b>Добрый день, '.$recipient['name'].'!</b></p>
 
                         <p>Для вас новая статья <b>"'.$articleDetail['title'].'"</b> на сайте "Spring Сonsulting",<br>

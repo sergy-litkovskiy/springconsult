@@ -115,12 +115,10 @@ $(document).ready(function(){
         var message_validator = $("#back_form_landing").validate({
             rules: {
                  title:     'required',
-                 page_text: 'required',
                  unique:    'required'
             },
             messages: {
                  title:     'Enter title',
-                 page_text: 'Enter text',
                  unique:    'Enter unique key'
             }
         });
@@ -336,7 +334,7 @@ $(document).ready(function(){
                 availableTagSet = new TagSet(_arrAvailableTags);
                 assignedTagSet  = new TagSet(_arrAssignedTags);
                 draftTagSet     = new TagSet(_arrAssignedTags);
-            
+
                 $("#mytags").tagit({
                     availableTags : _arrAvailableTags,
                     assignedTags  : _arrAssignedTags,
@@ -353,19 +351,23 @@ $(document).ready(function(){
         };
     }());
  
-  $('input[name=edit_articles]').click(function(e){
+  $('input[type=submit]').click(function(e){
         $(this).parent().find('input[name=json_encode_tag_arr]').remove();
+
         var availableTagSet = TagManager.getAvailableTagSet(),
             assignedTagSet  = TagManager.getAssignedTagSet(),
             draftTagSet     = TagManager.getDraftTagSet();
-            
+
         var toInsertNewTagSet       = TagSet.sub(draftTagSet, availableTagSet),
             toDeleteTagSet          = TagSet.sub(assignedTagSet, draftTagSet),
             toInsertAssignTagSet    = TagSet.sub(TagSet.sub(draftTagSet, toInsertNewTagSet), assignedTagSet),
-            jsonEncodeTagArr        = JSON.stringify({toInsertNew   : toInsertNewTagSet.values(),
+            insertAssignTags        = toInsertNewTagSet.values().length ? toInsertNewTagSet.values() : $('#mytags .tagit-input').val(),
+            jsonEncodeTagArr        = JSON.stringify({toInsertNew   : [insertAssignTags],
                                                     toDelete        : toDeleteTagSet.values(),
                                                     toInsertAssign  : toInsertAssignTagSet.values()});
 
+//console.log(jsonEncodeTagArr);
+//return false;
         $(this).before("<input type='hidden' name='json_encode_tag_arr' value='"+jsonEncodeTagArr+"'/>");
     });
 /////////////////LANDING PAGES/////////////////    	

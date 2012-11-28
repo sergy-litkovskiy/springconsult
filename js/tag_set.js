@@ -3,7 +3,9 @@ TagSet = function (tags) {
         i, len;
     
     var _add = function(tag){
-        if (_set.indexOf(tag) === -1) _set.push(tag);
+        if (_set.indexOf(tag) === -1){
+            _set.push(tag);
+        }
     };
 
 
@@ -34,8 +36,8 @@ TagSet = function (tags) {
         remove  : _remove,
         values  : _values,
         has     : _has
-    }
-}
+    };
+};
 
 
 

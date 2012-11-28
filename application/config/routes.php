@@ -53,10 +53,10 @@ $route['backend/logout']                          = "admin/index_admin/logout";
 $route['ajax_change_status']                      = "admin/menu_admin/ajax_change_status";
 $route['backend/ajax_change_status']              = "admin/index_admin/ajax_change_status";
 
-$route['backend/article_edit/(:num)']             = 'admin/index_admin/article_edit/$1';
-$route['backend/article_edit']                    = 'admin/index_admin/article_edit';
-$route['backend/check_valid_article']             = 'admin/index_admin/check_valid_article';
-$route['backend/article_drop/(:num)']             = 'admin/index_admin/drop/$1';
+$route['backend/article_edit/(:num)']             = 'admin/articles_admin/article_edit/$1';
+$route['backend/article_edit']                    = 'admin/articles_admin/article_edit';
+$route['backend/check_valid_article']             = 'admin/articles_admin/check_valid_article';
+$route['backend/article_drop/(:num)']             = 'admin/articles_admin/drop/$1';
 
 $route['backend/check_valid_submenu']             = 'admin/menu_admin/check_valid_menu';
 $route['backend/check_valid_menu']                = 'admin/menu_admin/check_valid_menu';
@@ -69,7 +69,7 @@ $route['backend/menu_admin/subitem_edit/(:num)']  = 'admin/menu_admin/edit_menu_
 
 $route['backend/news']                            = 'admin/index_admin/index';
 
-$route['backend/send_nl_subscribe/(:num)']        = 'admin/index_admin/ajax_send_article_to_subscribers/$1';
+$route['backend/send_nl_subscribe/(:num)']        = 'admin/articles_admin/ajax_send_article_to_subscribers/$1';
 
 $route['backend/subscribe']                       = 'admin/index_admin/subscribe_list';
 $route['backend/check_valid_subscribe']           = 'admin/index_admin/check_valid_subscribe';
@@ -77,40 +77,40 @@ $route['backend/subscribe_edit']                  = 'admin/index_admin/subscribe
 $route['backend/subscribe_edit/(:num)']           = 'admin/index_admin/subscribe_edit/$1';
 $route['backend/subscribe_drop']                  = 'admin/index_admin/subscribe_drop';
 
-$route['backend/material']                        = 'admin/index_admin/material_list';
-$route['backend/material_drop']                   = 'admin/index_admin/material_drop';
-$route['backend/material_edit']                   = 'admin/index_admin/material_edit';
-$route['backend/material_edit/(:num)']            = 'admin/index_admin/material_edit/$1';
-$route['backend/check_valid_material']            = 'admin/index_admin/check_valid_materials';
+$route['backend/material']                        = 'admin/material_admin/material_list';
+$route['backend/material_drop']                   = 'admin/material_admin/material_drop';
+$route['backend/material_edit']                   = 'admin/material_admin/material_edit';
+$route['backend/material_edit/(:num)']            = 'admin/material_admin/material_edit/$1';
+$route['backend/check_valid_material']            = 'admin/material_admin/check_valid_materials';
 
 $route['backend/aforizmus']                       = 'admin/index_admin/aforizmus_list';
 $route['backend/aforizmus_edit']                  = 'admin/index_admin/aforizmus_edit';
 $route['backend/aforizmus_edit/(:num)']           = 'admin/index_admin/aforizmus_edit/$1';
 $route['backend/aforizmus_drop/(:num)']           = 'admin/index_admin/aforizmus_drop/$1';
 
-$route['backend/landing']                         = 'admin/index_admin/landing_list';
-$route['backend/landing_edit']                    = 'admin/index_admin/landing_edit';
-$route['backend/landing_edit/(:num)']             = 'admin/index_admin/landing_edit/$1';
-$route['backend/landing_drop/(:num)']             = 'admin/index_admin/landing_drop/$1';
-$route['backend/check_valid_landing']             = 'admin/index_admin/check_valid_landing';
+$route['backend/landing']                         = 'admin/landing_admin/landing_list';
+$route['backend/landing_edit']                    = 'admin/landing_admin/landing_edit';
+$route['backend/landing_edit/(:num)']             = 'admin/landing_admin/landing_edit/$1';
+$route['backend/landing_drop/(:num)']             = 'admin/landing_admin/landing_drop/$1';
+$route['backend/check_valid_landing']             = 'admin/landing_admin/check_valid_landing';
 
-$route['backend/landing_articles']                = 'admin/index_admin/landing_articles_list';
-$route['backend/landing_articles_edit']           = 'admin/index_admin/landing_articles_edit';
-$route['backend/landing_articles_edit/(:num)']    = 'admin/index_admin/landing_articles_edit/$1';
-$route['backend/landing_articles_drop/(:num)']    = 'admin/index_admin/landing_articles_drop/$1';
-$route['backend/check_valid_landing_articles']    = 'admin/index_admin/check_valid_landing_articles';
+$route['backend/landing_articles']                = 'admin/landing_admin/landing_articles_list';
+$route['backend/landing_articles_edit']           = 'admin/landing_admin/landing_articles_edit';
+$route['backend/landing_articles_edit/(:num)']    = 'admin/landing_admin/landing_articles_edit/$1';
+$route['backend/landing_articles_drop/(:num)']    = 'admin/landing_admin/landing_articles_drop/$1';
+$route['backend/check_valid_landing_articles']    = 'admin/landing_admin/check_valid_landing_articles';
 
-$route['backend/sale_page_list']                  = 'admin/index_admin/sale_page_list';
-$route['backend/sale_page_edit']                  = 'admin/index_admin/sale_page_edit';
-$route['backend/sale_page_edit/(:num)']           = 'admin/index_admin/sale_page_edit/$1';
-$route['backend/sale_page_drop/(:num)']           = 'admin/index_admin/sale_page_drop/$1';
-$route['backend/check_valid_sale_page']           = 'admin/index_admin/check_valid_sale_page';
+$route['backend/sale_page_list']                  = 'admin/sale_admin/sale_page_list';
+$route['backend/sale_page_edit']                  = 'admin/sale_admin/sale_page_edit';
+$route['backend/sale_page_edit/(:num)']           = 'admin/sale_admin/sale_page_edit/$1';
+$route['backend/sale_page_drop/(:num)']           = 'admin/sale_admin/sale_page_drop/$1';
+$route['backend/check_valid_sale_page']           = 'admin/sale_admin/check_valid_sale_page';
 
-$route['backend/sale_products_list']              = 'admin/index_admin/sale_products_list';
-$route['backend/sale_products_edit']              = 'admin/index_admin/sale_products_edit';
-$route['backend/sale_products_edit/(:num)']       = 'admin/index_admin/sale_products_edit/$1';
-$route['backend/sale_products_drop/(:num)']       = 'admin/index_admin/sale_products_drop/$1';
-$route['backend/check_valid_sale_products']       = 'admin/index_admin/check_valid_sale_products';
+$route['backend/sale_products_list']              = 'admin/sale_admin/sale_products_list';
+$route['backend/sale_products_edit']              = 'admin/sale_admin/sale_products_edit';
+$route['backend/sale_products_edit/(:num)']       = 'admin/sale_admin/sale_products_edit/$1';
+$route['backend/sale_products_drop/(:num)']       = 'admin/sale_admin/sale_products_drop/$1';
+$route['backend/check_valid_sale_products']       = 'admin/sale_admin/check_valid_sale_products';
 
 $route['backend/spec_mailer_statistics']          = 'admin/index_admin/spec_mailer_statistics';
 $route['backend/spec_mailer_statistics/(:num)']   = 'admin/index_admin/spec_mailer_statistics/$1';
