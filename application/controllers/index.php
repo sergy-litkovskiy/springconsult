@@ -572,6 +572,6 @@ class Index extends CI_Controller
 
     protected function _getCloudsTag()
     {
-        return $this->index_model->getCloudsTag();
+        return $this->tags_model->getCloudsTag();
     }
 }
