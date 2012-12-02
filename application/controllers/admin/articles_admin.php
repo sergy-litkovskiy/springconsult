@@ -105,7 +105,7 @@ class Articles_admin extends CI_Controller
                 , 'table'                => 'assign_articles');
                 $this->assign_model->setAssignArr($this->assignsArr);
                 $this->assign_model->addOrDeleteAssigns();
-                $this->index_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
+                $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
 
                 $this->_update($data, $params);
             } else {
@@ -125,7 +125,7 @@ class Articles_admin extends CI_Controller
                 , 'table'                => 'assign_articles');
                 $this->assign_model->setAssignArr($this->assignsArr);
                 $this->assign_model->addOrDeleteAssigns();
-                $this->index_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
+                $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
 
                 redirect('backend/news');
             }

@@ -133,7 +133,7 @@ class Material_admin extends CI_Controller
                     , 'table'                => 'assign_materials');
                 $this->assign_model->setAssignArr($this->assignsArr);
                 $this->assign_model->addOrDeleteAssigns();
-                $this->index_model->tagProcess($arrAssignedTag, $id, 'materials_tag', 'materials_id');
+                $this->tags_model->tagProcess($arrAssignedTag, $id, 'materials_tag', 'materials_id');
                 $this->_updateMaterials($data, $params);
             } else {
                 $this->_formMaterialsValidation();
@@ -157,7 +157,7 @@ class Material_admin extends CI_Controller
 
                 $this->assign_model->setAssignArr($this->assignsArr);
                 $this->assign_model->addOrDeleteAssigns();
-                $this->index_model->tagProcess($arrAssignedTag, $id, 'materials_tag', 'materials_id');
+                $this->tags_model->tagProcess($arrAssignedTag, $id, 'materials_tag', 'materials_id');
                 redirect('backend/material');
             }
         } catch (Exception $e){

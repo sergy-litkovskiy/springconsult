@@ -1,0 +1,14 @@
+#
+# General files
+#
+/nbproject/private/
+/.idea/
+*workspace.xml
+*~
+*.DS_Store
+/log/*
+/exchange/*
+exchange
+
+/*.properties
+!/default.properties
