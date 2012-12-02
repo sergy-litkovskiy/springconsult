@@ -10,7 +10,7 @@
     <table id="main_content">
         <thead>
             <tr class="table_title_row">
-                <td>Название</th>
+                <td>Название</td>
                 <td>Текстовый блок1</td>
                 <td>Текстовый блок2</td>
                 <td style="width:180px">Список продуктов</td>

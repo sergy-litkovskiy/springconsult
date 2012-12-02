@@ -142,7 +142,8 @@ $autoload['model'] = array(
                         'mailer_model',
                         'landing_model',
                         'assign_model',
-                        'tags_model');
+                        'tags_model',
+                        'sale_model');
 
 
 /*

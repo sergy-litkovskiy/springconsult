@@ -47,20 +47,25 @@ class Sale_admin extends CI_Controller
     public function sale_page_list()
     {
         $title              = "Продающие страницы";
-        $salePageArr        = $this->index_model->getListFromTable('sale_page');
-        $saleProductsArr    = $this->index_model->getArrWhere('sale_products', array(), '' , 'sequence_num');
+        $salePageArr = $this->sale_model->getSalePageArrWithProductsAdmin();
+        $saleArr = array();
 
-        foreach($salePageArr as $key => $salePage){
-            foreach($saleProductsArr as $i => $saleProducts){
-                if($saleProducts['sale_page_id'] == $salePage['id']){
-                    $salePageArr[$key]['sale_products'][] = $saleProducts;
-                }
-            }
+        foreach($salePageArr as $salePage){
+            $saleArr[$salePage['id']]['id'] = $salePage['id'];
+            $saleArr[$salePage['id']]['slug'] = $salePage['slug'];
+            $saleArr[$salePage['id']]['title'] = $salePage['title'];
+            $saleArr[$salePage['id']]['text1'] = $salePage['text1'];
+            $saleArr[$salePage['id']]['text2'] = $salePage['text2'];
+            $saleArr[$salePage['id']]['status'] = $salePage['status'];
+            $saleArr[$salePage['id']]['created_at'] = $salePage['created_at'];
+            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['id'] = $salePage['sale_products_id'];
+            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['title'] = $salePage['sale_products_title'];
+            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['status'] = $salePage['sale_products_status'];
         }
 
         $this->data_arr     = array(
             'title'     => $title
-            ,'content'  => $salePageArr
+            ,'content'  => $saleArr
         );
 
         $data = array(
