@@ -18,7 +18,7 @@
     <ul class="sale-page-list">
         <?php foreach($salePageArr as $salePage):?>
             <li>
-                <input type="radio" class="edit_detail" name="sale_page_id" value="<?php echo $salePage['id']?>" <?php echo ($salePage['id'] == $content['sale_page_id']) ? 'checked="checked"': null;?>>
+                <input type="checkbox" class="edit_detail" name="sale_page_id" value="<?php echo $salePage['id']?>" <?php echo (in_array($salePage['id'], $content['sale_page'])) ? 'checked="checked"': '';?>>
                 <span class="landing_title_list">&nbsp;<?php echo $salePage['title']?></span>
             </li>                    
         <?php endforeach;?>

@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a12eea6-2247-4bf2-8bc1-f0085beec09e" name="Default" comment="Clean up">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/models/sale_model.php" />
       <change type="DELETED" beforePath="D:\projects\springconsult.my\springconsult" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/autoload.php" afterPath="$PROJECT_DIR$/application/config/autoload.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/admin/sale_admin.php" afterPath="$PROJECT_DIR$/application/controllers/admin/sale_admin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/sale.php" afterPath="$PROJECT_DIR$/application/controllers/sale.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/sale_model.php" afterPath="$PROJECT_DIR$/application/models/sale_model.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/sale_page/show.php" afterPath="$PROJECT_DIR$/application/views/admin/sale_page/show.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/sale_products/edit.php" afterPath="$PROJECT_DIR$/application/views/admin/sale_products/edit.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/sale_products/show.php" afterPath="$PROJECT_DIR$/application/views/admin/sale_products/show.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/index/show_sale.php" afterPath="$PROJECT_DIR$/application/views/index/show_sale.php" />
     </list>
     <ignored path="springconsult.my.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,28 +30,28 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="back.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/back.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="75" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="574" column="26" selection-start="24611" selection-end="24611" vertical-scroll-proportion="-14.230769">
+            <state line="574" column="26" selection-start="24611" selection-end="24611" vertical-scroll-proportion="-0.7692308">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sale_admin.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="sale_admin.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/admin/sale_admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="200" column="0" selection-start="7112" selection-end="7112" vertical-scroll-proportion="0.92633516">
+            <state line="228" column="35" selection-start="8350" selection-end="8350" vertical-scroll-proportion="-7.0384617">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sale.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/sale.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="9" selection-start="418" selection-end="418" vertical-scroll-proportion="-0.7692308">
               <folding />
             </state>
           </provider>
@@ -57,28 +60,25 @@
       <file leaf-file-name="sale_model.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/sale_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="53" selection-start="575" selection-end="575" vertical-scroll-proportion="-6.923077">
+            <state line="56" column="58" selection-start="1552" selection-end="1590" vertical-scroll-proportion="-6.269231">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/admin/sale_page/show.php">
+      <file leaf-file-name="edit.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/admin/sale_products/edit.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="48" selection-start="1785" selection-end="1785" vertical-scroll-proportion="-8.846154">
-              <folding>
-                <marker date="1354481351053" expanded="false" signature="1887:1898" placeholder="..." />
-                <marker date="1354481351053" expanded="false" signature="1921:1930" placeholder="..." />
-              </folding>
+            <state line="20" column="177" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.3207547">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="assign_model.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/assign_model.php">
+      <file leaf-file-name="show_sale.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/index/show_sale.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="0" selection-start="1264" selection-end="1264" vertical-scroll-proportion="-19.346153">
+            <state line="6" column="47" selection-start="431" selection-end="431" vertical-scroll-proportion="-4.6153846">
               <folding />
             </state>
           </provider>
@@ -87,7 +87,7 @@
       <file leaf-file-name="landing_model.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/landing_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="14" selection-start="1297" selection-end="1321" vertical-scroll-proportion="-12.423077">
+            <state line="39" column="14" selection-start="1297" selection-end="1321" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -96,7 +96,7 @@
       <file leaf-file-name="autoload.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/config/autoload.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="145" column="24" selection-start="4381" selection-end="4381" vertical-scroll-proportion="-4.730769">
+            <state line="145" column="24" selection-start="4381" selection-end="4381" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -115,10 +115,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/application/models/crud.php" />
-        <option value="$PROJECT_DIR$/application/controllers/sale.php" />
-        <option value="$PROJECT_DIR$/application/controllers/admin/landing_admin.php" />
-        <option value="$PROJECT_DIR$/application/controllers/admin/index_admin.php" />
         <option value="$PROJECT_DIR$/js/tag_set.js" />
         <option value="$PROJECT_DIR$/js/tag-it.js" />
         <option value="$PROJECT_DIR$/js/back.js" />
@@ -128,9 +124,13 @@
         <option value="$PROJECT_DIR$/application/controllers/index.php" />
         <option value="$PROJECT_DIR$/application/models/tags_model.php" />
         <option value="$PROJECT_DIR$/application/config/autoload.php" />
+        <option value="$PROJECT_DIR$/application/views/index/show_sale.php" />
         <option value="$PROJECT_DIR$/application/views/admin/sale_page/show.php" />
+        <option value="$PROJECT_DIR$/application/controllers/sale.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/sale_products/show.php" />
         <option value="$PROJECT_DIR$/application/models/sale_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/admin/sale_admin.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/sale_products/edit.php" />
       </list>
     </option>
   </component>
@@ -329,6 +329,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="sale_products" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="springconsult.my" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="springconsult.my" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="sale_page" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -401,9 +427,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
     <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -456,14 +482,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11969697" sideWeight="0.7347876" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.121212125" sideWeight="0.7347876" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -533,56 +559,24 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/jquery-ui-1.8.2/js/jquery-ui-1.8.2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="565" column="177" selection-start="97430" selection-end="97436" vertical-scroll-proportion="0.33268103" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/admin/index_admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="240" column="47" selection-start="9089" selection-end="9089" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/tag-it.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="0" selection-start="2287" selection-end="2287" vertical-scroll-proportion="-0.21631205" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/admin/material_admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="159" column="27" selection-start="6457" selection-end="6457" vertical-scroll-proportion="-0.7692308">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/tags_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="5" selection-start="6205" selection-end="6205" vertical-scroll-proportion="0.7801147">
-          <folding />
-        </state>
+        <state line="180" column="5" selection-start="6205" selection-end="6205" vertical-scroll-proportion="0.7801147" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/index_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="437" column="4" selection-start="14368" selection-end="14368" vertical-scroll-proportion="0.03773585">
-          <folding />
-        </state>
+        <state line="437" column="4" selection-start="14368" selection-end="14368" vertical-scroll-proportion="0.03773585" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/admin/articles_admin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="27" selection-start="5297" selection-end="5297" vertical-scroll-proportion="0.03773585">
-          <folding />
-        </state>
+        <state line="127" column="27" selection-start="5297" selection-end="5297" vertical-scroll-proportion="0.03773585" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/admin/landing/edit.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/back.js">
@@ -594,52 +588,83 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="574" column="26" selection-start="24611" selection-end="24611" vertical-scroll-proportion="-14.230769">
+        <state line="574" column="26" selection-start="24611" selection-end="24611" vertical-scroll-proportion="-0.7692308">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/config/autoload.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="24" selection-start="4381" selection-end="4381" vertical-scroll-proportion="-4.730769">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/assign_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="0" selection-start="1264" selection-end="1264" vertical-scroll-proportion="-19.346153">
+        <state line="145" column="24" selection-start="4381" selection-end="4381" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/landing_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="14" selection-start="1297" selection-end="1321" vertical-scroll-proportion="-12.423077">
+        <state line="39" column="14" selection-start="1297" selection-end="1321" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/admin/sale_page/show.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="48" selection-start="1785" selection-end="1785" vertical-scroll-proportion="-8.846154">
+        <state line="43" column="23" selection-start="1618" selection-end="2143" vertical-scroll-proportion="-8.461538">
           <folding>
-            <marker date="1354481351053" expanded="false" signature="1887:1898" placeholder="..." />
-            <marker date="1354481351053" expanded="false" signature="1921:1930" placeholder="..." />
+            <marker date="1354568588092" expanded="false" signature="1887:1898" placeholder="..." />
+            <marker date="1354568588092" expanded="false" signature="1921:1930" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/sale.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="9" selection-start="418" selection-end="418" vertical-scroll-proportion="-0.7692308">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/assign_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="0" selection-start="1264" selection-end="1264" vertical-scroll-proportion="0.038240917">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/sale_products/show.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="32" selection-start="416" selection-end="416" vertical-scroll-proportion="-8.461538">
+          <folding>
+            <marker date="1354569165513" expanded="false" signature="1714:1725" placeholder="..." />
+            <marker date="1354569165513" expanded="false" signature="1748:1757" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/sale_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="53" selection-start="575" selection-end="575" vertical-scroll-proportion="-6.923077">
+        <state line="56" column="58" selection-start="1552" selection-end="1590" vertical-scroll-proportion="-6.269231">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/admin/sale_admin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="0" selection-start="7112" selection-end="7112" vertical-scroll-proportion="0.92633516">
+        <state line="228" column="35" selection-start="8350" selection-end="8350" vertical-scroll-proportion="-7.0384617">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/index/show_sale.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="47" selection-start="431" selection-end="431" vertical-scroll-proportion="-4.6153846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/sale_products/edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="177" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.3207547">
           <folding />
         </state>
       </provider>
