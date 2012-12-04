@@ -9,7 +9,6 @@ class Material_admin extends CI_Controller
 {
     public $message;
     private $emptyMaterialsArr;
-    private $assignsArr;
 
     public function __construct()
     {
@@ -25,13 +24,6 @@ class Material_admin extends CI_Controller
             ,'file_path'         => null
             ,'num_sequence'      => null
             ,'status'            => null);
-
-        $this->assignsArr   = array(
-            'assignMenuIdArr'      => null
-           ,'oldAssignMenuIdArr'   => null
-           ,'id'                   => null
-           ,'assignFieldName'      => null
-           ,'table'                => null);
 
         $this->urlArr = explode('/',$_SERVER['REQUEST_URI']);
         $this->message  = null;
@@ -125,14 +117,11 @@ class Material_admin extends CI_Controller
                     ,'status'           => $_REQUEST['status']);
 
                 $data = $fileName ? array_merge(array('file_path' => $fileName), $dataUpdate) : $dataUpdate;
-                $this->assignsArr = array(
-                    'assignMenuIdArr'        => $assignMenuIdArr
-                    , 'oldAssignMenuIdArr'   => $oldAssignMenuId
-                    , 'id'                   => $id
-                    , 'assignFieldName'      => 'materials_id'
-                    , 'table'                => 'assign_materials');
-                $this->assign_model->setAssignArr($this->assignsArr);
-                $this->assign_model->addOrDeleteAssigns();
+
+                if(count($assignMenuIdArr)){
+                    $this->_assignProcess($assignMenuIdArr, $oldAssignMenuId, $id);
+                }
+
                 $this->tags_model->tagProcess($arrAssignedTag, $id, 'materials_tag', 'materials_id');
                 $this->_updateMaterials($data, $params);
             } else {
@@ -148,15 +137,10 @@ class Material_admin extends CI_Controller
                 $id = $this->_addMaterials($data);
                 Common::assertTrue($id, 'Форма заполнена неверно');
 
-                $this->assignsArr = array(
-                    'assignMenuIdArr'        => $assignMenuIdArr
-                    , 'oldAssignMenuIdArr'   => $oldAssignMenuId
-                    , 'id'                   => $id
-                    , 'assignFieldName'      => 'materials_id'
-                    , 'table'                => 'assign_materials');
+                if(count($assignMenuIdArr)){
+                    $this->_assignProcess($assignMenuIdArr, $oldAssignMenuId, $id);
+                }
 
-                $this->assign_model->setAssignArr($this->assignsArr);
-                $this->assign_model->addOrDeleteAssigns();
                 $this->tags_model->tagProcess($arrAssignedTag, $id, 'materials_tag', 'materials_id');
                 redirect('backend/material');
             }
@@ -164,6 +148,21 @@ class Material_admin extends CI_Controller
             $this->message = $e->getMessage();
             $this->material_edit($id);
         }
+    }
+
+
+    private function _assignProcess($assignMenuIdArr, $oldAssignMenuId, $id)
+    {
+        $assignsArr = array(
+            'newSourceIdArr'    => $assignMenuIdArr
+            , 'oldSourceIdArr'  => $oldAssignMenuId
+            , 'assignId'        => $id
+            , 'assignFieldName' => 'materials_id'
+            , 'sourceFieldName' => 'menu_id'
+            , 'table'           => 'assign_materials');
+
+        $this->assign_model->setAssignArr($assignsArr);
+        $this->assign_model->addOrDeleteAssigns();
     }
 
 

@@ -18,15 +18,20 @@
     <ul class="sale-page-list">
         <?php foreach($salePageArr as $salePage):?>
             <li>
-                <input type="checkbox" class="edit_detail" name="sale_page_id" value="<?php echo $salePage['id']?>" <?php echo (in_array($salePage['id'], $content['sale_page'])) ? 'checked="checked"': '';?>>
-                <span class="landing_title_list">&nbsp;<?php echo $salePage['title']?></span>
-            </li>                    
+                <input type="checkbox" class="edit_detail" name="new_sale_page_id[]" value="<?php echo $salePage['id']?>" <?php echo (count($content['sale_page'])&&(in_array($salePage['id'], $content['sale_page']))) ? 'checked="checked"': '';?>>
+                <span class="landing_title_list">&nbsp;<?php echo $salePage['title']?></span>&nbsp;|&nbsp;
+            </li>
         <?php endforeach;?>
     </ul> 
     <input id="id" name="id" type="hidden" value="<?php echo set_value('id', $content['id']);?>"/>
     <input id="sequence_num" name="sequence_num" type="hidden" value="<?php echo set_value('sequence_num', $content['sequence_num']);?>"/>
     <input id="status" name="status" type="hidden" value="<?php echo set_value('status', $content['status']);?>"/>
     <input id="created_at" name="created_at" type="hidden" value="<?php echo set_value('created_at', $content['created_at']);?>"/>
+    <?php foreach($salePageArr as $salePage):?>
+        <?php if(in_array($salePage['id'], $content['sale_page'])){ ?>
+            <input name="old_sale_page_id[]" type="hidden" value="<?php echo set_value('old_sale_page_id', $salePage['id']);?>">
+        <?php }?>
+    <?php endforeach;?>
     <div style="width:600px; clear:both">&nbsp;</div>
     
     <input id='button' name='edit_sale_products' type='submit' value='Сохранить'/>

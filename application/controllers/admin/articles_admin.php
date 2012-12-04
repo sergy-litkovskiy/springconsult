@@ -9,7 +9,6 @@ class Articles_admin extends CI_Controller
 {
     public $emptyArticleArr     = array();
     public $message;
-    private $assignsArr;
 
     public function __construct()
     {
@@ -97,14 +96,10 @@ class Articles_admin extends CI_Controller
                     ,'status'         => $_REQUEST['status']
                     ,'is_sent_mail'   => $_REQUEST['is_sent_mail']);
                 $data = array_merge($data, $dataUpdate);
-                $this->assignsArr = array(
-                    'assignMenuIdArr'      => $assignMenuIdArr
-                , 'oldAssignMenuIdArr'   => $oldAssignMenuId
-                , 'id'                   => $id
-                , 'assignFieldName'      => 'articles_id'
-                , 'table'                => 'assign_articles');
-                $this->assign_model->setAssignArr($this->assignsArr);
-                $this->assign_model->addOrDeleteAssigns();
+                if(count($assignMenuIdArr)){
+                    $this->_assignProcess($assignMenuIdArr, $oldAssignMenuId, $id);
+                }
+
                 $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
 
                 $this->_update($data, $params);
@@ -117,14 +112,9 @@ class Articles_admin extends CI_Controller
                 $id = $this->_add($data);
                 Common::assertTrue($id, 'Форма заполнена неверно');
 
-                $this->assignsArr = array(
-                    'assignMenuIdArr'      => $assignMenuIdArr
-                , 'oldAssignMenuIdArr'   => $oldAssignMenuId
-                , 'id'                   => $id
-                , 'assignFieldName'      => 'articles_id'
-                , 'table'                => 'assign_articles');
-                $this->assign_model->setAssignArr($this->assignsArr);
-                $this->assign_model->addOrDeleteAssigns();
+                if(count($assignMenuIdArr)){
+                    $this->_assignProcess($assignMenuIdArr, $oldAssignMenuId, $id);
+                }
                 $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
 
                 redirect('backend/news');
@@ -133,6 +123,21 @@ class Articles_admin extends CI_Controller
         } catch (Exception $e){
             $this->article_edit($id);
         }
+    }
+
+
+    private function _assignProcess($assignMenuIdArr, $oldAssignMenuId, $id)
+    {
+        $assignsArr = array(
+            'newSourceIdArr'    => $assignMenuIdArr
+            , 'oldSourceIdArr'  => $oldAssignMenuId
+            , 'assignId'        => $id
+            , 'assignFieldName' => 'articles_id'
+            , 'sourceFieldName' => 'menu_id'
+            , 'table'           => 'assign_articles');
+
+        $this->assign_model->setAssignArr($assignsArr);
+        $this->assign_model->addOrDeleteAssigns();
     }
 
 
