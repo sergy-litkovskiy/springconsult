@@ -34,6 +34,7 @@ class Sale_admin extends CI_Controller
             ,'description'          => null
             ,'price'                => null
             ,'sale_page_id'         => null
+            ,'sale_page'            => array()
             ,'sequence_num'         => null
             ,'status'               => null
             ,'created_at'           => null);
@@ -47,20 +48,25 @@ class Sale_admin extends CI_Controller
     public function sale_page_list()
     {
         $title              = "Продающие страницы";
-        $salePageArr        = $this->index_model->getListFromTable('sale_page');
-        $saleProductsArr    = $this->index_model->getArrWhere('sale_products', array(), '' , 'sequence_num');
+        $salePageArr = $this->sale_model->getSalePageArrWithProductsAdmin();
+        $saleArr = array();
 
-        foreach($salePageArr as $key => $salePage){
-            foreach($saleProductsArr as $i => $saleProducts){
-                if($saleProducts['sale_page_id'] == $salePage['id']){
-                    $salePageArr[$key]['sale_products'][] = $saleProducts;
-                }
-            }
+        foreach($salePageArr as $salePage){
+            $saleArr[$salePage['id']]['id'] = $salePage['id'];
+            $saleArr[$salePage['id']]['slug'] = $salePage['slug'];
+            $saleArr[$salePage['id']]['title'] = $salePage['title'];
+            $saleArr[$salePage['id']]['text1'] = $salePage['text1'];
+            $saleArr[$salePage['id']]['text2'] = $salePage['text2'];
+            $saleArr[$salePage['id']]['status'] = $salePage['status'];
+            $saleArr[$salePage['id']]['created_at'] = $salePage['created_at'];
+            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['id'] = $salePage['sale_products_id'];
+            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['title'] = $salePage['sale_products_title'];
+            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['status'] = $salePage['sale_products_status'];
         }
 
         $this->data_arr     = array(
             'title'     => $title
-            ,'content'  => $salePageArr
+            ,'content'  => $saleArr
         );
 
         $data = array(
@@ -176,22 +182,24 @@ class Sale_admin extends CI_Controller
 ////////////////////////////////SALE PRODUCTS//////////////////////////
     public function sale_products_list()
     {
-        $title           = "Продукты для продажи";
-        $salePageArr     = $this->index_model->getListFromTable('sale_page');
-        $saleProductsArr = $this->index_model->getListFromTable('sale_products');
-//        $saleProductsArr = $this->index_model->getArrWhere('sale_products', array(), '', '' , 'sequence_num');
+        $title          = "Продукты для продажи";
+        $salePageArr    = $this->sale_model->getSalePageArrWithProductsAdmin();
+        $saleArr        = array();
 
-        foreach($saleProductsArr as $i => $saleProducts){
-            foreach($salePageArr as $key => $salePage){
-                if($saleProducts['sale_page_id'] == $salePage['id']){
-                    $saleProductsArr[$i]['sale_page'] = $salePage['title'];
-                }
-            }
+        foreach($salePageArr as $salePage){
+            $saleArr[$salePage['sale_products_id']]['created_at']   = $salePage['created_at'];
+            $saleArr[$salePage['sale_products_id']]['id']           = $salePage['sale_products_id'];
+            $saleArr[$salePage['sale_products_id']]['title']        = $salePage['sale_products_title'];
+            $saleArr[$salePage['sale_products_id']]['price']        = $salePage['sale_products_price'];
+            $saleArr[$salePage['sale_products_id']]['description']  = $salePage['sale_products_description'];
+            $saleArr[$salePage['sale_products_id']]['status']       = $salePage['sale_products_status'];
+            $saleArr[$salePage['sale_products_id']]['sale_page'][$salePage['id']]['title'] = $salePage['title'];
+            $saleArr[$salePage['sale_products_id']]['sale_page'][$salePage['id']]['status'] = $salePage['status'];
         }
 
         $this->data_arr     = array(
             'title'     => $title
-            ,'content'  => $saleProductsArr
+            ,'content'  => $saleArr
         );
 
         $data = array(
@@ -211,15 +219,21 @@ class Sale_admin extends CI_Controller
 
     public function sale_products_edit($id = null)
     {
-        $saleProduct  = null;
+        $saleProductArr  = null;
         $title        = "Создать sale produst";
         if($id){
-            $saleProduct  = $this->index_model->getFromTableByParams(array('id' => $id), 'sale_products');
+            $saleProductArr  = $this->sale_model->getSaleProductWithAssignedSalePageById($id);
             $title        = "Редактировать sale product";
+            $assignedSalePageArr = array();
+            foreach($saleProductArr as $saleProduct){
+                $assignedSalePageArr[] = $saleProduct['sale_page_id'];
+            }
+
+            $saleProductArr[0]['sale_page'] = $assignedSalePageArr;
         }
 
         $salePageArr        = $this->index_model->getListFromTable('sale_page');
-        $contentArr         = $saleProduct[0] ? $saleProduct[0] : $this->emptySaleProductArr;
+        $contentArr         = $saleProductArr[0] ? $saleProductArr[0] : $this->emptySaleProductArr;
         $url                = $this->index_model->prepareUrl($this->urlArr);
         $contentArr['url']  = $url;
 
@@ -243,14 +257,15 @@ class Sale_admin extends CI_Controller
     {
         $data           = $params = array();
         $id             = isset($_REQUEST['id']) && $_REQUEST['id'] ? $_REQUEST['id'] : null;
+        $newSalePageIdArr = isset($_REQUEST['new_sale_page_id']) && $_REQUEST['new_sale_page_id'] ? $_REQUEST['new_sale_page_id'] : array();
+        $oldSalePageIdArr = isset($_REQUEST['old_sale_page_id']) && $_REQUEST['old_sale_page_id'] ? $_REQUEST['old_sale_page_id'] : array();
 
         try{
             $this->_formSaleProductsValidation();
             $dataMain       = array(
                 'title'             => $_REQUEST['title']
                 ,'description'      => $_REQUEST['description']
-                ,'price'            => $_REQUEST['price']
-                ,'sale_page_id'     => $_REQUEST['sale_page_id']);
+                ,'price'            => $_REQUEST['price']);
 
             if($id){
                 $params['id']  = $id;
@@ -258,6 +273,9 @@ class Sale_admin extends CI_Controller
                     'created_at'    => $_REQUEST['created_at'],
                     'status'        => $_REQUEST['status'],
                     'sequence_num'  => $_REQUEST['sequence_num']));
+                if(count($newSalePageIdArr)){
+                    $this->_assignProcess($newSalePageIdArr, $oldSalePageIdArr, $id);
+                }
                 $this->_updateSaleProducts($data, $params);
             } else {
                 $data = array_merge($dataMain, array(
@@ -265,12 +283,31 @@ class Sale_admin extends CI_Controller
                     'status'        => STATUS_ON,
                     'sequence_num'  => 0));
 
-                $this->_addSaleProducts($data);
+                $id = $this->_addSaleProducts($data);
+                if(count($newSalePageIdArr)){
+                    $this->_assignProcess($newSalePageIdArr, $oldSalePageIdArr, $id);
+                }
+                redirect('backend/sale_products_list');
             }
         } catch (Exception $e){
             $this->message = $e->getMessage();
             $this->sale_products_edit($id);
         }
+    }
+
+
+    private function _assignProcess($newSalePageIdArr, $oldSalePageIdArr, $saleProductid)
+    {
+        $this->assignsArr = array(
+            'newSourceIdArr'    => $newSalePageIdArr
+            , 'oldSourceIdArr'  => $oldSalePageIdArr
+            , 'assignId'        => $saleProductid
+            , 'assignFieldName' => 'sale_products_id'
+            , 'sourceFieldName' => 'sale_page_id'
+            , 'table'           => 'assign_sale');
+
+        $this->assign_model->setAssignArr($this->assignsArr);
+        $this->assign_model->addOrDeleteAssigns();
     }
 
 
@@ -293,7 +330,7 @@ class Sale_admin extends CI_Controller
     {
         $id = $this->index_model->addInTable($data, 'sale_products');
         Common::assertTrue($id, 'Информация не добавлена в базу');
-        redirect('backend/sale_products_list');
+        return $id;
     }
 
 

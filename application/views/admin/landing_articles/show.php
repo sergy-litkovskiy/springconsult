@@ -11,16 +11,16 @@
     <table id="main_content">
         <thead>
             <tr class="table_title_row">
-                <td style="width:65px">Дата</th>
-                <td>Ссылка на статью</th>
-                <td>Название</th>
+                <th style="width:65px">Дата</th>
+                <td>Ссылка на статью</td>
+                <td>Название</td>
                 <td>Landing page</td>
                 <td>Link mp3</td>
                 <td>Password mp3</td>
                 <td>Спец. рассылка</td>
                 <td><p>edit<p></td>
                 <td><p>del</p></td>
-                <td style="width:40px"><p>&nbsp;&nbsp;&nbsp;on</p></td>
+                <td style="width:4px"><p>&nbsp;&nbsp;&nbsp;on</p></td>
                 <td style="width:40px"><p>&nbsp;&nbsp;off</p></td>
             </tr>
         </thead>

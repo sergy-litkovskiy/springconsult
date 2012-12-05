@@ -2,9 +2,9 @@
 <script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/payment_registration_form.js"></script>
 <div id="sale-page-content">
     <?php echo $content['text1'];?>
-    <?php if(isset($sale_products)){?>
+    <?php if(count($content['sale_products'])){?>
         <div id="sale-products-list">
-        <?php foreach($sale_products as $product){?>
+        <?php foreach($content['sale_products'] as $product){?>
             <table class="sale-page-products">
                 <tr>
                     <td class="description">

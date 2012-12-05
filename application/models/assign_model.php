@@ -15,11 +15,12 @@ class Assign_model extends Crud
     {
         parent::__construct();
         $this->assignsArr = array(
-            'assignMenuIdArr'       => null
-            ,'oldAssignMenuIdArr'   => null
-            ,'id'                   => null
-            ,'assignFieldName'      => null
-            ,'table'                => null);
+            'newSourceIdArr'    => null
+            ,'oldSourceIdArr'   => null
+            ,'assignId'         => null
+            ,'assignFieldName'  => null
+            ,'sourceFieldName'  => null
+            ,'table'            => null);
     }
 
 
@@ -31,43 +32,55 @@ class Assign_model extends Crud
 
     public function addOrDeleteAssigns()
     {
-        $newAssignMenuIdArr         = $this->_prepareNewAssignedIdArrIndexIsEqualValue();
-        $clearedNewAssignMenuIdArr  = $this->_deleteClearedAssigns($newAssignMenuIdArr);
-        $clearedNewAssignMenuIdArr ? $this->_addNewAssigns($clearedNewAssignMenuIdArr) : null;
+        $newAssignSourceIdArr         = $this->_prepareNewAssignedIdArrIndexIsEqualValue();
+        $clearedNewAssignSourceIdArr  = $this->_deleteClearedAssigns($newAssignSourceIdArr);
+        $clearedNewAssignSourceIdArr ? $this->_addNewAssigns($clearedNewAssignSourceIdArr) : null;
     }
 
 
     private function _prepareNewAssignedIdArrIndexIsEqualValue()
     {
-        $newAssignMenuIdArr = array();
+        $newAssignSourceIdArr = array();
 
-        foreach($this->assignsArr['assignMenuIdArr'] as $assignId){
-            $newAssignMenuIdArr[$assignId] = $assignId;
+        foreach($this->assignsArr['newSourceIdArr'] as $assignId){
+            $newAssignSourceIdArr[$assignId] = $assignId;
         }
 
-        return $newAssignMenuIdArr;
+        return $newAssignSourceIdArr;
     }
 
 
-    private function _deleteClearedAssigns($newAssignMenuIdArr)
+    private function _deleteClearedAssigns($newAssignSourceIdArr)
     {
-        foreach($this->assignsArr['oldAssignMenuIdArr'] as $oldAssignMenuId){
-            if(!in_array($oldAssignMenuId, $newAssignMenuIdArr)){
-                $this->index_model->delFromTableByParams($this->assignsArr, $oldAssignMenuId);
+        foreach($this->assignsArr['oldSourceIdArr'] as $oldAssignSourceId){
+            if(!in_array($oldAssignSourceId, $newAssignSourceIdArr)){
+                $this->_delAssignedFromTableByParams($this->assignsArr, $oldAssignSourceId);
             } else{
-                unset($newAssignMenuIdArr[$oldAssignMenuId]);
+                unset($newAssignSourceIdArr[$oldAssignSourceId]);
             }
         }
 
-        return $newAssignMenuIdArr;
+        return $newAssignSourceIdArr;
     }
 
 
-    private function _addNewAssigns($clearedNewAssignMenuIdArr)
+    private function _addNewAssigns($clearedNewAssignSourceIdArr)
     {
-        foreach($clearedNewAssignMenuIdArr as $newAssignMenuId){
-            $data = array('menu_id' => $newAssignMenuId, $this->assignsArr['assignFieldName'] => $this->assignsArr['id']);
+        foreach($clearedNewAssignSourceIdArr as $newAssignSourceId){
+            $data = array($this->assignsArr['sourceFieldName'] => $newAssignSourceId, $this->assignsArr['assignFieldName'] => $this->assignsArr['assignId']);
             $this->index_model->addInTable($data, $this->assignsArr['table']);
         }
+    }
+
+
+    protected function _delAssignedFromTableByParams($assignsArr, $oldAssignSourceId)
+    {
+        $this ->db->where($assignsArr['assignFieldName'], $assignsArr['assignId']);
+        $this ->db->where($assignsArr['sourceFieldName'], $oldAssignSourceId);
+        if(!$this->db->delete($assignsArr['table']))
+        {
+            return false;
+        }
+        return true;
     }
 }

@@ -20,8 +20,8 @@
                 <td>Спец. рассылка</td>
                 <td><p>edit<p></td>
                 <td><p>del</p></td>
-                <td style="width:40px"><p>&nbsp;&nbsp;&nbsp;on</p></td>
-                <td style="width:40px"><p>&nbsp;&nbsp;off</p></td>
+                <td style="width:45px"><p>&nbsp;&nbsp;&nbsp;on</p></td>
+                <td style="width:75px"><p>&nbsp;&nbsp;off</p></td>
             </tr>
         </thead>
         <tbody>

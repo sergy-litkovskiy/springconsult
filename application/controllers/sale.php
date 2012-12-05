@@ -22,21 +22,29 @@ class Sale extends CI_Controller
 
     public function sale_show($slug)
     {
-        $salePageArr          = $this->index_model->getFromTableByParams(array('slug' => $slug, 'status' => STATUS_ON), 'sale_page');
+        $salePageArr = $this->sale_model->getSalePageArrWithProducts($slug);
         if(count($salePageArr) < 1)  redirect('/index');
-        $saleProductsArr      = $this->index_model->getArrWhere(
-                                        'sale_products',
-                                        array('sale_page_id' => $salePageArr[0]['id'], 'status' => STATUS_ON),
-                                        '' , 'sequence_num');
+        $saleArr = array();
 
-        $title                = count($salePageArr) > 0 ? $salePageArr[0]['title'] : 'sale page';
+        foreach($salePageArr as $salePage){
+            $saleArr['id'] = $salePage['id'];
+            $saleArr['slug'] = $salePage['slug'];
+            $saleArr['title'] = $salePage['title'];
+            $saleArr['text1'] = $salePage['text1'];
+            $saleArr['text2'] = $salePage['text2'];
+            $saleArr['sale_products'][$salePage['sale_products_id']]['id'] = $salePage['sale_products_id'];
+            $saleArr['sale_products'][$salePage['sale_products_id']]['title'] = $salePage['sale_products_title'];
+            $saleArr['sale_products'][$salePage['sale_products_id']]['description'] = $salePage['sale_products_description'];
+            $saleArr['sale_products'][$salePage['sale_products_id']]['price'] = $salePage['sale_products_price'];
+        }
+
+        $title                = count($saleArr) > 0 ? $saleArr['title'] : 'sale page';
         $this->data_arr       = array(
-        'title'         	=> SITE_TITLE.' - '.$title
-        ,'meta_keywords'	=> $this->defaultDescription
-        ,'meta_description'	=> $this->defaultKeywords
-        ,'content'       	=> $salePageArr[0]
-        ,'sale_products'    => count($saleProductsArr) > 0 ? $saleProductsArr : null
-        ,'payment_form'     => $this->load->view('blocks/payment_form', '', true)
+            'title'         	=> SITE_TITLE.' - '.$title
+            ,'meta_keywords'	=> $this->defaultDescription
+            ,'meta_description'	=> $this->defaultKeywords
+            ,'content'       	=> $saleArr
+            ,'payment_form'     => $this->load->view('blocks/payment_form', '', true)
         );
 
         $data = array('content' => $this->load->view('index/show_sale', $this->data_arr, true));

@@ -10,7 +10,7 @@
     <table id="main_content">
         <thead>
             <tr class="table_title_row">
-                <td>Название</th>
+                <td>Название</td>
                 <td>Текстовый блок1</td>
                 <td>Текстовый блок2</td>
                 <td style="width:180px">Список продуктов</td>
@@ -34,7 +34,7 @@
                 </td>
                 <td class="article_table">
                     <ul>
-                    <?php if(isset($item['sale_products'])){
+                    <?php if(count($item['sale_products'])){
                         foreach ($item['sale_products'] as $sale_products):?>
                             <?php if($sale_products['title']){
                                 $status = ($sale_products['status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>

@@ -388,19 +388,6 @@ class Index_model extends Crud
     }
 
 
-    public function delFromTableByParams($assignsArr, $oldAssignMenuId)
-    {
-        $this ->db->where($assignsArr['assignFieldName'], $assignsArr['id']);
-        $this ->db->where('menu_id', $oldAssignMenuId);
-        if(!$this->db->delete($assignsArr['table']))
-        {
-            return false;
-        }
-        return true;
-    }
-
-    
-
     public function getAforizmusByRandom()
     {
         $qweryResult = $this->db->query("SELECT * FROM `aforizmus` WHERE id >= (SELECT FLOOR( MAX(id) * RAND()) FROM `aforizmus` ) ORDER BY id LIMIT 1");

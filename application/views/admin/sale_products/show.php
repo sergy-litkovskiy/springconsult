@@ -9,7 +9,7 @@
     <table id="main_content">
         <thead>
             <tr class="table_title_row">
-                <td>Название</th>
+                <td>Название</td>
                 <td>Описание</td>
                 <td>Цена</td>
                 <td style="width:180px">Продающая страница</td>
@@ -32,11 +32,16 @@
                     <p><b><?php echo $item['price'];?></b></p>
                 </td>
                 <td class="article_table">
-                    <p><b>
-                    <?php if(isset($item['sale_page'])){
-                          echo $item['sale_page'];
-                    }?>
-                    </b></p>
+                    <ul>
+                        <?php if(count($item['sale_page'])){
+                            foreach ($item['sale_page'] as $sale_page):?>
+                                <?php if($sale_page['title']){
+                                    $status = ($sale_page['status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
+                                    <li><?php  echo $sale_page['title'].' - '.$status;?></li>
+                                <?php };?>
+                            <?php endforeach;
+                        }?>
+                    </ul>
                 </td>
                 <td>
                     <a title="edit" href="<?php echo base_url().'backend/sale_products_edit/'.$item['id'];?>">
