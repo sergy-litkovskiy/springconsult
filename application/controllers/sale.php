@@ -144,7 +144,7 @@ class Sale extends CI_Controller
             'current_url'   => $this->urlArr[count($this->urlArr)-1]);
 
         $data = array('content'  => $this->load->view('index/show_success_sale', $this->data_arr, true),
-            'menu'     => $this->load->view(MENU, $this->data_menu, true));
+                        'menu'   => $this->load->view(MENU, $this->data_menu, true));
         $this->load->view('layout_sale', $data);
     }
 

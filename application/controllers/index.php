@@ -44,7 +44,7 @@ class Index extends CI_Controller
        $this->data_menu     = array('menu' => $this->arrMenu,'current_url' => $this->urlArr[count($this->urlArr)-1]);
        $contentArr          = $this->index_model->getNewsList($pagerParam);
        $title               = count($contentArr) > 0 ? $contentArr[0]['slug_title'] : null;
-     
+
        $this->data_arr      = array_merge($this->_getDataArrForAction($title, $contentArr),
                                    array(
                                      'content'       	=> $contentArr
