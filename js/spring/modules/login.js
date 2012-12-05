@@ -3,7 +3,7 @@ function LoginModule() {
         var _validator;
          
          var _assignValidator = function(e) {
-            _validator = sb.$('form#login-form').validate({
+            _validator = sb.$('form').validate({
                 rules: {
                     log:       'required',
                     pass:      'required'
@@ -13,35 +13,43 @@ function LoginModule() {
                     pass:     'Введите пароль'
                 }
             });
-        };   
+        };
 
+        var _clearErrorMess = function(mess) {
+            sb.$('form p.error').html('').hide();
+        };
 
         var _init = function() {
             sb.$('input[type=text], input[type=password]').val('');
-            sb.$('#login-form > p.error').hide();
+            _clearErrorMess();
             _assignValidator();
         };
-        
-     
+
+
+        var _onSuccess = function(mess) {
+            window.location = "/backend/login";
+        };
+
+
+        var _onError = function(mess) {
+            sb.$('form p.error').show().html(mess);
+        };
+
+
         var _onClickLogin = function(e){
-            if(sb.$('form#login-form').valid()){
+            e.preventDefault();
+            _clearErrorMess();
+            if(sb.$('form#login_form').valid()){
                 var log     = sb.$('input#log').val(),
                     pass    = sb.$('input#pass').val();
 
-                sb.Login.authorize({log : log, pass : pass},  function(data){
-                                        window.location = "/backend/login";
-                                    }
-                                    , function(mess){
-                                        sb.$('#login-form > p.error').css('display', 'block').append(mess);
-                                    }
-                );
+                sb.Login.authorize({log : log, pass : pass}, _onSuccess, _onError);
             }
-            return false;
         };
         
         
         var _bindEvents = function() {  
-            sb.bind('input#button_login', 'click', _onClickLogin);
+            sb.bind('input[type=submit]', 'click', _onClickLogin);
         };
         
         return {
@@ -51,5 +59,5 @@ function LoginModule() {
             },
             destroy : function(){ }
         };
-    }
+    };
 }

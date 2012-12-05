@@ -80,6 +80,13 @@ class Sale_admin extends CI_Controller
     public function sale_page_drop($id)
     {
         $this->index_model->delFromTable($id, 'sale_page');
+        $assignSaleArr = $this->index_model->getFromTableByParams(array('sale_page_id' => $id), 'assign_sale');
+
+        if(count($assignSaleArr)){
+            foreach($assignSaleArr as $assignSale){
+                $this->index_model->delFromTable($assignSale['id'], 'assign_sale');
+            }
+        }
         redirect('backend/sale_page_list');
     }
 
@@ -213,6 +220,13 @@ class Sale_admin extends CI_Controller
     public function sale_products_drop($id)
     {
         $this->index_model->delFromTable($id, 'sale_products');
+        $assignSaleArr = $this->index_model->getFromTableByParams(array('sale_products_id' => $id), 'assign_sale');
+
+        if(count($assignSaleArr)){
+            foreach($assignSaleArr as $assignSale){
+                $this->index_model->delFromTable($assignSale['id'], 'assign_sale');
+            }
+        }
         redirect('backend/sale_products_list');
     }
 

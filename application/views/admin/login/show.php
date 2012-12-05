@@ -1,4 +1,5 @@
-<div class="login_block">
+<script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/login.js"></script>
+<div class="login_block" id="admin-login-form">
     <h2>Authorization:</h2>
     <form id="login_form" action='<?php echo base_url();?>backend/login' method='post' name='add_new' enctype='multipart/form-data'>
     <p class="error"><?php echo validation_errors(); ?></p>
@@ -24,3 +25,6 @@
             <input style='text-align:center; border: none' id='login_button' class="add_mess" name='add' type='submit' value='Send'/>
     </form>
 </div>
+<script>
+    SPRING.Core.registerModule("admin-login-form", LoginModule());
+</script>

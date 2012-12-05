@@ -42,6 +42,7 @@ $active_group = "default";
 $active_record = TRUE;
 
 $db['default']['hostname'] = "localhost";
+//$db['default']['hostname'] = "db8.freehost.com.ua";
 $db['default']['username'] = "springcon_spring";
 $db['default']['password'] = "renault2004";
 $db['default']['database'] = "springcon_helenspring";

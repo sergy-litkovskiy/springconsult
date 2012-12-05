@@ -329,6 +329,13 @@ class Articles_admin extends CI_Controller
     public function drop($id)
     {
         $this->index_model->delFromTable($id, 'articles');
+        $assignArticlesArr = $this->index_model->getFromTableByParams(array('articles_id' => $id), 'assign_articles');
+
+        if(count($assignArticlesArr)){
+            foreach($assignArticlesArr as $assignArticles){
+                $this->index_model->delFromTable($assignArticles['id'], 'assign_articles');
+            }
+        }
         redirect('backend/news');
     }
 }

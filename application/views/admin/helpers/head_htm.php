@@ -17,8 +17,8 @@
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery.loadmask.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery.validate.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery.tablesorter/jquery.tablesorter.js"></script>
-<script  type="text/javascript" src="<?php echo base_url();?>js/tag-it.js"></script>
-<script  type="text/javascript" src="<?php echo base_url();?>js/tag_set.js"></script>
+<!--<script  type="text/javascript" src="--><?php //echo base_url();?><!--js/tag-it.js"></script>-->
+<!--<script  type="text/javascript" src="--><?php //echo base_url();?><!--js/tag_set.js"></script>-->
 
 <script type="text/javascript" src="<?php echo base_url();?>js/init.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/spring/core.js"></script>

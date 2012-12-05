@@ -37,59 +37,6 @@ $(document).ready(function(){
         });
 
 ////////////////////////////////////////////////////////////////
-//dialog window
-        $('#login').dialog({
-        	autoOpen: false,
-        	title: '<p style=\'font-size:12pt;color:#FFFFFF\'>....</p>',
-        	width:350,
-        	heigth:300,
-        	show: 'blind',
-        	hide: 'explode'
-        });
-        
-        $('#opener').click(function() {
-        	$('#login').dialog('open');
-        	return false;
-        });
-
-////////////////////////////////////////////////////////////////
-   //form login validation
-       $("input#login_button").click(function(){
-        var log     = $('#log').val();
-        var pass    = $('#pass').val();
-
-        var message_validator = $("#login_form").validate({
-            rules: {
-                 log:       'required',
-                 pass:      'required'
-            },
-            messages: {
-                 log:      'Enter login',
-                 pass:     'Enter password'
-            },
-           submitHandler: function(form) {
-
-                if(message_validator.valid){
-                    $.ajax({
-                       type: "POST",
-                       url:  "admin/login/ajax_login",
-                       data: {"pass" : pass, "log" : log},
-                       success: function(msg){
-                           if(msg == 'login_true'){
-                                window.location = "/backend/login";
-                           }
-                           else{
-                                $('p.error').text('login or password is wrong! Please, try again');
-                                return false;
-                           }
-                       }
-                    });
-                }
-             }
-        });
-   });
-
-////////////////////////////////////////////////////////////////
    //form validation
        $("input#form_button").click(function(){
         var message_validator = $("#back_form").validate({
@@ -311,65 +258,65 @@ $(document).ready(function(){
     });
 	
 /////////////////start TAG process/////////////////    
-    var TagManager = (function(){
-        var availableTagSet, assignedTagSet, draftTagSet;
-
-        $.ajax({
-             type: "POST",
-             url: "/admin/index_admin/ajax_get_available_tag",
-             data: {},
-             dataType: 'json',
-             success: function (data){
-               
-                var _arrAvailableTags = [], _arrAssignedTags  = [];
-
-                $.each(data, function(i, item){
-                    _arrAvailableTags.push(item.description);
-                });
-
-                $('input.assigned_tags[type=hidden]').each(function(i, item) {
-                    _arrAssignedTags.push(item.value);
-                });
-
-                availableTagSet = new TagSet(_arrAvailableTags);
-                assignedTagSet  = new TagSet(_arrAssignedTags);
-                draftTagSet     = new TagSet(_arrAssignedTags);
-
-                $("#mytags").tagit({
-                    availableTags : _arrAvailableTags,
-                    assignedTags  : _arrAssignedTags,
-                    onAdd         : draftTagSet.add,
-                    onRemove      : draftTagSet.remove
-                });
-            }
-        });
-        
-        return {
-            getAvailableTagSet : function() {return availableTagSet;},
-            getAssignedTagSet  : function() {return assignedTagSet;},
-            getDraftTagSet     : function() {return draftTagSet;}
-        };
-    }());
- 
-  $('input[type=submit]').click(function(e){
-        $(this).parent().find('input[name=json_encode_tag_arr]').remove();
-
-        var availableTagSet = TagManager.getAvailableTagSet(),
-            assignedTagSet  = TagManager.getAssignedTagSet(),
-            draftTagSet     = TagManager.getDraftTagSet();
-
-        var toInsertNewTagSet       = TagSet.sub(draftTagSet, availableTagSet),
-            toDeleteTagSet          = TagSet.sub(assignedTagSet, draftTagSet),
-            toInsertAssignTagSet    = TagSet.sub(TagSet.sub(draftTagSet, toInsertNewTagSet), assignedTagSet),
-            insertAssignTags        = toInsertNewTagSet.values().length ? toInsertNewTagSet.values() : $('#mytags .tagit-input').val(),
-            jsonEncodeTagArr        = JSON.stringify({toInsertNew   : [insertAssignTags],
-                                                    toDelete        : toDeleteTagSet.values(),
-                                                    toInsertAssign  : toInsertAssignTagSet.values()});
-
-//console.log(jsonEncodeTagArr);
-//return false;
-        $(this).before("<input type='hidden' name='json_encode_tag_arr' value='"+jsonEncodeTagArr+"'/>");
-    });
+//    var TagManager = (function(){
+//        var availableTagSet, assignedTagSet, draftTagSet;
+//
+//        $.ajax({
+//             type: "POST",
+//             url: "/admin/index_admin/ajax_get_available_tag",
+//             data: {},
+//             dataType: 'json',
+//             success: function (data){
+//
+//                var _arrAvailableTags = [], _arrAssignedTags  = [];
+//
+//                $.each(data, function(i, item){
+//                    _arrAvailableTags.push(item.description);
+//                });
+//
+//                $('input.assigned_tags[type=hidden]').each(function(i, item) {
+//                    _arrAssignedTags.push(item.value);
+//                });
+//
+//                availableTagSet = new TagSet(_arrAvailableTags);
+//                assignedTagSet  = new TagSet(_arrAssignedTags);
+//                draftTagSet     = new TagSet(_arrAssignedTags);
+//
+//                $("#mytags").tagit({
+//                    availableTags : _arrAvailableTags,
+//                    assignedTags  : _arrAssignedTags,
+//                    onAdd         : draftTagSet.add,
+//                    onRemove      : draftTagSet.remove
+//                });
+//            }
+//        });
+//
+//        return {
+//            getAvailableTagSet : function() {return availableTagSet;},
+//            getAssignedTagSet  : function() {return assignedTagSet;},
+//            getDraftTagSet     : function() {return draftTagSet;}
+//        };
+//    }());
+//
+//  $('input[type=submit]').click(function(e){
+//        $(this).parent().find('input[name=json_encode_tag_arr]').remove();
+//
+//        var availableTagSet = TagManager.getAvailableTagSet(),
+//            assignedTagSet  = TagManager.getAssignedTagSet(),
+//            draftTagSet     = TagManager.getDraftTagSet();
+//
+//        var toInsertNewTagSet       = TagSet.sub(draftTagSet, availableTagSet),
+//            toDeleteTagSet          = TagSet.sub(assignedTagSet, draftTagSet),
+//            toInsertAssignTagSet    = TagSet.sub(TagSet.sub(draftTagSet, toInsertNewTagSet), assignedTagSet),
+//            insertAssignTags        = toInsertNewTagSet.values().length ? toInsertNewTagSet.values() : $('#mytags .tagit-input').val(),
+//            jsonEncodeTagArr        = JSON.stringify({toInsertNew   : [insertAssignTags],
+//                                                    toDelete        : toDeleteTagSet.values(),
+//                                                    toInsertAssign  : toInsertAssignTagSet.values()});
+//
+////console.log(jsonEncodeTagArr);
+////return false;
+//        $(this).before("<input type='hidden' name='json_encode_tag_arr' value='"+jsonEncodeTagArr+"'/>");
+//    });
 /////////////////LANDING PAGES/////////////////    	
     $('a.registred_detail').live('click', function(e){
         e.preventDefault();

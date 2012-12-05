@@ -542,6 +542,14 @@ class Index_model extends Crud
             $isDeleted = $this->delFromTable($id, $dirTableName);
             Common::assertTrue($isDeleted, 'Not deleted');
 
+            $assignMaterialsArr = $this->getFromTableByParams(array('menu_id' => $id), 'assign_materials');
+
+            if(count($assignMaterialsArr)){
+                foreach($assignMaterialsArr as $assignMaterials){
+                    $this->delFromTable($assignMaterials['id'], 'assign_materials');
+                }
+            }
+
         } catch(Exception $e){
             $error = $e->getMessage();
         }
