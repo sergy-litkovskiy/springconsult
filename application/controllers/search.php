@@ -98,6 +98,6 @@ class Search extends CI_Controller
 
     protected function _getCloudsTag()
     {
-        return array('tags' =>  $this->index_model->getCloudsTag());
+        return array('tags' =>  $this->tags_model->getCloudsTag());
     }
 }

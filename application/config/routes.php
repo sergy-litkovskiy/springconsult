@@ -69,7 +69,7 @@ $route['backend/menu_admin/subitem_edit/(:num)']  = 'admin/menu_admin/edit_menu_
 
 $route['backend/news']                            = 'admin/index_admin/index';
 
-$route['backend/send_nl_subscribe/(:num)']        = 'admin/articles_admin/ajax_send_article_to_subscribers/$1';
+//$route['backend/send_nl_subscribe/(:num)']        = 'admin/articles_admin/ajax_send_article_to_subscribers/$1';
 
 $route['backend/subscribe']                       = 'admin/index_admin/subscribe_list';
 $route['backend/check_valid_subscribe']           = 'admin/index_admin/check_valid_subscribe';

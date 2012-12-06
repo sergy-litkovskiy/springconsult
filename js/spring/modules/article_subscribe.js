@@ -57,12 +57,12 @@ function ArticleSubscribeModule() {
                     window.location.reload();
                 }
             );
-        }
+        };
         
         
         var _onError = function(message){
             $overlayMessageContainer = sb.UI.showError('<p class="error">' + message + '</p>'); 
-        }
+        };
         
         
         var _trySubmitDownloadForm = function(e){

@@ -17,17 +17,15 @@
       <change type="DELETED" beforePath="D:\projects\springconsult.my\system\language\russian\upload_lang.php" afterPath="" />
       <change type="DELETED" beforePath="D:\projects\springconsult.my\system\libraries\Security.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/database.php" afterPath="$PROJECT_DIR$/application/config/database.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/routes.php" afterPath="$PROJECT_DIR$/application/config/routes.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/admin/articles_admin.php" afterPath="$PROJECT_DIR$/application/controllers/admin/articles_admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/admin/login.php" afterPath="$PROJECT_DIR$/application/controllers/admin/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/admin/sale_admin.php" afterPath="$PROJECT_DIR$/application/controllers/admin/sale_admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/index_model.php" afterPath="$PROJECT_DIR$/application/models/index_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/helpers/head_htm.php" afterPath="$PROJECT_DIR$/application/views/admin/helpers/head_htm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/search.php" afterPath="$PROJECT_DIR$/application/controllers/search.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/index_admin/edit.php" afterPath="$PROJECT_DIR$/application/views/admin/index_admin/edit.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/login/show.php" afterPath="$PROJECT_DIR$/application/views/admin/login/show.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/layout_login.php" afterPath="$PROJECT_DIR$/application/views/layout_login.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/index_admin/show.php" afterPath="$PROJECT_DIR$/application/views/admin/index_admin/show.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/back.js" afterPath="$PROJECT_DIR$/js/back.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/spring/modules/login.js" afterPath="$PROJECT_DIR$/js/spring/modules/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/spring/modules/article_list_container.js" afterPath="$PROJECT_DIR$/js/spring/modules/article_list_container.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/spring/modules/article_subscribe.js" afterPath="$PROJECT_DIR$/js/spring/modules/article_subscribe.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/spring/sandbox.js" afterPath="$PROJECT_DIR$/js/spring/sandbox.js" />
     </list>
     <ignored path="springconsult.my.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,14 +45,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="back.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/back.js">
+      <file leaf-file-name="search.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/controllers/search.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="38" selection-start="722" selection-end="722" vertical-scroll-proportion="0.20168068">
-              <folding>
-                <marker date="1354740562316" expanded="false" signature="5455:5465" placeholder="..." />
-                <marker date="1354740562316" expanded="false" signature="8797:8807" placeholder="..." />
-              </folding>
+            <state line="92" column="23" selection-start="3324" selection-end="3324" vertical-scroll-proportion="0.45454547">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -72,22 +67,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/application/views/admin/index_admin/show.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/sale_products/show.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/sale_page/show.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/landing/show.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/landing_articles/show.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/sale_products/edit.php" />
         <option value="$PROJECT_DIR$/application/controllers/admin/sale_admin.php" />
-        <option value="$PROJECT_DIR$/application/controllers/admin/articles_admin.php" />
         <option value="$PROJECT_DIR$/application/models/index_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/admin/login.php" />
         <option value="$PROJECT_DIR$/application/views/layout_login.php" />
         <option value="$PROJECT_DIR$/application/views/admin/login/show.php" />
         <option value="$PROJECT_DIR$/application/views/admin/helpers/head_htm.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/index_admin/edit.php" />
         <option value="$PROJECT_DIR$/js/spring/modules/login.js" />
+        <option value="$PROJECT_DIR$/js/spring/modules/article_subscribe.js" />
+        <option value="$PROJECT_DIR$/application/views/admin/index_admin/show.php" />
+        <option value="$PROJECT_DIR$/application/config/routes.php" />
+        <option value="$PROJECT_DIR$/js/spring/sandbox.js" />
+        <option value="$PROJECT_DIR$/application/views/admin/index_admin/edit.php" />
+        <option value="$PROJECT_DIR$/application/controllers/admin/articles_admin.php" />
         <option value="$PROJECT_DIR$/js/back.js" />
+        <option value="$PROJECT_DIR$/js/spring/modules/article_list_container.js" />
+        <option value="$PROJECT_DIR$/application/controllers/search.php" />
       </list>
     </option>
   </component>
@@ -264,7 +259,33 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="index_admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="springconsult.my" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="springconsult.my" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -285,10 +306,6 @@
               <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -300,9 +317,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="preferences.editor" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -355,15 +372,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="11" y="8" width="1885" height="1031" extended-state="0" />
+    <frame x="11" y="8" width="1885" height="1031" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30998853" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23306544" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12397148" sideWeight="0.6900115" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12506858" sideWeight="0.7669346" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -432,104 +449,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/controllers/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="508" column="0" selection-start="22886" selection-end="23055" vertical-scroll-proportion="-9.481482">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/layout_login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="13" selection-start="929" selection-end="929" vertical-scroll-proportion="-20.222221">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/index/show_sale.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="0" selection-start="2873" selection-end="3069" vertical-scroll-proportion="-22.851852">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/tag_set.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/index_admin/show.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.3846154">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/landing_articles/edit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/landing/edit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/spring/sandbox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="46" selection-start="1809" selection-end="1809" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1353956086501" expanded="true" signature="4801:4873" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/login_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="31" selection-start="687" selection-end="687" vertical-scroll-proportion="0.46153846">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/helpers/head_htm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="55" selection-start="1228" selection-end="1228" vertical-scroll-proportion="0.46153846">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/index_admin/edit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="20" selection-start="3217" selection-end="3217" vertical-scroll-proportion="1.6414392">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/login/show.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="4" selection-start="312" selection-end="312" vertical-scroll-proportion="0.102564104">
-          <folding>
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/layout_admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="293" selection-end="293" vertical-scroll-proportion="0.12820514">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/spring/modules/login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="45" column="78" selection-start="1313" selection-end="1313" vertical-scroll-proportion="0.5212766">
@@ -539,18 +458,109 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/admin/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="8" selection-start="266" selection-end="266" vertical-scroll-proportion="0.30769232">
+        <state line="15" column="8" selection-start="266" selection-end="266" vertical-scroll-proportion="0.30769232" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/spring/modules/article_subscribe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="10" selection-start="2288" selection-end="2288" vertical-scroll-proportion="0.031914894">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/spring/modules/spec_mailer_container.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="32" selection-start="725" selection-end="725" vertical-scroll-proportion="-2.3510637">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/admin/landing_admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/admin/index_admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="407" column="0" selection-start="16082" selection-end="16082" vertical-scroll-proportion="14.069652">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="7" selection-start="818" selection-end="905" vertical-scroll-proportion="-0.5920398">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="7" selection-start="2764" selection-end="2764" vertical-scroll-proportion="0.53246754">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="0" selection-start="3305" selection-end="3305" vertical-scroll-proportion="-14.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/index_admin/edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="110" column="31" selection-start="5972" selection-end="5972" vertical-scroll-proportion="-12.111111">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/admin/articles_admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="271" column="52" selection-start="11105" selection-end="11105" vertical-scroll-proportion="-15.037037">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/spring/sandbox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="85" selection-start="2811" selection-end="2843" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1354826308152" expanded="true" signature="5002:5074" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/index_admin/show.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="89" selection-start="2451" selection-end="2512" vertical-scroll-proportion="-6.4814816">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/spring/modules/article_list_container.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="39" selection-start="1057" selection-end="1057" vertical-scroll-proportion="0.29393467">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/back.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="38" selection-start="722" selection-end="722" vertical-scroll-proportion="0.20168068">
+        <state line="104" column="12" selection-start="3417" selection-end="3478" vertical-scroll-proportion="0.6876033">
           <folding>
-            <marker date="1354740562316" expanded="false" signature="5455:5465" placeholder="..." />
-            <marker date="1354740562316" expanded="false" signature="8797:8807" placeholder="..." />
+            <marker date="1354827845859" expanded="false" signature="4496:4506" placeholder="..." />
+            <marker date="1354827845859" expanded="false" signature="7838:7848" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="23" selection-start="3324" selection-end="3324" vertical-scroll-proportion="0.45454547">
+          <folding />
         </state>
       </provider>
     </entry>

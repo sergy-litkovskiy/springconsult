@@ -87,6 +87,9 @@ SPRING.Sandbox = function(core, module_selector){
         Mailer : {
             sendSpecMailer : function(data, onSuccess, onError) {
                 _self.request('/admin/index_admin/ajax_send_spec_mailer', data, onSuccess, onError);
+            },
+            sendSubscribersMail : function(data, onSuccess, onError) {
+                _self.request('/admin/articles_admin/ajax_send_article_to_subscribers', data, onSuccess, onError);
             }
         },
         Landing : {

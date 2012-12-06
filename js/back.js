@@ -127,32 +127,6 @@ $(document).ready(function(){
        });
        
 ////////////////////////////////////////////////////////////////
-//send nl subscribe
-       $("a.send_subscribe").live('click', function(e){
-            if (confirm('Are you sure? Do you really want to SEND letter?')) {
-                var ajaxUrl     = $(this).data('url'),
-                    $messBox    = $('#mess_mailsent');
-
-                $.ajax({
-                   type: 'POST',
-                   url:  ajaxUrl,
-                   data: {},
-                   dataType: 'json',
-                   success: function(msg){
-                     
-                       if(msg.error == null){
-                            ajaxSumbitHandler($messBox, '<p class="success">'+msg.success+'</p>');
-                       }
-                       else{
-                            alert(msg.error);
-                            return false;
-                       }
-                   }
-                });
-            }
-            return false;
-       });
-//////////////////////////////////////////////////////////////// 
        $('button#sequence_actual').click(function(){
             $('ul#sortable').before("<img style='float:left' src='/img/img_main/loader.gif'/>");
 

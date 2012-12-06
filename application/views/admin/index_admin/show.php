@@ -46,7 +46,7 @@
                 <td class="article_table"><p><?php  echo Common::cutString($item['meta_description'], 10);?></p></td>
                 <td class="article_table">
                     <?php if($item['is_sent_mail'] !== STATUS_ON){?>
-                        <a class="send_subscribe" title="subscribe" href="#" data-url="<?php echo base_url().'backend/send_nl_subscribe/'.$item['id'];?>">
+                        <a class="send_subscribe" title="subscribe" href="#">
                             <img src="<?php echo base_url()?>img/img_main/email_go.png"/>
                         </a>
                     <?php } else {?>
@@ -54,10 +54,14 @@
                     <?php }?>
                 </td>
                 <td class="article_table mailer">
-                    <a title="edit" class="go-mailer-lp" href=""><img src="<?php echo base_url()?>img/img_main/email_go_lp.png"/></a>
+                    <a title="edit" class="go-mailer-lp" href="">
+                        <img src="<?php echo base_url()?>img/img_main/email_go_lp.png"/>
+                    </a>
                 </td>                
                 <td>
-                    <a title="edit" href="<?php echo base_url().'backend/article_edit/'.$item['id'];?>"><img src="<?php echo base_url()?>img/img_main/edit.png"/></a>
+                    <a title="edit" href="<?php echo base_url().'backend/article_edit/'.$item['id'];?>">
+                        <img src="<?php echo base_url()?>img/img_main/edit.png"/>
+                    </a>
                 </td>
                 <td>
                     <a title="delete" href="#" data-email="<?php echo base_url().'backend/article_drop/'.$item['id'];?>">

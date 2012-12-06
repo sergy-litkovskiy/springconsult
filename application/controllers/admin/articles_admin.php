@@ -30,7 +30,7 @@ class Articles_admin extends CI_Controller
                        ,'is_sent_mail'      => null
                        ,'date'              => date('Y-m-d')
                        ,'time'              => date('H:i:s'));
-
+        $this->result            = array("success" => null, "message" => null, "data" => null);
         $this->urlArr = explode('/',$_SERVER['REQUEST_URI']);
         $this->message  = null;
     }
@@ -82,7 +82,7 @@ class Articles_admin extends CI_Controller
         $id                 = isset($_REQUEST['id']) && $_REQUEST['id'] ? $_REQUEST['id'] : null;
         $assignMenuIdArr    = isset($_REQUEST['menu']) && $_REQUEST['menu'] ? $_REQUEST['menu'] : array() ;
         $oldAssignMenuId    = isset($_REQUEST['old_assign_id']) && $_REQUEST['old_assign_id'] ? $_REQUEST['old_assign_id'] : array();
-        $arrArticlesTag     = json_decode($_REQUEST['json_encode_tag_arr']);
+//        $arrArticlesTag     = json_decode($_REQUEST['json_encode_tag_arr']);
 //fb($arrArticlesTag);
 //exit;
         try{
@@ -100,7 +100,7 @@ class Articles_admin extends CI_Controller
                     $this->_assignProcess($assignMenuIdArr, $oldAssignMenuId, $id);
                 }
 
-                $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
+//                $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
 
                 $this->_update($data, $params);
             } else {
@@ -115,7 +115,7 @@ class Articles_admin extends CI_Controller
                 if(count($assignMenuIdArr)){
                     $this->_assignProcess($assignMenuIdArr, $oldAssignMenuId, $id);
                 }
-                $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
+//                $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
 
                 redirect('backend/news');
             }
@@ -185,12 +185,12 @@ class Articles_admin extends CI_Controller
     }
 
 
-    public function ajax_send_article_to_subscribers($articleId)
+    public function ajax_send_article_to_subscribers()
     {
         $errLogData = array();
+        $articleId = $_REQUEST['article_id'] && is_numeric($_REQUEST['article_id']) ? $_REQUEST['article_id'] : null;
         try{
-//            $this->index_model->db->trans_begin();
-
+            Common::assertTrue($articleId, 'Ошибка! Не установлен идентификатор статьи');
             $articlesArr    = $this->index_model->getDetailContent($articleId);
             $articleDetail  = count($articlesArr) ? $articlesArr[0] : null;
             Common::assertTrue($articleDetail, 'Ошибка! Нет данных по запрашиваемой статье');
@@ -204,10 +204,8 @@ class Articles_admin extends CI_Controller
 
             $isUpdated = $this->_updateArticleStatusIsMailSent($articleDetail['id']);
             Common::assertTrue($isUpdated, 'Ошибка! Статус сатьи не был изменен на is mail sent');
-
-//            $this->index_model->db->trans_commit();
+            $this->result['success'] = true;
         } catch (Exception $e){
-//            $this->index_model->db->trans_rollback();
             $this->result['message'] = $e->getMessage();
 
             $errLogData['resource_id']  = ERROR_SRC_ARTICLE_MAILER;
@@ -263,7 +261,7 @@ class Articles_admin extends CI_Controller
             'sender_email'  => ADMIN_EMAIL,
             'subject'       => $articleDetail['title'],
             'wrap_type'     => 'left',
-            'list_id'       => UNISENDERMAINLISTID,
+            'list_id'       => /*UNISENDERMAINLISTID*/UNISENDERTESTLISTID,
             'body'          => $this->mailer_model->getUnisenderSubscribeEmailTpl($articleDetail)
         );
 
@@ -299,7 +297,7 @@ class Articles_admin extends CI_Controller
         if((isset($jsonObj->error) && is_object($jsonObj->error)) && (isset($jsonObj->code) && is_object($jsonObj->code))){
             throw new Exception("An error occured: " . @$jsonObj->error . "(code: " . @$jsonObj->code . ")");
         } else {
-            $this->result['success'] = "Рассылка на Unisender<br> запущена успешно со статусом: " . $jsonObj->result->status."!";
+            $this->result['data'] = "Рассылка на Unisender<br> запущена успешно со статусом: " . $jsonObj->result->status."!";
         }
     }
 

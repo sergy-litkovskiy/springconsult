@@ -1,70 +1,70 @@
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url();?>js/jquery_multi_select/jquery.multiSelect.css" />
 <script type="text/javascript" src="<?php echo base_url();?>js/jquery_multi_select/jquery.multiSelect.js"></script>
-<script  type="text/javascript" src="<?php echo base_url();?>js/tag-it.js"></script>
-<script  type="text/javascript" src="<?php echo base_url();?>js/tag_set.js"></script>
+<!--<script  type="text/javascript" src="--><?php //echo base_url();?><!--js/tag-it.js"></script>-->
+<!--<script  type="text/javascript" src="--><?php //echo base_url();?><!--js/tag_set.js"></script>-->
 <script type="text/javascript">
     $(document).ready( function() {
         $(".menu_checkbox").multiSelect({ selectAllText: 'Выделить все', oneOrMoreSelected : 'Опубликовано в % разделах' });
         /////////////////start TAG process/////////////////
-        var TagManager = (function(){
-            var availableTagSet, assignedTagSet, draftTagSet;
-
-            $.ajax({
-                type: "POST",
-                url: "/admin/index_admin/ajax_get_available_tag",
-                data: {},
-                dataType: 'json',
-                success: function (data){
-
-                    var _arrAvailableTags = [], _arrAssignedTags  = [];
-
-                    $.each(data, function(i, item){
-                        _arrAvailableTags.push(item.description);
-                    });
-
-                    $('input.assigned_tags[type=hidden]').each(function(i, item) {
-                        _arrAssignedTags.push(item.value);
-                    });
-
-                    availableTagSet = new TagSet(_arrAvailableTags);
-                    assignedTagSet  = new TagSet(_arrAssignedTags);
-                    draftTagSet     = new TagSet(_arrAssignedTags);
-
-                    $("#mytags").tagit({
-                        availableTags : _arrAvailableTags,
-                        assignedTags  : _arrAssignedTags,
-                        onAdd         : draftTagSet.add,
-                        onRemove      : draftTagSet.remove
-                    });
-                }
-            });
-
-            return {
-                getAvailableTagSet : function() {return availableTagSet;},
-                getAssignedTagSet  : function() {return assignedTagSet;},
-                getDraftTagSet     : function() {return draftTagSet;}
-            };
-        }());
-
-        $('input[type=submit]').click(function(e){
-            $(this).parent().find('input[name=json_encode_tag_arr]').remove();
-
-            var availableTagSet = TagManager.getAvailableTagSet(),
-                    assignedTagSet  = TagManager.getAssignedTagSet(),
-                    draftTagSet     = TagManager.getDraftTagSet();
-
-            var toInsertNewTagSet       = TagSet.sub(draftTagSet, availableTagSet),
-                    toDeleteTagSet          = TagSet.sub(assignedTagSet, draftTagSet),
-                    toInsertAssignTagSet    = TagSet.sub(TagSet.sub(draftTagSet, toInsertNewTagSet), assignedTagSet),
-                    insertAssignTags        = toInsertNewTagSet.values().length ? toInsertNewTagSet.values() : $('#mytags .tagit-input').val(),
-                    jsonEncodeTagArr        = JSON.stringify({toInsertNew   : [insertAssignTags],
-                        toDelete        : toDeleteTagSet.values(),
-                        toInsertAssign  : toInsertAssignTagSet.values()});
+//        var TagManager = (function(){
+//            var availableTagSet, assignedTagSet, draftTagSet;
+//
+//            $.ajax({
+//                type: "POST",
+//                url: "/admin/index_admin/ajax_get_available_tag",
+//                data: {},
+//                dataType: 'json',
+//                success: function (data){
+//
+//                    var _arrAvailableTags = [], _arrAssignedTags  = [];
+//
+//                    $.each(data, function(i, item){
+//                        _arrAvailableTags.push(item.description);
+//                    });
+//
+//                    $('input.assigned_tags[type=hidden]').each(function(i, item) {
+//                        _arrAssignedTags.push(item.value);
+//                    });
+//
+//                    availableTagSet = new TagSet(_arrAvailableTags);
+//                    assignedTagSet  = new TagSet(_arrAssignedTags);
+//                    draftTagSet     = new TagSet(_arrAssignedTags);
+//
+//                    $("#mytags").tagit({
+//                        availableTags : _arrAvailableTags,
+//                        assignedTags  : _arrAssignedTags,
+//                        onAdd         : draftTagSet.add,
+//                        onRemove      : draftTagSet.remove
+//                    });
+//                }
+//            });
+//
+//            return {
+//                getAvailableTagSet : function() {return availableTagSet;},
+//                getAssignedTagSet  : function() {return assignedTagSet;},
+//                getDraftTagSet     : function() {return draftTagSet;}
+//            };
+//        }());
+//
+//        $('input[type=submit]').click(function(e){
+//            $(this).parent().find('input[name=json_encode_tag_arr]').remove();
+//
+//            var availableTagSet = TagManager.getAvailableTagSet(),
+//                    assignedTagSet  = TagManager.getAssignedTagSet(),
+//                    draftTagSet     = TagManager.getDraftTagSet();
+//
+//            var toInsertNewTagSet       = TagSet.sub(draftTagSet, availableTagSet),
+//                    toDeleteTagSet          = TagSet.sub(assignedTagSet, draftTagSet),
+//                    toInsertAssignTagSet    = TagSet.sub(TagSet.sub(draftTagSet, toInsertNewTagSet), assignedTagSet),
+//                    insertAssignTags        = toInsertNewTagSet.values().length ? toInsertNewTagSet.values() : $('#mytags .tagit-input').val(),
+//                    jsonEncodeTagArr        = JSON.stringify({toInsertNew   : [insertAssignTags],
+//                        toDelete        : toDeleteTagSet.values(),
+//                        toInsertAssign  : toInsertAssignTagSet.values()});
 
 //console.log(jsonEncodeTagArr);
 //return false;
-            $(this).before("<input type='hidden' name='json_encode_tag_arr' value='"+jsonEncodeTagArr+"'/>");
-        });
+//            $(this).before("<input type='hidden' name='json_encode_tag_arr' value='"+jsonEncodeTagArr+"'/>");
+//        });
     });
 </script>
 <h2><?php echo $title." '".$content['title']."'";?></h2>
