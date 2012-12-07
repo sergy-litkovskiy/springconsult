@@ -270,11 +270,12 @@ class Articles_admin extends CI_Controller
 
         $jsonObj = json_decode($result);
         Common::assertTrue($jsonObj, 'Ошибка! API(createEmailMessage) Invalid JSON');
-
+//Common::debugLogProd('_unisenderCreateEmailMessage');        
+//Common::debugLogProd($jsonObj);
         if((isset($jsonObj->error) && is_object($jsonObj->error)) && (isset($jsonObj->code) && is_object($jsonObj->code))){
             throw new Exception("An error occured: " . @$jsonObj->error . "(code: " . @$jsonObj->code . ")");
         } else {
-            $this->_unusenderCreateCampaign($jsonObj->result->message_id);
+            return $this->_unusenderCreateCampaign($jsonObj->result->message_id);
         }
     }
 
@@ -293,11 +294,13 @@ class Articles_admin extends CI_Controller
 
         $jsonObj = json_decode($result);
         Common::assertTrue($jsonObj, 'Ошибка! API(createCampaign) Invalid JSON');
-
-        if((isset($jsonObj->error) && is_object($jsonObj->error)) && (isset($jsonObj->code) && is_object($jsonObj->code))){
+//Common::debugLogProd('_unusenderCreateCampaign');
+//Common::debugLogProd($jsonObj);         
+        if((isset($jsonObj->error) && $jsonObj->error !== '')  && isset($jsonObj->code) ){
             throw new Exception("An error occured: " . @$jsonObj->error . "(code: " . @$jsonObj->code . ")");
         } else {
-            $this->result['data'] = "Рассылка на Unisender<br> запущена успешно со статусом: " . $jsonObj->result->status."!";
+	    //return $this->result['data'] = "Рассылка на Unisender запущена успешно!";
+            return $this->result['data'] = "Рассылка на Unisender<br> запущена успешно со статусом: " . @$jsonObj->result->status."!";
         }
     }
 
