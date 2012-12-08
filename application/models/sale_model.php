@@ -19,9 +19,9 @@ class Sale_model extends Crud
     public function getSalePageArrWithProducts($slug)
     {
         $sql = $this->_getSelectSql();
+        $sql .= " AND sale_products.status = ".STATUS_ON;
         $sql .= " WHERE sale_page.slug = '".$slug."'
                 AND sale_page.status = ".STATUS_ON."
-                AND sale_products.status = ".STATUS_ON."
                 ORDER BY sale_products.sequence_num";
         $query = $this->db->query($sql);
 
