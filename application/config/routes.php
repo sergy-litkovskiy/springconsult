@@ -112,6 +112,12 @@ $route['backend/sale_products_edit/(:num)']       = 'admin/sale_admin/sale_produ
 $route['backend/sale_products_drop/(:num)']       = 'admin/sale_admin/sale_products_drop/$1';
 $route['backend/check_valid_sale_products']       = 'admin/sale_admin/check_valid_sale_products';
 
+$route['backend/announce_list']                  = 'admin/announce_admin/announce_list';
+$route['backend/check_valid_announce']           = 'admin/announce_admin/check_valid_announce';
+$route['backend/announce_edit']                  = 'admin/announce_admin/announce_edit';
+$route['backend/announce_edit/(:num)']           = 'admin/announce_admin/announce_edit/$1';
+$route['backend/announce_drop']                  = 'admin/announce_admin/announce_drop';
+
 $route['backend/spec_mailer_statistics']          = 'admin/index_admin/spec_mailer_statistics';
 $route['backend/spec_mailer_statistics/(:num)']   = 'admin/index_admin/spec_mailer_statistics/$1';
 $route['backend/(:any)']                          = 'admin/index_admin/show/$1';

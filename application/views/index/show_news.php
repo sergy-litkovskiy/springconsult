@@ -1,4 +1,9 @@
 <div id="content">
+    <?php if(!isset($announcement)):?>
+        <div class="announce">
+            &nbsp;
+        </div>
+    <?php endif;?>
     <h1><b><?php echo @$content[0]['slug_title'];?></b></h1>
     <div style="text-align: right" id="article_subscribe">
         <a class="detail_show" href="#">
