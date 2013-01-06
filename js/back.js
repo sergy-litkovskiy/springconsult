@@ -23,18 +23,6 @@ $(document).ready(function(){
                     dateFormat: 'yy-mm-dd',
                     showButtonPanel: true
         });
-///////////////////////////////////////////////////////////////
-//after click add one new form for upload files
-        var max_photos_upload = 15;
-        var added_forms = 1;
-        var tmpl = $('#add_img_tmpl').html();
-        $('#push_me').click(function(){
-            if (added_forms < max_photos_upload){
-                $('#add_img_tmpl').append(tmpl);
-                added_forms++;
-            }
-            return false;
-        });
 
 ////////////////////////////////////////////////////////////////
    //form validation

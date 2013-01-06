@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a12eea6-2247-4bf2-8bc1-f0085beec09e" name="Default" comment="Clean up">
+      <change type="DELETED" beforePath="D:\projects\springconsult.my\js\jquery\jquery-1.6.2.js" afterPath="" />
       <change type="DELETED" beforePath="D:\projects\springconsult.my\springconsult" afterPath="" />
       <change type="DELETED" beforePath="D:\projects\springconsult.my\system\language\russian\calendar_lang.php" afterPath="" />
       <change type="DELETED" beforePath="D:\projects\springconsult.my\system\language\russian\date_lang.php" afterPath="" />
@@ -16,6 +17,8 @@
       <change type="DELETED" beforePath="D:\projects\springconsult.my\system\language\russian\unit_test_lang.php" afterPath="" />
       <change type="DELETED" beforePath="D:\projects\springconsult.my\system\language\russian\upload_lang.php" afterPath="" />
       <change type="DELETED" beforePath="D:\projects\springconsult.my\system\libraries\Security.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/back.js" afterPath="$PROJECT_DIR$/js/back.js" />
     </list>
     <ignored path="springconsult.my.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,19 +38,37 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="sale.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/controllers/sale.php">
+      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="51" selection-start="991" selection-end="991" vertical-scroll-proportion="0.6253102">
+            <state line="48" column="28" selection-start="2049" selection-end="2049" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sale_model.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/sale_model.php">
+      <file leaf-file-name="articles_admin.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/admin/articles_admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="53" selection-start="1390" selection-end="1390" vertical-scroll-proportion="-32.666668">
+            <state line="258" column="31" selection-start="10423" selection-end="10423" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index_model.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/models/index_model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="465" column="33" selection-start="15910" selection-end="15910" vertical-scroll-proportion="0.025641026">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="constants.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/config/constants.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="79" column="8" selection-start="3011" selection-end="3011" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -66,7 +87,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/application/controllers/admin/login.php" />
         <option value="$PROJECT_DIR$/application/views/layout_login.php" />
         <option value="$PROJECT_DIR$/application/views/admin/login/show.php" />
         <option value="$PROJECT_DIR$/application/views/admin/helpers/head_htm.php" />
@@ -77,11 +97,12 @@
         <option value="$PROJECT_DIR$/js/spring/sandbox.js" />
         <option value="$PROJECT_DIR$/application/views/admin/index_admin/edit.php" />
         <option value="$PROJECT_DIR$/application/controllers/admin/articles_admin.php" />
-        <option value="$PROJECT_DIR$/js/back.js" />
         <option value="$PROJECT_DIR$/js/spring/modules/article_list_container.js" />
         <option value="$PROJECT_DIR$/application/controllers/search.php" />
         <option value="$PROJECT_DIR$/application/models/sale_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/sale.php" />
+        <option value="$PROJECT_DIR$/js/back.js" />
+        <option value="$PROJECT_DIR$/application/controllers/index.php" />
       </list>
     </option>
   </component>
@@ -127,186 +148,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spring" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spring" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="index_admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -314,7 +155,7 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="preferences.editor" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -376,10 +217,9 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3272101" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12726276" sideWeight="0.6727899" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13549095" sideWeight="0.6727899" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -388,6 +228,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3272101" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -448,11 +289,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/spring/modules/article_subscribe.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="10" selection-start="2288" selection-end="2288" vertical-scroll-proportion="0.031914894" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/spring/modules/spec_mailer_container.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="32" selection-start="725" selection-end="725" vertical-scroll-proportion="-2.3510637" />
@@ -468,18 +304,6 @@
         <state line="407" column="0" selection-start="16082" selection-end="16082" vertical-scroll-proportion="14.069652" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="7" selection-start="818" selection-end="905" vertical-scroll-proportion="-0.5920398" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="7" selection-start="2764" selection-end="2764" vertical-scroll-proportion="0.53246754">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/config/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="72" column="0" selection-start="3305" selection-end="3305" vertical-scroll-proportion="-14.0" />
@@ -488,11 +312,6 @@
     <entry file="file://$PROJECT_DIR$/application/views/admin/index_admin/edit.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="110" column="31" selection-start="5972" selection-end="5972" vertical-scroll-proportion="-12.111111" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/admin/articles_admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="271" column="52" selection-start="11105" selection-end="11105" vertical-scroll-proportion="-15.037037" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/spring/sandbox.js">
@@ -510,28 +329,50 @@
         <state line="28" column="39" selection-start="1057" selection-end="1057" vertical-scroll-proportion="0.29393467" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/back.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="12" selection-start="3417" selection-end="3478" vertical-scroll-proportion="0.6876033" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/search.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="23" selection-start="3324" selection-end="3324" vertical-scroll-proportion="0.62026864">
-          <folding />
-        </state>
+        <state line="92" column="23" selection-start="3324" selection-end="3324" vertical-scroll-proportion="0.62026864" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/sale_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="53" selection-start="1390" selection-end="1390" vertical-scroll-proportion="-32.666668">
-          <folding />
-        </state>
+        <state line="50" column="53" selection-start="1390" selection-end="1390" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/sale.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="51" selection-start="991" selection-end="991" vertical-scroll-proportion="0.6253102">
+        <state line="20" column="0" selection-start="488" selection-end="488" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/back.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="859" selection-end="859" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="28" selection-start="2049" selection-end="2049" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="8" selection-start="3011" selection-end="3011" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/admin/articles_admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="258" column="31" selection-start="10423" selection-end="10423" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/index_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="465" column="33" selection-start="15910" selection-end="15910" vertical-scroll-proportion="0.025641026">
           <folding />
         </state>
       </provider>
