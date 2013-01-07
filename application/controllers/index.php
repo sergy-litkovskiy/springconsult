@@ -44,6 +44,7 @@ class Index extends CI_Controller
        $this->data_menu     = array('menu' => $this->arrMenu,'current_url' => $this->urlArr[count($this->urlArr)-1]);
        $contentArr          = $this->index_model->getNewsList($pagerParam);
        $title               = count($contentArr) > 0 ? $contentArr[0]['slug_title'] : null;
+       $announcement        = $this->index_model->getFromTableByParams(array('status' => STATUS_ON),'announcement');
 
        $this->data_arr      = array_merge($this->_getDataArrForAction($title, $contentArr),
                                    array(
@@ -51,6 +52,7 @@ class Index extends CI_Controller
                                     ,'pager'         	=> $pager
                                     ,'current_page'     => $currentPage
                                     ,'disqus'           => show_disqus()
+                                    ,'announcement'     => count($announcement) ? $announcement[0] : null
                                ));
 
        $data = array(
@@ -61,7 +63,6 @@ class Index extends CI_Controller
 
        $this->load->view('layout', $data);
     }
-
 
     
     public function show($slug)
@@ -94,7 +95,6 @@ class Index extends CI_Controller
     }
 
 
-
     public function show_detail($slug, $articleId)
     {
        $this->data_menu      = array('menu' => $this->arrMenu,'current_url' => $this->urlArr[count($this->urlArr)-1]);
@@ -120,7 +120,6 @@ class Index extends CI_Controller
              'subscribe'     => $this->load->view('blocks/subscribe', count($this->subscribe) ? $this->subscribe : null, true));
        $this->load->view('layout', $data);
     }
-
 
     
     public function cloud_tag_list($tagMasterId, $currentPage = null)
@@ -162,7 +161,6 @@ class Index extends CI_Controller
         $this->load->view('layout', $data);
     }
     
-    
 
     public function ajax_send_subscribe()
     {
@@ -173,7 +171,6 @@ class Index extends CI_Controller
         return $this->check_valid_subscribe_form($data);
     }
 
-    
     
     public function check_valid_subscribe_form($data)
     {
@@ -193,7 +190,6 @@ class Index extends CI_Controller
     }
 
 
-	 
     protected function _prepareRulesSubscribeForm()
     {
         return array(

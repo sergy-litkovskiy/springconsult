@@ -102,6 +102,11 @@ SPRING.Sandbox = function(core, module_selector){
                 _self.request('/contact_form/send', data, onSuccess, onError);
             }
         },
+        Status : {
+            statusChange : function(data, onSuccess, onError) {
+                _self.request('/admin/index_admin/ajax_change_status', data, onSuccess, onError);
+            }
+        },
         Menu : {
             addOrUpdate : function(data, onSuccess, onError) {
                 _self.request('/admin/index_admin/ajax_menu_edit', data, onSuccess, onError);

@@ -236,9 +236,9 @@ class Index_admin extends CI_Controller
     }
 
 
-    public function subscribe_drop()
+    public function subscribe_drop($id, $fileName)
     {
-        return $this->index_model->dropWithFile('subscribe');
+        return $this->index_model->dropWithFile($id, $fileName, 'subscribe');
     }
     
 ////////////////////////////////AFORIZMUS//////////////////////////
@@ -417,12 +417,15 @@ class Index_admin extends CI_Controller
         $data['status']     = $_REQUEST['status'];
         $arrData['id']      = $_REQUEST['id'];
         $arrData['table']   = $_REQUEST['table'];
-        if($this->_update_status($data, $arrData)){
-             print 'updated_true';
-             exit;
-        } else{
-             return false;
+        try{
+            $result = $this->_update_status($data, $arrData);
+            Common::assertTrue($result, 'Ошибка! Статус не был изменен');
+            $this->result['success']    = true;
+        } catch (Exception $e){
+            $this->result['message']    = $e->getMessage();
         }
+        print json_encode($this->result);
+        exit;
     }
 
     

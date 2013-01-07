@@ -1,5 +1,8 @@
 function ArticleListContainerModule() {
     return function(sb){
+        var _loader = '<img id="img_loader" src="/img/img_main/ajax-loader_red.gif" alt="Loading"/>';
+        var _currentContainer;
+
         var _onClickGoMailer = function(e){
             e.preventDefault();
          
@@ -41,10 +44,57 @@ function ArticleListContainerModule() {
             }
         };
 
-        
+
+        var _onLoaderHide = function(){
+            _currentContainer.next('#img_loader').remove();
+            _currentContainer.fadeIn();
+        };
+
+
+        var _onChangeStatusSuccess = function(data){
+//            _onLoaderHide();
+            _reloadPage();
+        };
+
+
+        var _onChangeStatusError = function(message){
+            _onLoaderHide();
+            $overlayMessageContainer = sb.UI.showError('<p class="error">' + message + '</p>');
+            $($overlayMessageContainer).find('div.close').click(
+                function(){
+                    _reloadPage();
+                }
+            );
+        };
+
+
+        var _onClickChangeStatus = function(e){
+            e.preventDefault();
+            _currentContainer = $(this).parent('form');
+            var data = {
+                status  : $(this).val(),
+                id      : _currentContainer.attr('id'),
+                table   : _currentContainer.data('table')
+            };
+            _currentContainer.hide().after(_loader);
+            sb.Status.statusChange(data, _onChangeStatusSuccess, _onChangeStatusError);
+        };
+
+
+        var _onClickDrop = function(e){
+            e.preventDefault();
+            if (confirm('Are you sure? Do you really want to DELETE?')) {
+                var email = $(this).data('email');
+                window.location.href(email);
+            }
+        };
+
+
         var _bindEvents = function() {  
             sb.bind('.go-mailer-lp', 'click', _onClickGoMailer);
             sb.bind('.send_subscribe', 'click', _onClickSendSubscribe);
+            sb.bind('.status-change input:radio', 'change', _onClickChangeStatus);
+            sb.bind('.drop', 'click', _onClickDrop);
         };
         
         return {

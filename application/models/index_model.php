@@ -527,12 +527,12 @@ class Index_model extends Crud
 
 
 
-    public function dropWithFile($dirTableName)
+    public function dropWithFile($id, $filename, $dirTableName)
     {
         $error = null;
         try{
-            $filename   = isset($_REQUEST['filename']) && $_REQUEST['filename'] ? $_REQUEST['filename'] : null;
-            $id         = isset($_REQUEST['id']) && $_REQUEST['id'] ? $_REQUEST['id'] : null;
+//            $filename   = isset($_REQUEST['filename']) && $_REQUEST['filename'] ? $_REQUEST['filename'] : null;
+//            $id         = isset($_REQUEST['id']) && $_REQUEST['id'] ? $_REQUEST['id'] : null;
             Common::assertTrue($id, 'Id not set');
             Common::assertTrue($filename, 'Filename not set');
 

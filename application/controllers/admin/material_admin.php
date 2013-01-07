@@ -180,9 +180,9 @@ class Material_admin extends CI_Controller
     }
 
 
-    public function material_drop()
+    public function material_drop($id, $fileName)
     {
-        return $this->index_model->dropWithFile('materials');
+        return $this->index_model->dropWithFile($id, $fileName, 'materials');
     }
 
 
