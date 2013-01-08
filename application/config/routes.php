@@ -116,7 +116,7 @@ $route['backend/announce_list']                  = 'admin/announce_admin/announc
 $route['backend/check_valid_announce']           = 'admin/announce_admin/check_valid_announce';
 $route['backend/announce_edit']                  = 'admin/announce_admin/announce_edit';
 $route['backend/announce_edit/(:num)']           = 'admin/announce_admin/announce_edit/$1';
-$route['backend/announce_drop/(:num)']                  = 'admin/announce_admin/announce_drop';
+$route['backend/announce_drop/(:num)']           = 'admin/announce_admin/announce_drop/$1';
 
 $route['backend/spec_mailer_statistics']          = 'admin/index_admin/spec_mailer_statistics';
 $route['backend/spec_mailer_statistics/(:num)']   = 'admin/index_admin/spec_mailer_statistics/$1';

@@ -79,15 +79,22 @@ class Sale_admin extends CI_Controller
 
     public function sale_page_drop($id)
     {
-        $this->index_model->delFromTable($id, 'sale_page');
-        $assignSaleArr = $this->index_model->getFromTableByParams(array('sale_page_id' => $id), 'assign_sale');
+        try{
+            $this->index_model->delFromTable($id, 'sale_page');
+            $assignSaleArr = $this->index_model->getFromTableByParams(array('sale_page_id' => $id), 'assign_sale');
 
-        if(count($assignSaleArr)){
-            foreach($assignSaleArr as $assignSale){
-                $this->index_model->delFromTable($assignSale['id'], 'assign_sale');
+            if(count($assignSaleArr)){
+                foreach($assignSaleArr as $assignSale){
+                    $this->index_model->delFromTable($assignSale['id'], 'assign_sale');
+                }
             }
+            $this->result['success'] = true;
+        } catch (Exception $e){
+            $this->result['message'] = $e->getMessage();
         }
-        redirect('backend/sale_page_list');
+
+        print json_encode($this->result);
+        exit;
     }
 
 

@@ -49,9 +49,15 @@ class Announce_admin extends CI_Controller
 
     public function announce_drop($id)
     {
-        $this->index_model->delFromTable($id, 'announcement');
+        try{
+            $this->index_model->delFromTable($id, 'announcement');
+            $this->result['success'] = true;
+        } catch (Exception $e){
+            $this->result['message'] = $e->getMessage();
+        }
 
-        redirect('backend/announce_list');
+        print json_encode($this->result);
+        exit;
     }
 
 

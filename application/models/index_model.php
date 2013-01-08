@@ -529,8 +529,6 @@ class Index_model extends Crud
 
     public function dropWithFile($id, $filename, $dirTableName)
     {
-        $error = null;
-        try{
 //            $filename   = isset($_REQUEST['filename']) && $_REQUEST['filename'] ? $_REQUEST['filename'] : null;
 //            $id         = isset($_REQUEST['id']) && $_REQUEST['id'] ? $_REQUEST['id'] : null;
             Common::assertTrue($id, 'Id not set');
@@ -549,10 +547,11 @@ class Index_model extends Crud
                     $this->delFromTable($assignMaterials['id'], 'assign_materials');
                 }
             }
+    }
 
-        } catch(Exception $e){
-            $error = $e->getMessage();
-        }
-        print json_encode($error);
+
+    public function updateStatusToZero()
+    {
+        return $this->db->query(" UPDATE announcement SET status = ".STATUS_OFF);
     }
 }

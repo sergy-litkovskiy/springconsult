@@ -51,10 +51,10 @@ function ArticleListContainerModule() {
         };
 
 
-        var _onChangeStatusSuccess = function(data){
-//            _onLoaderHide();
-            _reloadPage();
-        };
+//        var _onChangeStatusSuccess = function(){
+////            _onLoaderHide();
+//            _reloadPage();
+//        };
 
 
         var _onChangeStatusError = function(message){
@@ -77,15 +77,17 @@ function ArticleListContainerModule() {
                 table   : _currentContainer.data('table')
             };
             _currentContainer.hide().after(_loader);
-            sb.Status.statusChange(data, _onChangeStatusSuccess, _onChangeStatusError);
+            sb.Status.statusChange(data, _reloadPage, _onChangeStatusError);
         };
 
 
         var _onClickDrop = function(e){
             e.preventDefault();
+            _currentContainer = $(this);
             if (confirm('Are you sure? Do you really want to DELETE?')) {
                 var email = $(this).data('email');
-                window.location.href(email);
+                $(this).hide().after(_loader);
+                sb.ItemMove.drop(email, _reloadPage, _onChangeStatusError);
             }
         };
 
