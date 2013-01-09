@@ -1642,3 +1642,9 @@ ul.tagit input[type="text"] {
 .partners, .partners tr td{
     border: none!important;
 }
+
+.announce{
+    float: left;
+    border: solid 1px red;
+    width: 100%;
+}

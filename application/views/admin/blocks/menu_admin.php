@@ -9,4 +9,5 @@
     <li><a id='cat_name' href='/backend/spec_mailer_statistics'>Спец.  рассылка</a></li>
     <li><a id='cat_name' href='/backend/sale_page_list'>Sale page</a></li>
     <li><a id='cat_name' href='/backend/sale_products_list'>Sale products</a></li>
+    <li><a id='cat_name' href='/backend/announce_list'>Анонсы</a></li>
 </ul>
