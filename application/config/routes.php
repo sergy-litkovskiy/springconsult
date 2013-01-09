@@ -51,7 +51,7 @@ $route['backend/login']                           = "admin/index_admin";
 $route['backend/logout']                          = "admin/index_admin/logout";
 
 $route['ajax_change_status']                      = "admin/menu_admin/ajax_change_status";
-$route['backend/ajax_change_status']              = "admin/index_admin/ajax_change_status";
+//$route['backend/ajax_change_status']              = "admin/index_admin/ajax_change_status";
 
 $route['backend/article_edit/(:num)']             = 'admin/articles_admin/article_edit/$1';
 $route['backend/article_edit']                    = 'admin/articles_admin/article_edit';
@@ -75,10 +75,10 @@ $route['backend/subscribe']                       = 'admin/index_admin/subscribe
 $route['backend/check_valid_subscribe']           = 'admin/index_admin/check_valid_subscribe';
 $route['backend/subscribe_edit']                  = 'admin/index_admin/subscribe_edit';
 $route['backend/subscribe_edit/(:num)']           = 'admin/index_admin/subscribe_edit/$1';
-$route['backend/subscribe_drop']                  = 'admin/index_admin/subscribe_drop';
+$route['backend/subscribe_drop/(:num)/(:any)']    = 'admin/index_admin/subscribe_drop/$1/$2';
 
 $route['backend/material']                        = 'admin/material_admin/material_list';
-$route['backend/material_drop']                   = 'admin/material_admin/material_drop';
+$route['backend/material_drop/(:num)/(:any)']     = 'admin/material_admin/material_drop/$1/$2';
 $route['backend/material_edit']                   = 'admin/material_admin/material_edit';
 $route['backend/material_edit/(:num)']            = 'admin/material_admin/material_edit/$1';
 $route['backend/check_valid_material']            = 'admin/material_admin/check_valid_materials';
@@ -116,7 +116,7 @@ $route['backend/announce_list']                  = 'admin/announce_admin/announc
 $route['backend/check_valid_announce']           = 'admin/announce_admin/check_valid_announce';
 $route['backend/announce_edit']                  = 'admin/announce_admin/announce_edit';
 $route['backend/announce_edit/(:num)']           = 'admin/announce_admin/announce_edit/$1';
-$route['backend/announce_drop']                  = 'admin/announce_admin/announce_drop';
+$route['backend/announce_drop/(:num)']           = 'admin/announce_admin/announce_drop/$1';
 
 $route['backend/spec_mailer_statistics']          = 'admin/index_admin/spec_mailer_statistics';
 $route['backend/spec_mailer_statistics/(:num)']   = 'admin/index_admin/spec_mailer_statistics/$1';

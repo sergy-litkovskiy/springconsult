@@ -1645,6 +1645,8 @@ ul.tagit input[type="text"] {
 
 .announce{
     float: left;
-    border: solid 1px red;
     width: 100%;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: dotted 1px #CDF1AC;
 }

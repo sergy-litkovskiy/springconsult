@@ -1,3 +1,4 @@
+<script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/article_list_container.js"></script>
 <p class="edit_message"><?php echo @$message; ?></p>
 <h2>Анонсы</h2>
     <div class="add_new">
@@ -34,24 +35,22 @@
                     </a>
                 </td>
                 <td>
-                    <input type="hidden" name="id" id="hiddenid<?php echo $item['id'];?>" value="<?php echo $item['id'];?>"/>
-                    <input type="hidden" name="table" id="hiddentable<?php echo $item['id'];?>" value="announcement"/>
-                    <a class="drop" title="Удалить" href="#">
+                    <a class="drop" title="Удалить" href="#" data-email="<?php echo base_url().'backend/announce_drop/'.$item['id'];?>">
                         <img src="<?php echo base_url()?>img/img_main/del.png"/>
                     </a>
                 </td>
-
-                <td>
-                    <form id="<?php echo @$item['id'];?>">
-                    <input type="hidden" name="table" id="hidden<?php echo $item['id'];?>" value="announcement"/>
-                    <input type="radio" id="<?php echo $item['id'];?>" name="status" value="1" <?php echo ($item['status'] == '1') ? 'checked="checked"': null;?>/>
-                    <img src="<?php echo base_url()?>img/img_main/on.png"/>
-                </td>
-                <td>
-                    <input type="radio" id="<?php echo $item['id'];?>" name="status" value="0" <?php echo ($item['status'] == '0') ? 'checked="checked"': null;?>/>
-                    <img src="<?php echo base_url()?>img/img_main/off.png"/>
+                <td colspan="2" class="status-change">
+                    <form id="<?php echo @$item['id'];?>" data-table="announcement">
+                        <input type="radio" name="status" value="1" <?php echo ($item['status'] == '1') ? 'checked="checked"': null;?>/>
+                        <img src="<?php echo base_url()?>img/img_main/on.png"/>
+                        &nbsp;&nbsp;
+                        <input type="radio" name="status" value="0" <?php echo ($item['status'] == '0') ? 'checked="checked"': null;?>/>
+                        <img src="<?php echo base_url()?>img/img_main/off.png"/>
                     </form>
                 </td>
             </tr>
         <?php endforeach;?>
     </table>
+<script>
+    SPRING.Core.registerModule("main_content", ArticleListContainerModule());
+</script>

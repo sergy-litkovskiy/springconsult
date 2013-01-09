@@ -236,9 +236,17 @@ class Index_admin extends CI_Controller
     }
 
 
-    public function subscribe_drop()
+    public function subscribe_drop($id, $fileName)
     {
-        return $this->index_model->dropWithFile('subscribe');
+        try{
+            $this->index_model->dropWithFile($id, $fileName, 'subscribe');
+            $this->result['success'] = true;
+        } catch (Exception $e){
+            $this->result['message'] = $e->getMessage();
+        }
+
+        print json_encode($this->result);
+        exit;
     }
     
 ////////////////////////////////AFORIZMUS//////////////////////////
@@ -264,8 +272,15 @@ class Index_admin extends CI_Controller
 
     public function aforizmus_drop($id)
     {
-        $this->index_model->delFromTable($id, 'aforizmus');
-        redirect('backend/aforizmus');
+        try{
+            $this->index_model->delFromTable($id, 'aforizmus');
+            $this->result['success'] = true;
+        } catch (Exception $e){
+            $this->result['message'] = $e->getMessage();
+        }
+
+        print json_encode($this->result);
+        exit;
     }
     
 
@@ -417,15 +432,27 @@ class Index_admin extends CI_Controller
         $data['status']     = $_REQUEST['status'];
         $arrData['id']      = $_REQUEST['id'];
         $arrData['table']   = $_REQUEST['table'];
-        if($this->_update_status($data, $arrData)){
-             print 'updated_true';
-             exit;
-        } else{
-             return false;
+        try{
+            if($_REQUEST['table'] == 'announcement'){
+                $this->_updateStatusToZero();
+            }
+            $result = $this->_update_status($data, $arrData);
+            Common::assertTrue($result, 'Ошибка! Статус не был изменен');
+            $this->result['success']    = true;
+        } catch (Exception $e){
+            $this->result['message']    = $e->getMessage();
         }
+        print json_encode($this->result);
+        exit;
     }
 
-    
+
+    private function _updateStatusToZero()
+    {
+        $this->index_model->updateStatusToZero();
+    }
+
+
     public function ajax_get_available_tag()
     {
         $tagArr =  $this->index_model->getAvailableTag();

@@ -43,6 +43,7 @@ class Landing_admin extends CI_Controller
 
         $this->urlArr = explode('/',$_SERVER['REQUEST_URI']);
         $this->message  = null;
+        $this->result   = array("success" => null, "message" => null, "data" => null);
     }
 
 ////////////////////////////////LANDING//////////////////////////
@@ -70,8 +71,15 @@ class Landing_admin extends CI_Controller
 
     public function landing_drop($id)
     {
-        $this->index_model->delFromTable($id, 'landing_page');
-        redirect('backend/landing');
+        try{
+            $this->index_model->delFromTable($id, 'landing_page');
+            $this->result['success'] = true;
+        } catch (Exception $e){
+            $this->result['message'] = $e->getMessage();
+        }
+
+        print json_encode($this->result);
+        exit;
     }
 
 
