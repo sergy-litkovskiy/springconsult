@@ -22,7 +22,6 @@
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery.cross-slide.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery.validate.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery.watermark-3.1.3/jquery.watermark.min.js"></script>
-<script  type="text/javascript" src="<?php echo base_url();?>js/main.js"></script>
 
 <script type="text/javascript" src="<?php echo base_url();?>js/init.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/spring/core.js"></script>

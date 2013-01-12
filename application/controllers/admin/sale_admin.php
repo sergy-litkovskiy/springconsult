@@ -361,4 +361,29 @@ class Sale_admin extends CI_Controller
         Common::assertTrue($isUpdated, 'Not updated');
         redirect('backend/sale_products_list');
     }
+
+
+    public function sale_products_statistic()
+    {
+        $i = 0;
+        $title          = "Статистика продаж";
+        $saleHistoryArr    = $this->sale_model->getSaleHistory();
+        foreach($saleHistoryArr as $saleHistory){
+            if($saleHistory['payment_state']){
+                $i++;
+            }
+        }
+        $this->data_arr     = array(
+            'title'         => $title
+            ,'content'      => $saleHistoryArr
+            ,'successCount' => $i
+        );
+
+        $data = array(
+            'menu'    => $this->load->view(MENU_ADMIN, '', true),
+            'content' => $this->load->view('admin/sale_products/show_statistic', $this->data_arr, true));
+
+        $this->load->view('layout_admin', $data);
+    }
+
 }

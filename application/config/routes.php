@@ -111,6 +111,7 @@ $route['backend/sale_products_edit']              = 'admin/sale_admin/sale_produ
 $route['backend/sale_products_edit/(:num)']       = 'admin/sale_admin/sale_products_edit/$1';
 $route['backend/sale_products_drop/(:num)']       = 'admin/sale_admin/sale_products_drop/$1';
 $route['backend/check_valid_sale_products']       = 'admin/sale_admin/check_valid_sale_products';
+$route['backend/sale_products_statistic']         = 'admin/sale_admin/sale_products_statistic';
 
 $route['backend/announce_list']                  = 'admin/announce_admin/announce_list';
 $route['backend/check_valid_announce']           = 'admin/announce_admin/check_valid_announce';

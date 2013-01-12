@@ -29,6 +29,28 @@ class Sale_model extends Crud
     }
 
 
+    public function getSaleHistory()
+    {
+        $sql = "SELECT
+                    sale_history.*,
+                    sale_products.title as sale_products_title,
+                    sale_products.price as sale_products_price,
+                    recipients.name as recipients_name,
+                    recipients.email as recipients_email
+                FROM
+                    sale_history
+                LEFT JOIN
+                    sale_products ON sale_products.id = sale_history.sale_products_id
+                LEFT JOIN
+                    recipients ON recipients.id = sale_history.recipients_id
+                ORDER BY sale_history.created_at DESC";
+
+        $query = $this->db->query($sql);
+
+        return $query->result_array();
+    }
+
+
     public function getSalePageArrWithProductsAdmin()
     {
         $query = $this->db->query($this->_getSelectSql());
