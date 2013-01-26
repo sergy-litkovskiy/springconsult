@@ -11,7 +11,7 @@ class Index extends CI_Controller
     public $subscribe           = array();
     public $aforizmus           = array();
     public $cloudsTag           = array();
-    public $defaultDescription  = '';
+    public $defaultDescription  = 'SpringСonsulting - ваша возможность понять себя, реализовать свой потенциал, мечты, желания, цели! Профессиональная поддержка опытного коуча-консультанта и сопровождение в поисках ответов на жизненно важные вопросы, в поиске работы, в построении гармоничных отношений,  в достижении счастья и успеха';
     public $defaultKeywords     = '';
     public $contactFormArr, $result;
 
@@ -76,7 +76,7 @@ class Index extends CI_Controller
         $this->data_arr      = array_merge($this->_getDataArrForAction($title, $contentArr),
                                     array(
                                     'titleFB'         	=> SITE_TITLE.' - '.(count($contentArr) > 0 && $contentArr[0]['title']) ? $contentArr[0]['title'] : $title
-                                    ,'imgFB'         	=> (count($contentArr) > 0 && $contentArr[0]['text']) ? $this->_getFirstImgFromText($contentArr[0]['text']) : 'spring_logo.png'
+                                    ,'imgFB'         	=> (count($contentArr) > 0 && $contentArr[0]['text']) ? $this->index_model->getFirstImgFromText($contentArr[0]['text']) : 'spring_logo.png'
                                     ,'content'       	=> $contentArr[0]
                                     ,'articles'       	=> $articlesArr
                                     ,'materials'       	=> $materialsArr
@@ -95,6 +95,29 @@ class Index extends CI_Controller
     }
 
 
+    public function free_product_show()
+    {
+        $this->data_menu      = array('menu' => $this->arrMenu,'current_url' => $this->urlArr[count($this->urlArr)-1]);
+        $contentArr           = $this->index_model->getSubscribePage();
+        $title                = 'Подарки';
+
+        $this->data_arr      = array_merge($this->_getDataArrForAction($title, $contentArr),
+            array(
+                'titleFB'         	=> SITE_TITLE.' - '. $title
+                ,'imgFB'         	=> 'spring_logo.png'
+                ,'content'       	=> $this->load->view('blocks/subscribe', array('subscribeArr' => $contentArr), true),
+            ));
+
+        $data = array(
+            'menu'          => $this->load->view(MENU, $this->data_menu, true),
+            'content'       => $this->load->view('index/show_subscribe', $this->data_arr, true),
+            'cloud_tag'     => $this->load->view('blocks/cloud_tag', $this->cloudsTag, true),
+            'subscribe'     => $this->load->view('blocks/subscribe', count($this->subscribe) ? $this->subscribe : null, true));
+        $this->load->view('layout', $data);
+
+    }
+
+
     public function show_detail($slug, $articleId)
     {
        $this->data_menu      = array('menu' => $this->arrMenu,'current_url' => $this->urlArr[count($this->urlArr)-1]);
@@ -105,7 +128,7 @@ class Index extends CI_Controller
         $this->data_arr      = array_merge($this->_getDataArrForAction($title, $contentArr),
                                 array(
                                      'titleFB'         	=> SITE_TITLE.' - '.(count($contentArr) > 0 && $contentArr[0]['title']) ? $contentArr[0]['title'] : $title
-                                    ,'imgFB'         	=> (count($contentArr) > 0 && $contentArr[0]['text']) ? $this->_getFirstImgFromText($contentArr[0]['text']) : 'spring_logo.png'
+                                    ,'imgFB'         	=> (count($contentArr) > 0 && $contentArr[0]['text']) ? $this->index_model->getFirstImgFromText($contentArr[0]['text']) : 'spring_logo.png'
                                     ,'content'       	=> $contentArr[0]
                                     ,'articles'       	=> null
                                     ,'materials'       	=> null
@@ -205,7 +228,6 @@ class Index extends CI_Controller
     }
 
 
-
     protected function _trySubscribeProcess($data)
     {
         $data['created_at']  = date('Y-m-d H:i:s');
@@ -231,7 +253,6 @@ class Index extends CI_Controller
     }
 
 
-
     protected function _freeProductProcess($data, $recipientDataArr, $hashLink)
     {
         if($recipientDataArr['confirmed'] == STATUS_ON){
@@ -241,7 +262,6 @@ class Index extends CI_Controller
             return $this->_subscribeMailProcess($data, $recipientDataArr, $hashLink);
         }
     }
-
 
 
     protected function _subscribeArticlesProcess($data, $recipientDataArr)
@@ -257,7 +277,6 @@ class Index extends CI_Controller
 //            $this->_subscribeMailProcess($data, $recipientDataArr, $hashLink);
 //        }
     }
-
 
 
     protected function _showPopUpHashLink($hashLink)
@@ -276,7 +295,6 @@ class Index extends CI_Controller
     }
 
 
-
     protected function _showPopUpAlreadySubscribed($recipientDataArr)
     {
         $this->result["success"] = true;
@@ -288,7 +306,6 @@ class Index extends CI_Controller
 
         return $this->result;
     }
-
 
 
     protected function _subscribeMailProcess($data, $recipientDataArr, $hashLink)
@@ -303,7 +320,6 @@ class Index extends CI_Controller
     }
 
 
-
     protected function _trySendSubscribeMail($data, $recipientDataArr, $hashLink)
     {
         $messId = $data['subscribe_id'] > 0 ? $this->mailer_model->sendFreeProductSubscribeEmailMessage($data, $recipientDataArr, $hashLink) : $this->mailer_model->sendArticleSubscribeConfirmationEmailMessage($recipientDataArr, $hashLink);
@@ -313,13 +329,11 @@ class Index extends CI_Controller
     }
 
 
-
     protected function _trySendSubscribeAdminMail($data)
     {
         $messId = $this->mailer_model->sendAdminSubscribeEmailMessage($data);
         Common::assertTrue($messId, "<p class='error'>Ошибка при попытке отправить AdminSubscribeEmailMessage</p>");
     }
-
 
 
     protected function _tryAddMailHistory($data, $recipientDataArr)
@@ -333,7 +347,6 @@ class Index extends CI_Controller
     }
 
 
-
     public function finish_subscribe($hash)
     {
         try{
@@ -344,7 +357,6 @@ class Index extends CI_Controller
             redirect('/index');
         }
     }
-
 
 
     private function _finishSubscribeProcess($hash)
@@ -365,7 +377,6 @@ class Index extends CI_Controller
         }
         return (array('url' => $linksPackerData['url'], 'subscribe_id' => $linksPackerData['subscribe_id'],'recipient_id' => $recipientId));
     }
-
 
 
     public function show_finish_subscribe($finishSubscribeProcessDataArr)
@@ -392,7 +403,6 @@ class Index extends CI_Controller
         $this->load->view('layout', $data);
     }
 
-
     
     public function output_subscribe($subscribeId, $recipientId)
     {
@@ -406,7 +416,6 @@ class Index extends CI_Controller
             redirect('/index');
         }
     }
-
 
     
     private function _outputFile($fileName)
@@ -422,8 +431,7 @@ class Index extends CI_Controller
             redirect('/index');
         }
     }
-	
-    
+
     
     public function unsubscribe_process($hash)
     {
@@ -440,8 +448,7 @@ class Index extends CI_Controller
 
         return $this->showUnsubscribePage();
     }
-    
-	
+
     
     public function showUnsubscribePage()
     {
@@ -461,8 +468,7 @@ class Index extends CI_Controller
              'subscribe'     => $this->load->view('blocks/subscribe', count($this->subscribe) ? $this->subscribe : null, true));
        $this->load->view('layout', $data);
     }
-    
-    
+
 	
     public function ajax_send_contact_form()
     {
@@ -473,7 +479,6 @@ class Index extends CI_Controller
 
         return $this->check_valid_contact_form($data);
     }
-
 
 
     public function check_valid_contact_form($data)
@@ -498,7 +503,6 @@ class Index extends CI_Controller
         exit;
     }
 
-    
 
     protected function _checkValid($rules)
     {
@@ -509,7 +513,6 @@ class Index extends CI_Controller
     }
 
 
-
     protected function _prepareRulesContactForm()
     {
          return array(  'field'	=> 'text',
@@ -518,38 +521,22 @@ class Index extends CI_Controller
     }
 
 
-
     protected function _getDataArrForAction($title, $contentArr)
     {
         return array(
         'title'         	=> SITE_TITLE.' - '.$title
 
         ,'aforizmus'        => $this->aforizmus
-        ,'meta_keywords'	=> (count($contentArr) > 0 && $contentArr[0]['meta_keywords']) ? $contentArr[0]['meta_keywords'] : $this->defaultDescription
-        ,'meta_description'	=> (count($contentArr) > 0 && $contentArr[0]['meta_description']) ? $contentArr[0]['meta_description'] : $this->defaultKeywords
+        ,'meta_keywords'	=> (count($contentArr) > 0 && isset($contentArr[0]['meta_keywords'])) ? $contentArr[0]['meta_keywords'] : $this->defaultDescription
+        ,'meta_description'	=> (count($contentArr) > 0 && isset($contentArr[0]['meta_description'])) ? $contentArr[0]['meta_description'] : $this->defaultKeywords
         );
     }
-
-
-
-    private function _getFirstImgFromText($text)
-    {
-        $matches = array();
-        preg_match('/\<img.*?src=(\'|\")(.*?.[jpg|png|jpeg])(\'|\")/is', $text, $matches);
-	
-        $imgParts = count($matches) > 0 && $matches[2] ? explode("/",$matches[2]) : null;
-        $imgFB = $imgParts ? $imgParts[count($imgParts)-1] : 'spring_logo.png';
-                 
-        return $imgFB;
-    }
-
 
 
     protected function _prepareMenu()
     {
        return $this->menu_model->childs;
     }
-
 
 
     protected function _getAforizmus()

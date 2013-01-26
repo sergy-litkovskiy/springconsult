@@ -30,6 +30,9 @@
         </div>
     <?php endif;?>
 	<?php if($is_article){?>
+    <p class="social_share">
+        Понравился материал - поделись с друзьями, жми на кнопку!
+    </p>
 	<noindex>
 	<ul class="social_likes">
 		<li>

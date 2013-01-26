@@ -218,12 +218,16 @@ class Index_model extends Crud
     }
 
 
-
     public function getSubscribe()
     {
-        return $this->getFromTableByParams(array('status' => STATUS_ON), 'subscribe');
+        return $this->getFromTableByParams(array('status' => STATUS_ON, 'is_top' => STATUS_ON), 'subscribe');
     }
 
+
+    public function getSubscribePage()
+    {
+        return $this->getFromTableByParams(array('status' => STATUS_ON, 'is_top' => STATUS_OFF), 'subscribe');
+    }
 
 
     public function getContentFromTableByMenuId($table, $menuId)
@@ -553,5 +557,17 @@ class Index_model extends Crud
     public function updateStatusToZero()
     {
         return $this->db->query(" UPDATE announcement SET status = ".STATUS_OFF);
+    }
+
+
+    public function getFirstImgFromText($text)
+    {
+        $matches = array();
+        preg_match('/\<img.*?src=(\'|\")(.*?.[jpg|png|jpeg])(\'|\")/is', $text, $matches);
+
+        $imgParts = count($matches) > 0 && $matches[2] ? explode("/",$matches[2]) : null;
+        $imgFB = $imgParts ? $imgParts[count($imgParts)-1] : 'spring_logo.png';
+
+        return $imgFB;
     }
 }

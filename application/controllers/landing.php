@@ -8,7 +8,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Landing extends CI_Controller
 {
 
-    public $defaultDescription  = '';
+    public $defaultDescription  = 'SpringСonsulting - ваша возможность понять себя, реализовать свой потенциал, мечты, желания, цели! Профессиональная поддержка опытного коуча-консультанта и сопровождение в поисках ответов на жизненно важные вопросы, в поиске работы, в построении гармоничных отношений,  в достижении счастья и успеха';
     public $defaultKeywords     = '';
     public $arrMenu             = array();
 
@@ -29,7 +29,9 @@ class Landing extends CI_Controller
             'title'             => SITE_TITLE.' - landing page',
             'meta_keywords'	    => $this->defaultDescription,
             'meta_description'	=> $this->defaultKeywords,
-            'content'           => $landingPageData
+            'content'           => $landingPageData,
+            'titleFB'         	=> SITE_TITLE.' - '.(count($landingPageData) > 0 && $landingPageData['title']) ? $landingPageData['title'] : '',
+            'imgFB'         	=> 'spring_logo.png'
         );
 
        $data = array(

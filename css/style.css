@@ -703,7 +703,7 @@ input#searchtext{
 .subscribe_form{
     font-size:10pt;
     color:#3C3C3C;
-    margin: 1em auto auto 1em;
+    margin: 1em auto 2em 1em;
 }
 
 .subscribe_form input#name,
@@ -1649,4 +1649,39 @@ ul.tagit input[type="text"] {
     margin-bottom: 1em;
     padding-bottom: 0.5em;
     border-bottom: dotted 1px #CDF1AC;
+}
+
+#content #subscribe-box #subscribe{
+    float: left;
+    width: 300px;
+    height: 469px;
+    margin-left: 2em;
+    margin-bottom: 1em;
+    border: dotted 1px #dcdcdc;
+}
+
+#content #subscribe-box #subscribe table td,
+#content #subscribe-box #subscribe table{
+    border: none;
+    padding: 0;
+}
+
+#content #subscribe-box #subscribe img.img_subscribe{
+    height: 230px;
+    width: auto;
+}
+
+#content #subscribe-box #subscribe table p,
+#content #subscribe-box #subscribe p{
+    margin: 0;
+}
+
+#content #subscribe-box #subscribe form{
+    margin-top: 0;
+    margin-left: 2.5em;
+}
+
+.social_share{
+    margin: 2em auto -0.5em 0em!important;
+    font-weight: bold;
 }

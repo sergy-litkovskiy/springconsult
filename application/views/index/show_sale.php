@@ -30,6 +30,9 @@
         </div>
      <?php }?>
     <?php echo @$content['text2'];?>
+        <p class="social_share">
+            Понравился материал - поделись с друзьями, жми на кнопку!
+        </p>
     	<ul class="social_likes">
 		<li>
 			<div style="width:215px" class="fb-like" data-href="http://www.springconsult.com.ua/sale/<?php echo @$content['slug'];?>" data-send="true" data-layout="button_count" data-width="215" data-show-faces="false"></div>
