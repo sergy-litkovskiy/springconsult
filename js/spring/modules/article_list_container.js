@@ -85,9 +85,11 @@ function ArticleListContainerModule() {
             e.preventDefault();
             _currentContainer = $(this);
             if (confirm('Are you sure? Do you really want to DELETE?')) {
-                var email = $(this).data('email');
+                var data = {};
+                data.email = $(this).data('email');
+                data.file = $(this).data('file');
                 $(this).hide().after(_loader);
-                sb.ItemMove.drop(email, _reloadPage, _onChangeStatusError);
+                sb.ItemMove.drop(data, _reloadPage, _onChangeStatusError);
             }
         };
 

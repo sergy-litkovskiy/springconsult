@@ -75,10 +75,10 @@ $route['backend/subscribe']                       = 'admin/index_admin/subscribe
 $route['backend/check_valid_subscribe']           = 'admin/index_admin/check_valid_subscribe';
 $route['backend/subscribe_edit']                  = 'admin/index_admin/subscribe_edit';
 $route['backend/subscribe_edit/(:num)']           = 'admin/index_admin/subscribe_edit/$1';
-$route['backend/subscribe_drop/(:num)/(:any)']    = 'admin/index_admin/subscribe_drop/$1/$2';
+$route['backend/subscribe_drop/(:num)']           = 'admin/index_admin/subscribe_drop/$1';
 
 $route['backend/material']                        = 'admin/material_admin/material_list';
-$route['backend/material_drop/(:num)/(:any)']     = 'admin/material_admin/material_drop/$1/$2';
+$route['backend/material_drop/(:num)']            = 'admin/material_admin/material_drop/$1';
 $route['backend/material_edit']                   = 'admin/material_admin/material_edit';
 $route['backend/material_edit/(:num)']            = 'admin/material_admin/material_edit/$1';
 $route['backend/check_valid_material']            = 'admin/material_admin/check_valid_materials';

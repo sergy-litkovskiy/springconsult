@@ -181,10 +181,10 @@ class Material_admin extends CI_Controller
     }
 
 
-    public function material_drop($id, $fileName)
+    public function material_drop($id)
     {
         try{
-            $this->index_model->dropWithFile($id, $fileName, 'materials');
+            $this->index_model->dropWithFile($id, $_REQUEST['file'], 'materials');
             $this->result['success'] = true;
         } catch (Exception $e){
             $this->result['message'] = $e->getMessage();

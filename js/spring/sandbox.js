@@ -108,8 +108,8 @@ SPRING.Sandbox = function(core, module_selector){
             }
         },
         ItemMove : {
-            drop : function(email, onSuccess, onError) {
-                _self.request(email, {}, onSuccess, onError);
+            drop : function(data, onSuccess, onError) {
+                _self.request(data.email, data, onSuccess, onError);
             }
         },
         Menu : {

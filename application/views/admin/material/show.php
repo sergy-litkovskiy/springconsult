@@ -37,7 +37,7 @@
                     <a title="edit" href="<?php echo base_url().'backend/material_edit/'.$item['id'];?>"><img src="<?php echo base_url()?>img/img_main/edit.png"/></a>
                 </td>
                 <td>
-                    <a class="drop" title="Удалить" href="#" data-email="<?php echo base_url().'backend/material_drop/'.$item['id'].'/'.$item['file_path'];?>">
+                    <a class="drop" title="Удалить" href="#" data-email="<?php echo base_url().'backend/material_drop/'.$item['id'];?>" data-file="$item['file_path'];?>">
                         <img src="<?php echo base_url()?>img/img_main/del.png"/>
                     </a>
                 </td>
