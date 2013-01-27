@@ -7,10 +7,7 @@
       <change type="DELETED" beforePath="D:\projects\springconsult.my\materials\Vnutrenniy_trener.doc" afterPath="" />
       <change type="DELETED" beforePath="D:\projects\springconsult.my\springconsult" afterPath="" />
       <change type="DELETED" beforePath="D:\projects\springconsult.my\subscribe\check_list.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/admin/index_admin.php" afterPath="$PROJECT_DIR$/application/controllers/admin/index_admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/subscribe/show.php" afterPath="$PROJECT_DIR$/application/views/admin/subscribe/show.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/spring/modules/article_list_container.js" afterPath="$PROJECT_DIR$/js/spring/modules/article_list_container.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/spring/sandbox.js" afterPath="$PROJECT_DIR$/js/spring/sandbox.js" />
     </list>
     <ignored path="springconsult.my.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,10 +36,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index_admin.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index_admin.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/admin/index_admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="428" column="38" selection-start="16629" selection-end="16647" vertical-scroll-proportion="0.15841584">
+            <state line="429" column="5" selection-start="16655" selection-end="16655" vertical-scroll-proportion="-1.9607843">
               <folding />
             </state>
           </provider>
@@ -71,10 +68,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="article_list_container.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="article_list_container.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/spring/modules/article_list_container.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="12" selection-start="773" selection-end="773" vertical-scroll-proportion="0.0">
+            <state line="97" column="0" selection-start="3383" selection-end="3383" vertical-scroll-proportion="0.5782074">
               <folding />
             </state>
           </provider>
@@ -629,9 +626,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/spring/modules/article_list_container.js">
+    <entry file="file://$PROJECT_DIR$/application/models/index_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="12" selection-start="773" selection-end="773" vertical-scroll-proportion="0.0">
+        <state line="567" column="55" selection-start="19615" selection-end="19615" vertical-scroll-proportion="-11.923077">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/admin/index_admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="429" column="5" selection-start="16655" selection-end="16655" vertical-scroll-proportion="-1.9607843">
           <folding />
         </state>
       </provider>
@@ -645,16 +649,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/index_model.php">
+    <entry file="file://$PROJECT_DIR$/js/spring/modules/article_list_container.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="567" column="55" selection-start="19615" selection-end="19615" vertical-scroll-proportion="-11.923077">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/admin/index_admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="428" column="38" selection-start="16629" selection-end="16647" vertical-scroll-proportion="0.15841584">
+        <state line="97" column="0" selection-start="3383" selection-end="3383" vertical-scroll-proportion="0.5782074">
           <folding />
         </state>
       </provider>

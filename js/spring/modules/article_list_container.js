@@ -95,14 +95,13 @@ function ArticleListContainerModule() {
 
 
         var _onClickChangeIsTop = function(e){
-//            e.preventDefault();
             var _currentCheckbox = $(this);
 
             var data = {};
             data.id = $(this).val();
             data.table = $(this).data('table');
             data.is_top = _currentCheckbox.is(':checked') ? 1 : 0;
-console.log(data);
+
             $(this).hide().after(_loader);
             sb.Status.statusIsTopChange(data, _reloadPage, _onChangeStatusError);
         };
