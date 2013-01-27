@@ -424,7 +424,25 @@ class Index_admin extends CI_Controller
 
         return $contentAndAssignArr;
     }
-    
+
+
+    public function ajax_change_is_top()
+    {
+        $data = $arrData = array();
+        $data['is_top']     = $_REQUEST['is_top'];
+        $arrData['id']      = $_REQUEST['id'];
+        $arrData['table']   = $_REQUEST['table'];
+        try{
+            $result = $this->index_model->updateInTable($arrData['id'], $data, $arrData['table']);
+            Common::assertTrue($result, 'Ошибка! Статус is_top не был изменен');
+            $this->result['success']    = true;
+        } catch (Exception $e){
+            $this->result['message']    = $e->getMessage();
+        }
+        print json_encode($this->result);
+        exit;
+    }
+
 
     public function ajax_change_status()
     {

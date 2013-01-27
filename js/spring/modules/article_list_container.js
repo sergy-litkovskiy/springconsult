@@ -94,11 +94,26 @@ function ArticleListContainerModule() {
         };
 
 
+        var _onClickChangeIsTop = function(e){
+//            e.preventDefault();
+            var _currentCheckbox = $(this);
+
+            var data = {};
+            data.id = $(this).val();
+            data.table = $(this).data('table');
+            data.is_top = _currentCheckbox.is(':checked') ? 1 : 0;
+console.log(data);
+            $(this).hide().after(_loader);
+            sb.Status.statusIsTopChange(data, _reloadPage, _onChangeStatusError);
+        };
+
+
         var _bindEvents = function() {  
             sb.bind('.go-mailer-lp', 'click', _onClickGoMailer);
             sb.bind('.send_subscribe', 'click', _onClickSendSubscribe);
             sb.bind('.status-change input:radio', 'change', _onClickChangeStatus);
             sb.bind('.drop', 'click', _onClickDrop);
+            sb.bind('input:checkbox[name=is_top]', 'click', _onClickChangeIsTop);
         };
         
         return {

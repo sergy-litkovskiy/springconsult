@@ -105,6 +105,9 @@ SPRING.Sandbox = function(core, module_selector){
         Status : {
             statusChange : function(data, onSuccess, onError) {
                 _self.request('/admin/index_admin/ajax_change_status', data, onSuccess, onError);
+            },
+            statusIsTopChange : function(data, onSuccess, onError) {
+                _self.request('/admin/index_admin/ajax_change_is_top', data, onSuccess, onError);
             }
         },
         ItemMove : {

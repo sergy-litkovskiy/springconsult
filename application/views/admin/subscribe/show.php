@@ -11,6 +11,7 @@
                 <td><p>del</p></td>
                 <td style="width:40px"><p>&nbsp;&nbsp;&nbsp;on</p></td>
                 <td style="width:40px"><p>&nbsp;&nbsp;off</p></td>
+                <td><p>&nbsp;&nbsp;is_top</p></td>
             </tr>
         <?php foreach ($content as $key => $item):?>
             <tr>
@@ -47,6 +48,11 @@
                         &nbsp;&nbsp;
                         <input type="radio" name="status" value="0" <?php echo ($item['status'] == '0') ? 'checked="checked"': null;?>/>
                         <img src="<?php echo base_url()?>img/img_main/off.png"/>
+                    </form>
+                </td>
+                <td>
+                    <form>
+                        <input data-table="subscribe" type="checkbox" name="is_top" value="<?php echo $item['id'];?>" <?php echo ($item['is_top'] == '1') ? 'checked="checked"': null;?>/>
                     </form>
                 </td>
             </tr>
