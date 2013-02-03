@@ -107,14 +107,74 @@ function ArticleListContainerModule() {
         };
 
 
+        var _base64_decode = function (data) {
+            var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+            var o1, o2, o3, h1, h2, h3, h4, bits, i = 0,
+                ac = 0,
+                dec = "",
+                tmp_arr = [];
+
+            if (!data) {
+                return data;
+            }
+
+            data += '';
+
+            do { // unpack four hexets into three octets using index points in b64
+                h1 = b64.indexOf(data.charAt(i++));
+                h2 = b64.indexOf(data.charAt(i++));
+                h3 = b64.indexOf(data.charAt(i++));
+                h4 = b64.indexOf(data.charAt(i++));
+
+                bits = h1 << 18 | h2 << 12 | h3 << 6 | h4;
+
+                o1 = bits >> 16 & 0xff;
+                o2 = bits >> 8 & 0xff;
+                o3 = bits & 0xff;
+
+                if (h3 == 64) {
+                    tmp_arr[ac++] = String.fromCharCode(o1);
+                } else if (h4 == 64) {
+                    tmp_arr[ac++] = String.fromCharCode(o1, o2);
+                } else {
+                    tmp_arr[ac++] = String.fromCharCode(o1, o2, o3);
+                }
+            } while (i < data.length);
+
+            dec = tmp_arr.join('');
+
+            return dec;
+        };
+
+
+        var _onClickEditSaleLetter = function(e){
+            var _saleProductsLettersData = $(this).data('sale-products-letters');
+            sb.publish({
+                type : 'sale-products-container-show',
+                data: {productData : _base64_decode(_saleProductsLettersData)}
+            });
+        };
+
+
+        var _onClickAddSaleLetter = function(e){
+            var _saleProductsLettersId = $(this).parent().parent().data('article-id');
+            sb.publish({
+                type : 'sale-products-container-show',
+                data: {id : _saleProductsLettersId}
+            });
+        };
+
+
         var _bindEvents = function() {  
             sb.bind('.go-mailer-lp', 'click', _onClickGoMailer);
             sb.bind('.send_subscribe', 'click', _onClickSendSubscribe);
             sb.bind('.status-change input:radio', 'change', _onClickChangeStatus);
             sb.bind('.drop', 'click', _onClickDrop);
             sb.bind('input:checkbox[name=is_top]', 'click', _onClickChangeIsTop);
+            sb.bind('.edit_sale_products_letters', 'click', _onClickEditSaleLetter);
+            sb.bind('.new_sale_products_letters', 'click', _onClickAddSaleLetter);
         };
-        
+
         return {
             init : function(){
                 _bindEvents();

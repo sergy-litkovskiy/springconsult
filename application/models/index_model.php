@@ -530,7 +530,6 @@ class Index_model extends Crud
     }
 
 
-
     public function dropWithFile($id, $filename, $dirTableName)
     {
 //            $filename   = isset($_REQUEST['filename']) && $_REQUEST['filename'] ? $_REQUEST['filename'] : null;

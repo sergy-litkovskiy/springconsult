@@ -198,15 +198,23 @@ class Sale_admin extends CI_Controller
     {
         $title          = "Продукты для продажи";
         $salePageArr    = $this->sale_model->getSalePageArrWithProductsAdmin();
+        $saleProductsLetterArr = $this->sale_model->getListFromTable('sale_products_letters');
+
+        foreach($saleProductsLetterArr as $saleProductsLetter){
+            $saleProductsLetterArr[$saleProductsLetter['sale_products_id']] = $saleProductsLetter;
+        }
         $saleArr        = array();
 
         foreach($salePageArr as $salePage){
+            $saleProductsLetters = isset($saleProductsLetterArr[$salePage['sale_products_id']])
+                                    ? $saleProductsLetterArr[$saleProductsLetter['sale_products_id']] : null;
             $saleArr[$salePage['sale_products_id']]['created_at']   = $salePage['created_at'];
             $saleArr[$salePage['sale_products_id']]['id']           = $salePage['sale_products_id'];
             $saleArr[$salePage['sale_products_id']]['title']        = $salePage['sale_products_title'];
             $saleArr[$salePage['sale_products_id']]['price']        = $salePage['sale_products_price'];
             $saleArr[$salePage['sale_products_id']]['description']  = $salePage['sale_products_description'];
             $saleArr[$salePage['sale_products_id']]['status']       = $salePage['sale_products_status'];
+            $saleArr[$salePage['sale_products_id']]['sale_products_letters'] = $saleProductsLetters;
             $saleArr[$salePage['sale_products_id']]['sale_page'][$salePage['id']]['title'] = $salePage['title'];
             $saleArr[$salePage['sale_products_id']]['sale_page'][$salePage['id']]['status'] = $salePage['status'];
         }
@@ -214,6 +222,7 @@ class Sale_admin extends CI_Controller
         $this->data_arr     = array(
             'title'     => $title
             ,'content'  => $saleArr
+            ,'saleProductLetterContainer' => $this->load->view('admin/blocks/sale_product_letter_form', '', true)
         );
 
         $data = array(

@@ -1,4 +1,5 @@
 <script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/article_list_container.js"></script>
+<script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/sale_product_letter_container.js"></script>
 <h2><?php echo @$title;?></h2>
     <div class="add_new">
          <p>
@@ -14,6 +15,7 @@
                 <td>Описание</td>
                 <td>Цена</td>
                 <td style="width:180px">Продающая страница</td>
+                <td>Письмо</td>
                 <td><p>edit<p></td>
                 <td><p>del</p></td>
                 <td style="width:40px"><p>&nbsp;&nbsp;&nbsp;on</p></td>
@@ -45,6 +47,17 @@
                     </ul>
                 </td>
                 <td>
+                    <?php if($item['sale_products_letters']){?>
+                        <span class="edit_sale_products_letters" data-sale-products-letters="<?php echo base64_encode(json_encode($item['sale_products_letters']));?>">
+                            <img src="<?php echo base_url()?>img/img_main/mail_edit.png"/>
+                        </span>
+                        <?php } else {?>
+                        <span class="new_sale_products_letters">
+                            <img src="<?php echo base_url()?>img/img_main/mail_add.png"/>
+                        </span>
+                    <?php }?>
+                </td>
+                <td>
                     <a title="edit" href="<?php echo base_url().'backend/sale_products_edit/'.$item['id'];?>">
                         <img src="<?php echo base_url()?>img/img_main/edit.png"/>
                     </a>
@@ -69,7 +82,7 @@
         </tbody>
     </table>
 
-<div id="mess_mailsent"></div>
+<?php echo $saleProductLetterContainer;?>
 <script>
     SPRING.Core.registerModule("main_content", ArticleListContainerModule());
 </script>

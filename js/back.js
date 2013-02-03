@@ -3,14 +3,14 @@ $(document).ready(function(){
         var $tableContainer = $("#main_content"),
             delLinks        = $("a[title=delete]", $tableContainer);
 
-        if(delLinks.length > 0){
-            delLinks.each(function(e){
-                var delUrl = $(delLinks[e]).data("email");
-               $(delLinks[e]).bind('click', function(m){
-                    GotoURL(delUrl, 'Are you sure? Do you really want to DELETE?');
-               });
-            });
-        }
+//        if(delLinks.length > 0){
+//            delLinks.each(function(e){
+//                var delUrl = $(delLinks[e]).data("email");
+//               $(delLinks[e]).bind('click', function(m){
+//                    GotoURL(delUrl, 'Are you sure? Do you really want to DELETE?');
+//               });
+//            });
+//        }
         
         $("#sortable").sortable();
         $("#main_content").tablesorter();
@@ -61,59 +61,7 @@ $(document).ready(function(){
             $('form#back_form_landing').submit();
         }
   });
-  
-////////////////////////////////////////////////////////////////
-       //change status
-//       $("input:radio:not([name=landing])").change(function(){
-//        var status  = $(this).attr('value');
-//        var id      = $(this).attr('id');
-//        var table   = $('input#hidden'+id).attr('value');
-//
-//        $.ajax({
-//           type: "POST",
-//           url:  "ajax_change_status",
-//           data: "id="+ id +"&status="+ status + "&table=" + table,
-//           success: function(msg){
-//               if(msg == 'updated_true'){
-//                    window.location.reload();
-//               }
-//               else{
-//                    $('p.error').text('Status was not changed! Please, try again');
-//                    return false;
-//               }
-//           }
-//        });
-//
-//   });
 
-////////////////////////////////////////////////////////////////
-//drop action
-//       $("a.drop").live('click', function(e){
-//            e.preventDefault();
-//            if (confirm('Are you sure? Do you really want to DELETE?')) {
-//                var $this       = $(this).parent(),
-//                    id          = $('input[name=id]', $this).val(),
-//                    filename    = $('input[name=filename]', $this).val(),
-//                    table       = $('input[name=table]', $this).val();
-//
-//                $.ajax({
-//                   type: 'POST',
-//                   url:  table + '_drop',
-//                   data: {'id' : id, 'filename' : filename},
-//                   success: function(error){
-//                        if(error == 'null'){
-//                            window.location.reload();
-//                        }
-//                        else{
-//                            alert(error);
-//                            window.location.reload();
-//                        }
-//                    }
-//                });
-//            }
-//            return false;
-//       });
-       
 ////////////////////////////////////////////////////////////////
        $('button#sequence_actual').click(function(){
             $('ul#sortable').before("<img style='float:left' src='/img/img_main/loader.gif'/>");
