@@ -13,7 +13,6 @@ class Sale_admin extends CI_Controller
 
     public function __construct()
     {
-    
         parent::__construct();
         if(!$this->session->userdata('username') && !$this->session->userdata('loggedIn')){
             $this->login_model->logOut();
@@ -393,6 +392,36 @@ class Sale_admin extends CI_Controller
             'content' => $this->load->view('admin/sale_products/show_statistic', $this->data_arr, true));
 
         $this->load->view('layout_admin', $data);
+    }
+
+
+    public function ajax_sale_products_letters_edit()
+    {
+        $id             = $_REQUEST['id'] ? $_REQUEST['id'] : null;
+        $saleProductsId = $_REQUEST['saleProductsId'] ? $_REQUEST['saleProductsId'] : null;
+        try{
+            Common::assertTrue($saleProductsId, 'Не установлен ID продукта');
+            $data = array(
+                'sale_products_id'  => $saleProductsId,
+                'text'              => $_REQUEST['text'],
+                'subject'           => $_REQUEST['subject']);
+
+            if($id){
+                $result = $this->sale_model->updateInTable($id, $data, 'sale_products_letters');
+            } else {
+                $result = $this->sale_model->addInTable($data, 'sale_products_letters');
+            }
+
+            Common::assertTrue($result, 'Ошибка! Текст письма НЕ сохраненю. Попробуйте еще раз');
+
+            $this->result['data']       = 'Текст письма успешно сохранен! <br>Можно идти грызть морковку:)';
+            $this->result['success']    = true;
+        } catch (Exception $e){
+            $this->result['message']    = $e->getMessage();
+        }
+
+        print json_encode($this->result);
+        exit;
     }
 
 }

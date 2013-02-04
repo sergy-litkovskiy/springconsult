@@ -49,6 +49,7 @@ function SaleProductLetterContainerModule() {
             $('input[name=theme]', $overlayContainer).val(data.subject);
             $('textarea#spec-mailer-lp', $overlayContainer).val(data.text);
             $('input[name=sale_products_id]', $overlayContainer).val(data.sale_products_id);
+            $('input[name=id]', $overlayContainer).val(data.id);
         };
 
 
@@ -74,7 +75,8 @@ function SaleProductLetterContainerModule() {
             return {             
                 subject         : $('input[name=theme]', $overlayContainer).val(),
                 text            : _text,
-                saleProductsId  : $('input[name=sale_products_id]', $overlayContainer).val()
+                saleProductsId  : $('input[name=sale_products_id]', $overlayContainer).val(),
+                id              : $('input[name=id]', $overlayContainer).val()
             };
         };
 
@@ -97,7 +99,7 @@ function SaleProductLetterContainerModule() {
         var _trySubmitCatalogForm = function(saleProductsLetterData){
             var _loaderContainer = $($overlayContainer).find('#button').parent();
             _loaderContainer.html($('#loader').show());
-//            sb.Mailer.sendSpecMailer(saleProductsLetterData, _onSuccess, _onError);
+            sb.SaleProducts.addOrUpdate(saleProductsLetterData, _onSuccess, _onError);
         };
 
         

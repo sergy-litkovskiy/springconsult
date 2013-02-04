@@ -22,6 +22,7 @@
                     <td>
                         <input id="button" class="button_submit" type="submit" value="Сохранить"/>
                         <input type="hidden" name="sale_products_id" value="">
+                        <input type="hidden" name="id" value="">
                     </td>  
                     <td class="button_close">
                         <input id="button_red" class="button_reset" type="reset" value="Отменить"/>

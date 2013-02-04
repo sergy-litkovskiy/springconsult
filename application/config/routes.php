@@ -130,6 +130,7 @@ $route['rss']                                               = 'rss/show_rss';
 $route['sitemap']                                           = 'index/sitemap';
 $route['free']                                              = 'index/free_product_show';
 $route['show/news']                                         = 'index';
+$route['show/free']                                         = 'index/free_product_show';
 //$route['frontend/unsubscribe/re/(:num)']                    = 'index/unsubscribe_finish/$1';
 $route['cloudtag/(:num)']                                   = 'index/cloud_tag_list/$1';
 $route['cloudtag/(:num)/page/(:num)']                       = 'index/cloud_tag_list/$1/$2';

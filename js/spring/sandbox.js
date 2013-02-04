@@ -128,7 +128,12 @@ SPRING.Sandbox = function(core, module_selector){
             changePositionMenuItem : function(data, onSuccess, onError) {
                 _self.request('/admin/index_admin/ajax_menu_change_position_item', data, onSuccess, onError);
             }
-        },        
+        },
+        SaleProducts : {
+            addOrUpdate : function(data, onSuccess, onError) {
+                _self.request('/admin/sale_admin/ajax_sale_products_letters_edit', data, onSuccess, onError);
+            }
+        },
         JSON:{
             toSbJSON : function(value){
                 return core.json.stringify(value);

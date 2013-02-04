@@ -13,6 +13,7 @@ class Sale_model extends Crud
     public function __construct()
     {
         parent::__construct();
+        $this->idkey = 'id';
     }
 
 
