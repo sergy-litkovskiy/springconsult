@@ -1008,7 +1008,7 @@ p.title span.date{
 }
 
 #main_content tr td, #add_new_content tr td{
-    padding: 0.5em;
+    padding: 0.3em;
     border-bottom: dotted 1px #969696;
 }
 
