@@ -23,7 +23,6 @@ class Index_model extends Crud
     }
 
 
-
     public function getCountArticles($slug)
     {
         $query_parent = $this->db->query("SELECT
@@ -43,8 +42,7 @@ class Index_model extends Crud
         return $query_parent->num_rows();
     }
 
-    
-    
+
     public function getCountArticlesByTagId($tagMasterId)
     {
         $query_parent = $this->db->query("SELECT
@@ -60,8 +58,7 @@ class Index_model extends Crud
         return $query_parent->num_rows();
     }
     
-    
-    
+
     public function getArticlesListByTagId($pagerParam, $tagMasterId)
     {
         $currentPage = $startPage = null;
@@ -89,7 +86,6 @@ class Index_model extends Crud
     }
     
 
-
     public function getNewsList($pagerParam = null)
     {
         $currentPage = $startPage = null;
@@ -105,13 +101,11 @@ class Index_model extends Crud
     }
 
 
-
     public function getNewsListAdmin()
     {
         $sql_query = $this->db->query($this->_prepareSqlForNewsListAdmin());
         return $sql_query->result_array();
     }
-
 
 
     private function _prepareSqlForNewsList()
@@ -145,7 +139,6 @@ class Index_model extends Crud
     }
 
 
-
     private function _prepareSqlForNewsListAdmin()
     {
         return "SELECT
@@ -169,7 +162,6 @@ class Index_model extends Crud
                 ORDER by
                     articles.date DESC, articles.time DESC";
     }
-
 
 
     public function getMaterialListAdmin()
@@ -200,7 +192,6 @@ class Index_model extends Crud
     }
 
 
-
     public function getSubscribeListAdmin($id = null)
     {
         $where = $id ? "WHERE subscribe.id = ".$id : null;
@@ -209,7 +200,6 @@ class Index_model extends Crud
         $sql_query = $this->db->query($sql);
         return $sql_query->result_array();
     }
-
 
 
     public function getContent($slug)
@@ -248,12 +238,10 @@ class Index_model extends Crud
     }
 
 
-
     public function getDetailContent($articleId)
     {
         return $this->getFromTableByParams(array('id' => $articleId, 'status' => STATUS_ON), 'articles');
     }
-
 
 
     public function getDetailContentAdmin($articleId)
@@ -262,14 +250,12 @@ class Index_model extends Crud
     }
 
 
-
     public function getAssignArticlesByArticleIdAdmin($articleId)
     {
         return $this->getFromTableByParams(array('articles_id' => $articleId), 'assign_articles');
     }
 
 
-    
     public function getAssignTagArr($id, $table, $key)
     {
         $query = $this->db->query("SELECT
@@ -286,20 +272,17 @@ class Index_model extends Crud
         return $query->result_array();
     }
 
-    
-    
+
     public function getAvailableTag()
     {
         return $this->getListFromTable('tag_master');
     }
     
-    
-    
+
     public function getMaterialDetailsAdmin($materialId)
     {
         return $this->getFromTableByParams(array('id' => $materialId), 'materials');
     }
-
 
 
     public function getAssignMaterialsByMaterialIdAdmin($materialId)
@@ -308,7 +291,6 @@ class Index_model extends Crud
     }
 
 
-    
     public function getBlockStatusListForAdmin()
     {
         $block_status = $this->db->query("SELECT
@@ -324,7 +306,7 @@ class Index_model extends Crud
     }
 
     
-    public function getRecipientIdByEmail($email)
+    public function getRecipientByEmail($email)
     {
         $qweryResult = $this->getFromTableByParams(array('email' => $email), 'recipients');
         $result      = $qweryResult ? $qweryResult[0] : null;
@@ -332,9 +314,8 @@ class Index_model extends Crud
         return $result;
     }
 
-
         
-    public function getRecipientIdById($id)
+    public function getRecipientById($id)
     {
         $qweryResult = $this->getFromTableByParams(array('id' => $id), 'recipients');
         $result      = $qweryResult ? $qweryResult[0] : null;
@@ -400,15 +381,13 @@ class Index_model extends Crud
         return $result ? $result[0] : null;
     }
     
-    
-    
+
     public function getAforizmusList()
     {
         return $this->getListFromTable('aforizmus');
     }
     
-    
-    
+
     public function getArticlesForRssByParams($params)
     {
         $qweryResult = $this->db->query("SELECT * FROM `articles` WHERE status = ".STATUS_ON." ORDER BY date DESC LIMIT ".$params['limit']);
@@ -418,14 +397,12 @@ class Index_model extends Crud
     }
     
     
-    
     public function getNlSubscribers()
     {
         //TODO: inner join on mail_history
         return $this->getFromTableByParams(array('confirmed' => STATUS_ON, 'unsubscribed' => STATUS_OFF), 'recipients');
     }
-    
-    
+
     
     public function unsubscribeHashProcess($recipientId)
     {
@@ -486,18 +463,18 @@ class Index_model extends Crud
     public function getRecipientData($data)
     {
         $recipientDataArr = array();
-        $recipientDataArr = $this->getRecipientIdByEmail($data['email']);
+        $recipientDataArr = $this->getRecipientByEmail($data['email']);
 
         if(!count($recipientDataArr)){
             $data['confirmed']      = isset($data['confirmed']) ? $data['confirmed'] : STATUS_OFF;
             $data['unsubscribed']   = STATUS_OFF;
 
-            $recipientDataArr['id']        	= $this->addInTable($data, 'recipients');
+            $recipientDataArr['id'] = $this->addInTable($data, 'recipients');
             Common::assertTrue($recipientDataArr['id'], "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>");
             $recipientDataArr['name']           = $data['name'];
             $recipientDataArr['email']          = $data['email'];
-            $recipientDataArr['confirmed']	= $data['confirmed'] == STATUS_ON ? STATUS_ON : STATUS_OFF;
-            $recipientDataArr['unsubscribed']	= 0;
+            $recipientDataArr['confirmed']	    = $data['confirmed'] == STATUS_ON ? STATUS_ON : STATUS_OFF;
+            $recipientDataArr['unsubscribed']   = 0;
 
             if($data['confirmed'] == STATUS_ON){
                 $this->tryUnisenderSubscribe($recipientDataArr);

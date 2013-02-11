@@ -51,12 +51,6 @@ function ArticleListContainerModule() {
         };
 
 
-//        var _onChangeStatusSuccess = function(){
-////            _onLoaderHide();
-//            _reloadPage();
-//        };
-
-
         var _onChangeStatusError = function(message){
             _onLoaderHide();
             $overlayMessageContainer = sb.UI.showError('<p class="error">' + message + '</p>');

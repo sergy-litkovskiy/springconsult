@@ -4,7 +4,6 @@ SPRING.Sandbox = function(core, module_selector){
     var _container  = '#' + module_selector,
         _$container = core.$(_container),
         _config     = {
-            KEYPOINT_CONFIRM_ORDER : 7,
             lang : 'ru'
         };
 

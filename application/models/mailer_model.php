@@ -246,4 +246,18 @@ class Mailer_model extends Crud
         return $isMailSent;
     }
 
+
+    public function sendSaleMailerEmail($recipientDataArr, $saleProductsLettersData)
+    {
+        $headers    = $this->_getMailHeader();
+        $email      = $recipientDataArr['email'];
+        $subject    = $saleProductsLettersData['subject'];
+        $body       = "<p><b>Здравствуйте, ".$recipientDataArr['name']."!</b></p>
+                       ".$saleProductsLettersData['text'];
+        $message    = $this->_getEmailTamplate($body);
+        $isMailSent = mail($email, $subject, $message, $headers);
+
+        return $isMailSent;
+    }
+
 }

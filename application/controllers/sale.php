@@ -79,7 +79,7 @@ class Sale extends CI_Controller
 
             $recipient  = $this->index_model->getRecipientData($recipinetDataArr);
             $saleHistoryArr['recipients_id'] = $recipient['id'];
-            $saleHistoryId = $this->index_model->addInTable($saleHistoryArr, 'sale_history');
+            $saleHistoryId = $this->sale_model->addInTable($saleHistoryArr, 'sale_history');
             Common::assertTrue($saleHistoryId, "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>");
 
             $this->result["success"]    = true;
@@ -90,13 +90,12 @@ class Sale extends CI_Controller
             $errLogData['resource_id']  = ERROR_PAYMENT_REGISTRATION;
             $errLogData['text']         = $e->getMessage()." - Продающая страница: ".$saleHistoryArr['sale_products_id']."(".$recipinetDataArr['name']." - ".$recipinetDataArr['email'].")";
             $errLogData['created_at']   = date('Y-m-d H:i:s');
-            $this->index_model->addInTable($errLogData, 'error_log');
+            $this->sale_model->addInTable($errLogData, 'error_log');
         }
 
         print json_encode($this->result);
         exit;
     }
-
 
 
     public function sale_payment($saleStatusId)
@@ -111,16 +110,17 @@ class Sale extends CI_Controller
             Common::assertTrue(count($paymentUpdateRules), 'Данных(paymentUpdateRules) для апдейта не достаточно');
 
             $updateResult = $this->index_model->updateSaleHistoryByParams($paymentData, $paymentUpdateRules);
-            Common::assertTrue($updateResult, "Sale history table was not updated by: id-".$paymentUpdateRules['sale_history_id'].'|sale_products_id-'.$paymentUpdateRules['sale_history_id'].'|recipients_id-'.$paymentUpdateRules['recipients_id']);
-            $paymentData['payment_description'] = trim(strip_tags($_REQUEST['ik_payment_desc']));
+            Common::assertTrue($updateResult, "Sale history table was not updated by: id-".$paymentUpdateRules['sale_history_id'].'|sale_products_id-'.$paymentUpdateRules['sale_products_id'].'|recipients_id-'.$paymentUpdateRules['recipients_id']);
+
+            $this->_sendPaymentConfirmationLetter($paymentUpdateRules);
+
         } catch (Exception $e){
             $errLogData['resource_id']  = ERROR_PAYMENT_CALLBACK;
             $errLogData['text']         = $e->getMessage()." - Продающая страница: ".$paymentUpdateRules['sale_products_id']."(recipient#".$paymentUpdateRules['recipients_id'].")";
             $errLogData['created_at']   = date('Y-m-d H:i:s');
-            $this->index_model->addInTable($errLogData, 'error_log');
+            $this->sale_model->addInTable($errLogData, 'error_log');
         }
     }
-
 
 
     private function _makePaymentDataFromRequest()
@@ -139,6 +139,31 @@ class Sale extends CI_Controller
     }
 
 
+    private function _sendPaymentConfirmationLetter($paymentUpdateRules)
+    {
+        $saleProductLetterArr = $this->sale_model->getFromTableByParams(array('sale_products_id' => $paymentUpdateRules['sale_products_id']), "sale_products_letters");
+        if(count($saleProductLetterArr)){
+            $recipientDataArr = $this->sale_model->getFromTableByParams(array('id' => $paymentUpdateRules['recipients_id']), "recipients");
+            Common::assertTrue(count($recipientDataArr), "Any recipient was not found within: sale_history_id-".$paymentUpdateRules['sale_history_id'].'|sale_products_id-'.$paymentUpdateRules['sale_products_id'].'|recipients_id-'.$paymentUpdateRules['recipients_id']);
+
+            $isMailSent = $this->mailer_model->sendSaleMailerEmail($recipientDataArr[0], $saleProductLetterArr[0]);
+            Common::assertTrue($isMailSent, "Payment confirmation letter was not send within: sale_history_id-".$paymentUpdateRules['sale_history_id'].'|sale_products_id-'.$paymentUpdateRules['sale_products_id'].'|recipients_id-'.$paymentUpdateRules['recipients_id']);
+
+            $data = $this->_makeSaleMailerHistoryData($recipientDataArr[0]['email'], $saleProductLetterArr[0]['id'], $paymentUpdateRules['sale_history_id']);
+            $this->sale_model->addInTable($data, "sale_mailer_history");
+        }
+    }
+
+
+    private function _makeSaleMailerHistoryData($email, $saleProductsLettersId, $saleHistoryId)
+    {
+        return array(
+                "sale_history_id"           => $saleHistoryId,
+                "sale_products_letters_id"  => $saleProductsLettersId,
+                "email"                     => $email,
+                "created_at"                => date("Y-m-d H:i:s"));
+    }
+
 
     public function success_sale()
     {
@@ -155,7 +180,6 @@ class Sale extends CI_Controller
                         'menu'   => $this->load->view(MENU, $this->data_menu, true));
         $this->load->view('layout_sale', $data);
     }
-
 
 
     public function faild_sale()

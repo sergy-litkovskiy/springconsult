@@ -382,7 +382,7 @@ class Index extends CI_Controller
     public function show_finish_subscribe($finishSubscribeProcessDataArr)
     {
         $this->data_menu            = array('menu' => $this->arrMenu,'current_url' => $this->urlArr[count($this->urlArr)-1]);
-        $recipientData              = $this->index_model->getRecipientIdById($finishSubscribeProcessDataArr['recipient_id']);
+        $recipientData              = $this->index_model->getRecipientById($finishSubscribeProcessDataArr['recipient_id']);
         $subscribeId                = $finishSubscribeProcessDataArr['subscribe_id'];
         $finishSubscribeTamplate    = $subscribeId > 0 ? 'index/finish_free_product_subscribe' : 'index/finish_articles_subscribe';
 

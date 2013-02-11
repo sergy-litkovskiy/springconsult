@@ -19,7 +19,8 @@ class Sale_model extends Crud
 
     public function getSalePageArrWithProducts($slug)
     {
-        $sql = $this->_getSelectSql();
+        $sql  = $this->_getSelectSql();
+        $sql .= " INNER JOIN sale_products ON sale_products.id = assign_sale.sale_products_id";
         $sql .= " AND sale_products.status = ".STATUS_ON;
         $sql .= " WHERE sale_page.slug = '".$slug."'
                 AND sale_page.status = ".STATUS_ON."
@@ -54,7 +55,9 @@ class Sale_model extends Crud
 
     public function getSalePageArrWithProductsAdmin()
     {
-        $query = $this->db->query($this->_getSelectSql());
+        $sql = $this->_getSelectSql();
+        $sql .= " LEFT JOIN sale_products ON sale_products.id = assign_sale.sale_products_id";
+        $query = $this->db->query($sql);
         return $query->result_array();
     }
 
@@ -71,9 +74,7 @@ class Sale_model extends Crud
                 FROM
                     sale_page
                 LEFT JOIN
-                    assign_sale ON assign_sale.sale_page_id = sale_page.id
-                LEFT JOIN
-                    sale_products ON sale_products.id = assign_sale.sale_products_id";
+                    assign_sale ON assign_sale.sale_page_id = sale_page.id";
     }
 
 
