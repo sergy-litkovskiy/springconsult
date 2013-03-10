@@ -171,7 +171,7 @@
 
 			// Add ask before unload dialog only add one unload handler
 			if (!unloadHandlerAdded) {
-				window.onbeforeunload = tinymce.plugins.AutoSave._beforeUnloadHandler;
+				zwindow.onbeforeunload = tinymce.plugins.AutoSave._beforeUnloadHandler;
 				unloadHandlerAdded = TRUE;
 			}
 		},

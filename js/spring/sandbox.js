@@ -175,7 +175,7 @@ SPRING.Sandbox = function(core, module_selector){
                     if (typeof options.yes === 'function') {
                         options.yes();
                     }
-                    $container.overlay().close()
+                    $container.overlay().close();
                 });
                 _self.$wrap('.dialog-no-button').bind('click.dialog-no-button', function(e){
                     e.preventDefault();

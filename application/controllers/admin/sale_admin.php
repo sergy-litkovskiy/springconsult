@@ -199,14 +199,16 @@ class Sale_admin extends CI_Controller
         $salePageArr    = $this->sale_model->getSalePageArrWithProductsAdmin();
         $saleProductsLetterArr = $this->sale_model->getListFromTable('sale_products_letters');
 
+        $saleProductsLetterMapedArr = array();
         foreach($saleProductsLetterArr as $saleProductsLetter){
-            $saleProductsLetterArr[$saleProductsLetter['sale_products_id']] = $saleProductsLetter;
+            $saleProductsLetterMapedArr[$saleProductsLetter['sale_products_id']] = $saleProductsLetter;
         }
         $saleArr        = array();
 
         foreach($salePageArr as $salePage){
-            $saleProductsLetters = isset($saleProductsLetterArr[$salePage['sale_products_id']])
-                                    ? $saleProductsLetterArr[$saleProductsLetter['sale_products_id']] : null;
+            $saleProductsLetters = isset($saleProductsLetterMapedArr[$salePage['sale_products_id']])
+                                    ? $saleProductsLetterMapedArr[$salePage['sale_products_id']] : null;
+
             $saleArr[$salePage['sale_products_id']]['created_at']   = $salePage['created_at'];
             $saleArr[$salePage['sale_products_id']]['id']           = $salePage['sale_products_id'];
             $saleArr[$salePage['sale_products_id']]['title']        = $salePage['sale_products_title'];
