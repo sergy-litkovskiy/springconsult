@@ -32,14 +32,16 @@ class Sale extends CI_Controller
             $saleArr['title'] = $salePage['title'];
             $saleArr['text1'] = $salePage['text1'];
             $saleArr['text2'] = $salePage['text2'];
-            $saleArr['sale_products'][$salePage['sale_products_id']]['id'] = $salePage['sale_products_id'];
-            $saleArr['sale_products'][$salePage['sale_products_id']]['title'] = $salePage['sale_products_title'];
-            $saleArr['sale_products'][$salePage['sale_products_id']]['description'] = $salePage['sale_products_description'];
-            $saleArr['sale_products'][$salePage['sale_products_id']]['price'] = $salePage['sale_products_price'];
+            if($salePage['sale_products_id']){
+                $saleArr['sale_products'][$salePage['sale_products_id']]['id'] = $salePage['sale_products_id'];
+                $saleArr['sale_products'][$salePage['sale_products_id']]['title'] = $salePage['sale_products_title'];
+                $saleArr['sale_products'][$salePage['sale_products_id']]['description'] = $salePage['sale_products_description'];
+                $saleArr['sale_products'][$salePage['sale_products_id']]['price'] = $salePage['sale_products_price'];
+            }
         }
 
         $title                = count($saleArr) > 0 ? $saleArr['title'] : 'sale page';
-        $this->data_arr       = array(
+        $this->dataArr       = array(
             'title'         	=> SITE_TITLE.' - '.$title
             ,'meta_keywords'	=> $this->defaultDescription
             ,'meta_description'	=> $this->defaultKeywords
@@ -47,9 +49,8 @@ class Sale extends CI_Controller
             ,'payment_form'     => $this->load->view('blocks/payment_form', '', true)
         );
 
-        $data = array('content' => $this->load->view('index/show_sale', $this->data_arr, true));
+        $data = array('content' => $this->load->view('index/show_sale', $this->dataArr, true));
         $this->load->view('layout_sale', $data);
-
     }
 
 

@@ -36,7 +36,7 @@
                 </td>
                 <td class="article_table">
                     <ul>
-                        <?php if(count($item['sale_page'])){
+                        <?php if(isset($item['sale_page']) && count($item['sale_page'])){
                             foreach ($item['sale_page'] as $sale_page):?>
                                 <?php if($sale_page['title']){
                                     $status = ($sale_page['status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
