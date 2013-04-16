@@ -3,7 +3,8 @@
 #
 /nbproject/private/
 /.idea/
-*workspace.xml
+/.idea/workspace.xml
+!*workspace.xml
 *~
 *.DS_Store
 /log/*
