@@ -7,8 +7,6 @@
 *~
 *.DS_Store
 /log/*
-/exchange/*
-exchange
 
 /*.properties
 !/default.properties
