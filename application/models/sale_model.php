@@ -52,8 +52,16 @@ class Sale_model extends Crud
         return $query->result_array();
     }
 
-
     public function getSalePageArrWithProductsAdmin()
+    {
+        $sql = $this->_getSelectSql();
+        $sql .= " LEFT JOIN sale_products ON sale_products.id = assign_sale.sale_products_id";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+
+    public function getSaleProductsArrWithProductsAdmin()
     {
         $sql = "SELECT
                     sale_products.*,

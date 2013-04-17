@@ -196,7 +196,7 @@ class Sale_admin extends CI_Controller
     public function sale_products_list()
     {
         $title          = "Продукты для продажи";
-        $saleProductsArr    = $this->sale_model->getSalePageArrWithProductsAdmin();
+        $saleProductsArr    = $this->sale_model->getSaleProductsArrWithProductsAdmin();
         $saleProductsLetterArr = $this->sale_model->getListFromTable('sale_products_letters');
 
         foreach($saleProductsLetterArr as $saleProductsLetter){

@@ -16,21 +16,16 @@
       <change type="DELETED" beforePath="D:\projects\springconsult.my\system\language\russian\unit_test_lang.php" afterPath="" />
       <change type="DELETED" beforePath="D:\projects\springconsult.my\system\language\russian\upload_lang.php" afterPath="" />
       <change type="DELETED" beforePath="D:\projects\springconsult.my\system\libraries\Security.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" afterPath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/sale.php" afterPath="$PROJECT_DIR$/application/controllers/sale.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/admin/sale_admin.php" afterPath="$PROJECT_DIR$/application/controllers/admin/sale_admin.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/sale_model.php" afterPath="$PROJECT_DIR$/application/models/sale_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/sale_products/show.php" afterPath="$PROJECT_DIR$/application/views/admin/sale_products/show.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/index/show_sale.php" afterPath="$PROJECT_DIR$/application/views/index/show_sale.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="springconsult.my.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366133387833" ignored="false" />
+    <file path="/Dummy.txt" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366226627217" ignored="false" />
     <file path="/sale.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366135932396" ignored="false" />
     <file path="/a.dummy" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366138243880" ignored="false" />
-    <file path="/sale_model.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366138028769" ignored="false" />
+    <file path="/sale_model.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366226835179" ignored="false" />
     <file path="/show_sale.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366135822998" ignored="false" />
     <file path="/sale_admin.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366138500061" ignored="false" />
     <file path="/show.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366138749866" ignored="false" />
@@ -53,31 +48,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="sale_model.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="sale_model.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/sale_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="22" selection-start="1633" selection-end="1633" vertical-scroll-proportion="0.6826446">
+            <state line="63" column="55" selection-start="1852" selection-end="1887" vertical-scroll-proportion="-5.419355">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/admin/sale_products/show.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="53" selection-start="1917" selection-end="1917" vertical-scroll-proportion="-14.709678">
-              <folding>
-                <marker date="1366138822309" expanded="true" signature="2014:2025" placeholder="..." />
-                <marker date="1366138822309" expanded="true" signature="2048:2057" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sale_admin.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="sale_admin.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/admin/sale_admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="217" column="53" selection-start="8297" selection-end="8297" vertical-scroll-proportion="-8.032258">
+            <state line="198" column="84" selection-start="7040" selection-end="7040" vertical-scroll-proportion="0.2643819">
               <folding />
             </state>
           </provider>
@@ -114,9 +97,9 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/application/views/index/show_sale.php" />
         <option value="$PROJECT_DIR$/application/controllers/sale.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/sale_products/show.php" />
         <option value="$PROJECT_DIR$/application/models/sale_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/admin/sale_admin.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/sale_products/show.php" />
       </list>
     </option>
   </component>
@@ -301,9 +284,10 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.HTML" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -361,14 +345,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="11" y="8" width="1885" height="1031" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24256293" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12561712" sideWeight="0.75743705" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12671421" sideWeight="0.75743705" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -377,6 +360,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24256293" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -477,76 +461,59 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="142" selection-end="142" vertical-scroll-proportion="0.36792454">
-          <folding />
-        </state>
+        <state line="13" column="0" selection-start="142" selection-end="142" vertical-scroll-proportion="0.36792454" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/back.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="17" selection-start="3119" selection-end="3119" vertical-scroll-proportion="0.82580644">
-          <folding>
-            <marker date="1360097227307" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1360097227307" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
+        <state line="93" column="17" selection-start="3119" selection-end="3119" vertical-scroll-proportion="0.82580644" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/mailer_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="249" column="55" selection-start="11444" selection-end="11444" vertical-scroll-proportion="0.22972973">
-          <folding />
-        </state>
+        <state line="249" column="55" selection-start="11444" selection-end="11444" vertical-scroll-proportion="0.22972973" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/index_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="317" column="28" selection-start="11398" selection-end="11398" vertical-scroll-proportion="0.04054054">
-          <folding />
-        </state>
+        <state line="317" column="28" selection-start="11398" selection-end="11398" vertical-scroll-proportion="0.04054054" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/sale.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="60" selection-start="2079" selection-end="2079" vertical-scroll-proportion="0.36486486">
-          <folding />
-        </state>
+        <state line="45" column="60" selection-start="2079" selection-end="2079" vertical-scroll-proportion="0.36486486" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/index/show_sale.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="45" selection-start="341" selection-end="341" vertical-scroll-proportion="0.16216215">
-          <folding />
-        </state>
+        <state line="4" column="45" selection-start="341" selection-end="341" vertical-scroll-proportion="0.16216215" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/assign_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="23" selection-start="2188" selection-end="2188" vertical-scroll-proportion="1.6031746">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/admin/sale_admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="217" column="53" selection-start="8297" selection-end="8297" vertical-scroll-proportion="-8.032258">
-          <folding />
-        </state>
+        <state line="75" column="23" selection-start="2188" selection-end="2188" vertical-scroll-proportion="1.6031746" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/admin/sale_products/show.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="53" selection-start="1917" selection-end="1917" vertical-scroll-proportion="-14.709678">
+        <state line="40" column="53" selection-start="1917" selection-end="1917" vertical-scroll-proportion="1.1940298">
           <folding>
-            <marker date="1366138822309" expanded="true" signature="2014:2025" placeholder="..." />
-            <marker date="1366138822309" expanded="true" signature="2048:2057" placeholder="..." />
+            <marker date="1366138822309" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1366138822309" expanded="false" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/sale_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="22" selection-start="1633" selection-end="1633" vertical-scroll-proportion="0.6826446">
+        <state line="63" column="55" selection-start="1852" selection-end="1887" vertical-scroll-proportion="-5.419355">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/admin/sale_admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="198" column="84" selection-start="7040" selection-end="7040" vertical-scroll-proportion="0.2643819">
           <folding />
         </state>
       </provider>
