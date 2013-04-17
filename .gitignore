@@ -3,12 +3,11 @@
 #
 /nbproject/private/
 /.idea/
-*workspace.xml
+/.idea/workspace.xml
+!*workspace.xml
 *~
 *.DS_Store
 /log/*
-/exchange/*
-exchange
 
 /*.properties
 !/default.properties
