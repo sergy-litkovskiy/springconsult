@@ -195,18 +195,17 @@ class Sale_admin extends CI_Controller
 ////////////////////////////////SALE PRODUCTS//////////////////////////
     public function sale_products_list()
     {
-        $title          = "Продукты для продажи";
-        $saleProductsArr    = $this->sale_model->getSaleProductsArrWithProductsAdmin();
-        $saleProductsLetterArr = $this->sale_model->getListFromTable('sale_products_letters');
-
+        $title                  = "Продукты для продажи";
+        $saleProductsArr        = $this->sale_model->getSaleProductsArrWithProductsAdmin();
+        $saleProductsLetterArr  = $this->sale_model->getListFromTable('sale_products_letters');
+        $saleArr = $saleProductsLetterArrMaped = array();
         foreach($saleProductsLetterArr as $saleProductsLetter){
-            $saleProductsLetterArr[$saleProductsLetter['sale_products_id']] = $saleProductsLetter;
+            $saleProductsLetterArrMaped[$saleProductsLetter['sale_products_id']] = $saleProductsLetter;
         }
-        $saleArr        = array();
 
         foreach($saleProductsArr as $saleProducts){
-            $saleProductsLetters = isset($saleProductsLetterArr[$saleProducts['id']])
-                                    ? $saleProductsLetterArr[$saleProductsLetter['sale_products_id']] : null;
+            $saleProductsLetters = isset($saleProductsLetterArrMaped[$saleProducts['id']])
+                                    ? $saleProductsLetterArrMaped[$saleProducts['id']] : null;
             $saleArr[$saleProducts['id']]['created_at']   = $saleProducts['created_at'];
             $saleArr[$saleProducts['id']]['id']           = $saleProducts['id'];
             $saleArr[$saleProducts['id']]['title']        = $saleProducts['title'];
