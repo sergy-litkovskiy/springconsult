@@ -51,7 +51,8 @@ class Landing extends CI_Controller
             'title'             => SITE_TITLE.' - закрытая система мероприятий',
             'meta_keywords'	    => $this->defaultDescription,
             'meta_description'	=> $this->defaultKeywords,
-            'content'           => $landingArticleData
+            'content'           => $landingArticleData,
+            'disqus'            => show_disqus()
         );
 
        $data = array(
