@@ -1,35 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a12eea6-2247-4bf2-8bc1-f0085beec09e" name="Default" comment="Clean up">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/upload_img/books_my_child.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/upload_img/deti_landing.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/upload_img/deti_sale.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/upload_img/helen_spring_article_1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/upload_img/helen_spring_article_2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/upload_img/man_sport.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/upload_img/the-good-gardener-vector.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/upload_img/trudolubie.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/subscribegift/work_book_5shagov_uspeh_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" afterPath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/admin/sale_admin.php" afterPath="$PROJECT_DIR$/application/controllers/admin/sale_admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/sale.php" afterPath="$PROJECT_DIR$/application/controllers/sale.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/sale_model.php" afterPath="$PROJECT_DIR$/application/models/sale_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/sale_products/show.php" afterPath="$PROJECT_DIR$/application/views/admin/sale_products/show.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/index/show_sale.php" afterPath="$PROJECT_DIR$/application/views/index/show_sale.php" />
-    </list>
+    <list default="true" id="4a12eea6-2247-4bf2-8bc1-f0085beec09e" name="Default" comment="Clean up" />
     <ignored path="springconsult.my.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/show.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366138749866" ignored="false" />
-    <file path="/sale_admin.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366138500061" ignored="false" />
-    <file path="/show_sale.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366135822998" ignored="false" />
-    <file path="/sale_model.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366226835179" ignored="false" />
-    <file path="/a.dummy" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366138243880" ignored="false" />
-    <file path="/sale.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366135932396" ignored="false" />
     <file path="/Dummy.txt" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366226627217" ignored="false" />
+    <file path="/sale.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366135932396" ignored="false" />
+    <file path="/a.dummy" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366138243880" ignored="false" />
+    <file path="/sale_model.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366226835179" ignored="false" />
+    <file path="/show_sale.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366135822998" ignored="false" />
+    <file path="/sale_admin.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366138500061" ignored="false" />
+    <file path="/show.php" changelist="4a12eea6-2247-4bf2-8bc1-f0085beec09e" time="1366138749866" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,9 +262,9 @@
     <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.HTML" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
     <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -347,7 +328,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12841946" sideWeight="0.75743705" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12993921" sideWeight="0.75743705" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
