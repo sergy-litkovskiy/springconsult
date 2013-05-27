@@ -56,6 +56,7 @@ class Landing extends CI_Controller
         );
 
        $data = array(
+
              'menu'          => $this->load->view(MENU, $this->data_menu, true),           
              'content'       => $this->load->view('blocks/landing_article', $this->data_arr, true),
              'downloads'     => $this->load->view('blocks/landing_downloads', $this->data_arr, true));
