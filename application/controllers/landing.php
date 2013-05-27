@@ -132,7 +132,7 @@ class Landing extends CI_Controller
             $this->result['data']       = "<p class='success'>Чтобы скачать материал по теме<br/>  
                                             <b>'".$landingArticleData['title']."'</b><br/>
                                             перейдите по ссылке:<br> 
-                                            <a href='".base_url().$landingArticleData['link_mp3']."'>'".base_url().$landingArticleData['link_mp3']."'</a><br/> 
+                                            <a href='".$landingArticleData['link_mp3']."'>'".$landingArticleData['link_mp3']."'</a><br/>
                                             и воспользуйтесь паролем<br/> 
                                             <b>".$landingArticleData['password_mp3']."</b></p>";
             $this->result['success']    = true;            
