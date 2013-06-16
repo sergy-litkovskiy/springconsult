@@ -51,7 +51,7 @@
                         <span class="edit_sale_products_letters" data-sale-products-letters="<?php echo base64_encode(json_encode($item['sale_products_letters']));?>">
                             <img src="<?php echo base_url()?>img/img_main/mail_edit.png"/>
                         </span>
-                        <?php } else {?>
+                    <?php } else {?>
                         <span class="new_sale_products_letters">
                             <img src="<?php echo base_url()?>img/img_main/mail_add.png"/>
                         </span>

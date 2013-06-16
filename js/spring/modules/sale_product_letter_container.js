@@ -49,7 +49,7 @@ function SaleProductLetterContainerModule() {
             $('input[name=theme]', $overlayContainer).val(data.subject);
             $('textarea#spec-mailer-lp', $overlayContainer).val(data.text);
             $('input[name=sale_products_id]', $overlayContainer).val(data.sale_products_id);
-            $('input[name=id]', $overlayContainer).val(data.id);
+            $('input[name=id]', $overlayContainer).val(data.id||'');
         };
 
 
@@ -61,6 +61,7 @@ function SaleProductLetterContainerModule() {
             _initTinymce();
             if(data.id ){
                 $('input[name=sale_products_id]', $overlayContainer).val(data.id);
+                $('input[name=id]', $overlayContainer).val('');
             }
 
             if(data.productData){
