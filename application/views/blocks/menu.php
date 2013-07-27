@@ -26,4 +26,9 @@
             </ul>
             </li>
     <?php endfor;?>
+    <li>
+        <a id='cat_name' class='not_drop' href='http://springmagazin.com.ua'>
+            Spring - Магазин
+        </a>
+    </li>
 </ul>
