@@ -1,4 +1,5 @@
 <script  type="text/javascript" src="<?php echo base_url();?>js/sort_menu_item.js"></script>
+<script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/menu_list_container.js"></script>
 <h2>Редактировать меню</h2>
 <p class="edit_message"><?php echo @$message; ?></p>
     <table id="main_content" class="menu_content" cellspacing="0">
@@ -40,17 +41,16 @@
                     </a>
                 </td>
                 <td>
-                    <a title="delete" class="edit" id="<?php echo $contentMenu[$i]->id;?>" href="#" data-email="<?php echo base_url()?>backend/menu_admin/del/<?php echo $contentMenu[$i]->parent;?>/<?php echo $contentMenu[$i]->id;?>">
+                    <a title="delete" class="drop" id="<?php echo $contentMenu[$i]->id;?>" href="#" data-email="<?php echo base_url()?>backend/menu_admin/del/<?php echo $contentMenu[$i]->parent;?>/<?php echo $contentMenu[$i]->id;?>">
                         <img src="<?php echo base_url()?>img/img_main/del.png"/>
                     </a>
                 </td>
-                <td>
-                    <form id="<?php echo $contentMenu[$i]->id;?>">
+                <td class="status-change">
+                    <form id="<?php echo $contentMenu[$i]->id;?>" data-table="menu">
                         <input type="radio" id="<?php echo $contentMenu[$i]->id;?>" name="status" value="1" <?php echo ($contentMenu[$i]->status == '1') ? 'checked="checked"': null;?>/>
                         <img src="<?php echo base_url()?>img/img_main/on.png"/>
                         <input type="radio" id="<?php echo $contentMenu[$i]->id;?>" name="status" value="0" <?php echo ($contentMenu[$i]->status == '0') ? 'checked="checked"': null;?>/>
                         <img src="<?php echo base_url()?>img/img_main/off.png"/>
-                        <input type="hidden" name="table" id="hidden<?php echo $contentMenu[$i]->id;?>" value="menu">
                     </form>
                 </td>
             </tr>
@@ -72,19 +72,19 @@
                         </a>
                     </td>
                     <td>
-                        <a title="delete" class="edit" id="<?php echo $child[$k]->id;?>" href="#" data-email="<?php echo base_url()?>backend/menu_admin/del/<?php echo $child[$k]->parent;?>/<?php echo $child[$k]->id;?>">
+                        <a title="delete" class="drop" id="<?php echo $child[$k]->id;?>" href="#" data-email="<?php echo base_url()?>backend/menu_admin/del/<?php echo $child[$k]->parent;?>/<?php echo $child[$k]->id;?>">
                             <img src="<?php echo base_url()?>img/img_main/del.png"/>
                         </a>
                     </td>
-                    <td>
-                        <form id="<?php echo $child[$k]->id;?>">
+                    <td class="status-change">
+                        <form id="<?php echo $child[$k]->id;?>" data-table="menu">
                             <input type="radio" id="<?php echo $child[$k]->id;?>" name="status" value="1" <?php echo ($child[$k]->status == '1') ? 'checked="checked"': null;?>/>
                             <img src="<?php echo base_url()?>img/img_main/on.png"/>
                             <input type="radio" id="<?php echo $child[$k]->id;?>" name="status" value="0" <?php echo ($child[$k]->status == '0') ? 'checked="checked"': null;?>/>
                             <img src="<?php echo base_url()?>img/img_main/off.png"/>
-                            <input type="hidden" name="table" id="hidden<?php echo $child[$k]->id;?>" value="menu">
                         </form>
                     </td>
+
                 </tr>
                 <?php endfor;?>
             <!-- end second level -->
@@ -93,3 +93,6 @@
     </table>
   
 <div id="mess_mailsent"></div>
+<script>
+    SPRING.Core.registerModule("main_content", MenuListContainerModule());
+</script>
