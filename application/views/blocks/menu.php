@@ -32,7 +32,7 @@
         </a>
     </li>
 </ul>
-<div id="banner_slider"></div>
+<!--<div id="banner_slider"></div>-->
 <script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/banner_slider.js"></script>
 <script>
     SPRING.Core.registerModule("banner_slider", BannerSliderModule());
