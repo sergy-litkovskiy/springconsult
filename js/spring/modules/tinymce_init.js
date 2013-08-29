@@ -8,8 +8,8 @@ function TinymceInitModule() {
                 elements : elementId,
 		theme : "simple",
 		language : "ru",
-		theme_advanced_buttons1 : "forecolor"                
-//                content_css : "themes/simple/skins/default/content.css"
+		theme_advanced_buttons1 : "forecolor",
+                content_css : "themes/simple/skins/default/content.css"
             });
         };
 

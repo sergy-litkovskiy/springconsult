@@ -11,14 +11,12 @@
 <meta content="no-cache" http-equiv="Cache-Control"/>
 <title>Admin Springconsulting</title>
 
-<script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery-1.7.2-min.js"></script>
+<script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery-1.8.3-min.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery-ui-1.8.2/js/jquery-ui-1.8.2.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery.tools.min.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery.loadmask.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery.validate.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery.tablesorter/jquery.tablesorter.js"></script>
-<!--<script  type="text/javascript" src="--><?php //echo base_url();?><!--js/tag-it.js"></script>-->
-<!--<script  type="text/javascript" src="--><?php //echo base_url();?><!--js/tag_set.js"></script>-->
 
 <script type="text/javascript" src="<?php echo base_url();?>js/init.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/spring/core.js"></script>

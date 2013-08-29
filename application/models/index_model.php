@@ -2,7 +2,7 @@
 /**
  * @author Litkovsky
  * @copyright 2010
- * model for index page
+ *
  */
  
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');

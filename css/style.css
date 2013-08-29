@@ -1273,7 +1273,7 @@ ul.tagit input[type="text"] {
 
 
 /*cloud tag*/
-#cloud_tag{
+#cloud_tag {
     background-color: none;
     margin: 0;
     padding: 0;
@@ -1684,4 +1684,10 @@ ul.tagit input[type="text"] {
 .social_share{
     margin: 2em auto -0.5em 0em!important;
     font-weight: bold;
+}
+
+#banner_slider {
+    margin-top: 10px;
+    width:190px;
+    height: 250px
 }

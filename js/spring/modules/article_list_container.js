@@ -1,81 +1,81 @@
 function ArticleListContainerModule() {
-    return function(sb){
+    return function (sb) {
         var _loader = '<img id="img_loader" src="/img/img_main/ajax-loader_red.gif" alt="Loading"/>';
         var _currentContainer;
 
-        var _onClickGoMailer = function(e){
+        var _onClickGoMailer = function (e) {
             e.preventDefault();
-         
-            var _articleId    = $(this).parent().parent().data('article-id'),
+
+            var _articleId = $(this).parent().parent().data('article-id'),
                 _articleTitle = $(this).parent().parent().data('article-title'),
-                _isLanding    = $(this).parent().parent().data('is-landing');
-              
+                _isLanding = $(this).parent().parent().data('is-landing');
+
             sb.publish({
-                type : 'spec-mailer-container-show',
-                data: {article_id : _articleId, article_title : _articleTitle, is_landing : parseInt(_isLanding)||0}
+                type: 'spec-mailer-container-show',
+                data: {article_id: _articleId, article_title: _articleTitle, is_landing: parseInt(_isLanding) || 0}
             });
         };
 
 
-        var _reloadPage = function() {
+        var _reloadPage = function () {
             window.location.reload();
         };
 
 
-        var _onSuccess = function(data) {
+        var _onSuccess = function (data) {
             sb.$self().find('img#loader').remove();
-            var messageContainer = sb.UI.showMessage('<p class="success">Рассылка успешно стартовала!<br/>'+data+'</p>');
+            var messageContainer = sb.UI.showMessage('<p class="success">Рассылка успешно стартовала!<br/>' + data + '</p>');
             messageContainer.find('.close').live('click', _reloadPage);
         };
 
 
-        var _onError = function(mess) {
+        var _onError = function (mess) {
             sb.$self().find('img#loader').remove();
-            sb.UI.showError('<p class="error">'+mess+'</p>');
+            sb.UI.showError('<p class="error">' + mess + '</p>');
         };
 
 
-        var _onClickSendSubscribe = function(e){
+        var _onClickSendSubscribe = function (e) {
             e.preventDefault();
             if (confirm('Do you really want to START MAIL PROCESS?')) {
                 $(this).append('<img id="loader" src="/img/img_main/loader.gif"/>');
                 var _articleId = $(this).parent().parent().data('article-id');
-                sb.Mailer.sendSubscribersMail({'article_id':_articleId}, _onSuccess, _onError);
+                sb.Mailer.sendSubscribersMail({'article_id': _articleId}, _onSuccess, _onError);
             }
         };
 
 
-        var _onLoaderHide = function(){
+        var _onLoaderHide = function () {
             _currentContainer.next('#img_loader').remove();
             _currentContainer.fadeIn();
         };
 
 
-        var _onChangeStatusError = function(message){
+        var _onChangeStatusError = function (message) {
             _onLoaderHide();
-            $overlayMessageContainer = sb.UI.showError('<p class="error">' + message + '</p>');
+            var $overlayMessageContainer = sb.UI.showError('<p class="error">' + message + '</p>');
             $($overlayMessageContainer).find('div.close').click(
-                function(){
+                function () {
                     _reloadPage();
                 }
             );
         };
 
 
-        var _onClickChangeStatus = function(e){
+        var _onClickChangeStatus = function (e) {
             e.preventDefault();
             _currentContainer = $(this).parent('form');
             var data = {
-                status  : $(this).val(),
-                id      : _currentContainer.attr('id'),
-                table   : _currentContainer.data('table')
+                status: $(this).val(),
+                id    : _currentContainer.attr('id'),
+                table : _currentContainer.data('table')
             };
             _currentContainer.hide().after(_loader);
             sb.Status.statusChange(data, _reloadPage, _onChangeStatusError);
         };
 
 
-        var _onClickDrop = function(e){
+        var _onClickDrop = function (e) {
             e.preventDefault();
             _currentContainer = $(this);
             if (confirm('Are you sure? Do you really want to DELETE?')) {
@@ -88,7 +88,7 @@ function ArticleListContainerModule() {
         };
 
 
-        var _onClickChangeIsTop = function(e){
+        var _onClickChangeIsTop = function (e) {
             var _currentCheckbox = $(this);
 
             var data = {};
@@ -141,25 +141,30 @@ function ArticleListContainerModule() {
         };
 
 
-        var _onClickEditSaleLetter = function(e){
+        var _onClickEditSaleLetter = function (e) {
             var _saleProductsLettersData = $(this).data('sale-products-letters');
             sb.publish({
-                type : 'sale-products-container-show',
-                data: {productData : _base64_decode(_saleProductsLettersData)}
+                type: 'sale-products-container-show',
+                data: {productData: _base64_decode(_saleProductsLettersData)}
             });
         };
 
 
-        var _onClickAddSaleLetter = function(e){
+        var _onClickAddSaleLetter = function (e) {
             var _saleProductsLettersId = $(this).parent().parent().data('article-id');
             sb.publish({
-                type : 'sale-products-container-show',
-                data: {id : _saleProductsLettersId}
+                type: 'sale-products-container-show',
+                data: {id: _saleProductsLettersId}
             });
         };
 
+        var _subscribeEmailList = function (e) {
+            e.preventDefault();
+            var $registredListTd = $(this).parent().parent();
+            $registredListTd.find('.landing_registred_list').toggle(600);
+        };
 
-        var _bindEvents = function() {  
+        var _bindEvents = function () {
             sb.bind('.go-mailer-lp', 'click', _onClickGoMailer);
             sb.bind('.send_subscribe', 'click', _onClickSendSubscribe);
             sb.bind('.status-change input:radio', 'change', _onClickChangeStatus);
@@ -167,13 +172,15 @@ function ArticleListContainerModule() {
             sb.bind('input:checkbox[name=is_top]', 'click', _onClickChangeIsTop);
             sb.bind('.edit_sale_products_letters', 'click', _onClickEditSaleLetter);
             sb.bind('.new_sale_products_letters', 'click', _onClickAddSaleLetter);
+            sb.bind('a.registred_detail', 'click', _subscribeEmailList);
         };
 
         return {
-            init : function(){
+            init   : function () {
                 _bindEvents();
             },
-            destroy : function(){ }
+            destroy: function () {
+            }
         };
     };
 }

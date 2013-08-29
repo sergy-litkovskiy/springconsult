@@ -15,7 +15,7 @@
 <meta property="og:image" content="<?php echo base_url()."img/upload_img/".@$imgFB;?>"/>
 <title><?php echo $title;?></title>
 
-<script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery-1.7.2-min.js"></script>
+<script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery-1.8.3-min.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery-ui-1.8.2/js/jquery-ui-1.8.2.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery.tools.min.js"></script>
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery.loadmask.js"></script>
