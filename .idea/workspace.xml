@@ -2,13 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/spring/modules/banner_slider.js" afterPath="$PROJECT_DIR$/js/spring/modules/banner_slider.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/blocks/menu.php" afterPath="$PROJECT_DIR$/application/views/blocks/menu.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/img_main/cross.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/img_main/delete.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/img_main/disc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/img_main/tick.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/img_main/undo.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="springconsult.my.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1379259758719" ignored="false" />
+    <file path="/Dummy.txt" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1379272766909" ignored="false" />
     <file path="/sale_admin.php" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1371392188470" ignored="false" />
     <file path="/sale_product_letter_container.js" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1371393867306" ignored="false" />
     <file path="/show.php" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1377618722807" ignored="false" />
@@ -54,7 +57,7 @@
       <file leaf-file-name="menu.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/blocks/menu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="28" selection-start="1445" selection-end="1445" vertical-scroll-proportion="0.74710745">
+            <state line="35" column="28" selection-start="1445" selection-end="1445" vertical-scroll-proportion="1.1770834">
               <folding />
             </state>
           </provider>
@@ -214,7 +217,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="subscribe" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -228,11 +231,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spring" />
+              <option name="myItemId" value="img" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -246,15 +245,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="img" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="spring" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
+              <option name="myItemId" value="img_main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -302,18 +297,23 @@
       <created>1377799145952</created>
       <updated>1377799145952</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="banner_slider added">
+      <created>1379272773160</created>
+      <updated>1379272773160</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="22" width="1420" height="790" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32886904" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18995634" sideWeight="0.67113096" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18995634" sideWeight="0.67113096" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -323,7 +323,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -371,7 +370,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="gitignore changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="banner_slider added" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -389,16 +388,12 @@
     <MESSAGE value="custom menu item added" />
     <MESSAGE value="tag editor changed" />
     <MESSAGE value="gitignore changed" />
+    <MESSAGE value="banner_slider added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/admin/index_admin/edit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="65" selection-start="4909" selection-end="4909" vertical-scroll-proportion="-26.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/spring/modules/landing_subscribe_form.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="89" column="12" selection-start="3180" selection-end="3199" vertical-scroll-proportion="0.36645964" />
@@ -484,9 +479,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/img/img_main/cross.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/blocks/menu.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="28" selection-start="1445" selection-end="1445" vertical-scroll-proportion="0.74710745">
+        <state line="35" column="28" selection-start="1445" selection-end="1445" vertical-scroll-proportion="1.1770834">
           <folding />
         </state>
       </provider>
