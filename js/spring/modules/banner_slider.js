@@ -1,9 +1,9 @@
 function BannerSliderModule() {
     return function (sb) {
-        var imgArr = [], i;
+        var imgArr = [];
 
-        var _makeImgUrl = function (i) {
-            return {src: 'http://' + location.hostname + '/img/banner_img/po_mokromu_' + i + '.jpg'};
+        var _makeImgUrl = function (num) {
+            return {src: 'http://' + location.hostname + '/img/banner_img/banner_site_' + num + '.jpg'};
         };
 
         var _slideShow = function(){
@@ -14,9 +14,11 @@ function BannerSliderModule() {
             );
         };
 
-        var _makeImgArr = function (i) {
+        var _makeImgArr = function () {
+            var i;
             for (i = 1; i <= 3; i++) {
-                imgArr.push(_makeImgUrl(i));
+                var num = (i < 10) ? '0' + i : i;
+                imgArr.push(_makeImgUrl(num));
             }
 
             _slideShow();
