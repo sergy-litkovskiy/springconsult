@@ -7,7 +7,7 @@
     </list>
     <ignored path="springconsult.my.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1379273408792" ignored="false" />
+    <file path="/Dummy.txt" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1379274016435" ignored="false" />
     <file path="/sale_admin.php" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1371392188470" ignored="false" />
     <file path="/sale_product_letter_container.js" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1371393867306" ignored="false" />
     <file path="/show.php" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1377618722807" ignored="false" />
@@ -15,7 +15,7 @@
     <file path="$PROJECT_DIR$/../mynster/app/config/parameters.yml" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1374522456107" ignored="false" />
     <file path="/a.dummy" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1377435900451" ignored="false" />
     <file path="/menu_list_container.js" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1374945220420" ignored="false" />
-    <file path="/menu.php" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1379273608575" ignored="false" />
+    <file path="/menu.php" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1379274146261" ignored="false" />
     <file path="$PROJECT_DIR$/../cupandcup/application/views/layout.php" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1376817375813" ignored="false" />
     <file path="/banner_slider.js" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1379273632194" ignored="false" />
     <file path="/style.css" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1377438965029" ignored="false" />
@@ -53,7 +53,7 @@
       <file leaf-file-name="menu.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/blocks/menu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="19" selection-start="1240" selection-end="1240" vertical-scroll-proportion="0.60661155">
+            <state line="29" column="36" selection-start="1283" selection-end="1283" vertical-scroll-proportion="0.6628099">
               <folding />
             </state>
           </provider>
@@ -305,7 +305,11 @@
       <created>1379273411102</created>
       <updated>1379273411102</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="link to shop added">
+      <created>1379274019507</created>
+      <updated>1379274019507</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -374,7 +378,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="css for banner_slider changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="link to shop added" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -395,6 +399,7 @@
     <MESSAGE value="banner_slider added" />
     <MESSAGE value="images for tag manager added" />
     <MESSAGE value="css for banner_slider changed" />
+    <MESSAGE value="link to shop added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -494,7 +499,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/blocks/menu.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="19" selection-start="1240" selection-end="1240" vertical-scroll-proportion="0.60661155">
+        <state line="29" column="36" selection-start="1283" selection-end="1283" vertical-scroll-proportion="0.6628099">
           <folding />
         </state>
       </provider>

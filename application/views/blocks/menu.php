@@ -27,7 +27,7 @@
             </li>
     <?php endfor;?>
 </ul>
-<a class='banner_lik' href='http://springmagazin.com.ua'>
+<a class='banner_lik' target="_blank" href='http://springmagazin.com.ua'>
     <div id="banner_slider"></div>
 </a>
 <script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/banner_slider.js"></script>
