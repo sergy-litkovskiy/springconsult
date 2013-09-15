@@ -26,13 +26,10 @@
             </ul>
             </li>
     <?php endfor;?>
-    <li>
-        <a id='cat_name' class='not_drop' href='http://springmagazin.com.ua'>
-            Spring - Магазин
-        </a>
-    </li>
 </ul>
-<div id="banner_slider"></div>
+<a class='banner_lik' href='http://springmagazin.com.ua'>
+    <div id="banner_slider"></div>
+</a>
 <script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/banner_slider.js"></script>
 <script>
     SPRING.Core.registerModule("banner_slider", BannerSliderModule());
