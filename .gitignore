@@ -2,6 +2,7 @@
 # General files
 #
 .idea/
+.idea/workspace.xml
 /.idea/
 *~
 *.DS_Store

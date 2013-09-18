@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/blocks/menu.php" afterPath="$PROJECT_DIR$/application/views/blocks/menu.php" />
+    <list default="true" id="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" name="Default" comment="gitignore changed">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="springconsult.my.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1379274016435" ignored="false" />
+    <file path="/Dummy.txt" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1379532132324" ignored="false" />
     <file path="/sale_admin.php" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1371392188470" ignored="false" />
     <file path="/sale_product_letter_container.js" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1371393867306" ignored="false" />
     <file path="/show.php" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1377618722807" ignored="false" />
@@ -31,6 +31,7 @@
     <file path="/material_admin.php" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1377439320657" ignored="false" />
     <file path="/landing_edit.js" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1377618267614" ignored="false" />
     <file path="/article_list_container.js" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1377631398980" ignored="false" />
+    <file path="/.gitignore" changelist="c0cfc8f4-2e41-4a3e-95d7-4493a7ece1d2" time="1379532162881" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,10 +51,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="menu.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="menu.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/blocks/menu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="36" selection-start="1283" selection-end="1283" vertical-scroll-proportion="0.6628099">
+            <state line="35" column="9" selection-start="1557" selection-end="1557" vertical-scroll-proportion="-19.346153">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="0" selection-start="69" selection-end="69" vertical-scroll-proportion="0.21118012">
               <folding />
             </state>
           </provider>
@@ -62,7 +72,7 @@
       <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1691" column="15" selection-start="28564" selection-end="28564" vertical-scroll-proportion="-19.48">
+            <state line="1691" column="15" selection-start="28564" selection-end="28564" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -146,10 +156,10 @@
         <option value="$PROJECT_DIR$/application/views/admin/landing/show.php" />
         <option value="$PROJECT_DIR$/js/back.js" />
         <option value="$PROJECT_DIR$/js/spring/modules/article_list_container.js" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/js/spring/modules/banner_slider.js" />
         <option value="$PROJECT_DIR$/application/views/blocks/menu.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -185,6 +195,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -203,55 +214,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="subscribe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult.my" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springconsult" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img_main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -309,7 +273,23 @@
       <created>1379274019507</created>
       <updated>1379274019507</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="target added to link">
+      <created>1379274167803</created>
+      <updated>1379274167803</updated>
+    </task>
+    <task id="LOCAL-00009" summary="images updated from production">
+      <created>1379530848512</created>
+      <updated>1379530848512</updated>
+    </task>
+    <task id="LOCAL-00010" summary="images updated from production v2">
+      <created>1379531922677</created>
+      <updated>1379531922677</updated>
+    </task>
+    <task id="LOCAL-00011" summary="gitignore changed">
+      <created>1379532108471</created>
+      <updated>1379532108471</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -321,7 +301,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18995634" sideWeight="0.67113096" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19577874" sideWeight="0.67113096" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -378,7 +358,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="link to shop added" />
+    <option name="LAST_COMMIT_MESSAGE" value="gitignore changed" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -395,11 +375,14 @@
     <MESSAGE value="menu admin fixed" />
     <MESSAGE value="custom menu item added" />
     <MESSAGE value="tag editor changed" />
-    <MESSAGE value="gitignore changed" />
     <MESSAGE value="banner_slider added" />
     <MESSAGE value="images for tag manager added" />
     <MESSAGE value="css for banner_slider changed" />
     <MESSAGE value="link to shop added" />
+    <MESSAGE value="target added to link" />
+    <MESSAGE value="images updated from production" />
+    <MESSAGE value="images updated from production v2" />
+    <MESSAGE value="gitignore changed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -449,11 +432,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="6" selection-start="26" selection-end="26" vertical-scroll-proportion="0.07919255" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/back.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="111" column="3" selection-start="3901" selection-end="3901" vertical-scroll-proportion="0.0">
@@ -471,16 +449,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1691" column="15" selection-start="28564" selection-end="28564" vertical-scroll-proportion="-19.48">
+        <state line="1691" column="15" selection-start="28564" selection-end="28564" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/jquery/jquery.cross-slide.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="35" selection-start="1738" selection-end="1738" vertical-scroll-proportion="0.05279503">
-          <folding />
-        </state>
+        <state line="28" column="35" selection-start="1738" selection-end="1738" vertical-scroll-proportion="0.05279503" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/spring/modules/banner_slider.js">
@@ -499,7 +475,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/blocks/menu.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="36" selection-start="1283" selection-end="1283" vertical-scroll-proportion="0.6628099">
+        <state line="35" column="9" selection-start="1557" selection-end="1557" vertical-scroll-proportion="-19.346153">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="69" selection-end="69" vertical-scroll-proportion="0.21118012">
           <folding />
         </state>
       </provider>
