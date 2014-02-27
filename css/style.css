@@ -1275,7 +1275,7 @@ ul.tagit input[type="text"] {
 /*cloud tag*/
 #cloud_tag {
     background-color: none;
-    margin: 0;
+    margin: 0 0 1em 0;
     padding: 0;
 }
 

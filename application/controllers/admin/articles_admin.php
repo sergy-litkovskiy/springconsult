@@ -271,8 +271,7 @@ class Articles_admin extends CI_Controller
             'sender_email' => ADMIN_EMAIL,
             'subject'      => $articleDetail['title'],
             'wrap_type'    => 'left',
-            'list_id'      => /*UNISENDERMAINLISTID*/
-            UNISENDERTESTLISTID,
+            'list_id'      => UNISENDERMAINLISTID,
             'body'         => $this->mailer_model->getUnisenderSubscribeEmailTpl($articleDetail)
         );
 

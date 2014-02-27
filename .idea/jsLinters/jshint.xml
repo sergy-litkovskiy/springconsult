@@ -10,7 +10,6 @@
     <option nonew="true" />
     <option undef="true" />
     <option strict="true" />
-    <option es5="true" />
     <option browser="true" />
     <option devel="true" />
     <option jquery="true" />
