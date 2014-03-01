@@ -1586,41 +1586,26 @@ ul.tagit input[type="text"] {
     text-align: center;
 }
 
-#payment_form_block{
+.sale-block-payment {
     display: none;
 }
 
-#payment_form{
-    width: 375px;
+.sale-block-payment form{
+    padding-bottom: 1em;
+    text-align: center;
 }
 
-#payment_form table{
-    width: 100%;
+.sale-block-payment form .payment-input input{
+    width: 80%;
+    height: 25px;
 }
 
-#payment_form table td.td-label{
-    text-align: right;
-    padding-right: 0.5em;
-    width: 75px;
-} 
-
-#payment_form table td.td-input{
-    text-align: left;
-    padding-left: 0.5em;
-} 
-
-#payment_form table td.td-input input.email, 
-#payment_form table td.td-input input.name{
-    width: 90%;
+.sale-block-payment .payment-form {
+    width: 40%;
 }
 
-#payment_form p{
-    font-size: 12px;
-    color: #3C3C3C;
-}
-
-#payment_form p.payment-title{
-    margin-left: 2.5em;
+.sale-block-payment form input#button {
+    float: none;
 }
 
 #overlay_message_container #payment_form #button{
