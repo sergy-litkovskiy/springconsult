@@ -3,9 +3,7 @@ function PaymentRegistrationFormModule() {
         var emptyFieldMess      = 'Заполните поле',
             tooShortFieldMess   = 'Введите более 3 символов',
             $overlayContainer,
-            _saleProductsId,
-            _productDescription,
-            _productPrice;
+            _saleProductsId;
 
         var _init = function(){
             _hide();
@@ -45,7 +43,7 @@ function PaymentRegistrationFormModule() {
 
         var _onError = function(message){
             sb.UI.showError('<p class="error">' + message + '</p>'); 
-        }
+        };
 
 
         var _onSuccesPaymentRegistration = function(saleHistoryData){
@@ -53,11 +51,6 @@ function PaymentRegistrationFormModule() {
                 type : 'payment-registration-success',
                 data : saleHistoryData
             });            
-        }; 
-                
-        
-        var _renderProductsDescPrice = function() {  
-            $overlayContainer.find('form h1').after('<p><b>"' + _productDescription + '"<br/>' + _productPrice + ' грн.</b></p>');
         };
         
         
@@ -71,10 +64,8 @@ function PaymentRegistrationFormModule() {
 
         var _onPaymentRegistrationFormShow = function(saleProductData){
             _saleProductsId     = saleProductData.product_id;
-            _productDescription = saleProductData.product_description;
-            _productPrice       = saleProductData.product_price;
             $overlayContainer = sb.UI.showMessage({message : sb.$self().html()});
-            _renderProductsDescPrice();
+
             _assignValidator();
             _bindEvents();
         }; 
@@ -99,5 +90,5 @@ function PaymentRegistrationFormModule() {
             },
             destroy : function(){ }
         };
-    }
+    };
 }
