@@ -1,5 +1,4 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>js/spring/modules/sale_products_list.js"></script>
-<!--<script type="text/javascript" src="--><?php //echo base_url(); ?><!--js/spring/modules/payment_registration_form.js"></script>-->
 <div id="sale-page-content">
     <?php echo $content['text1']; ?>
     <?php if (isset($content['sale_products']) && count($content['sale_products'])) { ?>
@@ -13,6 +12,7 @@
                         </td>
                         <td class="products-price">
                             <h2><?php echo $product['price']; ?> грн.</h2>
+
                             <div class="payment-box">
                                 <form name="payment" action="https://www.interkassa.com/lib/payment.php" method="post"
                                       enctype="application/x-www-form-urlencoded" accept-charset="cp1251">
@@ -33,16 +33,21 @@
                         <td class="payment-form">
                             <form action='#' method='post' name='add_new' enctype='multipart/form-data'>
                                 <h1>Оформление заказа</h1>
+
                                 <p>
                                     <b><?php echo $product['title']; ?></b> -
                                     <?php echo $product['price']; ?> грн.
                                 </p>
-                                <p class="payment-title">Введите Ваше имя и E-mail для получения <br/>электронного продукта после успешной оплаты!</p>
+
+                                <p class="payment-title">Введите Ваше имя и E-mail для получения <br/>электронного
+                                    продукта после успешной оплаты!</p>
+
                                 <p class="payment-input">
                                     <input type="text" class='name' name='recipient_name' value="" placeholder="Имя"/>
                                 </p>
+
                                 <p class="payment-input">
-                                    <input type="text"class='email' name='email' value="" placeholder="Email"/>
+                                    <input type="text" class='email' name='email' value="" placeholder="Email"/>
                                 </p>
                                 <input id='button' class="add_payment_data" name='add' type='submit' value='Заказать'/>
                             </form>
@@ -68,13 +73,15 @@
                  data-layout="button_count" data-width="215" data-show-faces="false"></div>
         </li>
         <li>
-            <div class="twitter-like"><a href="https://twitter.com/share" class="twitter-share-button"
-                                         data-via="Litkovska" data-lang="ru">Твитнуть</a></div>
+            <div class="twitter-like">
+                <a href="https://twitter.com/share" class="twitter-share-button"
+                   data-via="Litkovska" data-lang="ru">Твитнуть</a></div>
         </li>
         <li>
-            <div id="odnoklasniki-like"><a class="odkl-klass-stat"
-                                           href="<?php echo "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?> "
-                                           onclick="ODKL.Share(this);return false;"><span class="custom_count">0</span></a>
+            <div id="odnoklasniki-like">
+                <a class="odkl-klass-stat"
+                   href="<?php echo "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?> "
+                   onclick="ODKL.Share(this);return false;"><span class="custom_count">0</span></a>
             </div>
         </li>
         <li>
@@ -88,5 +95,4 @@
 </div>
 <script>
     SPRING.Core.registerModule("sale-products-list", SaleProductsListModule());
-//    SPRING.Core.registerModule("payment_form_block", PaymentRegistrationFormModule());
 </script>  
