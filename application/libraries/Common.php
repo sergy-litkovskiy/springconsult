@@ -16,7 +16,7 @@ class Common
      *
      * @return array
      */
-    public function parseDateTimeAndGetDate($strDateTime)
+    public static function parseDateTimeAndGetDate($strDateTime)
     {
         $date = $time = null;
         list($date, $time) = explode(' ', $strDateTime);
@@ -31,7 +31,7 @@ class Common
      *
      * @return array
      */
-    public function getDate($strDateTime)
+    public static function getDate($strDateTime)
     {
         $date = self::parseDate($strDateTime);
         return $date[2] . '.' . $date[1] . '.' . $date[0];
@@ -44,7 +44,7 @@ class Common
      *
      * @return array
      */
-    public function getCutDate($strDateTime)
+    public static function getCutDate($strDateTime)
     {
         $date = self::getDate($strDateTime);
         return substr($date, 0,-2);
@@ -57,7 +57,7 @@ class Common
      *
      * @return array with date items or with 0
      */
-    public function parseDate($strDateTime)
+    public static function parseDate($strDateTime)
     {
         $matches = null;
         if (preg_match('!(\d{4})-(\d{2})-(\d{2})!', $strDateTime, $matches)) {
@@ -76,7 +76,7 @@ class Common
      *
      * @return array  with time items or with 0
      */
-    public function parseTime($strDateTime)
+    public static function parseTime($strDateTime)
     {
         $matches = null;
         if (preg_match('!(\d{2})\:(\d{2})\:(\d{2})!', $strDateTime, $matches)) {
@@ -158,4 +158,3 @@ class Common
         error_log("$dateString\t$msg\n", 3, $_SERVER["DOCUMENT_ROOT"].'/application/logs/'.$debugLogFilename);
     }
 }
-?>
