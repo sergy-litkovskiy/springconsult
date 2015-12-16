@@ -1,3 +1,4 @@
 .idea/
+./application/tmp/
 *.DS_Store
 *~
