@@ -3,7 +3,7 @@
  * @author Litkovskiy
  * @copyright 2010
  */
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Search extends CI_Controller
 {
@@ -26,7 +26,7 @@ class Search extends CI_Controller
 
         try{
             Common::assertTrue($searchText, 'Вы не ввели посковое предписание!');
-            $searchText = xss_clean(strip_image_tags(trim($_REQUEST['search_text'])));
+            $searchText = $this->security->xss_clean(strip_image_tags(trim($_REQUEST['search_text'])));
 
             $this->data_menu      = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr)-1]);
             $contentArr           = $this->search_model->getSearchContent($searchText);

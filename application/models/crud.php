@@ -5,8 +5,7 @@
  * @copyright 2010
  * model for all objects of site
  */
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Crud extends CI_Model {
 	

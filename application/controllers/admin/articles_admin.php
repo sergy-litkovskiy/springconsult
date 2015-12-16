@@ -3,7 +3,7 @@
  * @author Litkovskiy
  * @copyright 2012
  */
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Articles_admin extends CI_Controller
 {
@@ -28,7 +28,8 @@ class Articles_admin extends CI_Controller
         , 'meta_keywords'    => null
         , 'is_sent_mail'     => null
         , 'date'             => date('Y-m-d')
-        , 'time'             => date('H:i:s'));
+        , 'time'             => date('H:i:s')
+        );
 
         $this->result  = array("success" => null, "message" => null, "data" => null);
         $this->urlArr  = explode('/', $_SERVER['REQUEST_URI']);
