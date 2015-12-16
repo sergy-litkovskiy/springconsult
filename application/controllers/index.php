@@ -28,7 +28,6 @@ class Index extends CI_Controller
        $this->cloudsTag         = array('tags' => $this->_getCloudsTag()); 
     }
 
-
     
     public function index($currentPage = null)
     {
