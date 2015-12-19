@@ -1,0 +1,1 @@
+{"nfs":{"/var/www/springconsult.loc":{"nfs":{"mount_options":["dmode=777","fmode=777"]},"guestpath":"/var/www/springconsult.loc","hostpath":"/Users/torr/projects/springconsult","disabled":false,"type":"nfs","map_uid":501,"map_gid":20,"nfs_udp":true,"nfs_version":3,"uuid":"3667316172"}}}
