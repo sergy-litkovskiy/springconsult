@@ -38,5 +38,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         ,'num_tag_open'     => '<span class="pager">'
         ,'num_tag_close'    => '</span>'
         ,'use_page_numbers' => TRUE
+        ,'first_url'        => base_url()
      );
 }
