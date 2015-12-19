@@ -3,7 +3,7 @@
  * @author Litkovskiy
  * @copyright 2010
  */
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Index_admin extends CI_Controller
 {

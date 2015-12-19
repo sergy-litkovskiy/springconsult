@@ -75,8 +75,8 @@ class Assign_model extends Crud
 
     protected function _delAssignedFromTableByParams($assignsArr, $oldAssignSourceId)
     {
-        $this ->db->where($assignsArr['assignFieldName'], $assignsArr['assignId']);
-        $this ->db->where($assignsArr['sourceFieldName'], $oldAssignSourceId);
+        $this->db->where($assignsArr['assignFieldName'], $assignsArr['assignId']);
+        $this->db->where($assignsArr['sourceFieldName'], $oldAssignSourceId);
         if(!$this->db->delete($assignsArr['table']))
         {
             return false;
