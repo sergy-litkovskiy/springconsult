@@ -60,15 +60,15 @@
                 <div class="logo_col_left"></div>
                     <?php echo $menu;?>
                     <?php echo $cloud_tag;?>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- left green 180x150 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:180px;height:150px"
-     data-ad-client="ca-pub-3087152553947310"
-     data-ad-slot="1724133588"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- left green 180x150 -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:180px;height:150px"
+                         data-ad-client="ca-pub-3087152553947310"
+                         data-ad-slot="1724133588"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
             </div>
             <div class="content_block_right">
