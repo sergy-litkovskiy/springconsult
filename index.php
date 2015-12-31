@@ -282,6 +282,8 @@ switch (ENVIRONMENT)
 
 	define('VIEWPATH', $view_folder);
 
+	//TODO: set timezone by another way
+	date_default_timezone_set('Europe/Kiev');
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE

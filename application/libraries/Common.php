@@ -9,6 +9,17 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Common
 {
+    public static function getDateTime($format = null, $time = 'now')
+    {
+        $dateTime = new DateTime($time);
+
+        if ($format) {
+            return $dateTime->format($format);
+        }
+
+        return $dateTime;
+    }
+
     /**
      * Call parseDate() and return array date in format (date2.date1.date0)
      *
@@ -140,8 +151,9 @@ class Common
             $msg = var_export($msg, true);
         }
 
-        $dateString       = date('Y-m-d H:i:s');
-        $debugLogFilename = 'debug_log_'.date('Y-m-d').'.txt';
+        $date = new DateTime();
+        $dateString = $date->format('Y-m-d H:i:s');
+        $debugLogFilename = 'debug_log_'.$date->format('Y-m-d').'.txt';
         error_log("$dateString\t$msg\n", 3, __DIR__ . '/../logs/'.$debugLogFilename);
     }
     
@@ -152,8 +164,10 @@ class Common
             $msg = var_export($msg, true);
         }
 
-        $dateString       = date('Y-m-d H:i:s');
-        $debugLogFilename = 'debug_log_'.date('Y-m-d').'.txt';
+        $date = new DateTime();
+        $dateString = $date->format('Y-m-d H:i:s');
+
+        $debugLogFilename = 'debug_log_'.$date->format('Y-m-d').'.txt';
 
         error_log("$dateString\t$msg\n", 3, $_SERVER["DOCUMENT_ROOT"].'/application/logs/'.$debugLogFilename);
     }
