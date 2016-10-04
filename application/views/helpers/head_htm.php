@@ -13,6 +13,9 @@
 <meta content="no-cache" http-equiv="Cache-Control"/>
 <meta property="og:title" content="<?php echo @$titleFB;?>"/>
 <meta property="og:image" content="<?php echo base_url()."img/upload_img/".@$imgFB;?>"/>
+
+<meta name="interkassa-verification" content="ff9961ee5360677d66c3c06bb4f244bf" />
+
 <title><?php echo $title;?></title>
 
 <script  type="text/javascript" src="<?php echo base_url();?>js/jquery/jquery-1.8.3-min.js"></script>
