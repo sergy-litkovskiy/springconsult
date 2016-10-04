@@ -320,7 +320,7 @@ class Index_admin extends CI_Controller
             $recipientsSpecMailerArr = $this->landing_model->getLandingRegistredRecipients($data['landing_page_id']);
             Common::assertTrue(count($recipientsSpecMailerArr), 'Не найден ни один подписчик для отправки');
 
-            $data['created_at']  = date('Y-m-d H:i:s');
+            $data['created_at']  = Common::getDateTime('Y-m-d H:i:s');
             $specMailerHistoryId = $this->index_model->addInTable($data, 'spec_mailer_history');
             Common::assertTrue($specMailerHistoryId, 'Ошибка! Информация об отправке писем по спецрассылке НЕ вставлена в БД');
 
@@ -338,7 +338,7 @@ class Index_admin extends CI_Controller
 
             $errLogData['resource_id'] = ERROR_SRC_SPEC_MAILER;
             $errLogData['text']        = $e->getMessage() . " - Название статьи: " . $_REQUEST['articleTitle'];
-            $errLogData['created_at']  = date('Y-m-d H:i:s');
+            $errLogData['created_at']  = Common::getDateTime('Y-m-d H:i:s');
             $this->index_model->addInTable($errLogData, 'error_log');
         }
 
@@ -367,7 +367,7 @@ class Index_admin extends CI_Controller
             } catch (Exception $e) {
                 $errLogData['resource_id'] = ERROR_SRC_SPEC_MAILER;
                 $errLogData['text']        = $e->getMessage() . " - Название статьи: " . $data['articles_title'];
-                $errLogData['created_at']  = date('Y-m-d H:i:s');
+                $errLogData['created_at']  = Common::getDateTime('Y-m-d H:i:s');
                 $this->index_model->addInTable($errLogData, 'error_log');
             }
         }

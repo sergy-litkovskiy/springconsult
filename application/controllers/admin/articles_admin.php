@@ -9,6 +9,7 @@ class Articles_admin extends CI_Controller
 {
     public $emptyArticleArr = array();
     public $message;
+    private $currentDate;
 
     public function __construct()
     {
@@ -27,8 +28,8 @@ class Articles_admin extends CI_Controller
         , 'meta_description' => null
         , 'meta_keywords'    => null
         , 'is_sent_mail'     => null
-        , 'date'             => date('Y-m-d')
-        , 'time'             => date('H:i:s')
+        , 'date'             => Common::getDateTime('Y-m-d')
+        , 'time'             => Common::getDateTime('H:i:s')
         );
 
         $this->result  = array("success" => null, "message" => null, "data" => null);
@@ -192,8 +193,8 @@ class Articles_admin extends CI_Controller
         , 'title'                       => $request['title']
         , 'slug'                        => $request['slug']
         , 'text'                        => $request['text']
-        , 'date'                        => isset($request['date']) ? $request['date'] : date('Y-m-d')
-        , 'time'                        => isset($request['time']) ? $request['time'] : date('H:i:s'));
+        , 'date'                        => isset($request['date']) ? $request['date'] : Common::getDateTime('Y-m-d')
+        , 'time'                        => isset($request['time']) ? $request['time'] : Common::getDateTime('H:i:s'));
     }
 
 
@@ -222,7 +223,7 @@ class Articles_admin extends CI_Controller
 
             $errLogData['resource_id'] = ERROR_SRC_ARTICLE_MAILER;
             $errLogData['text']        = $e->getMessage() . " - Название статьи: " . $articleDetail['title'];
-            $errLogData['created_at']  = date('Y-m-d H:i:s');
+            $errLogData['created_at']  = Common::getDateTime('Y-m-d H:i:s');
             $this->index_model->addInTable($errLogData, 'error_log');
         }
 
