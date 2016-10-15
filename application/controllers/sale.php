@@ -53,6 +53,94 @@ class Sale extends CI_Controller
         $this->load->view('layout_sale', $data);
     }
 
+    public function payment_response()
+    {
+        $responseString = trim(file_get_contents('php://input'));
+        $urlDecodedString = urldecode($responseString);
+        $jsonDecodedString = json_decode(json_encode($responseString), true);
+Common::debugLogProd('-----responseString-----');
+Common::debugLogProd($responseString);
+Common::debugLogProd('-----urlDecodedString-----');
+Common::debugLogProd($urlDecodedString);
+Common::debugLogProd('-----jsonDecodedString-----');
+Common::debugLogProd($jsonDecodedString);
+//Common::debugLogProd($xml);
+//Common::debugLogProd($xmlResult);
+return json_encode('OK');
+//var_dump($_REQUEST);
+//var_dump($xml);
+        //convert the XML result into array
+
+//var_dump($xmlResult);exit;
+    }
+
+//    public function payment_send()
+//    {
+//        $items = array();
+//
+//        $recipientId = trim(strip_tags($_REQUEST['r-id']));
+//        $saleHistoryId = trim(strip_tags($_REQUEST['s-h-id']));
+//        $productId = trim(strip_tags($_REQUEST['product-id']));
+//        $price = trim(strip_tags($_REQUEST['product-price']));
+//        $description = trim(strip_tags($_REQUEST['product-detail']));
+//
+//        $order = sprintf('%s|%s|%s', $productId, $recipientId, $saleHistoryId);
+//
+//        $data = array(
+//            'amt' => $price,
+//            'ccy' => PRIVAT_PAYMENT_CURRENCY,
+//            'merchant' => PRIVAT_MERCHANT_ID,
+//            'order' => $order,
+//            'details' => $description,
+//            'ext_details' => '',
+//            'pay_way' => 'privat24',
+//            'return_url' => '',
+//            'server_url' => '',
+//            'state' => 'OK',
+//        );
+//
+//        foreach ($data as $key => $value) {
+//            $items[] = $key . '=' . $value;
+//        }
+//
+//        $fields = implode ('&', $items);
+//
+//        $curlConnection = curl_init(PRIVAT_PAYMENT_HTTP_REQUEST_URI);
+//
+//        curl_setopt($curlConnection, CURLOPT_CONNECTTIMEOUT, 30);
+//        curl_setopt($curlConnection, CURLOPT_HEADER, true);
+//        curl_setopt($curlConnection, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
+//        curl_setopt($curlConnection, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+//        curl_setopt($curlConnection, CURLOPT_RETURNTRANSFER, true);
+//        curl_setopt($curlConnection, CURLOPT_SSL_VERIFYPEER, false);
+//        curl_setopt($curlConnection, CURLOPT_FOLLOWLOCATION, 1);
+//        curl_setopt($curlConnection, CURLOPT_POSTFIELDS, $fields);
+//
+//        $result = curl_exec($curlConnection);
+
+//        $headers = substr($result, 0, $httpCode["header_size"]); //split out header
+//        $redirect = curl_getinfo($curlConnection)['redirect_url'];
+//
+//        header('HTTP/1.1 307 Temporary Redirect');
+
+//        curl_close($curlConnection);
+//
+//        header("Location: ".PRIVAT_PAYMENT_HTTP_REQUEST_URI);
+//<form action="https://api.privatbank.ua/p24api/ishop" method="POST">
+//<input type="hidden" name="amt" value="'.$ini_many_params["price_vip"].'"/>
+//<input type="hidden" name="ccy" value="UAH" />
+//<input type="hidden" name="merchant" value="'.$ini_many_params["id_merchant_privat"].'" />
+//<input type="hidden" name="order" value="'.$id_vip.'" />
+//<input type="hidden" name="details" value="Oplata VIP '.$id_vip.'" />
+//<input type="hidden" name="ext_details" value="Oplata VIP  '.$id_vip.'" />
+//<input type="hidden" name="pay_way" value="privat24" />
+//<input type="hidden" name="return_url" value="http://сайт?id='.$id_vip.'" />
+//<input type="hidden" name="server_url" value="http://сайт/validation.php" />
+//<input type="hidden" name="state" value="ок" />
+//<input type="submit" value="Оплатить" />
+//</form>
+//var_dump($data);exit;
+//    }
 
     public function ajax_payment_registration()
     {
@@ -79,9 +167,9 @@ class Sale extends CI_Controller
 
             $recipient                          = $this->index_model->getRecipientData($recipientDataArr);
             $saleHistoryArr['recipients_id']    = $recipient['id'];
-            $saleHistoryArr['payment_state']    = '';
+            $saleHistoryArr['payment_state']    = NULL;
             $saleHistoryArr['payment_trans_id'] = '';
-            $saleHistoryArr['payment_system']   = '';
+            $saleHistoryArr['payment_message']   = '';
 
             $saleHistoryId = $this->sale_model->addInTable($saleHistoryArr, 'sale_history');
             Common::assertTrue($saleHistoryId, "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>");
@@ -129,7 +217,7 @@ class Sale extends CI_Controller
 
     private function _makePaymentDataFromRequest()
     {
-        $paymentData['payment_system']   = trim(strip_tags($_REQUEST['ik_paysystem_alias']));
+        $paymentData['payment_message']   = trim(strip_tags($_REQUEST['ik_paysystem_alias']));
         $paymentData['payment_state']    = trim(strip_tags($_REQUEST['ik_payment_state']));
         $paymentData['payment_trans_id'] = trim(strip_tags($_REQUEST['ik_trans_id']));
         $paymentData['payment_date']     = date('Y-m-d H:m:s', trim(strip_tags($_REQUEST['ik_payment_timestamp'])));

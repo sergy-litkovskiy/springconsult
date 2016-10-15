@@ -114,18 +114,29 @@ define('LANGUAGE_ID_RU', '1');
 
 define('STATUS_ON', '1');
 define('STATUS_OFF', '0');
+
 define('ERROR_SRC_SPEC_MAILER', '1');
 define('ERROR_SRC_ARTICLE_MAILER', '2');
 define('ERROR_PAYMENT_REGISTRATION', '3');
 define('ERROR_PAYMENT_CALLBACK', '4');
+
 define('ALLOWED_UPLOAD_SIZE', 2111111);
 define('ALLOWED_FORMAT', 'txt,doc,ppt,pps,pdf,docx,pptx,ppsx,pdfx,xls,xlsx,jpeg,jpg,gif,png,flw,swt');
+
 define('ADMIN_EMAIL', 'spring@springconsult.com.ua');
 define('SUPERADMIN_EMAIL', 'avdik77@mail.ru');
 define('SITE_TITLE', 'Spring Consulting');
+
 define('SALESTATUSID', '813A6CE48D37');
-//define('SALESHOPID', 'D13EFD96-A73E-4638-43CD-813A6CE48D37');
 define('SALESHOPID', '531eca23bf4efc7c57cc6988');
+
+define('PRIVAT_MERCHANT_ID', '122459');
+define('PRIVAT_MERCHANT_PASS', '46h5u2Kvqz454049il6M7u7fZ5fPa1fi');
+define('PRIVAT_PAYMENT_HTTP_REQUEST_URI', 'https://api.privatbank.ua/p24api/ishop');
+define('PRIVAT_PAYMENT_XML_REQUEST_URI', 'https://api.privatbank.ua/p24api/pay_pb');
+define('PRIVAT_XML_CHECK_PAY_URI', 'https://api.privatbank.ua/p24api/check_pay');
+define('PRIVAT_PAYMENT_CURRENCY', 'UAH');
+
 define('UNISENDERAPIKEY', '581woumrc4iedxpdtsahhsy8hxkfew5q8xpp8tyy');
 define('UNISENDERMAINLISTID', 1237963);
 define('UNISENDERTESTLISTID', 1238223);

@@ -3,7 +3,7 @@ function SaleProductsListModule() {
         var emptyFieldMess = 'Заполните поле',
             tooShortFieldMess = 'Введите более 3 символов',
             _paymentContainer,
-            _saleProductsId,
+            _paymentRegistrationForm,
             _paymentForm;
 
         var _init = function () {
@@ -13,7 +13,7 @@ function SaleProductsListModule() {
 
 
         var _assignValidator = function () {
-            _paymentContainer.find('.sale-block-payment form').validate({
+            _paymentRegistrationForm.validate({
                 rules   : {
                     recipient_name: {
                         required : true,
@@ -39,13 +39,15 @@ function SaleProductsListModule() {
 
 
         var _onError = function(message){
-            _paymentContainer.find('.sale-block-payment form input[type=submit]').prev('.error').remove();
-            _paymentContainer.find('.sale-block-payment form input[type=submit]').before('<p class="error">' + message + '</p>');
+            _paymentRegistrationForm.find('input[type=submit]').prev('.error').remove();
+            _paymentRegistrationForm.find('input[type=submit]').before('<p class="error">' + message + '</p>');
         };
 
 
         var _onPaymentRegistrationSuccess = function (saleHistoryData) {
-            _paymentForm.find('input[name=ik_baggage_fields]').val(saleHistoryData.recipients_id + '|' + saleHistoryData.sale_history_id);
+            _paymentForm = _paymentContainer.find('form[name=payment]');
+            var _order = saleHistoryData.sale_history_id+'|'+saleHistoryData.recipients_id+'|'+_paymentForm.data('product-id');
+            _paymentForm.find('input[name=order]').val(_order);
             _paymentForm.submit();
         };
 
@@ -54,9 +56,9 @@ function SaleProductsListModule() {
             e.preventDefault();
 
             var _formData = {
-                name            : _paymentContainer.find('.sale-block-payment form input[name=recipient_name]').val(),
-                email           : _paymentContainer.find('.sale-block-payment form input[name=email]').val(),
-                sale_products_id: _saleProductsId
+                name            : _paymentRegistrationForm.find('input[name=recipient_name]').val(),
+                email           : _paymentRegistrationForm.find('input[name=email]').val(),
+                sale_products_id: _paymentRegistrationForm.find('input[name=product-id]').val()
             };
 
             sb.Payment.registration(_formData, _onPaymentRegistrationSuccess, _onError);
@@ -64,13 +66,11 @@ function SaleProductsListModule() {
 
 
         var _bindPaymentEvents = function () {
-            _paymentContainer.find('.sale-block-payment input[type=submit]').on('click', _registrationProcess);
+            _paymentRegistrationForm.find('input[type=submit]').on('click', _registrationProcess);
         };
 
 
         var _tryRegistrationProcess = function () {
-            _saleProductsId = _paymentForm.find('input[name=ik_payment_id]').val();
-
             _paymentContainer.find('.sale-block-description').fadeOut('fast');
             _paymentContainer.find('.sale-block-payment').fadeIn('fast');
 
@@ -82,7 +82,7 @@ function SaleProductsListModule() {
         var _onClickPaymentButton = function (e) {
             e.preventDefault();
             _paymentContainer = $(this).parent().parent().parent().parent().parent();
-            _paymentForm = $(this).parent();
+            _paymentRegistrationForm = _paymentContainer.find('.sale-block-payment form');
             _tryRegistrationProcess();
         };
 

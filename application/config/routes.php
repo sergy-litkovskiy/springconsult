@@ -157,6 +157,7 @@ $route['ajax_get_landing_mp3']                              = 'landing/ajax_get_
 $route['landing/(:any)']                                    = 'landing/show_landing_page/$1';
 $route['landing_subscribe']                                 = 'landing/ajax_landing_subscribe';
 $route['landing_articles/(:any)']                           = 'landing/show_landing_article/$1';
+$route['payment/response']                                  = 'sale/payment_response';
 $route['ajax_payment_registration']                         = 'sale/ajax_payment_registration';
 $route['sale/(:any)']                                       = 'sale/sale_show/$1';
 

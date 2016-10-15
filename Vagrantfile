@@ -6,7 +6,7 @@ Vagrant::configure("2") do |config|
   config.vm.define "spring", autostart: false do |spring|
     spring.vm.provider :virtualbox do |vb|
       # Set configuration options for the VirtualBox image.
-      vb.customize ["modifyvm", :id, "--memory", "2048", "--cpus", "2", "--ioapic", "on"]
+      vb.customize ["modifyvm", :id, "--memory", "4096", "--cpus", "2", "--ioapic", "on"]
     end
     spring.vm.box = "ubuntu/trusty64"
     spring.vm.hostname = "springconsult.loc"

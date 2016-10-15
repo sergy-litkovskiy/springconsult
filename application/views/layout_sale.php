@@ -56,7 +56,7 @@
                 </div>
                 <div class="content_block_bottom">
                     <p id="copyright">&copy; Copyright Spring consulting</p>
-                    <a id="author" href="#">Design &amp; programming by Sergy Litkovskiy</a>
+<!--                    <a id="author" href="#">Design &amp; programming by Sergy Litkovskiy</a>-->
                 </div>
             </div>
         </div>

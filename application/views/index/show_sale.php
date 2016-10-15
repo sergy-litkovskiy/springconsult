@@ -14,24 +14,36 @@
                             <h2><?php echo $product['price']; ?> грн.</h2>
 
                             <div class="payment-box">
-                                <form name="payment" action="https://www.interkassa.com/lib/payment.php" method="post"
-                                      enctype="application/x-www-form-urlencoded" accept-charset="cp1251">
-                                    <input type="hidden" name="ik_shop_id" value="<?php echo SALESHOPID; ?>">
-                                    <input type="hidden" name="ik_payment_amount"
-                                           value="<?php echo $product['price']; ?>.0">
-                                    <input type="hidden" name="ik_payment_id" value="<?php echo $product['id']; ?>">
-                                    <input type="hidden" name="ik_payment_desc"
-                                           value="<?php echo $content['title'] . ' - ' . $product['title']; ?>">
-                                    <input type="hidden" name="ik_baggage_fields" value="">
-                                    <input class="button-payment" type="submit" name="process" value="Заказать">
+                                <form
+                                    name="payment"
+                                    method="POST"
+                                    data-product-id="<?php echo $product['id']; ?>"
+                                    action="<?php echo PRIVAT_PAYMENT_HTTP_REQUEST_URI ?>"
+                                >
+                                    <input type="hidden" name="amt" value="<?php echo $product['price']; ?>" />
+<!--                                    <input type="hidden" name="amt" value="10" />-->
+                                    <input type="hidden" name="ccy" value="<?php echo PRIVAT_PAYMENT_CURRENCY; ?>" />
+                                    <input type="hidden" name="merchant" value="<?php echo PRIVAT_MERCHANT_ID ?>" />
+                                    <input type="hidden" name="order" value="" />
+                                    <input type="hidden" name="details" value="<?php echo $product['title']; ?>" />
+                                    <input type="hidden" name="ext_details" value="" />
+                                    <input type="hidden" name="pay_way" value="privat24" />
+                                    <input type="hidden" name="return_url" value="<?php echo base_url(); ?>sale/<?php echo $content['slug']; ?>" />
+                                    <input type="hidden" name="server_url" value="<?php echo base_url(); ?>payment/response" />
                                 </form>
+                                <button class="button-payment">Заказать</button>
                             </div>
                         </td>
                     </tr>
                     <tr class="sale-block-payment">
                         <td></td>
                         <td class="payment-form">
-                            <form action='#' method='post' name='add_new' enctype='multipart/form-data'>
+                            <form
+                                action='<?php echo base_url(); ?>payment/send'
+                                method='post'
+                                name='add_new'
+                                enctype='multipart/form-data'
+                            >
                                 <h1>Оформление заказа</h1>
 
                                 <p>
@@ -49,7 +61,9 @@
                                 <p class="payment-input">
                                     <input type="text" class='email' name='email' value="" placeholder="Email"/>
                                 </p>
-                                <input id='button' class="add_payment_data" name='add' type='submit' value='Заказать'/>
+                                <input type="hidden" name='product-id' value=""/>
+                                <input id='button' class="add_payment_data" name='add' type='submit' value='Оплатить'/>
+                                <img class="privat-logo" src="<?php echo base_url(); ?>img/img_main/api_logo_privat.jpg" alt="Privat24"/>
                             </form>
                             <div id="loader" class="loader" style="display:none;">
                                 <img id="img_loader" src="<?php echo base_url(); ?>img/img_main/ajax-loader.gif"

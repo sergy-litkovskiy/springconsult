@@ -429,7 +429,7 @@ class Index_model extends Crud
         $result = $this->db->query(" UPDATE 
                                         sale_history 
                                     SET 
-                                        payment_system = '".$paymentData['payment_system']."',
+                                        payment_message = '".$paymentData['payment_message']."',
                                         payment_state = '".$paymentData['payment_state']."',
                                         payment_trans_id = '".$paymentData['payment_trans_id']."',
                                         payment_date = '".$paymentData['payment_date']."'
