@@ -63,7 +63,9 @@
                                 </p>
                                 <input type="hidden" name='product-id' value=""/>
                                 <p>Cервис online заказа временно недоступен.</p>
-                                <p>Для заказа товара обращайтесь по тел. +38097 916-24-56 или эл. почте spring@springconsult.com.ua</p>
+                                <p>Для заказа товара обращайтесь</p>
+                                <p>по тел. +38097 916-24-56</p>
+                                <p>или эл. почте spring@springconsult.com.ua</p>
 <!--                                <input id='button' class="add_payment_data" name='add' type='submit' value='Оплатить'/>-->
 <!--                                <img class="privat-logo" src="--><?php //echo base_url(); ?><!--img/img_main/api_logo_privat.jpg" alt="Privat24"/>-->
                             </form>
