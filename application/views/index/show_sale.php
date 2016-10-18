@@ -62,8 +62,10 @@
                                     <input type="text" class='email' name='email' value="" placeholder="Email"/>
                                 </p>
                                 <input type="hidden" name='product-id' value=""/>
-                                <input id='button' class="add_payment_data" name='add' type='submit' value='Оплатить'/>
-                                <img class="privat-logo" src="<?php echo base_url(); ?>img/img_main/api_logo_privat.jpg" alt="Privat24"/>
+                                <p>Cервис online заказа временно недоступен.</p>
+                                <p>Для заказа товара обращайтесь по тел. +38097 916-24-56 или эл. почте spring@springconsult.com.ua</p>
+<!--                                <input id='button' class="add_payment_data" name='add' type='submit' value='Оплатить'/>-->
+<!--                                <img class="privat-logo" src="--><?php //echo base_url(); ?><!--img/img_main/api_logo_privat.jpg" alt="Privat24"/>-->
                             </form>
                             <div id="loader" class="loader" style="display:none;">
                                 <img id="img_loader" src="<?php echo base_url(); ?>img/img_main/ajax-loader.gif"

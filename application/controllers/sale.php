@@ -55,15 +55,10 @@ class Sale extends CI_Controller
 
     public function payment_response()
     {
-        $responseString = trim(file_get_contents('php://input'));
-        $urlDecodedString = urldecode($responseString);
-        $jsonDecodedString = json_decode(json_encode($responseString), true);
+        $responseString = urldecode(trim(file_get_contents('php://input')));
 Common::debugLogProd('-----responseString-----');
 Common::debugLogProd($responseString);
-Common::debugLogProd('-----urlDecodedString-----');
-Common::debugLogProd($urlDecodedString);
-Common::debugLogProd('-----jsonDecodedString-----');
-Common::debugLogProd($jsonDecodedString);
+
 //Common::debugLogProd($xml);
 //Common::debugLogProd($xmlResult);
 return json_encode('OK');

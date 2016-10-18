@@ -137,6 +137,9 @@ define('PRIVAT_PAYMENT_XML_REQUEST_URI', 'https://api.privatbank.ua/p24api/pay_p
 define('PRIVAT_XML_CHECK_PAY_URI', 'https://api.privatbank.ua/p24api/check_pay');
 define('PRIVAT_PAYMENT_CURRENCY', 'UAH');
 
+define('LIQPAY_PUBLIC_ID', 'i5887278126');
+define('LIQPAY_PRIVAT_ID', 'PMODzlRD5zLvvIDHoNuojcYiTYc');
+
 define('UNISENDERAPIKEY', '581woumrc4iedxpdtsahhsy8hxkfew5q8xpp8tyy');
 define('UNISENDERMAINLISTID', 1237963);
 define('UNISENDERTESTLISTID', 1238223);
