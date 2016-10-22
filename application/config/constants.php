@@ -139,6 +139,7 @@ define('PRIVAT_PAYMENT_CURRENCY', 'UAH');
 
 define('LIQPAY_PUBLIC_ID', 'i5887278126');
 define('LIQPAY_PRIVAT_ID', 'PMODzlRD5zLvvIDHoNuojcYiTYc');
+define('LIQPAY_HTTP_REQUEST_URI', 'https://www.liqpay.com/api/3/checkout');
 
 define('UNISENDERAPIKEY', '581woumrc4iedxpdtsahhsy8hxkfew5q8xpp8tyy');
 define('UNISENDERMAINLISTID', 1237963);

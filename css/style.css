@@ -1677,7 +1677,6 @@ ul.tagit input[type="text"] {
     height: 192px
 }
 
-img.privat-logo {
-    height: 30px;
-    vertical-align: bottom;
+.add_payment_data {
+    border: none;
 }

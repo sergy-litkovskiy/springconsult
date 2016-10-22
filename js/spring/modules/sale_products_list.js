@@ -11,7 +11,6 @@ function SaleProductsListModule() {
             sb.$self().find('.sale-block-payment form input[type=button]').prev('.error').remove();
         };
 
-
         var _assignValidator = function () {
             _paymentRegistrationForm.validate({
                 rules   : {
@@ -46,8 +45,10 @@ function SaleProductsListModule() {
 
         var _onPaymentRegistrationSuccess = function (saleHistoryData) {
             _paymentForm = _paymentContainer.find('form[name=payment]');
-            var _order = saleHistoryData.sale_history_id+'|'+saleHistoryData.recipients_id+'|'+_paymentForm.data('product-id');
-            _paymentForm.find('input[name=order]').val(_order);
+
+            _paymentForm.find('input[name=data]').val(saleHistoryData.data);
+            _paymentForm.find('input[name=signature]').val(saleHistoryData.signature);
+
             _paymentForm.submit();
         };
 
@@ -56,9 +57,12 @@ function SaleProductsListModule() {
             e.preventDefault();
 
             var _formData = {
-                name            : _paymentRegistrationForm.find('input[name=recipient_name]').val(),
-                email           : _paymentRegistrationForm.find('input[name=email]').val(),
-                sale_products_id: _paymentRegistrationForm.find('input[name=product-id]').val()
+                name       : _paymentRegistrationForm.find('input[name=recipient_name]').val(),
+                email      : _paymentRegistrationForm.find('input[name=email]').val(),
+                product_id : _paymentRegistrationForm.find('input[name=product-id]').val(),
+                price      : _paymentRegistrationForm.find('input[name=price]').val(),
+                description: _paymentRegistrationForm.find('input[name=description]').val(),
+                slug       : _paymentRegistrationForm.find('input[name=slug]').val()
             };
 
             sb.Payment.registration(_formData, _onPaymentRegistrationSuccess, _onError);
@@ -66,7 +70,7 @@ function SaleProductsListModule() {
 
 
         var _bindPaymentEvents = function () {
-            _paymentRegistrationForm.find('input[type=submit]').on('click', _registrationProcess);
+            _paymentRegistrationForm.find('input.add_payment_data').on('click', _registrationProcess);
         };
 
 

@@ -17,19 +17,10 @@
                                 <form
                                     name="payment"
                                     method="POST"
-                                    data-product-id="<?php echo $product['id']; ?>"
-                                    action="<?php echo PRIVAT_PAYMENT_HTTP_REQUEST_URI ?>"
-                                >
-                                    <input type="hidden" name="amt" value="<?php echo $product['price']; ?>" />
-<!--                                    <input type="hidden" name="amt" value="10" />-->
-                                    <input type="hidden" name="ccy" value="<?php echo PRIVAT_PAYMENT_CURRENCY; ?>" />
-                                    <input type="hidden" name="merchant" value="<?php echo PRIVAT_MERCHANT_ID ?>" />
-                                    <input type="hidden" name="order" value="" />
-                                    <input type="hidden" name="details" value="<?php echo $product['title']; ?>" />
-                                    <input type="hidden" name="ext_details" value="" />
-                                    <input type="hidden" name="pay_way" value="privat24" />
-                                    <input type="hidden" name="return_url" value="<?php echo base_url(); ?>sale/<?php echo $content['slug']; ?>" />
-                                    <input type="hidden" name="server_url" value="<?php echo base_url(); ?>payment/response" />
+                                    action="<?php echo LIQPAY_HTTP_REQUEST_URI; ?>"
+                                      accept-charset="utf-8">
+                                    <input type="hidden" name="data" value=""/>
+                                    <input type="hidden" name="signature" value=""/>
                                 </form>
                                 <button class="button-payment">Заказать</button>
                             </div>
@@ -52,7 +43,7 @@
                                 </p>
 
                                 <p class="payment-title">Введите Ваше имя и E-mail для получения <br/>электронного
-                                    продукта после успешной оплаты!</p>
+                                    продукта или подтверждения оплаты</p>
 
                                 <p class="payment-input">
                                     <input type="text" class='name' name='recipient_name' value="" placeholder="Имя"/>
@@ -61,13 +52,11 @@
                                 <p class="payment-input">
                                     <input type="text" class='email' name='email' value="" placeholder="Email"/>
                                 </p>
-                                <input type="hidden" name='product-id' value=""/>
-                                <p>Cервис online заказа временно недоступен.</p>
-                                <p>Для заказа товара обращайтесь</p>
-                                <p>по тел. +38097 916-24-56</p>
-                                <p>или эл. почте spring@springconsult.com.ua</p>
-<!--                                <input id='button' class="add_payment_data" name='add' type='submit' value='Оплатить'/>-->
-<!--                                <img class="privat-logo" src="--><?php //echo base_url(); ?><!--img/img_main/api_logo_privat.jpg" alt="Privat24"/>-->
+                                <input type="hidden" name='product-id' value="<?php echo $product['id']; ?>"/>
+                                <input type="hidden" name="price" value="<?php echo $product['price']; ?>"/>
+                                <input type="hidden" name="description" value="<?php echo $product['title']; ?>" />
+                                <input type="hidden" name="slug" value="<?php echo $content['slug']; ?>" />
+                                <input type="image" class="add_payment_data" src="//static.liqpay.com/buttons/p1ru.radius.png"/>
                             </form>
                             <div id="loader" class="loader" style="display:none;">
                                 <img id="img_loader" src="<?php echo base_url(); ?>img/img_main/ajax-loader.gif"
