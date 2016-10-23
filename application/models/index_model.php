@@ -473,6 +473,7 @@ class Index_model extends Crud
             Common::assertTrue($recipientDataArr['id'], "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>");
             $recipientDataArr['name']           = $data['name'];
             $recipientDataArr['email']          = $data['email'];
+            $recipientDataArr['phone']          = $data['phone'];
             $recipientDataArr['confirmed']	    = $data['confirmed'] == STATUS_ON ? STATUS_ON : STATUS_OFF;
             $recipientDataArr['unsubscribed']   = 0;
 

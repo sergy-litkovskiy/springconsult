@@ -47,6 +47,18 @@ class Mailer_model extends Crud
         return $this->_sendAdminEmailMessage($message);
     }
 
+    public function sendAdminSaleEmailMessage($data)
+    {
+        $message = "Type of message: 'Message from sale page'<br/>\r\n
+                    Date: ".date('Y-m-d')." / Time ".date('H:i:s')."<br/>\r\n
+                    Product name: ".@$data['description']."<br/>\r\n
+                    Product price: ".@$data['price']."<br/>\r\n
+                    Buyer name: ".$data['name']."<br/>\r\n
+                    Buyer email: ".$data['email']."<br/>\r\n
+                    Buyer email: ".$data['phone']."<br/>\r\n";
+
+        return $this->_sendAdminEmailMessage($message);
+    }
 
     private function _sendAdminEmailMessage($message)
     {

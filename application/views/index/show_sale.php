@@ -53,7 +53,7 @@
                                     <input type="text" class='email' name='email' value="" placeholder="Email"/>
                                 </p>
                                 <p class="payment-input">
-                                    <input type="text" class='phone' name='phone' value="" placeholder="Phone"/>
+                                    <input type="text" class='phone' name='phone' value="" placeholder="Тел."/>
                                 </p>
                                 <input type="hidden" name='product-id' value="<?php echo $product['id']; ?>"/>
                                 <input type="hidden" name="price" value="<?php echo $product['price']; ?>"/>
