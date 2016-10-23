@@ -1677,6 +1677,6 @@ ul.tagit input[type="text"] {
     height: 192px
 }
 
-.add_payment_data {
-    border: none;
+.button-payment.add_payment_data {
+    float: none;
 }

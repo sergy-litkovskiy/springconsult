@@ -44,12 +44,13 @@ function SaleProductsListModule() {
 
 
         var _onPaymentRegistrationSuccess = function (saleHistoryData) {
-            _paymentForm = _paymentContainer.find('form[name=payment]');
-
-            _paymentForm.find('input[name=data]').val(saleHistoryData.data);
-            _paymentForm.find('input[name=signature]').val(saleHistoryData.signature);
-
-            _paymentForm.submit();
+            window.location.reload();
+            // _paymentForm = _paymentContainer.find('form[name=payment]');
+            //
+            // _paymentForm.find('input[name=data]').val(saleHistoryData.data);
+            // _paymentForm.find('input[name=signature]').val(saleHistoryData.signature);
+            //
+            // _paymentForm.submit();
         };
 
 
@@ -59,6 +60,7 @@ function SaleProductsListModule() {
             var _formData = {
                 name       : _paymentRegistrationForm.find('input[name=recipient_name]').val(),
                 email      : _paymentRegistrationForm.find('input[name=email]').val(),
+                phone      : _paymentRegistrationForm.find('input[name=phone]').val(),
                 product_id : _paymentRegistrationForm.find('input[name=product-id]').val(),
                 price      : _paymentRegistrationForm.find('input[name=price]').val(),
                 description: _paymentRegistrationForm.find('input[name=description]').val(),
@@ -70,7 +72,7 @@ function SaleProductsListModule() {
 
 
         var _bindPaymentEvents = function () {
-            _paymentRegistrationForm.find('input.add_payment_data').on('click', _registrationProcess);
+            _paymentRegistrationForm.find('button.add_payment_data').on('click', _registrationProcess);
         };
 
 

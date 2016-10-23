@@ -42,8 +42,8 @@
                                     <?php echo $product['price']; ?> грн.
                                 </p>
 
-                                <p class="payment-title">Введите Ваше имя и E-mail для получения <br/>электронного
-                                    продукта или подтверждения оплаты</p>
+                                <p class="payment-title">Введите Ваше имя, E-mail и номер телефона</br>для оформления заказа.</p>
+                                <p>Мы свяжемся с вами для уточнения</br>способа оплаты и доставки.</p>
 
                                 <p class="payment-input">
                                     <input type="text" class='name' name='recipient_name' value="" placeholder="Имя"/>
@@ -52,11 +52,15 @@
                                 <p class="payment-input">
                                     <input type="text" class='email' name='email' value="" placeholder="Email"/>
                                 </p>
+                                <p class="payment-input">
+                                    <input type="text" class='phone' name='phone' value="" placeholder="Phone"/>
+                                </p>
                                 <input type="hidden" name='product-id' value="<?php echo $product['id']; ?>"/>
                                 <input type="hidden" name="price" value="<?php echo $product['price']; ?>"/>
                                 <input type="hidden" name="description" value="<?php echo $product['title']; ?>" />
                                 <input type="hidden" name="slug" value="<?php echo $content['slug']; ?>" />
-                                <input type="image" class="add_payment_data" src="//static.liqpay.com/buttons/p1ru.radius.png"/>
+                                <button type="submit" class="add_payment_data button-payment">Заказать</button>
+<!--                                <input type="image" class="add_payment_data" src="//static.liqpay.com/buttons/p1ru.radius.png"/>-->
                             </form>
                             <div id="loader" class="loader" style="display:none;">
                                 <img id="img_loader" src="<?php echo base_url(); ?>img/img_main/ajax-loader.gif"

@@ -9,8 +9,8 @@ class Sale extends CI_Controller
 {
 
     public $defaultDescription = 'SpringСonsulting - ваша возможность понять себя, реализовать свой потенциал, мечты, желания, цели! Профессиональная поддержка опытного коуча-консультанта и сопровождение в поисках ответов на жизненно важные вопросы, в поиске работы, в построении гармоничных отношений,  в достижении счастья и успеха';
-    public $defaultKeywords = '';
-    public $arrMenu = array();
+    public $defaultKeywords    = '';
+    public $arrMenu            = array();
 
     public function __construct()
     {
@@ -42,11 +42,11 @@ class Sale extends CI_Controller
 
         $title         = count($saleArr) > 0 ? $saleArr['title'] : 'sale page';
         $this->dataArr = array(
-            'title'          => SITE_TITLE . ' - ' . $title
-        , 'meta_keywords'    => $this->defaultDescription
-        , 'meta_description' => $this->defaultKeywords
-        , 'content'          => $saleArr
-        , 'payment_form'     => $this->load->view('blocks/payment_form', '', true)
+            'title'              => SITE_TITLE . ' - ' . $title
+            , 'meta_keywords'    => $this->defaultDescription
+            , 'meta_description' => $this->defaultKeywords
+            , 'content'          => $saleArr
+            , 'payment_form'     => $this->load->view('blocks/payment_form', '', true)
         );
 
         $data = array('content' => $this->load->view('index/show_sale', $this->dataArr, true));
@@ -56,103 +56,68 @@ class Sale extends CI_Controller
     public function payment_response()
     {
         $responseString = urldecode(trim(file_get_contents('php://input')));
-Common::debugLogProd('-----responseString-----');
-Common::debugLogProd($responseString);
 
-//Common::debugLogProd($xml);
-//Common::debugLogProd($xmlResult);
-return json_encode('OK');
-//var_dump($_REQUEST);
-//var_dump($xml);
-        //convert the XML result into array
+        $responseArr = explode('&', $responseString);
+        $responseCode = '';
 
-//var_dump($xmlResult);exit;
+        foreach ($responseArr as $responsePart) {
+            if (!preg_match('/data=(.+)$/', $responsePart, $matches)) {
+                continue;
+            }
+
+            if (isset($matches[1])) {
+                $responseCode = $matches[1];
+                break;
+            }
+        }
+
+        if (!$responseCode) {
+            return json_encode('EMPTY response');
+        }
+
+        $responseJsonData = base64_decode($responseCode);
+        $responseData = (array) json_decode($responseJsonData);
+
+        $orderIdData = explode('|', $responseData['order_id']);
+
+        $saleHistoryArr = array(
+            'payment_status'    => $responseData['status'],
+            'payment_trans_id' => $responseData['payment_id'],
+            'payment_message'  => $responseJsonData,
+            'payment_date'  => date('Y-m-d H:i:s')
+        );
+
+        $this->sale_model->updateInTable($orderIdData[0], $saleHistoryArr, 'sale_history');
+
+        return json_encode('OK');
     }
-
-//    public function payment_send()
-//    {
-//        $items = array();
-//
-//        $recipientId = trim(strip_tags($_REQUEST['r-id']));
-//        $saleHistoryId = trim(strip_tags($_REQUEST['s-h-id']));
-//        $productId = trim(strip_tags($_REQUEST['product-id']));
-//        $price = trim(strip_tags($_REQUEST['product-price']));
-//        $description = trim(strip_tags($_REQUEST['product-detail']));
-//
-//        $order = sprintf('%s|%s|%s', $productId, $recipientId, $saleHistoryId);
-//
-//        $data = array(
-//            'amt' => $price,
-//            'ccy' => PRIVAT_PAYMENT_CURRENCY,
-//            'merchant' => PRIVAT_MERCHANT_ID,
-//            'order' => $order,
-//            'details' => $description,
-//            'ext_details' => '',
-//            'pay_way' => 'privat24',
-//            'return_url' => '',
-//            'server_url' => '',
-//            'state' => 'OK',
-//        );
-//
-//        foreach ($data as $key => $value) {
-//            $items[] = $key . '=' . $value;
-//        }
-//
-//        $fields = implode ('&', $items);
-//
-//        $curlConnection = curl_init(PRIVAT_PAYMENT_HTTP_REQUEST_URI);
-//
-//        curl_setopt($curlConnection, CURLOPT_CONNECTTIMEOUT, 30);
-//        curl_setopt($curlConnection, CURLOPT_HEADER, true);
-//        curl_setopt($curlConnection, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
-//        curl_setopt($curlConnection, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-//        curl_setopt($curlConnection, CURLOPT_RETURNTRANSFER, true);
-//        curl_setopt($curlConnection, CURLOPT_SSL_VERIFYPEER, false);
-//        curl_setopt($curlConnection, CURLOPT_FOLLOWLOCATION, 1);
-//        curl_setopt($curlConnection, CURLOPT_POSTFIELDS, $fields);
-//
-//        $result = curl_exec($curlConnection);
-
-//        $headers = substr($result, 0, $httpCode["header_size"]); //split out header
-//        $redirect = curl_getinfo($curlConnection)['redirect_url'];
-//
-//        header('HTTP/1.1 307 Temporary Redirect');
-
-//        curl_close($curlConnection);
-//
-//        header("Location: ".PRIVAT_PAYMENT_HTTP_REQUEST_URI);
-//<form action="https://api.privatbank.ua/p24api/ishop" method="POST">
-//<input type="hidden" name="amt" value="'.$ini_many_params["price_vip"].'"/>
-//<input type="hidden" name="ccy" value="UAH" />
-//<input type="hidden" name="merchant" value="'.$ini_many_params["id_merchant_privat"].'" />
-//<input type="hidden" name="order" value="'.$id_vip.'" />
-//<input type="hidden" name="details" value="Oplata VIP '.$id_vip.'" />
-//<input type="hidden" name="ext_details" value="Oplata VIP  '.$id_vip.'" />
-//<input type="hidden" name="pay_way" value="privat24" />
-//<input type="hidden" name="return_url" value="http://сайт?id='.$id_vip.'" />
-//<input type="hidden" name="server_url" value="http://сайт/validation.php" />
-//<input type="hidden" name="state" value="ок" />
-//<input type="submit" value="Оплатить" />
-//</form>
-//var_dump($data);exit;
-//    }
 
     public function ajax_payment_registration()
     {
-        $recipientDataArr               = $saleHistoryArr = array();
-        $recipientDataArr['name']       = trim(strip_tags($_REQUEST['name']));
-        $recipientDataArr['email']      = trim(strip_tags($_REQUEST['email']));
-        $recipientDataArr['created_at'] = date('Y-m-d H:i:s');
-        $recipientDataArr['confirmed']  = STATUS_ON;
+        $recipientDataArr = array(
+            'name'        => trim(strip_tags($_REQUEST['name'])),
+            'email'       => trim(strip_tags($_REQUEST['email'])),
+            'phone'       => trim(strip_tags($_REQUEST['phone'])),
+            'created_at'  => date('Y-m-d H:i:s'),
+            'confirmed'   => STATUS_ON
+        );
+
+        $extDataArr = array(
+            'product-id'  => trim(strip_tags($_REQUEST['product_id'])),
+            'price'       => trim(strip_tags($_REQUEST['price'])),
+            'description' => trim(strip_tags($_REQUEST['description'])),
+            'slug'        => trim(strip_tags($_REQUEST['slug'])),
+        );
+
 
         $saleHistoryArr['created_at']       = date('Y-m-d H:i:s');
-        $saleHistoryArr['sale_products_id'] = trim(strip_tags($_REQUEST['sale_products_id']));
+        $saleHistoryArr['sale_products_id'] = trim(strip_tags($_REQUEST['product_id']));
 
-        return $this->check_valid_payment_registration($recipientDataArr, $saleHistoryArr);
+        return $this->check_valid_payment_registration($recipientDataArr, $saleHistoryArr, $extDataArr);
     }
 
 
-    public function check_valid_payment_registration($recipientDataArr, $saleHistoryArr)
+    public function check_valid_payment_registration($recipientDataArr, $saleHistoryArr, $extDataArr)
     {
         $recipient = $errLogData = array();
 
@@ -163,14 +128,37 @@ return json_encode('OK');
             $recipient                          = $this->index_model->getRecipientData($recipientDataArr);
             $saleHistoryArr['recipients_id']    = $recipient['id'];
             $saleHistoryArr['payment_state']    = NULL;
+            $saleHistoryArr['payment_status']    = '';
             $saleHistoryArr['payment_trans_id'] = '';
-            $saleHistoryArr['payment_message']   = '';
+            $saleHistoryArr['payment_message']  = '';
 
             $saleHistoryId = $this->sale_model->addInTable($saleHistoryArr, 'sale_history');
             Common::assertTrue($saleHistoryId, "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>");
 
-            $this->result["success"] = true;
-            $this->result["data"]    = array('sale_history_id' => $saleHistoryId, 'recipients_id' => $recipient['id']);
+            $data = array(
+                'action'      => 'pay',
+                'version'      => 3,
+                'public_key'  => LIQPAY_PUBLIC_ID,
+                'amount'      => $extDataArr['price'],
+                'currency'    => PRIVAT_PAYMENT_CURRENCY,
+                'description' => $extDataArr['description'],
+                'server_url'  => sprintf('%spayment/response', base_url()),
+                'result_url'  => sprintf('%ssale/%s', base_url(), $extDataArr['slug']),
+                'order_id'    => sprintf('%s|%s|%s', $saleHistoryId, $recipient['id'], $extDataArr['product-id'])
+            );
+
+            $data = base64_encode(json_encode($data));
+
+            $this->result = array(
+                'success'   => true,
+                'data'      => array(
+//                    'data' => $data,
+//                    'signature' => base64_encode(sha1(LIQPAY_PRIVAT_ID . $data . LIQPAY_PRIVAT_ID, 1))
+                )
+            );
+
+            $mailData = array_merge($extDataArr, $recipientDataArr);
+            $this->mailer_model->sendAdminSaleEmailMessage($mailData);
         } catch (Exception $e) {
             $this->result['message'] = $e->getMessage();
 
@@ -212,7 +200,7 @@ return json_encode('OK');
 
     private function _makePaymentDataFromRequest()
     {
-        $paymentData['payment_message']   = trim(strip_tags($_REQUEST['ik_paysystem_alias']));
+        $paymentData['payment_message']  = trim(strip_tags($_REQUEST['ik_paysystem_alias']));
         $paymentData['payment_state']    = trim(strip_tags($_REQUEST['ik_payment_state']));
         $paymentData['payment_trans_id'] = trim(strip_tags($_REQUEST['ik_trans_id']));
         $paymentData['payment_date']     = date('Y-m-d H:m:s', trim(strip_tags($_REQUEST['ik_payment_timestamp'])));
@@ -255,10 +243,10 @@ return json_encode('OK');
     public function success_sale()
     {
         $this->data_arr  = array(
-            'title'          => SITE_TITLE . ' - успешная оплата услуг'
-        , 'meta_keywords'    => $this->defaultDescription
-        , 'meta_description' => $this->defaultKeywords
-        , 'content'          => "сообщение"
+            'title'              => SITE_TITLE . ' - успешная оплата услуг'
+            , 'meta_keywords'    => $this->defaultDescription
+            , 'meta_description' => $this->defaultKeywords
+            , 'content'          => "сообщение"
         );
         $this->data_menu = array('menu'        => $this->arrMenu,
                                  'current_url' => $this->urlArr[count($this->urlArr) - 1]);
