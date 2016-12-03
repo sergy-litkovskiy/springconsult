@@ -66,6 +66,7 @@ $autoload['libraries'] = array('database'
                                 , 'session'
                                 , 'common'
                                 , 'pagination'
+                                , 'twig'
 //                                , 'security'
                                 , 'email');
 
