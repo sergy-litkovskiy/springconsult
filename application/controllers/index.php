@@ -17,6 +17,8 @@ class Index extends CI_Controller
     public $pagination;
     /** @var  Tags_model */
     public $tags_model;
+    /** @var  CI_Form_validation */
+    public $form_validation;
 
     public $arrMenu            = array();
     public $subscribe          = array();
@@ -25,8 +27,6 @@ class Index extends CI_Controller
     public $cloudsTag          = array();
     public $dataMenu           = array();
     public $data               = array();
-    public $defaultDescription = DEFAULT_META_DESCRIPTION;
-    public $defaultKeywords    = '';
     public $contactFormArr, $result;
 
     public function __construct()
@@ -55,7 +55,7 @@ class Index extends CI_Controller
         $pagerParam     = array('current_page' => $currentPage, 'per_page' => $config['per_page']);
         $this->dataMenu = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr) - 1]);
         $contentArr     = $this->index_model->getNewsList($pagerParam);
-        $title          = count($contentArr) > 0 ? $contentArr[0]['slug_title'] : null;
+        $title          = ArrayHelper::arrayGet($contentArr, '0.slug_title');
         $announcement   = $this->index_model->getFromTableByParams(array('status' => STATUS_ON), 'announcement');
 
         $this->data = array_merge($this->_getDataArrForAction($title, $contentArr),
@@ -81,29 +81,35 @@ class Index extends CI_Controller
     {
         $this->dataMenu = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr) - 1]);
         $contentArr     = $this->index_model->getContent($slug);
-        $articlesArr    = $this->index_model->getContentFromTableByMenuId('articles', $contentArr[0]['id']);
-        $materialsArr   = $this->index_model->getContentFromTableByMenuId('materials', $contentArr[0]['id']);
-        $title          = count($contentArr) > 0 ? $contentArr[0]['slug'] : null;
+        $itemId         = ArrayHelper::arrayGet($contentArr, '0.id');
+        $articlesArr    = $this->index_model->getContentFromTableByMenuId('articles', $itemId);
+        $materialsArr   = $this->index_model->getContentFromTableByMenuId('materials', $itemId);
+        $slug          = ArrayHelper::arrayGet($contentArr, '0.slug');
+        $text           = ArrayHelper::arrayGet($contentArr, '0.text');
 
-        $this->data = array_merge($this->_getDataArrForAction($title, $contentArr),
-            array(
-                'titleFB'        => SITE_TITLE . ' - ' . (count($contentArr) > 0 && $contentArr[0]['title']) ? $contentArr[0]['title'] : $title
-                , 'imgFB'        => (count($contentArr) > 0 && $contentArr[0]['text']) ? $this->index_model->getFirstImgFromText($contentArr[0]['text']) : 'spring_logo.png'
-                , 'content'      => $contentArr[0]
-                , 'articles'     => $articlesArr
-                , 'materials'    => $materialsArr
-                , 'contact_form' => $slug == 'contacts' ? $this->load->view('blocks/contact_form', $this->contactFormArr, true) : null
-                , 'is_article'   => false
-                , 'disqus'       => $slug == 'reviews' ? show_disqus() : null
-            ));
+        $fbTitle = sprintf('%s - %s', SITE_TITLE, ArrayHelper::arrayGet($contentArr, '0.title', $slug));
+        $fbImage = $text ? $this->index_model->getFirstImgFromText($text) : DEFAULT_FB_IMAGE;
+
+        $contentData = array(
+            'titleFB'      => $fbTitle,
+            'imgFB'        => $fbImage,
+            'content'      => ArrayHelper::arrayGet($contentArr, 0),
+            'articles'     => $articlesArr,
+            'materials'    => $materialsArr,
+            'contact_form' => $slug == 'contacts' ? $this->load->view('blocks/contact_form', $this->contactFormArr, true) : null,
+            'is_article'   => false,
+            'disqus'       => $slug == 'reviews' ? show_disqus() : null
+        );
+
+        $this->data = array_merge($this->_getDataArrForAction($slug, $contentArr), $contentData);
 
         $data = array(
             'menu'      => $this->load->view(MENU, $this->dataMenu, true),
             'content'   => $this->load->view('index/show', $this->data, true),
             'cloud_tag' => $this->load->view('blocks/cloud_tag', $this->cloudsTag, true),
             'subscribe' => $this->load->view('blocks/subscribe', count($this->subscribe) ? $this->subscribe : null, true));
-        $this->load->view('layout', $data);
 
+        $this->load->view('layout', $data);
     }
 
 
@@ -116,7 +122,7 @@ class Index extends CI_Controller
         $this->data = array_merge($this->_getDataArrForAction($title, $contentArr),
             array(
                 'titleFB'   => SITE_TITLE . ' - ' . $title
-                , 'imgFB'   => 'spring_logo.png'
+                , 'imgFB'   => DEFAULT_FB_IMAGE
                 , 'content' => $this->load->view('blocks/subscribe', array('subscribeArr' => $contentArr), true),
             ));
 
@@ -134,14 +140,22 @@ class Index extends CI_Controller
     {
         $this->dataMenu = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr) - 1]);
         $contentArr     = $this->index_model->getDetailContent($articleId);
-        if (count($contentArr) < 1) redirect('/index');
-        $title = count($contentArr) > 0 ? $slug . ' - ' . $contentArr[0]['slug'] : null;
+
+        if (!$contentArr) {
+            redirect('/index');
+        }
+
+        $title = $contentArr ? $slug . ' - ' . ArrayHelper::arrayGet($contentArr, '0.slug') : null;
+        $text  = ArrayHelper::arrayGet($contentArr, '0.text');
+
+        $fbTitle = sprintf('%s - %s', SITE_TITLE, ArrayHelper::arrayGet($contentArr, '0.title', $slug));
+        $fbImage = $text ? $this->index_model->getFirstImgFromText($text) : DEFAULT_FB_IMAGE;
 
         $this->data = array_merge($this->_getDataArrForAction($title, $contentArr),
             array(
-                'titleFB'      => SITE_TITLE . ' - ' . (count($contentArr) > 0 && $contentArr[0]['title']) ? $contentArr[0]['title'] : $title
-                , 'imgFB'      => (count($contentArr) > 0 && $contentArr[0]['text']) ? $this->index_model->getFirstImgFromText($contentArr[0]['text']) : 'spring_logo.png'
-                , 'content'    => $contentArr[0]
+                'titleFB'      => $fbTitle
+                , 'imgFB'      => $fbImage
+                , 'content'    => ArrayHelper::arrayGet($contentArr, 0)
                 , 'articles'   => null
                 , 'materials'  => null
                 , 'is_article' => true
@@ -153,13 +167,14 @@ class Index extends CI_Controller
             'content'   => $this->load->view('index/show', $this->data, true),
             'cloud_tag' => $this->load->view('blocks/cloud_tag', $this->cloudsTag, true),
             'subscribe' => $this->load->view('blocks/subscribe', count($this->subscribe) ? $this->subscribe : null, true));
+
         $this->load->view('layout', $data);
     }
 
 
     public function cloudTagList($tagMasterId, $currentPage = null)
     {
-        $this->load->library('pagination');
+//        $this->load->library('pagination');
         $countTotal = $this->index_model->getCountArticlesByTagId($tagMasterId);
 
         //prepare pager config
@@ -167,18 +182,22 @@ class Index extends CI_Controller
         $config['uri_segment'] = 4;
         $config['base_url']    = base_url() . 'cloudtag/' . $tagMasterId . '/page/';
         $config['total_rows']  = $countTotal;
+
         $this->pagination->initialize($config);
+
         $pager          = $this->pagination->create_links();
         $pagerParam     = array('current_page' => $currentPage, 'per_page' => $config['per_page']);
         $this->dataMenu = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr) - 1]);
         $contentArr     = $this->index_model->getArticlesListByTagId($pagerParam, $tagMasterId);
-        $contentArr     = count($contentArr) > 0 ? $contentArr : null;
+        $contentArr     = $contentArr ? $contentArr : null;
         $title          = 'статьи';
+
         if ($contentArr) {
             foreach ($contentArr as $key => $content) {
                 $contentArr[$key]['slug_title'] = 'Статьи';
             }
         }
+
         $this->data = array_merge($this->_getDataArrForAction($title, $contentArr),
             array(
                 'content'        => $contentArr
@@ -244,18 +263,31 @@ class Index extends CI_Controller
     {
         $data['created_at'] = date('Y-m-d H:i:s');
 
-        if (!isset($_REQUEST['subscribe_id'])) {
+        if (!$subscribeId = ArrayHelper::arrayGet($_REQUEST, 'subscribe_id', 0)) {
             $data['confirmed'] = STATUS_ON;
         }
+
         $recipientDataArr = $this->index_model->getRecipientData($data);
-        Common::assertTrue($recipientDataArr['id'], "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>");
+        $recipientId = ArrayHelper::arrayGet($recipientDataArr, 'id');
 
-        $data['subscribe_name'] = isset($_REQUEST['subscribe_name']) ? trim(strip_tags($_REQUEST['subscribe_name'])) : '';
-        $data['subscribe_id']   = isset($_REQUEST['subscribe_id']) ? $_REQUEST['subscribe_id'] : 0;
+        Common::assertTrue(
+            $recipientId,
+            "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>"
+        );
 
-        if ($data['subscribe_id'] > 0) {
-            $hashLink = $this->index_model->hashProcess($data, $recipientDataArr['id']);
-            Common::assertTrue($hashLink, "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>");
+        $subscribeName = ArrayHelper::arrayGet($_REQUEST, 'subscribe_name', '');
+
+        $data['subscribe_name'] = trim(strip_tags($subscribeName));
+        $data['subscribe_id']   = $subscribeId;
+
+        if ($subscribeId) {
+            $hashLink = $this->index_model->hashProcess($data, $recipientId);
+
+            Common::assertTrue(
+                $hashLink,
+                "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>"
+            );
+
             $this->_freeProductProcess($data, $recipientDataArr, $hashLink);
         } else {
             $this->_subscribeArticlesProcess($data, $recipientDataArr);
@@ -298,10 +330,9 @@ class Index extends CI_Controller
         $finishSubscribeProcessData = $this->_finishSubscribeProcess($hash);
 
         $this->result["success"] = true;
-        $this->result["data"]    = "<p class='subscribe_success'>Материалы бесплатного продукта<br/>
-                                    Вы можете скачать прямо сейчас:<br/>
-                                    <a id='success' href='" . $finishSubscribeProcessData['url'] . "'><img src='/img/img_main/floppy_disk.png'/><br/>
-                                    Скачать материал</a></p>";
+        $this->result["data"]    = sprintf(
+            "<p class='subscribe_success'>Материалы бесплатного продукта<br/>Вы можете скачать прямо сейчас:<br/><a id='success' href='%s'><img src='/img/img_main/floppy_disk.png'/><br/>Скачать материал</a></p>",
+            ArrayHelper::arrayGet($finishSubscribeProcessData, 'url'));
 
         return $this->result;
     }
@@ -313,8 +344,10 @@ class Index extends CI_Controller
 //        $this->result["data"] 	= "<p class='subscribe_success'>Добрый день, ".$recipientDataArr['name']."!<br/>
 //                                    Вы уже подписаны на рассылку статей по личной эффективности с сайта Spring Consult.<br/>
 //                                    Если вы по какой-либо причине не получаете материалы - пожалуйста, сообщите об этом <a id='success' href='".base_url()."show/contacts'>администратору сайта</a></p>";
-        $this->result["data"] = "<p class='subscribe_success'>Добрый день, " . $recipientDataArr['name'] . "!<br/>
-                                    Вы успешно подписались на рассылку статей по личной эффективности от Елены Литковской.</p>";
+        $this->result["data"] = sprintf(
+            "<p class='subscribe_success'>Добрый день, %s!<br/>Вы успешно подписались на рассылку статей по личной эффективности от Елены Литковской.</p>",
+            ArrayHelper::arrayGet($recipientDataArr, 'name')
+        );
 
         return $this->result;
     }
@@ -334,8 +367,12 @@ class Index extends CI_Controller
 
     protected function _trySendSubscribeMail($data, $recipientDataArr, $hashLink)
     {
-        $messId = $data['subscribe_id'] > 0 ? $this->mailer_model->sendFreeProductSubscribeEmailMessage($data, $recipientDataArr, $hashLink) : $this->mailer_model->sendArticleSubscribeConfirmationEmailMessage($recipientDataArr, $hashLink);
+        $messId = ArrayHelper::arrayGet($data, 'subscribe_id') ?
+            $this->mailer_model->sendFreeProductSubscribeEmailMessage($data, $recipientDataArr, $hashLink) :
+            $this->mailer_model->sendArticleSubscribeConfirmationEmailMessage($recipientDataArr, $hashLink);
+
         Common::assertTrue($messId, "<p class='error'>К сожалению, письмо с сылкой на материал не было отправлено.<br/>Пожалуйста, попробуйте еще раз</p>");
+
         $this->result['success'] = true;
         $this->result["data"]    = "<p class='success'>Спасибо за подписку!<br>На Ваш e-mail отправлено письмо для подтверждения вашей подписки. Проверьте Ваш почтовый ящик - папку Входящие и СПАМ.</p>";
     }
@@ -350,12 +387,18 @@ class Index extends CI_Controller
 
     protected function _tryAddMailHistory($data, $recipientDataArr)
     {
-        $dataMailHistory['subscribe_id']  = $data['subscribe_id'];
-        $dataMailHistory['recipients_id'] = $recipientDataArr['id'];
+        $dataMailHistory['subscribe_id']  = ArrayHelper::arrayGet($data, 'subscribe_id');
+        $dataMailHistory['recipients_id'] = ArrayHelper::arrayGet($recipientDataArr, 'id');
         $dataMailHistory['date']          = date('Y-m-d');
         $dataMailHistory['time']          = date('H:i:s');
         $mailHistoryId                    = $this->index_model->addInTable($dataMailHistory, 'mail_history');
-        Common::assertTrue($mailHistoryId, "<p class='error'>Ошибка! Запись в Mail_history для subscribe_id=" . $dataMailHistory['subscribe_id'] . " и recipients_id=" . $dataMailHistory['recipients_id'] . " не произошла</p>");
+        Common::assertTrue(
+            $mailHistoryId,
+            sprintf("<p class='error'>Ошибка! Запись в Mail_history для subscribe_id=%s и recipients_id=%s не произошла</p>",
+                ArrayHelper::arrayGet($dataMailHistory, 'subscribe_id'),
+                ArrayHelper::arrayGet($dataMailHistory, 'recipients_id')
+            )
+        );
     }
 
 
@@ -370,24 +413,31 @@ class Index extends CI_Controller
         }
     }
 
-
     private function _finishSubscribeProcess($hash)
     {
         $linksPackerData = $this->index_model->getLinksPackerDataByHash($hash);
         Common::assertTrue($linksPackerData, "");
 
-        $updateData = array('count' => $linksPackerData['count'] + 1, 'updated_at' => date('Y-m-d H:i:s'));
-        $this->index_model->updateInTable($linksPackerData['id'], $updateData, 'links_packer');
+        $url = ArrayHelper::arrayGet($linksPackerData, 'url');
+        $linkId = ArrayHelper::arrayGet($linksPackerData, 'id');
+        $count = ArrayHelper::arrayGet($linksPackerData, 'count');
+        $subscribeId = ArrayHelper::arrayGet($linksPackerData, 'subscribe_id');
 
-        $urlParts            = explode('/', $linksPackerData['url']);
+        $updateData = array('count' => $count + 1, 'updated_at' => date('Y-m-d H:i:s'));
+        $this->index_model->updateInTable($linkId, $updateData, 'links_packer');
+
+        $urlParts            = explode('/', $url);
         $recipientId         = $urlParts[count($urlParts) - 1];
         $updateDataRecipient = array('confirmed' => STATUS_ON);
         $this->index_model->updateInTable($recipientId, $updateDataRecipient, 'recipients');
+
         $recipientDataArr = $this->index_model->getFromTableByParams(array('id' => $recipientId), 'recipients');
-        if ($recipientDataArr[0]) {
-            $this->index_model->tryUnisenderSubscribe($recipientDataArr[0]);
+
+        if ($subscribeData = ArrayHelper::arrayGet($recipientDataArr, 0)) {
+            $this->index_model->tryUnisenderSubscribe($subscribeData);
         }
-        return (array('url' => $linksPackerData['url'], 'subscribe_id' => $linksPackerData['subscribe_id'], 'recipient_id' => $recipientId));
+
+        return (array('url' => $url, 'subscribe_id' => $subscribeId, 'recipient_id' => $recipientId));
     }
 
 
@@ -395,21 +445,21 @@ class Index extends CI_Controller
     {
         $this->dataMenu          = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr) - 1]);
         $recipientData           = $this->index_model->getRecipientById($finishSubscribeProcessDataArr['recipient_id']);
-        $subscribeId             = $finishSubscribeProcessDataArr['subscribe_id'];
-        $finishSubscribeTamplate = $subscribeId > 0 ? 'index/finish_free_product_subscribe' : 'index/finish_articles_subscribe';
+        $subscribeId             = ArrayHelper::arrayGet($finishSubscribeProcessDataArr, 'subscribe_id');
+        $finishSubscribeTemplate = $subscribeId > 0 ? 'index/finish_free_product_subscribe' : 'index/finish_articles_subscribe';
 
         $this->data = array(
             'title'              => SITE_TITLE . ' - subscribe'
             , 'aforizmus'        => $this->aforizmus
-            , 'meta_keywords'    => $this->defaultDescription
-            , 'meta_description' => $this->defaultKeywords
+            , 'meta_keywords'    => DEFAULT_META_KEYWORDS
+            , 'meta_description' => DEFAULT_META_DESCRIPTION
             , 'recipient_data'   => $recipientData
-            , 'url'              => $finishSubscribeProcessDataArr['url']
+            , 'url'              => ArrayHelper::arrayGet($finishSubscribeProcessDataArr, 'url')
         );
 
         $data = array(
             'menu'      => $this->load->view(MENU, $this->dataMenu, true),
-            'content'   => $this->load->view($finishSubscribeTamplate, $this->data, true),
+            'content'   => $this->load->view($finishSubscribeTemplate, $this->data, true),
             'cloud_tag' => $this->load->view('blocks/cloud_tag', $this->cloudsTag, true),
             'subscribe' => $this->load->view('blocks/subscribe', count($this->subscribe) ? $this->subscribe : null, true));
         $this->load->view('layout', $data);
@@ -423,7 +473,7 @@ class Index extends CI_Controller
             $subscribeDataArr = $this->index_model->getSubscribeDataArrById($subscribeId);
             Common::assertTrue($subscribeDataArr, "");
 
-            $this->_outputFile($subscribeDataArr['material_path']);
+            $this->_outputFile(ArrayHelper::arrayGet($subscribeDataArr, 'material_path'));
         } catch (Exception $e) {
             redirect('/index');
         }
@@ -456,6 +506,7 @@ class Index extends CI_Controller
         $urlParts            = explode('/', $linksPackerData['url']);
         $recipientId         = $urlParts[count($urlParts) - 1];
         $updateDataRecipient = array('unsubscribed' => STATUS_ON);
+
         $this->index_model->updateInTable($recipientId, $updateDataRecipient, 'recipients');
 
         return $this->showUnsubscribePage();
@@ -469,8 +520,8 @@ class Index extends CI_Controller
         $this->data = array(
             'title'              => SITE_TITLE . ' - unsubscribe'
             , 'aforizmus'        => $this->aforizmus
-            , 'meta_keywords'    => $this->defaultDescription
-            , 'meta_description' => $this->defaultKeywords
+            , 'meta_keywords'    => DEFAULT_META_KEYWORDS
+            , 'meta_description' => DEFAULT_META_DESCRIPTION
         );
 
         $data = array(
@@ -478,6 +529,7 @@ class Index extends CI_Controller
             'content'   => $this->load->view('blocks/unsubscribe_message', $this->data, true),
             'cloud_tag' => $this->load->view('blocks/cloud_tag', $this->cloudsTag, true),
             'subscribe' => $this->load->view('blocks/subscribe', count($this->subscribe) ? $this->subscribe : null, true));
+
         $this->load->view('layout', $data);
     }
 
@@ -527,20 +579,24 @@ class Index extends CI_Controller
 
     protected function _prepareRulesContactForm()
     {
-        return array('field' => 'text',
+        return array(
+            'field' => 'text',
                      'label' => 'Сообщение',
-                     'rules' => 'required|xss_clean');
+                     'rules' => 'required|xss_clean'
+        );
     }
 
 
     protected function _getDataArrForAction($title, $contentArr)
     {
-        return array(
-            'title'              => SITE_TITLE . ' - ' . $title
+        $metaKeywords = ArrayHelper::arrayGet($contentArr, '0.meta_keywords', DEFAULT_META_KEYWORDS);
+        $metaDescription = ArrayHelper::arrayGet($contentArr, '0.meta_description', DEFAULT_META_DESCRIPTION);
 
-            , 'aforizmus'        => $this->aforizmus
-            , 'meta_keywords'    => (count($contentArr) > 0 && isset($contentArr[0]['meta_keywords'])) ? $contentArr[0]['meta_keywords'] : $this->defaultDescription
-            , 'meta_description' => (count($contentArr) > 0 && isset($contentArr[0]['meta_description'])) ? $contentArr[0]['meta_description'] : $this->defaultKeywords
+        return array(
+            'title'              => SITE_TITLE . ' - ' . $title,
+            'aforizmus'        => $this->aforizmus,
+            'meta_keywords'    => $metaKeywords,
+            'meta_description' => $metaDescription
         );
     }
 
