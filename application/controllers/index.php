@@ -19,14 +19,16 @@ class Index extends CI_Controller
     public $tags_model;
     /** @var  CI_Form_validation */
     public $form_validation;
+    /** @var  Twig */
+    public $twig;
 
-    public $arrMenu            = array();
-    public $subscribe          = array();
-    public $aforizmus          = array();
-    public $urlArr             = array();
-    public $cloudsTag          = array();
-    public $dataMenu           = array();
-    public $data               = array();
+    public $arrMenu   = array();
+    public $subscribe = array();
+    public $aforizmus = array();
+    public $urlArr    = array();
+    public $cloudsTag = array();
+    public $dataMenu  = array();
+    public $data      = array();
     public $contactFormArr, $result;
 
     public function __construct()
@@ -41,10 +43,8 @@ class Index extends CI_Controller
         $this->cloudsTag      = array('tags' => $this->_getCloudsTag());
     }
 
-
     public function index($currentPage = null)
     {
-        $this->load->library('pagination');
         $countTotal = $this->index_model->getCountArticles('news');
         //prepare pager config
         $config               = prepare_pager_config();
@@ -73,9 +73,9 @@ class Index extends CI_Controller
             'cloud_tag' => $this->load->view('blocks/cloud_tag', $this->cloudsTag, true),
             'subscribe' => $this->load->view('blocks/subscribe', count($this->subscribe) ? $this->subscribe : null, true));
 
-        $this->load->view('layout', $data);
+//        $this->load->view('layout', $data);
+        $this->twig->display('index/index.html', $this->data);
     }
-
 
     public function show($slug)
     {
@@ -84,7 +84,7 @@ class Index extends CI_Controller
         $itemId         = ArrayHelper::arrayGet($contentArr, '0.id');
         $articlesArr    = $this->index_model->getContentFromTableByMenuId('articles', $itemId);
         $materialsArr   = $this->index_model->getContentFromTableByMenuId('materials', $itemId);
-        $slug          = ArrayHelper::arrayGet($contentArr, '0.slug');
+        $slug           = ArrayHelper::arrayGet($contentArr, '0.slug');
         $text           = ArrayHelper::arrayGet($contentArr, '0.text');
 
         $fbTitle = sprintf('%s - %s', SITE_TITLE, ArrayHelper::arrayGet($contentArr, '0.title', $slug));
@@ -111,7 +111,6 @@ class Index extends CI_Controller
 
         $this->load->view('layout', $data);
     }
-
 
     public function freeProductShow()
     {
@@ -268,7 +267,7 @@ class Index extends CI_Controller
         }
 
         $recipientDataArr = $this->index_model->getRecipientData($data);
-        $recipientId = ArrayHelper::arrayGet($recipientDataArr, 'id');
+        $recipientId      = ArrayHelper::arrayGet($recipientDataArr, 'id');
 
         Common::assertTrue(
             $recipientId,
@@ -418,9 +417,9 @@ class Index extends CI_Controller
         $linksPackerData = $this->index_model->getLinksPackerDataByHash($hash);
         Common::assertTrue($linksPackerData, "");
 
-        $url = ArrayHelper::arrayGet($linksPackerData, 'url');
-        $linkId = ArrayHelper::arrayGet($linksPackerData, 'id');
-        $count = ArrayHelper::arrayGet($linksPackerData, 'count');
+        $url         = ArrayHelper::arrayGet($linksPackerData, 'url');
+        $linkId      = ArrayHelper::arrayGet($linksPackerData, 'id');
+        $count       = ArrayHelper::arrayGet($linksPackerData, 'count');
         $subscribeId = ArrayHelper::arrayGet($linksPackerData, 'subscribe_id');
 
         $updateData = array('count' => $count + 1, 'updated_at' => date('Y-m-d H:i:s'));
@@ -581,19 +580,19 @@ class Index extends CI_Controller
     {
         return array(
             'field' => 'text',
-                     'label' => 'Сообщение',
-                     'rules' => 'required|xss_clean'
+            'label' => 'Сообщение',
+            'rules' => 'required|xss_clean'
         );
     }
 
 
     protected function _getDataArrForAction($title, $contentArr)
     {
-        $metaKeywords = ArrayHelper::arrayGet($contentArr, '0.meta_keywords', DEFAULT_META_KEYWORDS);
+        $metaKeywords    = ArrayHelper::arrayGet($contentArr, '0.meta_keywords', DEFAULT_META_KEYWORDS);
         $metaDescription = ArrayHelper::arrayGet($contentArr, '0.meta_description', DEFAULT_META_DESCRIPTION);
 
         return array(
-            'title'              => SITE_TITLE . ' - ' . $title,
+            'title'            => SITE_TITLE . ' - ' . $title,
             'aforizmus'        => $this->aforizmus,
             'meta_keywords'    => $metaKeywords,
             'meta_description' => $metaDescription
