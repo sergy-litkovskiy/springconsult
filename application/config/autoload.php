@@ -106,7 +106,7 @@ $autoload['helper'] = array('url'
                             ,'pager'
                             ,'security'
                             ,'disqus'
-                            ,'firephp'
+//                            ,'firephp'
                             ,'unisender_curl');
 
 /*

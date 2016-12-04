@@ -144,3 +144,5 @@ define('LIQPAY_HTTP_REQUEST_URI', 'https://www.liqpay.com/api/3/checkout');
 define('UNISENDERAPIKEY', '581woumrc4iedxpdtsahhsy8hxkfew5q8xpp8tyy');
 define('UNISENDERMAINLISTID', 1237963);
 define('UNISENDERTESTLISTID', 1238223);
+
+define('DEFAULT_META_DESCRIPTION', 'SpringСonsulting - ваша возможность понять себя, реализовать свой потенциал, мечты, желания, цели! Профессиональная поддержка опытного коуча-консультанта и сопровождение в поисках ответов на жизненно важные вопросы, в поиске работы, в построении гармоничных отношений,  в достижении счастья и успеха');

@@ -136,22 +136,22 @@ $route['backend/spec_mailer_statistics/(:num)']   = 'admin/index_admin/spec_mail
 $route['backend/(:any)']                          = 'admin/index_admin/show/$1';
 
 ////////////////////FRONTEND////////////////////////////
-$route['contact_form/send']                                 = 'index/ajax_send_contact_form';
+$route['contact_form/send']                                 = 'index/ajaxSendContactForm';
 $route['search']                                            = 'search/search_result';
 $route['rss']                                               = 'rss/show_rss';
 $route['sitemap']                                           = 'index/sitemap';
-$route['free']                                              = 'index/free_product_show';
+$route['free']                                              = 'index/freeProductShow';
 $route['show/news']                                         = 'index';
-$route['show/free']                                         = 'index/free_product_show';
+$route['show/free']                                         = 'index/freeProductShow';
 //$route['frontend/unsubscribe/re/(:num)']                    = 'index/unsubscribe_finish/$1';
-$route['cloudtag/(:num)']                                   = 'index/cloud_tag_list/$1';
-$route['cloudtag/(:num)/page/(:num)']                       = 'index/cloud_tag_list/$1/$2';
+$route['cloudtag/(:num)']                                   = 'index/cloudTagList/$1';
+$route['cloudtag/(:num)/page/(:num)']                       = 'index/cloudTagList/$1/$2';
 
-$route['unsubscribe/(:any)']                                = 'index/unsubscribe_process/$1';
+$route['unsubscribe/(:any)']                                = 'index/unsubscribeProcess/$1';
 //$route['subscribe/send']                                    = 'index/ajax_send_subscribe';
-$route['frontend/finishsubscribe/(:num)/recip/(:num)']      = 'index/output_subscribe/$1/$2';
+$route['frontend/finishsubscribe/(:num)/recip/(:num)']      = 'index/outputSubscribe/$1/$2';
 $route['news/page/(:num)']                                  = 'index/index/$1';
-$route['finishsubscribe/(:any)']                            = 'index/finish_subscribe/$1';
+$route['finishsubscribe/(:any)']                            = 'index/finishSubscribe/$1';
 $route['show/(:any)']                                       = 'index/show/$1';
 $route['ajax_get_landing_mp3']                              = 'landing/ajax_get_landing_mp3';
 $route['landing/(:any)']                                    = 'landing/show_landing_page/$1';
@@ -165,4 +165,4 @@ $route['salestatus/(:any)']                                 = 'sale/sale_payment
 $route['success/sale']                                      = 'sale/success_sale';
 $route['faild/sale']                                        = 'sale/faild_sale';
 
-$route['(:any)/(:num)']                                     = 'index/show_detail/$1/$2';
+$route['(:any)/(:num)']                                     = 'index/showDetail/$1/$2';
