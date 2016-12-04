@@ -7,6 +7,7 @@
  */
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
+
 class Common
 {
     public static function getDateTime($format = null, $time = 'now')
@@ -102,8 +103,8 @@ class Common
      *
      * @param string $val
      * @param string $message
-     *
-     * @return string|bool
+     * @return bool|string
+     * @throws Exception
      */
     public static function assertTrue($val, $message)
     {
@@ -117,8 +118,8 @@ class Common
      *
      * @param string $val
      * @param string $message
-     *
-     * @return string|bool
+     * @return bool|string
+     * @throws Exception
      */
     public static function assertFalse($val, $message)
     {

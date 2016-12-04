@@ -60,11 +60,12 @@ $autoload['packages'] = array(APPPATH.'third_party');
 */
 
 $autoload['libraries'] = array('database'
-                                , 'firephp'
+//                                , 'firephp'
                                 , 'form_validation'
                                 , 'fileloader'
                                 , 'session'
                                 , 'common'
+                                , 'arrayHelper'
                                 , 'pagination'
                                 , 'twig'
 //                                , 'security'
