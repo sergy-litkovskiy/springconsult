@@ -1,6 +1,6 @@
 .idea/
 .vagrant/
 /application/tmp/
-vendor/*
+#vendor/*
 *.DS_Store
 *~
