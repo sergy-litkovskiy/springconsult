@@ -1,7 +1,4 @@
-/**
- * Add barrels and stuff
- * Adjust as necessary for your application needs.
- */
+
 // (function (global) {
 //   System.config({
 //     packages: {
@@ -40,11 +37,14 @@
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
       app: {
-        main: '../app-angular/app/main.js',
+        main: './app/main.js',
         defaultExtension: 'js'
       },
       rxjs: {
         defaultExtension: 'js'
+      },
+      traceur:{
+          main: 'traceur'
       }
     }
   });
