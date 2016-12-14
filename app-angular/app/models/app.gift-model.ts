@@ -1,10 +1,10 @@
-class GiftModel
+export class GiftModel
 {
-  userName: string;
-  email: string;
+  giftName: string;
+  giftDescription: string;
 
-  constructor (userName: string, email: string) {
-    this.userName = userName;
-    this.email = email;
+  constructor (giftName: string, giftDescription: string) {
+    this.giftName = giftName;
+    this.giftDescription = giftDescription;
   }
 }
