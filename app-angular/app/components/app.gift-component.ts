@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-// import {GiftModel} from '../models/app.gift-model';
+import { GiftMock } from '../mocks/mock-gift-model-list';
 
 @Component({
   selector: 'gift-container',
   template: `
-    <div *ngFor="let giftModel of giftModelList">
+    <div *ngFor="let giftModel of giftModelMock.getGiftList()">
         <p>{{ giftModel.giftName }}</p>  
         <p>{{ giftModel.giftDescription }}</p>  
         <form class="">
@@ -16,8 +16,10 @@ import { Component } from '@angular/core';
             <div class="field">
               <label for="email">Email:</label>
               <input name="email" #email>
+              <input name="gid" type="hidden" value="{{ giftModel.giftId }}" #giftId>
+              <input name="gname" type="hidden" value="{{ giftModel.giftName }}" #giftName>
             </div>
-            <button (click)="sendGift(userName, email)" class="">
+            <button (click)="sendGift(userName, email, giftId, giftName)" class="">
               Get the Gift
             </button>
         </form>
@@ -27,23 +29,16 @@ import { Component } from '@angular/core';
 
 export class GiftContainerComponent
 {
-  giftModelList = [
-    {giftName: 'gift1', giftDescriptiion: 'gift1 descr'},
-    {giftName: 'gift2', giftDescriptiion: 'gift2 descr'},
-  ];
-  // constructor() {
-  //   // this.giftModelList = [
-  //   //     new GiftModel('gift1', 'gift1 descr'),
-  //   //     new GiftModel('gift2', 'gift2 descr')
-  //   // ];
-  //   this.giftModelList = [
-  //     {giftName: 'gift1', giftDescriptiion: 'gift1 descr'},
-  //     {giftName: 'gift2', giftDescriptiion: 'gift2 descr'},
-  //   ];
-  // }
+  giftModelMock: GiftMock;
 
-  sendGift(userName: HTMLInputElement, email: HTMLInputElement): boolean {
-    console.log(`Adding article user name: ${userName.value} and email: ${email.value}`);
+  constructor() {
+    this.giftModelMock = new GiftMock();
+  }
+
+  sendGift(userName: HTMLInputElement, email: HTMLInputElement, giftId: HTMLInputElement, giftName: HTMLInputElement): boolean {
+    console.log(`
+      Adding giftId: ${giftId.value} | giftName: ${giftName.value} | email: ${email.value} | user: ${userName.value}
+    `);
     return false;
   }
 }
