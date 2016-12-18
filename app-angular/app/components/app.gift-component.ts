@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { GiftMock } from '../mocks/mock-gift-model-list';
+import {Component, OnInit} from '@angular/core';
+import { GiftService } from '../services/gift-service';
+import { GiftModel } from '../models/gift-model';
 
 @Component({
   selector: 'gift-container',
   template: `
-    <div *ngFor="let giftModel of giftModelMock.getGiftList()">
+    <div *ngFor="let giftModel of giftModelList">
         <p>{{ giftModel.giftName }}</p>  
         <p>{{ giftModel.giftDescription }}</p>  
         <form class="">
@@ -24,15 +25,24 @@ import { GiftMock } from '../mocks/mock-gift-model-list';
             </button>
         </form>
     </div>
-  `
+  `,
+  providers: [GiftService]
 })
 
-export class GiftContainerComponent
+export class GiftContainerComponent implements OnInit
 {
-  giftModelMock: GiftMock;
+  giftModelList: GiftModel[];
 
-  constructor() {
-    this.giftModelMock = new GiftMock();
+  constructor (private _giftService: GiftService) {}
+
+  ngOnInit () {
+    this.getModelList();
+  }
+
+  getModelList () {
+    this._giftService
+        .getGiftModelList()
+        .then(giftModelList => this.giftModelList = giftModelList);
   }
 
   sendGift(userName: HTMLInputElement, email: HTMLInputElement, giftId: HTMLInputElement, giftName: HTMLInputElement): boolean {
