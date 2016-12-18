@@ -5,28 +5,26 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Articles_admin extends CI_Controller
+class Topics_admin extends CI_Controller
 {
-    public $emptyArticleArr = array();
+    public $emptyTopicList = array();
     private $data = array();
     public $message;
     public $result;
     public $urlArr;
-    private $currentDate;
-    /** @var  Login_model */
-    public $login_model;
+
     /** @var  Index_admin */
     public $index_model;
+    /** @var  Login_model */
+    public $login_model;
+    /** @var  Login_model */
+    public $topics_model;
     /** @var  Edit_menu_model */
     public $edit_menu_model;
-    /** @var  Tags_model */
-    public $tags_model;
     /** @var  Assign_model */
     public $assign_model;
     /** @var  CI_Form_validation */
     public $form_validation;
-    /** @var  Mailer_model */
-    public $mailer_model;
     /** @var  CI_Session */
     public $session;
 
@@ -38,18 +36,10 @@ class Articles_admin extends CI_Controller
             $this->login_model->logOut();
         }
 
-        $this->emptyArticleArr = array(
-            'id'             => null
-        , 'slug'             => null
-        , 'text'             => null
-        , 'title'            => null
-        , 'num_sequence'     => null
-        , 'status'           => null
-        , 'meta_description' => null
-        , 'meta_keywords'    => null
-        , 'is_sent_mail'     => null
-        , 'date'             => Common::getDateTime('Y-m-d')
-        , 'time'             => Common::getDateTime('H:i:s')
+        $this->emptyTopicList = array(
+            'id'     => null,
+            'name'   => null,
+            'status' => null
         );
 
         $this->result  = array("success" => null, "message" => null, "data" => null);
@@ -57,42 +47,37 @@ class Articles_admin extends CI_Controller
         $this->message = null;
     }
 
-
-    public function article_edit($id = null)
+    public function topic_edit($id = null)
     {
-        $contentItems   = array(0);
-        $assignArticles = $assignTagArr = array();
-        $title          = "Добавить статью";
-        if ($id) {
-            $contentItems = $this->index_model->getDetailContentAdmin($id);
-            $assignArtArr = $this->index_model->getAssignArticlesByArticleIdAdmin($id);
-            $assignTagArr = $this->index_model->getAssignTagArr($id, 'articles_tag', 'articles_id');
+        $topicData = array();
+        $assignArticles = array();
+        $title     = "Добавить topic";
 
-            foreach ($assignArtArr as $assignArt) {
-                $assignArticles[$assignArt['articles_id']][] = $assignArt['menu_id'];
-            }
-            if ($assignArticles) {
-                $assignArticles = $assignArticles[$id];
-            }
-            $title = "Редактировать статью";
+        $articleList = $this->index_model->getListFromTable('articles');
+
+        if ($id) {
+            $topicData      = $this->topics_model->getFromTableByParams(['id' => $id], 'topics');
+            $assignArticles = $this->index_model->getAssignedArticleListByTopicId($id);
+
+            $title = "Редактировать topic";
         }
 
-        $contentArr        = $contentItems[0] ? $contentItems[0] : $this->emptyArticleArr;
-        $url               = $this->index_model->prepareUrl($this->urlArr);
-        $contentArr['url'] = $url;
+        $content        = ArrayHelper::arrayGet($topicData, 0, $this->emptyTopicList);
+        $url            = $this->index_model->prepareUrl($this->urlArr);
+        $content['url'] = $url;
 
         $this->data = array(
-            'title'         => $title
-        , 'content'         => $contentArr
-        , 'menu_items'      => $this->edit_menu_model->childs
-        , 'assign_articles' => $assignArticles
-        , 'assign_tag_arr'  => $assignTagArr
-        , 'message'         => $this->message
+            'title'           => $title,
+            'content'         => $content,
+            'menu_items'      => $this->edit_menu_model->childs,
+            'assign_articles' => $assignArticles,
+            'article_list'    => $articleList,
+            'message'         => $this->message
         );
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/index_admin/edit', $this->data, true));
+            'content' => $this->load->view('admin/topics/edit', $this->data, true));
 
         $this->load->view('layout_admin', $data);
     }
@@ -251,107 +236,15 @@ class Articles_admin extends CI_Controller
         exit;
     }
 
-
-//    private function _sendNlSubscribe($recipientsArr, $articleDetail)
-//    {
-//        $sentMailCounter = 0;
-//         foreach($recipientsArr as $recipient){
-//             try{
-//                $unsubscribeLink = $this->index_model->unsubscribeHashProcess($recipient['id']);
-//                Common::assertTrue($unsubscribeLink, 'Ошибка! Не был сформирован url для отказа от подписки');
-//
-//                $data = array('articles_id'    => $articleDetail['id']
-//                            ,'recipients_id'   => $recipient['id']
-//                            ,'date'            => date('Y-m-d')
-//                            ,'time'            => date('H:i:s'));
-//
-//                $historyId = $this->index_model->addInTable($data, 'articles_subscribe_mail_history');
-//                Common::assertTrue($historyId, 'Ошибка! Не произошла запись в articles_subscribe_mail_history');
-//
-//                $isSent = $this->mailer_model->sendArticlesSubscribedEmail($recipient, $articleDetail, $unsubscribeLink);
-//                Common::assertTrue($isSent, 'Ошибка! Письмо для подписчика '.$recipient['name'].' ('.$recipient['email'].') не было отправлено');
-//
-//                $sentMailCounter++;
-//            } catch (Exception $e){
-//                $errLogData['resource_id']  = ERROR_SRC_ARTICLE_MAILER;
-//                $errLogData['text']         = $e->getMessage()." - Название статьи: ".$articleDetail['title'];
-//                $errLogData['created_at']   = date('Y-m-d H:i:s');
-//                $this->index_model->addInTable($errLogData, 'error_log');
-//            }
-//         }
-//
-//         return $sentMailCounter;
-//    }
-
-
-    private function _unisenderCreateEmailMessage($articleDetail)
-    {
-        $jsonObj = null;
-        $postArr = array(
-            'api_key'      => UNISENDERAPIKEY,
-            'sender_name'  => SITE_TITLE,
-            'sender_email' => ADMIN_EMAIL,
-            'subject'      => $articleDetail['title'],
-            'wrap_type'    => 'left',
-            'list_id'      => UNISENDERMAINLISTID,
-            'body'         => $this->mailer_model->getUnisenderSubscribeEmailTpl($articleDetail)
-        );
-
-        $result = startCurlExec($postArr, 'http://api.unisender.com/ru/api/createEmailMessage?format=json');
-        Common::assertTrue($result, 'Ошибка! Unisender API(createEmailMessage) не отвечает!');
-
-        $jsonObj = json_decode($result);
-        Common::assertTrue($jsonObj, 'Ошибка! API(createEmailMessage) Invalid JSON');
-//Common::debugLogProd('_unisenderCreateEmailMessage');        
-//Common::debugLogProd($jsonObj);
-        if ((isset($jsonObj->error) && is_object($jsonObj->error)) && (isset($jsonObj->code) && is_object($jsonObj->code))) {
-            throw new Exception("An error occured: " . @$jsonObj->error . "(code: " . @$jsonObj->code . ")");
-        } else {
-            return $this->_unusenderCreateCampaign($jsonObj->result->message_id);
-        }
-    }
-
-
-    private function _unusenderCreateCampaign($messageId)
-    {
-        $postArr = array(
-            'api_key'     => UNISENDERAPIKEY,
-            'message_id'  => $messageId,
-            'track_read'  => '0',
-            'track_links' => '0'
-        );
-
-        $result = startCurlExec($postArr, 'http://api.unisender.com/ru/api/createCampaign?format=json');
-        Common::assertTrue($result, 'Ошибка! Unisender API(createCampaign) не отвечает!');
-
-        $jsonObj = json_decode($result);
-        Common::assertTrue($jsonObj, 'Ошибка! API(createCampaign) Invalid JSON');
-//Common::debugLogProd('_unusenderCreateCampaign');
-//Common::debugLogProd($jsonObj);         
-        if ((isset($jsonObj->error) && $jsonObj->error !== '') && isset($jsonObj->code)) {
-            throw new Exception("An error occured: " . @$jsonObj->error . "(code: " . @$jsonObj->code . ")");
-        } else {
-            //return $this->result['data'] = "Рассылка на Unisender запущена успешно!";
-            return $this->result['data'] = "Рассылка на Unisender<br> запущена успешно со статусом: " . @$jsonObj->result->status . "!";
-        }
-    }
-
-
-    private function _updateArticleStatusIsMailSent($articleId)
-    {
-        return $this->index_model->updateInTable($articleId, array('is_sent_mail' => STATUS_ON), 'articles');
-    }
-
-
     private function _add($data)
     {
-        return $this->index_model->addInTable($data, 'articles');
+        return $this->index_model->addInTable($data, 'topics');
     }
 
 
     private function _update($data, $params)
     {
-        if ($this->index_model->updateInTable($params['id'], $data, 'articles')) {
+        if ($this->index_model->updateInTable($params['id'], $data, 'topics')) {
             redirect('backend/news');
         } else {
             throw new Exception('Not updated');
@@ -362,7 +255,7 @@ class Articles_admin extends CI_Controller
     public function drop($id)
     {
         try {
-            $this->index_model->delFromTable($id, 'articles');
+            $this->index_model->delFromTable($id, 'topics');
             $assignArticlesArr = $this->index_model->getFromTableByParams(array('articles_id' => $id), 'assign_articles');
 
             if (count($assignArticlesArr)) {

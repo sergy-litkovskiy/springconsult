@@ -163,4 +163,5 @@ $autoload['model'] = array(
                         'landing_model',
                         'assign_model',
                         'tags_model',
+                        'topics_model',
                         'sale_model');

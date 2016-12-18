@@ -35,6 +35,9 @@
             </select>
         </p>
         <br/>
+        <p><b>Thumbnail:</b></p>
+        <p><input type="text" id='thumb' name='thumb' value="<?php echo $content['thumb'];?>"/></p>
+        <br/>
         <p><b>Название:</b></p>
         <p><input type="text" id='title' name='title' value="<?php echo $content['title'];?>"/></p>
         <br/>
