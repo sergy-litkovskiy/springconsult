@@ -53,7 +53,7 @@ class Topics_model extends Crud
     private function _getSelectSql()
     {
         return "SELECT
-                    topics.id as topic_id,
+                    topics.*,
                     articles.id as article_id,
                     articles.title as article_title,
                     articles.status as article_status

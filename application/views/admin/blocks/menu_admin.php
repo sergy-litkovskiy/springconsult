@@ -1,6 +1,7 @@
 <ul id="my-menu" class="main_menu">
     <li><a id='cat_name' href='/backend/menu_admin'>Меню</a></li>
     <li><a id='cat_name' href='/backend/news'>Статьи</a></li>
+    <li><a id='cat_name' href='/backend/topics'>Темы</a></li>
     <li><a id='cat_name' href='/backend/material'>Материалы</a></li>
     <li><a id='cat_name' href='/backend/subscribe'>Бесплатный продукт</a></li>
     <li><a id='cat_name' href='/backend/aforizmus'>Афоризмы</a></li>

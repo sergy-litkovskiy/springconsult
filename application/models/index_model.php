@@ -547,4 +547,21 @@ class Index_model extends Crud
 
         return $imgFB;
     }
+
+    public function getAssignedArticleListByTopicId($id)
+    {
+        $sql = "SELECT
+                    articles.id as article_id,
+                    articles.title as article_title,
+                    articles.status as article_status
+                FROM
+                    articles
+                INNER JOIN
+                    topics_articles_assignment ON topics_articles_assignment.articles_id = articles.id";
+        $sql .= " AND topics_articles_assignment.topics_id = ".$id;
+
+        $query = $this->db->query($sql);
+
+        return $query->result_array();
+    }
 }

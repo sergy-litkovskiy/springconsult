@@ -70,6 +70,10 @@ $route['backend/article_edit']                    = 'admin/articles_admin/articl
 $route['backend/check_valid_article']             = 'admin/articles_admin/check_valid_article';
 $route['backend/article_drop/(:num)']             = 'admin/articles_admin/drop/$1';
 
+$route['backend/topic_edit']               = 'admin/topics_admin/topic_edit';
+$route['backend/topic_edit/(:num)']               = 'admin/topics_admin/topic_edit/$1';
+$route['backend/topic_drop/(:num)']               = 'admin/topics_admin/topic_drop/$1';
+
 $route['backend/check_valid_submenu']             = 'admin/menu_admin/check_valid_menu';
 $route['backend/check_valid_menu']                = 'admin/menu_admin/check_valid_menu';
 $route['backend/menu_admin']                      = 'admin/menu_admin/index';
@@ -80,6 +84,8 @@ $route['backend/menu_admin/subitem_edit']         = 'admin/menu_admin/edit_menu_
 $route['backend/menu_admin/subitem_edit/(:num)']  = 'admin/menu_admin/edit_menu_subitem/$1';
 
 $route['backend/news']                            = 'admin/index_admin/index';
+
+$route['backend/topics']                          = 'admin/topics_admin/index';
 
 //$route['backend/send_nl_subscribe/(:num)']        = 'admin/articles_admin/ajax_send_article_to_subscribers/$1';
 

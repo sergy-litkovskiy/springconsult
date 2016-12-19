@@ -1028,11 +1028,16 @@ p.title span.date{
     text-align: center;
 }
 
-.add_new{
+.add_new,
+.add_new_topic {
     float:left;
     width:900px;
     margin: 1.5em auto 1.5em auto;
     text-align: right;
+}
+
+.add_new_topic {
+    text-align: left;
 }
 
 #back_form_landing input{
@@ -1523,13 +1528,19 @@ ul.tagit input[type="text"] {
     width: 15px;
 }
 
-.sale-page-list{
+.sale-page-list {
     display: none;
     float: left;
     margin-left: 2em;
 }
 
-.sale-page-list li{
+.topic-article-list {
+    float: left;
+    margin-left: 2em;
+}
+
+.sale-page-list li,
+.topic-article-list li {
     float: left;
     list-style-type: none;
 }

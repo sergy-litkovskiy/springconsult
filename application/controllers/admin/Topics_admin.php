@@ -7,11 +7,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Topics_admin extends CI_Controller
 {
-    public $emptyTopicList = array();
-    private $data = array();
-    public $message;
-    public $result;
-    public $urlArr;
+    public  $emptyTopicList = array();
+    private $data           = array();
+    public  $message;
+    public  $result;
+    public  $urlArr;
 
     /** @var  Index_admin */
     public $index_model;
@@ -47,11 +47,41 @@ class Topics_admin extends CI_Controller
         $this->message = null;
     }
 
+    public function index()
+    {
+        $topicListWithArticles = $this->topics_model->getTopicListWithArticlesAdmin();
+        $topicArticlesMap      = $this->_prepareTopicArticlesMap($topicListWithArticles);
+
+        $contentData = array(
+            'title'            => 'Springconsulting - admin',
+            'topicArticlesMap' => $topicArticlesMap,
+            'message'          => $this->message
+        );
+
+        $data = array(
+            'menu'    => $this->load->view(MENU_ADMIN, '', true),
+            'content' => $this->load->view('admin/topics/show', $contentData, true));
+
+        $this->load->view('layout_admin', $data);
+    }
+
+    private function _prepareTopicArticlesMap(array $topicListWithArticles)
+    {
+        $map = array();
+
+        foreach ($topicListWithArticles as $topicData) {
+            $map[ArrayHelper::arrayGet($topicData, 'id')]['data']          = $topicData;
+            $map[ArrayHelper::arrayGet($topicData, 'id')]['articleList'][] = $topicData;
+        }
+
+        return $map;
+    }
+
     public function topic_edit($id = null)
     {
-        $topicData = array();
+        $topicData      = array();
         $assignArticles = array();
-        $title     = "Добавить topic";
+        $title          = "Добавить topic";
 
         $articleList = $this->index_model->getListFromTable('articles');
 
@@ -67,12 +97,12 @@ class Topics_admin extends CI_Controller
         $content['url'] = $url;
 
         $this->data = array(
-            'title'           => $title,
-            'content'         => $content,
-            'menu_items'      => $this->edit_menu_model->childs,
-            'assign_articles' => $assignArticles,
-            'article_list'    => $articleList,
-            'message'         => $this->message
+            'title'          => $title,
+            'content'        => $content,
+            'menu_items'     => $this->edit_menu_model->childs,
+            'assignArticles' => $assignArticles,
+            'articleList'    => $articleList,
+            'message'        => $this->message
         );
 
         $data = array(
@@ -87,52 +117,35 @@ class Topics_admin extends CI_Controller
     {
         $data            = $params = array();
         $id              = isset($_REQUEST['id']) && $_REQUEST['id'] ? $_REQUEST['id'] : null;
-        $assignMenuIdArr = isset($_REQUEST['menu']) && $_REQUEST['menu'] ? $_REQUEST['menu'] : array();
-        $oldAssignMenuId = isset($_REQUEST['old_assign_id']) && $_REQUEST['old_assign_id'] ? $_REQUEST['old_assign_id'] : array();
-        $arrArticlesTag  = !empty($_REQUEST['tag']) ? $_REQUEST['tag'] : array();
+        $assignedNewArticleIds = isset($_REQUEST['new_article_id']) && $_REQUEST['new_article_id'] ? $_REQUEST['new_article_id'] : array();
+        $assignedOldArticleIds = isset($_REQUEST['old_article_id']) && $_REQUEST['old_article_id'] ? $_REQUEST['old_article_id'] : array();
 
         try {
             $this->_formValidation();
-            $data = $this->_prepareArticleDataForAddUpdate($_REQUEST);
+            $data = $this->_prepareTopicDataForAddUpdate($_REQUEST);
 
             if ($id) {
                 $params ['id'] = $id;
-                $dataUpdate    = array(
-                    'num_sequence' => $_REQUEST['num_sequence']
-                , 'status'         => $_REQUEST['status']
-                , 'is_sent_mail'   => $_REQUEST['is_sent_mail']
+                $dataUpdate    = array('status'       => $_REQUEST['status']
                 );
 
                 $data = array_merge($data, $dataUpdate);
 
-                if (count($assignMenuIdArr)) {
-                    $this->_assignProcess($assignMenuIdArr, $oldAssignMenuId, $id);
-                }
-
-                if (count($arrArticlesTag)) {
-                    /** @var Tags_model $this->tags_model */
-                    $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
+                if (count($assignedNewArticleIds)) {
+                    $this->_assignProcess($assignedNewArticleIds, $assignedOldArticleIds, $id);
                 }
 
                 $this->_update($data, $params);
             } else {
-                $dataAdd = array(
-                    'num_sequence' => '0'
-                , 'status'         => STATUS_ON
-                , 'is_sent_mail'   => '0'
-                );
+                $dataAdd = array('status' => STATUS_ON);
 
                 $data = array_merge($data, $dataAdd);
 
                 $id = $this->_add($data);
                 Common::assertTrue($id, 'Форма заполнена неверно');
 
-                if (count($assignMenuIdArr)) {
-                    $this->_assignProcess($assignMenuIdArr, $oldAssignMenuId, $id);
-                }
-
-                if (count($arrArticlesTag)) {
-                    $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
+                if (count($assignedNewArticleIds)) {
+                    $this->_assignProcess($assignedNewArticleIds, $assignedOldArticleIds, $id);
                 }
 
                 redirect('backend/news');
@@ -147,12 +160,12 @@ class Topics_admin extends CI_Controller
     private function _assignProcess($assignMenuIdArr, $oldAssignMenuId, $id)
     {
         $assignsArr = array(
-            'newSourceIdArr' => $assignMenuIdArr
-        , 'oldSourceIdArr'   => $oldAssignMenuId
-        , 'assignId'         => $id
-        , 'assignFieldName'  => 'articles_id'
-        , 'sourceFieldName'  => 'menu_id'
-        , 'table'            => 'assign_articles');
+            'newSourceIdArr'    => $assignMenuIdArr
+            , 'oldSourceIdArr'  => $oldAssignMenuId
+            , 'assignId'        => $id
+            , 'assignFieldName' => 'articles_id'
+            , 'sourceFieldName' => 'menu_id'
+            , 'table'           => 'assign_articles');
 
         $this->assign_model->setAssignArr($assignsArr);
         $this->assign_model->addOrDeleteAssigns();
@@ -176,30 +189,24 @@ class Topics_admin extends CI_Controller
                 'field' => 'title',
                 'label' => '<Название раздела>',
                 'rules' => 'required')
-        , array(
+            , array(
                 'field' => 'slug',
                 'label' => '<Алиас раздела>',
                 'rules' => 'required')
-        , array(
+            , array(
                 'field' => 'text',
                 'label' => '<Текст>',
                 'rules' => 'required')
-        , array(
+            , array(
                 'field' => 'date',
                 'label' => '<Дата>',
                 'rules' => 'required'));
     }
 
 
-    private function _prepareArticleDataForAddUpdate($request)
+    private function _prepareTopicDataForAddUpdate($request)
     {
-        return array('meta_description' => $request['meta_description']
-        , 'meta_keywords'               => $request['meta_keywords']
-        , 'title'                       => $request['title']
-        , 'slug'                        => $request['slug']
-        , 'text'                        => $request['text']
-        , 'date'                        => isset($request['date']) ? $request['date'] : Common::getDateTime('Y-m-d')
-        , 'time'                        => isset($request['time']) ? $request['time'] : Common::getDateTime('H:i:s'));
+        return array('title' => $request['title']);
     }
 
 
