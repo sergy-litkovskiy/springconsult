@@ -12,20 +12,20 @@
         <thead>
             <tr class="table_title_row">
                 <td>Название</td>
-                <td style="width:180px">Статьи</td>
+                <td>Статьи</td>
                 <td><p>edit<p></td>
                 <td><p>del</p></td>
-                <td style="width:40px"><p>&nbsp;&nbsp;&nbsp;on</p></td>
-                <td style="width:40px"><p>&nbsp;&nbsp;off</p></td>
+                <td style="width:60px"><p>&nbsp;&nbsp;&nbsp;on</p></td>
+                <td style="width:60px"><p>&nbsp;&nbsp;off</p></td>
             </tr>
         </thead>
         <tbody>
         <?php foreach ($topicArticlesMap as $topicId => $topic):?>
             <tr data-topic-id="<?php echo $topic['data']['id'];?>" data-topic-title="<?php echo $topic['data']['name'];?>">
-                <td class="article_table title">
+                <td class="article_table title" style="padding: 1em">
                     <p><b><?php echo $topic['data']['name'];?></b></p>
                 </td>
-                <td class="article_table">
+                <td class="article_table" style="padding: 1em">
                     <ul>
                         <?php if(isset($topic['articleList']) && count($topic['articleList'])){
                             foreach ($topic['articleList'] as $articleData):?>
@@ -37,19 +37,19 @@
                         }?>
                     </ul>
                 </td>
-                <td>
+                <td style="text-align: center">
                     <a title="edit" href="<?php echo base_url().'backend/topic_edit/'.$topicId;?>">
                         <img src="<?php echo base_url()?>img/img_main/edit.png"/>
                     </a>
                 </td>
-                <td>
+                <td style="text-align: center">
                     <a class="drop" title="Удалить" href="#" data-email="<?php echo base_url().'backend/topic_drop/'.$topicId;?>">
                         <img src="<?php echo base_url()?>img/img_main/del.png"/>
                     </a>
                 </td>
 
-                <td colspan="2" class="status-change">
-                    <form id="<?php echo $topicId;?>" data-table="sale_products">
+                <td colspan="2" class="status-change" style="text-align: center">
+                    <form id="<?php echo $topicId;?>" data-table="topics">
                         <input type="radio" name="status" value="1" <?php echo ($topic['data']['status'] == '1') ? 'checked="checked"': null;?>/>
                         <img src="<?php echo base_url()?>img/img_main/on.png"/>
                         &nbsp;&nbsp;
