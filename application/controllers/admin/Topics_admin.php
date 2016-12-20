@@ -80,7 +80,7 @@ class Topics_admin extends CI_Controller
     public function topic_edit($id = null)
     {
         $topicData      = array();
-        $assignArticles = array();
+        $assignArticleList = array();
         $title          = "Добавить topic";
 
         $articleList = $this->index_model->getListFromTable('articles');
@@ -88,6 +88,10 @@ class Topics_admin extends CI_Controller
         if ($id) {
             $topicData      = $this->topics_model->getFromTableByParams(['id' => $id], 'topics');
             $assignArticles = $this->index_model->getAssignedArticleListByTopicId($id);
+
+            foreach ($assignArticles as $assignArticle) {
+                $assignArticleList[ArrayHelper::arrayGet($assignArticle, 'article_id')] = $assignArticle;
+            }
 
             $title = "Редактировать topic";
         }
@@ -100,7 +104,7 @@ class Topics_admin extends CI_Controller
             'title'          => $title,
             'content'        => $content,
             'menu_items'     => $this->edit_menu_model->childs,
-            'assignArticles' => $assignArticles,
+            'assignArticles' => $assignArticleList,
             'articleList'    => $articleList,
             'message'        => $this->message
         );
@@ -113,7 +117,7 @@ class Topics_admin extends CI_Controller
     }
 
 
-    public function check_valid_article()
+    public function check_valid_topic()
     {
         $data            = $params = array();
         $id              = ArrayHelper::arrayGet($_REQUEST, 'id');
@@ -147,7 +151,7 @@ class Topics_admin extends CI_Controller
                     $this->_assignProcess($assignedNewArticleIds, $assignedOldArticleIds, $id);
                 }
 
-                redirect('backend/news');
+                redirect('backend/topics');
             }
 
         } catch (Exception $e) {
@@ -195,14 +199,14 @@ class Topics_admin extends CI_Controller
 
     private function _update($data, $params)
     {
-        if ($this->index_model->updateInTable($params['id'], $data, 'topics')) {
+        if ($this->index_model->updateInTable(ArrayHelper::arrayGet($params, 'id'), $data, 'topics')) {
             redirect('backend/topics');
         } else {
             throw new Exception('Not updated');
         }
     }
 
-    public function drop($id)
+    public function topic_drop($id)
     {
         try {
             $this->topics_model->delFromTable($id, 'topics');

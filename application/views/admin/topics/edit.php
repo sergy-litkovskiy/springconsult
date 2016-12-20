@@ -12,7 +12,7 @@
             <li style="float: left; list-style-type: none;">
                 <input type="checkbox" class="edit_detail" name="new_article_id[]" value="<?php echo $article['id']?>"
                     <?php
-                        echo $assignArticles && in_array($article['id'], $assignArticles) ?
+                        echo $assignArticles && array_key_exists($article['id'], $assignArticles) ?
                         'checked="checked"':
                         ''
                     ;?>
@@ -23,8 +23,8 @@
     </ul> 
     <input id="id" name="id" type="hidden" value="<?php echo set_value('id', $content['id']);?>"/>
     <input id="status" name="status" type="hidden" value="<?php echo set_value('status', $content['status']);?>"/>
-    <?php foreach($assignArticles as $articleData):?>
-        <input name="old_article_id[]" type="hidden" value="<?php echo set_value('old_article_id', $articleData['article_id']);?>">
+    <?php foreach($assignArticles as $assignArticleId => $articleData):?>
+        <input name="old_article_id[]" type="hidden" value="<?php echo set_value('old_article_id', $assignArticleId);?>">
     <?php endforeach;?>
     <div style="width:600px; clear:both">&nbsp;</div>
     

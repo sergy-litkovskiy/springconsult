@@ -73,6 +73,7 @@ $route['backend/article_drop/(:num)']             = 'admin/articles_admin/drop/$
 $route['backend/topic_edit']               = 'admin/topics_admin/topic_edit';
 $route['backend/topic_edit/(:num)']               = 'admin/topics_admin/topic_edit/$1';
 $route['backend/topic_drop/(:num)']               = 'admin/topics_admin/topic_drop/$1';
+$route['backend/check_valid_topic']               = 'admin/topics_admin/check_valid_topic';
 
 $route['backend/check_valid_submenu']             = 'admin/menu_admin/check_valid_menu';
 $route['backend/check_valid_menu']                = 'admin/menu_admin/check_valid_menu';

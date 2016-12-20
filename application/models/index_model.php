@@ -551,6 +551,7 @@ class Index_model extends Crud
     public function getAssignedArticleListByTopicId($id)
     {
         $sql = "SELECT
+                    topics_articles_assignment.id as topics_articles_assignment_id,
                     articles.id as article_id,
                     articles.title as article_title,
                     articles.status as article_status
