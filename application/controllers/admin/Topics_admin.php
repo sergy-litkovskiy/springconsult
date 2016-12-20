@@ -116,18 +116,17 @@ class Topics_admin extends CI_Controller
     public function check_valid_article()
     {
         $data            = $params = array();
-        $id              = isset($_REQUEST['id']) && $_REQUEST['id'] ? $_REQUEST['id'] : null;
-        $assignedNewArticleIds = isset($_REQUEST['new_article_id']) && $_REQUEST['new_article_id'] ? $_REQUEST['new_article_id'] : array();
-        $assignedOldArticleIds = isset($_REQUEST['old_article_id']) && $_REQUEST['old_article_id'] ? $_REQUEST['old_article_id'] : array();
+        $id              = ArrayHelper::arrayGet($_REQUEST, 'id');
+        $assignedNewArticleIds = ArrayHelper::arrayGet($_REQUEST, 'new_article_id', array());
+        $assignedOldArticleIds = ArrayHelper::arrayGet($_REQUEST, 'old_article_id', array());
 
         try {
             $this->_formValidation();
-            $data = $this->_prepareTopicDataForAddUpdate($_REQUEST);
+            $data['name'] = ArrayHelper::arrayGet($_REQUEST, 'name');
 
             if ($id) {
-                $params ['id'] = $id;
-                $dataUpdate    = array('status'       => $_REQUEST['status']
-                );
+                $params['id'] = $id;
+                $dataUpdate    = array('status' => ArrayHelper::arrayGet($_REQUEST, 'status'));
 
                 $data = array_merge($data, $dataUpdate);
 
@@ -152,25 +151,24 @@ class Topics_admin extends CI_Controller
             }
 
         } catch (Exception $e) {
-            $this->article_edit($id);
+            $this->topic_edit($id);
         }
     }
 
-
-    private function _assignProcess($assignMenuIdArr, $oldAssignMenuId, $id)
+    private function _assignProcess($assignedNewArticleIds, $assignedOldArticleIds, $id)
     {
         $assignsArr = array(
-            'newSourceIdArr'    => $assignMenuIdArr
-            , 'oldSourceIdArr'  => $oldAssignMenuId
-            , 'assignId'        => $id
-            , 'assignFieldName' => 'articles_id'
-            , 'sourceFieldName' => 'menu_id'
-            , 'table'           => 'assign_articles');
+            'newSourceIdArr'  => $assignedNewArticleIds,
+            'oldSourceIdArr'  => $assignedOldArticleIds,
+            'assignId'        => $id,
+            'assignFieldName' => 'topics_id',
+            'sourceFieldName' => 'articles_id',
+            'table'           => 'topics_articles_assignment'
+        );
 
         $this->assign_model->setAssignArr($assignsArr);
         $this->assign_model->addOrDeleteAssigns();
     }
-
 
     private function _formValidation()
     {
@@ -181,66 +179,13 @@ class Topics_admin extends CI_Controller
         Common::assertTrue($isValid, 'Форма заполнена неверно');
     }
 
-
     private function _prepareArticleValidationRules()
     {
         return array(
             array(
-                'field' => 'title',
-                'label' => '<Название раздела>',
-                'rules' => 'required')
-            , array(
-                'field' => 'slug',
-                'label' => '<Алиас раздела>',
-                'rules' => 'required')
-            , array(
-                'field' => 'text',
-                'label' => '<Текст>',
-                'rules' => 'required')
-            , array(
-                'field' => 'date',
-                'label' => '<Дата>',
+                'field' => 'name',
+                'label' => '<Название темы>',
                 'rules' => 'required'));
-    }
-
-
-    private function _prepareTopicDataForAddUpdate($request)
-    {
-        return array('title' => $request['title']);
-    }
-
-
-    public function ajax_send_article_to_subscribers()
-    {
-        $errLogData = array();
-        $articleId  = $_REQUEST['article_id'] && is_numeric($_REQUEST['article_id']) ? $_REQUEST['article_id'] : null;
-        try {
-            Common::assertTrue($articleId, 'Ошибка! Не установлен идентификатор статьи');
-            $articlesArr   = $this->index_model->getDetailContent($articleId);
-            $articleDetail = count($articlesArr) ? $articlesArr[0] : null;
-            Common::assertTrue($articleDetail, 'Ошибка! Нет данных по запрашиваемой статье');
-
-            $recipientsArr = $this->index_model->getNlSubscribers();
-            Common::assertTrue(count($recipientsArr), 'Не найден ни один подписчик для отправки');
-
-//            $sentMailCounter = $this->_sendNlSubscribe($recipientsArr, $articleDetail);
-//            Common::assertTrue($sentMailCounter > 0, 'Ошибка! Не было отправлено ни одного письма');
-            $this->_unisenderCreateEmailMessage($articleDetail);
-
-            $isUpdated = $this->_updateArticleStatusIsMailSent($articleDetail['id']);
-            Common::assertTrue($isUpdated, 'Ошибка! Статус сатьи не был изменен на is mail sent');
-            $this->result['success'] = true;
-        } catch (Exception $e) {
-            $this->result['message'] = $e->getMessage();
-
-            $errLogData['resource_id'] = ERROR_SRC_ARTICLE_MAILER;
-            $errLogData['text']        = $e->getMessage() . " - Название статьи: " . $articleDetail['title'];
-            $errLogData['created_at']  = Common::getDateTime('Y-m-d H:i:s');
-            $this->index_model->addInTable($errLogData, 'error_log');
-        }
-
-        print json_encode($this->result);
-        exit;
     }
 
     private function _add($data)
@@ -248,26 +193,27 @@ class Topics_admin extends CI_Controller
         return $this->index_model->addInTable($data, 'topics');
     }
 
-
     private function _update($data, $params)
     {
         if ($this->index_model->updateInTable($params['id'], $data, 'topics')) {
-            redirect('backend/news');
+            redirect('backend/topics');
         } else {
             throw new Exception('Not updated');
         }
     }
 
-
     public function drop($id)
     {
         try {
-            $this->index_model->delFromTable($id, 'topics');
-            $assignArticlesArr = $this->index_model->getFromTableByParams(array('articles_id' => $id), 'assign_articles');
+            $this->topics_model->delFromTable($id, 'topics');
+            $assignArticles = $this->index_model->getAssignedArticleListByTopicId($id);
 
-            if (count($assignArticlesArr)) {
-                foreach ($assignArticlesArr as $assignArticles) {
-                    $this->index_model->delFromTable($assignArticles['id'], 'assign_articles');
+            if ($assignArticles) {
+                foreach ($assignArticles as $assignArticleData) {
+                    $this->index_model->delFromTable(
+                        ArrayHelper::arrayGet($assignArticleData, 'topics_articles_assignment_id'),
+                        'topics_articles_assignment'
+                    );
                 }
             }
             $this->result['success'] = true;
