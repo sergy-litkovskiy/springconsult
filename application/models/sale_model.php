@@ -114,4 +114,21 @@ class Sale_model extends Crud
         return $query->result_array();
     }
 
+    public function getAssignedASaleProductListBySaleCategoryId($saleCategoryId)
+    {
+        $sql = "SELECT
+                    sale_categories_sale_products_assignment.id as sale_categories_sale_products_assignment_id,
+                    sale_products.id as sale_products_id,
+                    sale_products.title as sale_products_title,
+                    sale_products.status as sale_products_status
+                FROM
+                    sale_products
+                INNER JOIN
+                    sale_categories_sale_products_assignment ON sale_categories_sale_products_assignment.sale_products_id = sale_products.id";
+        $sql .= " AND sale_categories_sale_products_assignment.sale_categories_id = ".$saleCategoryId;
+
+        $query = $this->db->query($sql);
+
+        return $query->result_array();
+    }
 }

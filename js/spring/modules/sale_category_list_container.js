@@ -28,6 +28,7 @@ function CategoryListContainerModule() {
         var _onClickChangeStatus = function (e) {
             e.preventDefault();
             _currentContainer = $(this).parent('form');
+
             var data = {
                 status: $(this).val(),
                 id    : _currentContainer.attr('id'),
