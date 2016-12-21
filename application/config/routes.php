@@ -128,13 +128,13 @@ $route['backend/sale_page_list']        = 'admin/sale_admin/sale_page_list';
 $route['backend/sale_page_edit']        = 'admin/sale_admin/sale_page_edit';
 $route['backend/sale_page_edit/(:num)'] = 'admin/sale_admin/sale_page_edit/$1';
 $route['backend/sale_page_drop/(:num)'] = 'admin/sale_admin/sale_page_drop/$1';
-$route['backend/check_valid_sale_page'] = 'admin/sale_admin/check_valid_sale_page';
+$route['backend/sale_page_save'] = 'admin/sale_admin/sale_page_save';
 
 $route['backend/sale_products_list']        = 'admin/sale_admin/sale_products_list';
 $route['backend/sale_products_edit']        = 'admin/sale_admin/sale_products_edit';
 $route['backend/sale_products_edit/(:num)'] = 'admin/sale_admin/sale_products_edit/$1';
 $route['backend/sale_products_drop/(:num)'] = 'admin/sale_admin/sale_products_drop/$1';
-$route['backend/check_valid_sale_products'] = 'admin/sale_admin/check_valid_sale_products';
+$route['backend/sale_products_save'] = 'admin/sale_admin/sale_products_save';
 $route['backend/sale_products_statistic']   = 'admin/sale_admin/sale_products_statistic';
 
 $route['backend/announce_list']        = 'admin/announce_admin/announce_list';
