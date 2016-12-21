@@ -1,9 +1,4 @@
 <?php
-/**
- * @author Litkovsky
- * @copyright 2010
- * model for index page
- */
  
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -88,7 +83,8 @@ class Sale_model extends Crud
                     sale_products.title as sale_products_title,
                     sale_products.status as sale_products_status,
                     sale_products.price as sale_products_price,
-                    sale_products.description as sale_products_description
+                    sale_products.description as sale_products_description,
+                    sale_products.thumb as sale_products_thumb
                 FROM
                     sale_page
                 LEFT JOIN
