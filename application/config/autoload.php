@@ -153,15 +153,17 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array(
-                        'crud',
-                        'index_model',
-                        'edit_menu_model',
-                        'menu_model',
-                        'login_model',
-                        'search_model',
-                        'mailer_model',
-                        'landing_model',
-                        'assign_model',
-                        'tags_model',
-                        'topics_model',
-                        'sale_model');
+    'crud',
+    'index_model',
+    'edit_menu_model',
+    'menu_model',
+    'login_model',
+    'search_model',
+    'mailer_model',
+    'landing_model',
+    'assign_model',
+    'tags_model',
+    'topic_model',
+    'sale_model',
+    'saleCategory_model',
+);

@@ -1,11 +1,8 @@
 <?php
-/**
- * @author Litkovskiy
- * @copyright 2012
- */
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Topics_admin extends CI_Controller
+class Topic_admin extends CI_Controller
 {
     public  $emptyTopicList = array();
     private $data           = array();
@@ -49,7 +46,7 @@ class Topics_admin extends CI_Controller
 
     public function index()
     {
-        $topicListWithArticles = $this->topics_model->getTopicListWithArticlesAdmin();
+        $topicListWithArticles = $this->topic_model->getTopicListWithArticlesAdmin();
         $topicArticlesMap      = $this->_prepareTopicArticlesMap($topicListWithArticles);
 
         $contentData = array(
@@ -77,7 +74,7 @@ class Topics_admin extends CI_Controller
         return $map;
     }
 
-    public function topic_edit($id = null)
+    public function edit($id = null)
     {
         $topicData      = array();
         $assignArticleList = array();
@@ -86,7 +83,7 @@ class Topics_admin extends CI_Controller
         $articleList = $this->index_model->getListFromTable('articles');
 
         if ($id) {
-            $topicData      = $this->topics_model->getFromTableByParams(['id' => $id], 'topics');
+            $topicData      = $this->topic_model->getFromTableByParams(['id' => $id], 'topics');
             $assignArticles = $this->index_model->getAssignedArticleListByTopicId($id);
 
             foreach ($assignArticles as $assignArticle) {
@@ -117,7 +114,7 @@ class Topics_admin extends CI_Controller
     }
 
 
-    public function check_valid_topic()
+    public function save()
     {
         $data            = $params = array();
         $id              = ArrayHelper::arrayGet($_REQUEST, 'id');
@@ -155,7 +152,7 @@ class Topics_admin extends CI_Controller
             }
 
         } catch (Exception $e) {
-            $this->topic_edit($id);
+            $this->edit($id);
         }
     }
 
@@ -206,10 +203,10 @@ class Topics_admin extends CI_Controller
         }
     }
 
-    public function topic_drop($id)
+    public function drop($id)
     {
         try {
-            $this->topics_model->delFromTable($id, 'topics');
+            $this->topic_model->delFromTable($id, 'topics');
             $assignArticles = $this->index_model->getAssignedArticleListByTopicId($id);
 
             if ($assignArticles) {

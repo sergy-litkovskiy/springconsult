@@ -1,13 +1,8 @@
 <?php
-/**
- * @author Litkovsky
- * @copyright 2010
- * model for index page
- */
  
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Topics_model extends Crud
+class Topic_model extends Crud
 {
 
     public function __construct()
