@@ -20,18 +20,18 @@
             </tr>
         </thead>
         <tbody>
-        <?php foreach ($categoriesProductsMap as $categoryId => $map):?>
+        <?php foreach ($categoriesToProductsMap as $categoryId => $map):?>
             <tr data-topic-id="<?php echo $map['data']['id'];?>" data-topic-title="<?php echo $map['data']['name'];?>">
                 <td class="article_table title" style="padding: 1em">
                     <p><b><?php echo $map['data']['name'];?></b></p>
                 </td>
                 <td class="article_table" style="padding: 1em">
                     <ul>
-                        <?php if(isset($map['saleProductList']) && count($map['saleProductList'])){
-                            foreach ($map['saleProductList'] as $saleProductData):?>
-                                <?php if($saleProductData['sale_product_title']){
-                                    $status = ($saleProductData['sale_product_status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
-                                    <li><?php  echo $saleProductData['sale_product_title'].' - '.$status;?></li>
+                        <?php if(isset($map['sale_product_list']) && count($map['sale_product_list'])){
+                            foreach ($map['sale_product_list'] as $saleProductData):?>
+                                <?php if($saleProductData['sale_products_title']){
+                                    $status = ($saleProductData['sale_products_title'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
+                                    <li><?php  echo $saleProductData['sale_products_title'].' - '.$status;?></li>
                                 <?php };?>
                             <?php endforeach;
                         }?>

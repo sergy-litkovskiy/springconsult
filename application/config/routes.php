@@ -91,7 +91,7 @@ $route['backend/menu_admin/subitem_edit/(:num)'] = 'admin/menu_admin/edit_menu_s
 
 $route['backend/news']            = 'admin/index_admin/index';
 $route['backend/topic']          = 'admin/topic_admin/index';
-$route['backend/sale_category'] = 'admin/sale_category_admin/index';
+$route['backend/sale_category'] = 'admin/saleCategory_admin/index';
 
 //$route['backend/send_nl_subscribe/(:num)']        = 'admin/articles_admin/ajax_send_article_to_subscribers/$1';
 

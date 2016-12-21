@@ -4,18 +4,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class SaleCategory_admin extends CI_Controller
 {
-    public  $emptyTopicList = array();
-    private $data           = array();
+    public  $emptyCategoryList = array();
+    private $data              = array();
     public  $message;
     public  $result;
     public  $urlArr;
 
-    /** @var  Index_admin */
+    /** @var  Index_model */
     public $index_model;
+    /** @var  Sale_model */
+    public $sale_model;
     /** @var  Login_model */
     public $login_model;
-    /** @var  Login_model */
-    public $topics_model;
+    /** @var  SaleCategory_model */
+    public $saleCategory_model;
     /** @var  Edit_menu_model */
     public $edit_menu_model;
     /** @var  Assign_model */
@@ -33,7 +35,7 @@ class SaleCategory_admin extends CI_Controller
             $this->login_model->logOut();
         }
 
-        $this->emptyTopicList = array(
+        $this->emptyCategoryList = array(
             'id'     => null,
             'name'   => null,
             'status' => null
@@ -46,29 +48,29 @@ class SaleCategory_admin extends CI_Controller
 
     public function index()
     {
-        $topicListWithArticles = $this->topic_model->getTopicListWithArticlesAdmin();
-        $topicArticlesMap      = $this->_prepareTopicArticlesMap($topicListWithArticles);
+        $categoryListWithProductList = $this->saleCategory_model->getCategoryListWithProductListAdmin();
+        $categoriesToProductsMap = $this->_prepareCategoriesToProductsMap($categoryListWithProductList);
 
         $contentData = array(
             'title'            => 'Springconsulting - admin',
-            'topicArticlesMap' => $topicArticlesMap,
+            'categoriesToProductsMap' => $categoriesToProductsMap,
             'message'          => $this->message
         );
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/topics/show', $contentData, true));
+            'content' => $this->load->view('admin/sale_categories/show', $contentData, true));
 
         $this->load->view('layout_admin', $data);
     }
 
-    private function _prepareTopicArticlesMap(array $topicListWithArticles)
+    private function _prepareCategoriesToProductsMap(array $categoryListWithProductList)
     {
         $map = array();
 
-        foreach ($topicListWithArticles as $topicData) {
-            $map[ArrayHelper::arrayGet($topicData, 'id')]['data']          = $topicData;
-            $map[ArrayHelper::arrayGet($topicData, 'id')]['articleList'][] = $topicData;
+        foreach ($categoryListWithProductList as $categoryData) {
+            $map[ArrayHelper::arrayGet($categoryData, 'id')]['data']          = $categoryData;
+            $map[ArrayHelper::arrayGet($categoryData, 'id')]['sale_product_list'][] = $categoryData;
         }
 
         return $map;
@@ -77,23 +79,24 @@ class SaleCategory_admin extends CI_Controller
     public function edit($id = null)
     {
         $topicData      = array();
-        $assignArticleList = array();
-        $title          = "Добавить topic";
+        $assignedSaleProductList = array();
+        $title          = "Добавить sale category";
 
-        $articleList = $this->index_model->getListFromTable('articles');
+        $saleProductList = $this->sale_model->getListFromTable('sale_products');
 
         if ($id) {
-            $topicData      = $this->topic_model->getFromTableByParams(['id' => $id], 'topics');
-            $assignArticles = $this->index_model->getAssignedArticleListByTopicId($id);
+            $topicData      = $this->saleCategory_model->getFromTableByParams(['id' => $id], 'topics');
+            $assignedSaleProductDataList = $this->sale_model->getAssignedASaleProductListBySaleCategoryId($id);
 
-            foreach ($assignArticles as $assignArticle) {
-                $assignArticleList[ArrayHelper::arrayGet($assignArticle, 'article_id')] = $assignArticle;
+            foreach ($assignedSaleProductDataList as $assignedSaleProductData) {
+                $saleProductsId = ArrayHelper::arrayGet($assignedSaleProductData, 'sale_products_id');
+                $assignedSaleProductList[$saleProductsId] = $assignedSaleProductData;
             }
 
             $title = "Редактировать topic";
         }
 
-        $content        = ArrayHelper::arrayGet($topicData, 0, $this->emptyTopicList);
+        $content        = ArrayHelper::arrayGet($topicData, 0, $this->emptyCategoryList);
         $url            = $this->index_model->prepareUrl($this->urlArr);
         $content['url'] = $url;
 
@@ -101,14 +104,14 @@ class SaleCategory_admin extends CI_Controller
             'title'          => $title,
             'content'        => $content,
             'menu_items'     => $this->edit_menu_model->childs,
-            'assignArticles' => $assignArticleList,
-            'articleList'    => $articleList,
+            'assignedSaleProductList' => $assignedSaleProductList,
+            'saleProductList'    => $saleProductList,
             'message'        => $this->message
         );
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/topics/edit', $this->data, true));
+            'content' => $this->load->view('admin/sale_categories/edit', $this->data, true));
 
         $this->load->view('layout_admin', $data);
     }
@@ -118,8 +121,8 @@ class SaleCategory_admin extends CI_Controller
     {
         $data            = $params = array();
         $id              = ArrayHelper::arrayGet($_REQUEST, 'id');
-        $assignedNewArticleIds = ArrayHelper::arrayGet($_REQUEST, 'new_article_id', array());
-        $assignedOldArticleIds = ArrayHelper::arrayGet($_REQUEST, 'old_article_id', array());
+        $assignedNewSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'new_sale_products_id', array());
+        $assignedOldSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'old_sale_products_id', array());
 
         try {
             $this->_formValidation();
@@ -131,8 +134,8 @@ class SaleCategory_admin extends CI_Controller
 
                 $data = array_merge($data, $dataUpdate);
 
-                if (count($assignedNewArticleIds)) {
-                    $this->_assignProcess($assignedNewArticleIds, $assignedOldArticleIds, $id);
+                if (count($assignedNewSaleProductIds)) {
+                    $this->_assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $id);
                 }
 
                 $this->_update($data, $params);
@@ -144,11 +147,11 @@ class SaleCategory_admin extends CI_Controller
                 $id = $this->_add($data);
                 Common::assertTrue($id, 'Форма заполнена неверно');
 
-                if (count($assignedNewArticleIds)) {
-                    $this->_assignProcess($assignedNewArticleIds, $assignedOldArticleIds, $id);
+                if (count($assignedNewSaleProductIds)) {
+                    $this->_assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $id);
                 }
 
-                redirect('backend/topics');
+                redirect('backend/sale_category');
             }
 
         } catch (Exception $e) {
@@ -156,15 +159,15 @@ class SaleCategory_admin extends CI_Controller
         }
     }
 
-    private function _assignProcess($assignedNewArticleIds, $assignedOldArticleIds, $id)
+    private function _assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $id)
     {
         $assignsArr = array(
-            'newSourceIdArr'  => $assignedNewArticleIds,
-            'oldSourceIdArr'  => $assignedOldArticleIds,
+            'newSourceIdArr'  => $assignedNewSaleProductIds,
+            'oldSourceIdArr'  => $assignedOldSaleProductIds,
             'assignId'        => $id,
-            'assignFieldName' => 'topics_id',
-            'sourceFieldName' => 'articles_id',
-            'table'           => 'topics_articles_assignment'
+            'assignFieldName' => 'sale_categories_id',
+            'sourceFieldName' => 'sale_products_id',
+            'table'           => 'sale_categories_sale_products_assignment'
         );
 
         $this->assign_model->setAssignArr($assignsArr);
@@ -173,31 +176,31 @@ class SaleCategory_admin extends CI_Controller
 
     private function _formValidation()
     {
-        $rules = $this->_prepareArticleValidationRules();
+        $rules = $this->_prepareSaleCategoryValidationRules();
         $this->form_validation->set_rules($rules);
 
         $isValid = $this->form_validation->run();
         Common::assertTrue($isValid, 'Форма заполнена неверно');
     }
 
-    private function _prepareArticleValidationRules()
+    private function _prepareSaleCategoryValidationRules()
     {
         return array(
             array(
                 'field' => 'name',
-                'label' => '<Название темы>',
+                'label' => '<Название sale category>',
                 'rules' => 'required'));
     }
 
     private function _add($data)
     {
-        return $this->index_model->addInTable($data, 'topics');
+        return $this->index_model->addInTable($data, 'sale_categories');
     }
 
     private function _update($data, $params)
     {
-        if ($this->index_model->updateInTable(ArrayHelper::arrayGet($params, 'id'), $data, 'topics')) {
-            redirect('backend/topics');
+        if ($this->index_model->updateInTable(ArrayHelper::arrayGet($params, 'id'), $data, 'sale_categories')) {
+            redirect('backend/sale_category');
         } else {
             throw new Exception('Not updated');
         }
@@ -206,14 +209,14 @@ class SaleCategory_admin extends CI_Controller
     public function drop($id)
     {
         try {
-            $this->topic_model->delFromTable($id, 'topics');
-            $assignArticles = $this->index_model->getAssignedArticleListByTopicId($id);
+            $this->saleCategory_model->delFromTable($id, 'sale_categories');
+            $assignedSaleProductDataList = $this->sale_model->getAssignedASaleProductListBySaleCategoryId($id);
 
-            if ($assignArticles) {
-                foreach ($assignArticles as $assignArticleData) {
+            if ($assignedSaleProductDataList) {
+                foreach ($assignedSaleProductDataList as $assignedSaleProductsData) {
                     $this->index_model->delFromTable(
-                        ArrayHelper::arrayGet($assignArticleData, 'topics_articles_assignment_id'),
-                        'topics_articles_assignment'
+                        ArrayHelper::arrayGet($assignedSaleProductsData, 'sale_categories_sale_products_assignment_id'),
+                        'sale_categories_sale_products_assignment'
                     );
                 }
             }

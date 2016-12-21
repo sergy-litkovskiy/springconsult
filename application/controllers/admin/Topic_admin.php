@@ -14,8 +14,8 @@ class Topic_admin extends CI_Controller
     public $index_model;
     /** @var  Login_model */
     public $login_model;
-    /** @var  Login_model */
-    public $topics_model;
+    /** @var  Topic_model */
+    public $topic_model;
     /** @var  Edit_menu_model */
     public $edit_menu_model;
     /** @var  Assign_model */
@@ -148,7 +148,7 @@ class Topic_admin extends CI_Controller
                     $this->_assignProcess($assignedNewArticleIds, $assignedOldArticleIds, $id);
                 }
 
-                redirect('backend/topics');
+                redirect('backend/topic');
             }
 
         } catch (Exception $e) {
@@ -197,7 +197,7 @@ class Topic_admin extends CI_Controller
     private function _update($data, $params)
     {
         if ($this->index_model->updateInTable(ArrayHelper::arrayGet($params, 'id'), $data, 'topics')) {
-            redirect('backend/topics');
+            redirect('backend/topic');
         } else {
             throw new Exception('Not updated');
         }
