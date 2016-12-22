@@ -10,6 +10,7 @@ class SaleCategory_model extends Crud
         parent::__construct();
 
         $this->idkey = 'id';
+        $this->table = 'sale_categories';
     }
 
     public function getCategoryListWithProductList()

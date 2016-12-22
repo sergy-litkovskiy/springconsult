@@ -2,26 +2,25 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class SaleCategory_admin extends CI_Controller
+class Review_admin extends CI_Controller
 {
-    public  $emptyCategoryList = array();
-    private $data              = array();
-    public  $message;
-    public  $result;
-    public  $urlArr;
+    public $emptyReviewList = array();
+    public $message;
+    public $result;
+    public $urlArr;
 
     /** @var  Index_model */
     public $index_model;
     /** @var  Sale_model */
     public $sale_model;
-    /** @var  Login_model */
-    public $login_model;
-    /** @var  SaleCategory_model */
-    public $saleCategory_model;
-    /** @var  Edit_menu_model */
-    public $edit_menu_model;
     /** @var  Assign_model */
     public $assign_model;
+    /** @var  Login_model */
+    public $login_model;
+    /** @var  Review_model */
+    public $review_model;
+    /** @var  Edit_menu_model */
+    public $edit_menu_model;
     /** @var  CI_Form_validation */
     public $form_validation;
     /** @var  CI_Session */
@@ -35,7 +34,7 @@ class SaleCategory_admin extends CI_Controller
             $this->login_model->logOut();
         }
 
-        $this->emptyCategoryList = array(
+        $this->emptyReviewList = array(
             'id'     => null,
             'name'   => null,
             'status' => null
@@ -48,29 +47,29 @@ class SaleCategory_admin extends CI_Controller
 
     public function index()
     {
-        $categoryListWithProductList = $this->saleCategory_model->getCategoryListWithProductListAdmin();
-        $categoriesToProductsMap     = $this->_prepareCategoriesToProductsMap($categoryListWithProductList);
+        $reviewListWithProductList = $this->review_model->getReviewListWithProductListAdmin();
+        $reviewsToProductsMap      = $this->_prepareReviewsToProductsMap($reviewListWithProductList);
 
         $contentData = array(
             'title'                   => 'Springconsulting - admin',
-            'categoriesToProductsMap' => $categoriesToProductsMap,
+            'categoriesToProductsMap' => $reviewsToProductsMap,
             'message'                 => $this->message
         );
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/sale_categories/show', $contentData, true));
+            'content' => $this->load->view('admin/reviews/show', $contentData, true));
 
         $this->load->view('layout_admin', $data);
     }
 
-    private function _prepareCategoriesToProductsMap(array $categoryListWithProductList)
+    private function _prepareReviewsToProductsMap(array $reviewListWithProductList)
     {
         $map = array();
 
-        foreach ($categoryListWithProductList as $categoryData) {
-            $map[ArrayHelper::arrayGet($categoryData, 'id')]['data']                = $categoryData;
-            $map[ArrayHelper::arrayGet($categoryData, 'id')]['sale_product_list'][] = $categoryData;
+        foreach ($reviewListWithProductList as $reviewData) {
+            $map[ArrayHelper::arrayGet($reviewData, 'id')]['data']                = $reviewData;
+            $map[ArrayHelper::arrayGet($reviewData, 'id')]['sale_product_list'][] = $reviewData;
         }
 
         return $map;
@@ -78,29 +77,29 @@ class SaleCategory_admin extends CI_Controller
 
     public function edit($id = null)
     {
-        $topicData               = array();
+        $reviewData              = array();
         $assignedSaleProductList = array();
-        $title                   = "Добавить sale category";
+        $title                   = "Добавить отзыв";
 
         $saleProductList = $this->sale_model->getListFromTable('sale_products');
 
         if ($id) {
-            $topicData                   = $this->saleCategory_model->getFromTableByParams(['id' => $id], 'topics');
-            $assignedSaleProductDataList = $this->sale_model->getAssignedASaleProductListBySaleCategoryId($id);
+            $reviewData                  = $this->review_model->get($id);
+            $assignedSaleProductDataList = $this->sale_model->getAssignedSaleProductListByReviewId($id);
 
             foreach ($assignedSaleProductDataList as $assignedSaleProductData) {
-                $saleProductsId = ArrayHelper::arrayGet($assignedSaleProductData, 'sale_products_id');
+                $saleProductsId                           = ArrayHelper::arrayGet($assignedSaleProductData, 'sale_products_id');
                 $assignedSaleProductList[$saleProductsId] = $assignedSaleProductData;
             }
 
-            $title = "Редактировать topic";
+            $title = "Редактировать reviews";
         }
 
-        $content        = ArrayHelper::arrayGet($topicData, 0, $this->emptyCategoryList);
+        $content        = ArrayHelper::arrayGet($reviewData, 0, $this->emptyReviewList);
         $url            = $this->index_model->prepareUrl($this->urlArr);
         $content['url'] = $url;
 
-        $this->data = array(
+        $contentData = array(
             'title'                   => $title,
             'content'                 => $content,
             'menu_items'              => $this->edit_menu_model->childs,
@@ -111,7 +110,7 @@ class SaleCategory_admin extends CI_Controller
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/sale_categories/edit', $this->data, true));
+            'content' => $this->load->view('admin/reviews/edit', $contentData, true));
 
         $this->load->view('layout_admin', $data);
     }
@@ -119,20 +118,24 @@ class SaleCategory_admin extends CI_Controller
 
     public function save()
     {
-        $data                      = $params = array();
-        $id                        = ArrayHelper::arrayGet($_REQUEST, 'id');
+        $data = $params = array();
+        $id   = ArrayHelper::arrayGet($_REQUEST, 'id');
+
         $assignedNewSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'new_sale_products_id', array());
         $assignedOldSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'old_sale_products_id', array());
 
         try {
-            $data['name'] = ArrayHelper::arrayGet($_REQUEST, 'name');
+            $data['author'] = ArrayHelper::arrayGet($_REQUEST, 'author');
+            $data['text']   = ArrayHelper::arrayGet($_REQUEST, 'text');
+            $data['image']  = ArrayHelper::arrayGet($_REQUEST, 'image');
+            $data['date']  = new DateTime(ArrayHelper::arrayGet($_REQUEST, 'date'));
 
             if ($id) {
                 $dataUpdate = array('status' => ArrayHelper::arrayGet($_REQUEST, 'status'));
 
                 $data = array_merge($data, $dataUpdate);
 
-                if (count($assignedNewSaleProductIds)) {
+                if ($assignedNewSaleProductIds) {
                     $this->_assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $id);
                 }
 
@@ -142,13 +145,14 @@ class SaleCategory_admin extends CI_Controller
 
                 $data = array_merge($data, $dataAdd);
 
-                $this->saleCategory_model->add($data);
+                $id = $this->review_model->add($data);
+                Common::assertTrue($id, 'Форма заполнена неверно');
 
-                if ($assignedNewSaleProductIds) {
+                if (count($assignedNewSaleProductIds)) {
                     $this->_assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $id);
                 }
 
-                redirect('backend/sale_category');
+                redirect('backend/review');
             }
 
         } catch (Exception $e) {
@@ -162,9 +166,9 @@ class SaleCategory_admin extends CI_Controller
             'newSourceIdArr'  => $assignedNewSaleProductIds,
             'oldSourceIdArr'  => $assignedOldSaleProductIds,
             'assignId'        => $id,
-            'assignFieldName' => 'sale_categories_id',
+            'assignFieldName' => 'reviews_id',
             'sourceFieldName' => 'sale_products_id',
-            'table'           => 'sale_categories_sale_products_assignment'
+            'table'           => 'sale_products_reviews_assignment'
         );
 
         $this->assign_model->setAssignArr($assignsArr);
@@ -173,8 +177,8 @@ class SaleCategory_admin extends CI_Controller
 
     private function _update($id, $data)
     {
-        if ($this->saleCategory_model->update($id, $data)) {
-            redirect('backend/sale_category');
+        if ($this->review_model->update($id, $data)) {
+            redirect('backend/review');
         } else {
             throw new Exception('Not updated');
         }
@@ -183,14 +187,14 @@ class SaleCategory_admin extends CI_Controller
     public function drop($id)
     {
         try {
-            $this->saleCategory_model->del($id);
-            $assignedSaleProductDataList = $this->sale_model->getAssignedASaleProductListBySaleCategoryId($id);
+            $this->review_model->del($id);
+            $assignedSaleProductDataList = $this->sale_model->getAssignedSaleProductListByReviewId($id);
 
             if ($assignedSaleProductDataList) {
                 foreach ($assignedSaleProductDataList as $assignedSaleProductsData) {
-                    $this->saleCategory_model->delFromTable(
-                        ArrayHelper::arrayGet($assignedSaleProductsData, 'sale_categories_sale_products_assignment_id'),
-                        'sale_categories_sale_products_assignment'
+                    $this->review_model->delFromTable(
+                        ArrayHelper::arrayGet($assignedSaleProductsData, 'sale_products_reviews_assignment_id'),
+                        'sale_products_reviews_assignment'
                     );
                 }
             }

@@ -1,16 +1,11 @@
 <?php
 
-/**
- * @author Litkovsky
- * @copyright 2010
- * model for all objects of site
- */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Crud extends CI_Model {
-	
-    var $table = '';
-    var $idkey = '';
+class Crud extends CI_Model
+{
+    protected $table = '';
+    protected $idkey = 'id';
     
     function __construct()
     {
@@ -114,7 +109,7 @@ class Crud extends CI_Model {
         $sqlLimit = $limit ? " LIMIT ".$limit : false;
         $sqlWhere = count($params) ? $this->_makeSqlWhereFromParams($params) : null;
 
-        $query = $this->db->query("SELECT * FROM ".$table.$sqlWhere.$orderBy.$sqlLimit."");
+        $query = $this->db->query("SELECT * FROM ".$table.$sqlWhere.$orderBy.$sqlLimit);
         return $query->result_array();
     }
 
