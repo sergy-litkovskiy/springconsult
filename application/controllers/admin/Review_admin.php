@@ -36,8 +36,11 @@ class Review_admin extends CI_Controller
 
         $this->emptyReviewList = array(
             'id'     => null,
-            'name'   => null,
-            'status' => null
+            'author' => null,
+            'image'  => null,
+            'text'   => null,
+            'status' => null,
+            'date'   => null,
         );
 
         $this->result  = array("success" => null, "message" => null, "data" => null);
@@ -51,9 +54,9 @@ class Review_admin extends CI_Controller
         $reviewsToProductsMap      = $this->_prepareReviewsToProductsMap($reviewListWithProductList);
 
         $contentData = array(
-            'title'                   => 'Springconsulting - admin',
+            'title'                => 'Springconsulting - admin',
             'reviewsToProductsMap' => $reviewsToProductsMap,
-            'message'                 => $this->message
+            'message'              => $this->message
         );
 
         $data = array(
@@ -95,7 +98,13 @@ class Review_admin extends CI_Controller
             $title = "Редактировать reviews";
         }
 
-        $content        = ArrayHelper::arrayGet($reviewData, 0, $this->emptyReviewList);
+        $content = ArrayHelper::arrayGet($reviewData, 0, $this->emptyReviewList);
+        /** @var DateTime $dateTime */
+        $dateTime        = ArrayHelper::arrayGet($content, 'date');
+        $dateTime = $dateTime ? $dateTime : new DateTime();
+
+        $content['date'] = $dateTime->format('Y-m-d H:i:s');
+
         $url            = $this->index_model->prepareUrl($this->urlArr);
         $content['url'] = $url;
 
@@ -128,7 +137,7 @@ class Review_admin extends CI_Controller
             $data['author'] = ArrayHelper::arrayGet($_REQUEST, 'author');
             $data['text']   = ArrayHelper::arrayGet($_REQUEST, 'text');
             $data['image']  = ArrayHelper::arrayGet($_REQUEST, 'image');
-            $data['date']  = new DateTime(ArrayHelper::arrayGet($_REQUEST, 'date'));
+            $data['date']   = new DateTime(ArrayHelper::arrayGet($_REQUEST, 'date'));
 
             if ($id) {
                 $dataUpdate = array('status' => ArrayHelper::arrayGet($_REQUEST, 'status'));
