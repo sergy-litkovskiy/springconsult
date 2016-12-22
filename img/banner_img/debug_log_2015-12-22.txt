@@ -1,4 +1,0 @@
-2015-12-22 22:57:01	array (
-  'username' => '\'helenspring_admin\'',
-  'loggedIn' => true,
-)
