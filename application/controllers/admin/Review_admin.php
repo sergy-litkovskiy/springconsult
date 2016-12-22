@@ -91,7 +91,7 @@ class Review_admin extends CI_Controller
             $assignedSaleProductDataList = $this->sale_model->getAssignedSaleProductListByReviewId($id);
 
             foreach ($assignedSaleProductDataList as $assignedSaleProductData) {
-                $saleProductsId                           = ArrayHelper::arrayGet($assignedSaleProductData, 'sale_products_id');
+                $saleProductsId = ArrayHelper::arrayGet($assignedSaleProductData, 'sale_products_id');
                 $assignedSaleProductList[$saleProductsId] = $assignedSaleProductData;
             }
 
@@ -99,11 +99,6 @@ class Review_admin extends CI_Controller
         }
 
         $content = ArrayHelper::arrayGet($reviewData, 0, $this->emptyReviewList);
-        /** @var DateTime $dateTime */
-        $dateTime        = ArrayHelper::arrayGet($content, 'date');
-        $dateTime = $dateTime ? $dateTime : new DateTime();
-
-        $content['date'] = $dateTime->format('Y-m-d H:i:s');
 
         $url            = $this->index_model->prepareUrl($this->urlArr);
         $content['url'] = $url;
@@ -137,7 +132,7 @@ class Review_admin extends CI_Controller
             $data['author'] = ArrayHelper::arrayGet($_REQUEST, 'author');
             $data['text']   = ArrayHelper::arrayGet($_REQUEST, 'text');
             $data['image']  = ArrayHelper::arrayGet($_REQUEST, 'image');
-            $data['date']   = new DateTime(ArrayHelper::arrayGet($_REQUEST, 'date'));
+            $data['date']   = ArrayHelper::arrayGet($_REQUEST, 'date', date('Y-m-d H:i:s'));
 
             if ($id) {
                 $dataUpdate = array('status' => ArrayHelper::arrayGet($_REQUEST, 'status'));
