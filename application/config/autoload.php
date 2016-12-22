@@ -166,4 +166,5 @@ $autoload['model'] = array(
     'topic_model',
     'sale_model',
     'saleCategory_model',
+    'review_model',
 );

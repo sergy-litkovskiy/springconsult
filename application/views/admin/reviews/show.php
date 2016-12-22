@@ -1,17 +1,19 @@
-<script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/sale_category_list_container.js"></script>
+<script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/review_list_container.js"></script>
 
 <h2><?php echo @$title;?></h2>
     <div class="add_new">
          <p>
-            <a title="add new" href="<?php echo base_url().'backend/sale_category_edit'?>">
-                <img src="<?php echo base_url()?>img/img_main/add.png"/>&nbsp;Создать sale category
+            <a title="add new" href="<?php echo base_url().'backend/review_edit'?>">
+                <img src="<?php echo base_url()?>img/img_main/add.png"/>&nbsp;Создать отзыв
             </a>
         </p>
     </div>
-    <table id="category_list_content">
+    <table id="review_list_content">
         <thead>
             <tr class="table_title_row">
-                <td>Название</td>
+                <td>Автор</td>
+                <td>Фото</td>
+                <td>Текст</td>
                 <td>Sale product list</td>
                 <td><p>edit<p></td>
                 <td><p>del</p></td>
@@ -20,10 +22,16 @@
             </tr>
         </thead>
         <tbody>
-        <?php foreach ($categoriesToProductsMap as $categoryId => $map):?>
-            <tr data-topic-id="<?php echo $map['data']['id'];?>" data-topic-title="<?php echo $map['data']['name'];?>">
+        <?php foreach ($reviewsToProductsMap as $reviewId => $map):?>
+            <tr data-review-id="<?php echo $map['data']['id'];?>" data-review-author="<?php echo $map['data']['author'];?>">
                 <td class="article_table title" style="padding: 1em">
-                    <p><b><?php echo $map['data']['name'];?></b></p>
+                    <p><b><?php echo $map['data']['author'];?></b></p>
+                </td>
+                <td class="article_table title" style="padding: 1em">
+                    <p><b><?php echo $map['data']['image'];?></b></p>
+                </td>
+                <td class="article_table title" style="padding: 1em">
+                    <p><b><?php echo $map['data']['text'];?></b></p>
                 </td>
                 <td class="article_table" style="padding: 1em">
                     <ul>
@@ -38,18 +46,18 @@
                     </ul>
                 </td>
                 <td style="text-align: center">
-                    <a title="edit" href="<?php echo base_url().'backend/sale_category_edit/'.$categoryId;?>">
+                    <a title="edit" href="<?php echo base_url().'backend/review_edit/'.$reviewId;?>">
                         <img src="<?php echo base_url()?>img/img_main/edit.png"/>
                     </a>
                 </td>
                 <td style="text-align: center">
-                    <a class="drop" title="Удалить" href="#" data-email="<?php echo base_url().'backend/sale_category_drop/'.$categoryId;?>">
+                    <a class="drop" title="Удалить" href="#" data-email="<?php echo base_url().'backend/review_drop/'.$reviewId;?>">
                         <img src="<?php echo base_url()?>img/img_main/del.png"/>
                     </a>
                 </td>
 
                 <td colspan="2" class="status-change" style="text-align: center">
-                    <form id="<?php echo $categoryId;?>" data-table="sale_categories">
+                    <form id="<?php echo $reviewId;?>" data-table="reviews">
                         <input type="radio" name="status" value="1" <?php echo ($map['data']['status'] == '1') ? 'checked="checked"': null;?>/>
                         <img src="<?php echo base_url()?>img/img_main/on.png"/>
                         &nbsp;&nbsp;
@@ -63,5 +71,5 @@
     </table>
 
 <script>
-    SPRING.Core.registerModule("category_list_content", CategoryListContainerModule());
+    SPRING.Core.registerModule("review_list_content", ReviewListContainerModule());
 </script>

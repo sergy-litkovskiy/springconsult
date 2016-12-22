@@ -80,6 +80,11 @@ $route['backend/sale_category_edit/(:num)'] = 'admin/saleCategory_admin/edit/$1'
 $route['backend/sale_category_drop/(:num)'] = 'admin/saleCategory_admin/drop/$1';
 $route['backend/sale_category_save']        = 'admin/saleCategory_admin/save';
 
+$route['backend/review_edit']        = 'admin/review_admin/edit';
+$route['backend/review_edit/(:num)'] = 'admin/review_admin/edit/$1';
+$route['backend/review_drop/(:num)'] = 'admin/review_admin/drop/$1';
+$route['backend/review_save']        = 'admin/review_admin/save';
+
 $route['backend/check_valid_submenu']            = 'admin/menu_admin/check_valid_menu';
 $route['backend/check_valid_menu']               = 'admin/menu_admin/check_valid_menu';
 $route['backend/menu_admin']                     = 'admin/menu_admin/index';
@@ -89,9 +94,10 @@ $route['backend/menu_admin/item_edit/(:num)']    = 'admin/menu_admin/edit_menu_i
 $route['backend/menu_admin/subitem_edit']        = 'admin/menu_admin/edit_menu_subitem';
 $route['backend/menu_admin/subitem_edit/(:num)'] = 'admin/menu_admin/edit_menu_subitem/$1';
 
-$route['backend/news']            = 'admin/index_admin/index';
-$route['backend/topic']          = 'admin/topic_admin/index';
+$route['backend/news']          = 'admin/index_admin/index';
+$route['backend/topic']         = 'admin/topic_admin/index';
 $route['backend/sale_category'] = 'admin/saleCategory_admin/index';
+$route['backend/review']        = 'admin/review_admin/index';
 
 //$route['backend/send_nl_subscribe/(:num)']        = 'admin/articles_admin/ajax_send_article_to_subscribers/$1';
 
@@ -128,13 +134,13 @@ $route['backend/sale_page_list']        = 'admin/sale_admin/sale_page_list';
 $route['backend/sale_page_edit']        = 'admin/sale_admin/sale_page_edit';
 $route['backend/sale_page_edit/(:num)'] = 'admin/sale_admin/sale_page_edit/$1';
 $route['backend/sale_page_drop/(:num)'] = 'admin/sale_admin/sale_page_drop/$1';
-$route['backend/sale_page_save'] = 'admin/sale_admin/sale_page_save';
+$route['backend/sale_page_save']        = 'admin/sale_admin/sale_page_save';
 
 $route['backend/sale_products_list']        = 'admin/sale_admin/sale_products_list';
 $route['backend/sale_products_edit']        = 'admin/sale_admin/sale_products_edit';
 $route['backend/sale_products_edit/(:num)'] = 'admin/sale_admin/sale_products_edit/$1';
 $route['backend/sale_products_drop/(:num)'] = 'admin/sale_admin/sale_products_drop/$1';
-$route['backend/sale_products_save'] = 'admin/sale_admin/sale_products_save';
+$route['backend/sale_products_save']        = 'admin/sale_admin/sale_products_save';
 $route['backend/sale_products_statistic']   = 'admin/sale_admin/sale_products_statistic';
 
 $route['backend/announce_list']        = 'admin/announce_admin/announce_list';

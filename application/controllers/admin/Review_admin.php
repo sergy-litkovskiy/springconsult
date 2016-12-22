@@ -52,7 +52,7 @@ class Review_admin extends CI_Controller
 
         $contentData = array(
             'title'                   => 'Springconsulting - admin',
-            'categoriesToProductsMap' => $reviewsToProductsMap,
+            'reviewsToProductsMap' => $reviewsToProductsMap,
             'message'                 => $this->message
         );
 
