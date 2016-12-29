@@ -13,20 +13,28 @@ class Review_model extends Crud
         $this->table = 'reviews';
     }
 
-    public function getReviewListWithProductListAdmin()
+    public function getReviewListWithAssignedItemsAdmin()
     {
         $sql = "SELECT
                     reviews.*,
                     sale_products.id as sale_products_id,
                     sale_products.title as sale_products_title,
-                    sale_products.status as sale_products_status
+                    sale_products.status as sale_products_status,
+                    
+                    menu.id as menu_id,
+                    menu.title as menu_title,
+                    menu.status as menu_status
                 FROM
                     reviews
                 LEFT JOIN
-                    sale_products_reviews_assignment ON sale_products_reviews_assignment.reviews_id = reviews.id"
+                    sale_products_reviews_assignment ON sale_products_reviews_assignment.reviews_id = reviews.id
+                LEFT JOIN 
+                    sale_products ON sale_products.id = sale_products_reviews_assignment.sale_products_id                    
+                LEFT JOIN
+                    menu_reviews_assignment ON menu_reviews_assignment.reviews_id = reviews.id
+                LEFT JOIN 
+                    menu ON menu.id = menu_reviews_assignment.menu_id"
         ;
-
-        $sql .= " LEFT JOIN sale_products ON sale_products.id = sale_products_reviews_assignment.sale_products_id";
 
         $query = $this->db->query($sql);
 

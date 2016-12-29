@@ -22,6 +22,8 @@ class Index extends CI_Controller
     /** @var  Twig */
     public $twig;
 
+    public $topMenu   = array();
+
     public $arrMenu   = array();
     public $subscribe = array();
     public $aforizmus = array();
@@ -34,47 +36,28 @@ class Index extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->arrMenu        = $this->_prepareMenu();
-        $this->subscribe      = $this->_prepareSubscribe();
-        $this->aforizmus      = $this->_getAforizmus();
+
+
         $this->contactFormArr = array('contact_form' => array('name' => null, 'email' => null, 'text' => null));
         $this->result         = array("success" => null, "message" => null, "data" => null);
-        $this->urlArr         = explode('/', $_SERVER['REQUEST_URI']);
-        $this->cloudsTag      = array('tags' => $this->_getCloudsTag());
     }
 
     public function index($currentPage = null)
     {
-        $countTotal = $this->index_model->getCountArticles('news');
-        //prepare pager config
-        $config               = prepare_pager_config();
-        $config['base_url']   = base_url() . 'news/page/';
-        $config['total_rows'] = $countTotal;
-        $this->pagination->initialize($config);
-        $pager          = $this->pagination->create_links();
-        $pagerParam     = array('current_page' => $currentPage, 'per_page' => $config['per_page']);
-        $this->dataMenu = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr) - 1]);
-        $contentArr     = $this->index_model->getNewsList($pagerParam);
+//        $this->dataMenu = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr) - 1]);
+        $contentArr     = $this->index_model->getNewsList();
         $title          = ArrayHelper::arrayGet($contentArr, '0.slug_title');
         $announcement   = $this->index_model->getFromTableByParams(array('status' => STATUS_ON), 'announcement');
 
-        $this->data = array_merge($this->_getDataArrForAction($title, $contentArr),
+        $data = array_merge($this->_getDataArrForAction($title, $contentArr),
             array(
-                'content'        => $contentArr
-                , 'pager'        => $pager
-                , 'current_page' => $currentPage
-                , 'disqus'       => show_disqus()
-                , 'announcement' => count($announcement) ? $announcement[0] : null
+//                'content'        => $contentArr
+//                , 'current_page' => $currentPage
+//                , 'disqus'       => show_disqus()
+//                , 'announcement' => count($announcement) ? $announcement[0] : null
             ));
 
-        $data = array(
-            'menu'      => $this->load->view(MENU, $this->dataMenu, true),
-            'content'   => $this->load->view('index/show_news', $this->data, true),
-            'cloud_tag' => $this->load->view('blocks/cloud_tag', $this->cloudsTag, true),
-            'subscribe' => $this->load->view('blocks/subscribe', count($this->subscribe) ? $this->subscribe : null, true));
-
-//        $this->load->view('layout', $data);
-        $this->twig->display('index/index.html', $this->data);
+        $this->twig->display('index/index.html', $data);
     }
 
     public function show($slug)

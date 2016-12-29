@@ -50,12 +50,12 @@ class Review_admin extends CI_Controller
 
     public function index()
     {
-        $reviewListWithProductList = $this->review_model->getReviewListWithProductListAdmin();
-        $reviewsToProductsMap      = $this->_prepareReviewsToProductsMap($reviewListWithProductList);
+        $reviewListWithAssignedItems = $this->review_model->getReviewListWithAssignedItemsAdmin();
+        $reviewsToAssignedItemsMap      = $this->_prepareReviewsWithAssignedItemsMap($reviewListWithAssignedItems);
 
         $contentData = array(
             'title'                => 'Springconsulting - admin',
-            'reviewsToProductsMap' => $reviewsToProductsMap,
+            'reviewsToAssignedItemsMap' => $reviewsToAssignedItemsMap,
             'message'              => $this->message
         );
 
@@ -66,13 +66,17 @@ class Review_admin extends CI_Controller
         $this->load->view('layout_admin', $data);
     }
 
-    private function _prepareReviewsToProductsMap(array $reviewListWithProductList)
+    private function _prepareReviewsWithAssignedItemsMap(array $reviewListWithProductList)
     {
         $map = array();
 
         foreach ($reviewListWithProductList as $reviewData) {
+            $saleProductsId = ArrayHelper::arrayGet($reviewData, 'sale_products_id');
+            $menuId = ArrayHelper::arrayGet($reviewData, 'menu_id');
+
             $map[ArrayHelper::arrayGet($reviewData, 'id')]['data']                = $reviewData;
-            $map[ArrayHelper::arrayGet($reviewData, 'id')]['sale_product_list'][] = $reviewData;
+            $map[ArrayHelper::arrayGet($reviewData, 'id')]['sale_product_list'][$saleProductsId] = $reviewData;
+            $map[ArrayHelper::arrayGet($reviewData, 'id')]['menu_list'][$menuId] = $reviewData;
         }
 
         return $map;
@@ -82,17 +86,25 @@ class Review_admin extends CI_Controller
     {
         $reviewData              = array();
         $assignedSaleProductList = array();
+        $assignedMenuList = array();
         $title                   = "Добавить отзыв";
 
         $saleProductList = $this->sale_model->getListFromTable('sale_products');
+        $menuList = $this->sale_model->getListFromTable('menu');
 
         if ($id) {
             $reviewData                  = $this->review_model->get($id);
             $assignedSaleProductDataList = $this->sale_model->getAssignedSaleProductListByReviewId($id);
+            $assignedMenuDataList = $this->edit_menu_model->getAssignedMenuListByReviewId($id);
 
             foreach ($assignedSaleProductDataList as $assignedSaleProductData) {
                 $saleProductsId = ArrayHelper::arrayGet($assignedSaleProductData, 'sale_products_id');
                 $assignedSaleProductList[$saleProductsId] = $assignedSaleProductData;
+            }
+
+            foreach ($assignedMenuDataList as $assignedMenuData) {
+                $menuId = ArrayHelper::arrayGet($assignedMenuData, 'id');
+                $assignedMenuList[$menuId] = $assignedMenuData;
             }
 
             $title = "Редактировать reviews";
@@ -108,7 +120,9 @@ class Review_admin extends CI_Controller
             'content'                 => $content,
             'menu_items'              => $this->edit_menu_model->childs,
             'assignedSaleProductList' => $assignedSaleProductList,
+            'assignedMenuList' => $assignedMenuList,
             'saleProductList'         => $saleProductList,
+            'menuList'         => $menuList,
             'message'                 => $this->message
         );
 
@@ -128,6 +142,9 @@ class Review_admin extends CI_Controller
         $assignedNewSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'new_sale_products_id', array());
         $assignedOldSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'old_sale_products_id', array());
 
+        $assignedNewMenuIds = ArrayHelper::arrayGet($_REQUEST, 'new_menu_id', array());
+        $assignedOldMenuIds = ArrayHelper::arrayGet($_REQUEST, 'old_menu_id', array());
+
         try {
             $data['author'] = ArrayHelper::arrayGet($_REQUEST, 'author');
             $data['text']   = ArrayHelper::arrayGet($_REQUEST, 'text');
@@ -140,7 +157,25 @@ class Review_admin extends CI_Controller
                 $data = array_merge($data, $dataUpdate);
 
                 if ($assignedNewSaleProductIds) {
-                    $this->_assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $id);
+                    $dataToAssign = array(
+                        'assignId'        => $id,
+                        'assignFieldName' => 'reviews_id',
+                        'sourceFieldName' => 'sale_products_id',
+                        'table'           => 'sale_products_reviews_assignment'
+                    );
+
+                    $this->_assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $dataToAssign);
+                }
+
+                if ($assignedNewMenuIds) {
+                    $dataToAssign = array(
+                        'assignId'        => $id,
+                        'assignFieldName' => 'reviews_id',
+                        'sourceFieldName' => 'menu_id',
+                        'table'           => 'menu_reviews_assignment'
+                    );
+
+                    $this->_assignProcess($assignedNewMenuIds, $assignedOldMenuIds, $dataToAssign);
                 }
 
                 $this->_update($id, $data);
@@ -164,15 +199,13 @@ class Review_admin extends CI_Controller
         }
     }
 
-    private function _assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $id)
+    private function _assignProcess(array $assignedNewIds, array $assignedOldIds, array $data)
     {
-        $assignsArr = array(
-            'newSourceIdArr'  => $assignedNewSaleProductIds,
-            'oldSourceIdArr'  => $assignedOldSaleProductIds,
-            'assignId'        => $id,
-            'assignFieldName' => 'reviews_id',
-            'sourceFieldName' => 'sale_products_id',
-            'table'           => 'sale_products_reviews_assignment'
+        $assignsArr = array_merge(
+            $data, array(
+                'newSourceIdArr'  => $assignedNewIds,
+                'oldSourceIdArr'  => $assignedOldIds,
+            )
         );
 
         $this->assign_model->setAssignArr($assignsArr);

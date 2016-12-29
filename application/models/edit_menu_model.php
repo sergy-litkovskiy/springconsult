@@ -69,5 +69,21 @@ class Edit_menu_model extends Crud
         $query_parent = $this->db->query("SELECT * FROM menu WHERE id = '".$id."'");
         return $query_parent->result_array();
     }
+
+    public function getAssignedMenuListByReviewId($reviewId)
+    {
+        $sql = "SELECT
+                    menu_reviews_assignment.id as menu_reviews_assignment_id,
+                    menu.*
+                FROM
+                    menu
+                INNER JOIN
+                    menu_reviews_assignment ON menu_reviews_assignment.menu_id = menu.id";
+        $sql .= " AND menu_reviews_assignment.reviews_id = ".$reviewId;
+
+        $query = $this->db->query($sql);
+
+        return $query->result_array();
+    }
 }
-?>
+

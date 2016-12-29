@@ -2,15 +2,9 @@ DirectoryIndex index.php
 #php_flag magic_quotes_gpc Off
 RewriteEngine on
 
-#Redirect 301 /index http://www.springconsult.com.ua
-#RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
-#RewriteRule ^index\.php$ http://www.springconsult.com.ua [R=301,L]
-
-#RewriteCond $1 !^(index\.php|images|robots\.txt|public)
 RewriteCond %{REQUEST_URI} !\.(css|js|jpg|gif|png)$
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
 
 RewriteCond $1 !^(index\.php|images|robots\.txt)
 RewriteRule ^(.*)$ /index.php/$1 [L]

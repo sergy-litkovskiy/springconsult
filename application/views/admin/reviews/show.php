@@ -15,6 +15,7 @@
                 <td>Фото</td>
                 <td>Текст</td>
                 <td>Sale product list</td>
+                <td>Разделы</td>
                 <td><p>edit<p></td>
                 <td><p>del</p></td>
                 <td style="width:60px"><p>&nbsp;&nbsp;&nbsp;on</p></td>
@@ -22,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-        <?php foreach ($reviewsToProductsMap as $reviewId => $map):?>
+        <?php foreach ($reviewsToAssignedItemsMap as $reviewId => $map):?>
             <tr data-review-id="<?php echo $map['data']['id'];?>" data-review-author="<?php echo $map['data']['author'];?>">
                 <td class="article_table title" style="padding: 1em">
                     <p><b><?php echo $map['data']['author'];?></b></p>
@@ -37,9 +38,21 @@
                     <ul>
                         <?php if(isset($map['sale_product_list']) && count($map['sale_product_list'])){
                             foreach ($map['sale_product_list'] as $saleProductData):?>
-                                <?php if($saleProductData['sale_products_title']){
-                                    $status = ($saleProductData['sale_products_title'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
+                                <?php if($saleProductData['sale_products_status']){
+                                    $status = ($saleProductData['sale_products_status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
                                     <li><?php  echo $saleProductData['sale_products_title'].' - '.$status;?></li>
+                                <?php };?>
+                            <?php endforeach;
+                        }?>
+                    </ul>
+                </td>
+                <td class="article_table" style="padding: 1em">
+                    <ul>
+                        <?php if(isset($map['menu_list']) && count($map['menu_list'])){
+                            foreach ($map['menu_list'] as $menuData):?>
+                                <?php if($menuData['menu_status']){
+                                    $status = ($menuData['menu_status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
+                                    <li><?php  echo $menuData['menu_title'].' - '.$status;?></li>
                                 <?php };?>
                             <?php endforeach;
                         }?>
