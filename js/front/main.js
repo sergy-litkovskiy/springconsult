@@ -69,31 +69,31 @@
         /*----------------------------------------------------*/
         /*	Owl Carousel
         /*----------------------------------------------------*/
-        if(jQuery.isFunction(jQuery.fn.owlCarousel)){
-
-            // Recent Work Slider
-            $("#recent-work-slider").owlCarousel({
-                navigation : true,
-                pagination : false,
-                items : 5,
-                itemsDesktop:[1199,4],
-                itemsTablet : [768, 3],
-                itemsDesktopSmall : [992, 3],
-                itemsMobile : [480,1],
-                navigationText : ["",""]
-            });
-
-            // Post News Slider
-            $("#post-slider").owlCarousel({
-                navigation : true,
-                pagination : false,
-                items : 4,
-                itemsDesktop:[1199,3],
-                itemsDesktopSmall:[980,2],
-                itemsMobile : [479,1],
-                navigationText : ["",""]
-            });
-        }
+        // if(jQuery.isFunction(jQuery.fn.owlCarousel)){
+        //
+        //     // Recent Work Slider
+        //     $("#recent-work-slider").owlCarousel({
+        //         navigation : true,
+        //         pagination : false,
+        //         items : 5,
+        //         itemsDesktop:[1199,4],
+        //         itemsTablet : [768, 3],
+        //         itemsDesktopSmall : [992, 3],
+        //         itemsMobile : [480,1],
+        //         navigationText : ["",""]
+        //     });
+        //
+        //     // Post News Slider
+        //     $("#post-slider").owlCarousel({
+        //         navigation : true,
+        //         pagination : false,
+        //         items : 4,
+        //         itemsDesktop:[1199,3],
+        //         itemsDesktopSmall:[980,2],
+        //         itemsMobile : [479,1],
+        //         navigationText : ["",""]
+        //     });
+        // }
 
         // ============================
         //  = Scroll event function =

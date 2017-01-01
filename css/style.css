@@ -326,7 +326,7 @@ a:focus{
 }
 .navbar{
     margin-bottom: 0;
-    margin-top: 7px;
+    margin-top: 20px;
     min-height:35px;
     border:none;
     float: right;
@@ -2914,6 +2914,7 @@ blockquote{font-size:14px;}
     margin-top: 25px;
 
 }
+
 .testimonial .testimonial-buttons {
     position: absolute;
     right: 0;
