@@ -5,187 +5,161 @@
 {% endblock %}
 
 {% block header %}
-    <!-- header -->
-    {% block header_banner %}
-        <div class="banner" style="min-height: 300px">
-            <div class="callbacks_container">
-                {#<ul class="rslides" id="slider">#}
-                    {#<li>#}
-                        {#<img src="/img/banner.jpg" class="img-responsive" alt="">#}
-                    {#</li>#}
-                    {#<li>#}
-                        {#<img src="/img/banner2.jpg" class="img-responsive" alt="">#}
-                    {#</li>#}
-                    {#<li>#}
-                        {#<img src="/img/banner3.jpg" class="img-responsive" alt="">#}
-                    {#</li>#}
-                {#</ul>#}
-            </div>
-            {% include 'blocks/header.html.twig' %}
-        </div>
-    {% endblock %}
+    {{ parent() }}
 {% endblock %}
 {% block content %}
-    <div class="get">
-        <div class="container">
-            <div class="col-md-9 get-left">
-                <h1>Lorem Ipsum is simply dummy text of the printing and industry</h1>
-            </div>
-            <div class="col-md-3 get-right">
-                <a href="#" class="btn  btn-1c btn1 btn-1d">GET STARTED</a>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-
-    <div class="welcome">
-        <div class="col-md-6 welcome-left">
-            <img src="/img/right.jpg" class="img-responsive" alt=""/>
-            <div class="welcome-lefttop">
-                <h5>Contrary to popular belief, Lorem Ipsum simpl</h5>
-                <li><span>01.</span>There are many variations of passages</li>
-                <li><span>02.</span>Lorem ipsum dolor sit amet, consectet</li>
-                <li><span>03.</span>Ut wisi enim ad minim veniam, quis</li>
-                <li><span>04.</span>Duis autem vel eum iriure in hendrerit</li>
-                <div class="button">
-                    <a href="#" class="btn  btn-1c btn1 btn-1d">LEARN MORE</a>
+    <section class="wrapper">
+        <section class="page_head">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="page_title">
+                            <h2>Услуги</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 welcome-right">
-            <h3>welcome</h3>
-            <h6>It is a long established fact that a reader will be distracted by the readable content of a page when
-                looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</h6>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged.</p>
-        </div>
-        <div class="clearfix"></div>
-
-    </div>
-    <div class="hand">
-        <div class="container">
-            <h2>On the other hand, we dnounce </h2>
-            <div class="col-md-3 flights">
-                <i class="fligh"> </i>
-                <h4>flights</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.</p>
-            </div>
-            <div class="col-md-3 resturants">
-                <i class="rest"> </i>
-                <h4> resturants</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.</p>
-            </div>
-            <div class="col-md-3 beech">
-                <i class="beec"> </i>
-                <h4>beech</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.</p>
-            </div>
-            <div class="col-md-3 cars">
-                <i class="ca"> </i>
-                <h4>cars</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.</p>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-
-    <div class="vero">
-        <div class="container">
-            <section class="slider">
-                <div class="flexslider">
-                    <ul class="slides">
-                        <li>
-                            <div class="vero-top">
-                                <div class="col-md-4 vero-1">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                    <label> </label>
-                                    <h6>At vero eos et accusamus</h6>
-                                    <div class="button-1">
-                                        <a class="read-more" href="#">more</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 vero-2">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                    <label> </label>
-                                    <h6>At vero eos et accusamus</h6>
-                                    <div class="button-1">
-                                        <a class="read-more" href="#">more</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 vero-3">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                    <label> </label>
-                                    <h6>At vero eos et accusamus</h6>
-                                    <div class="button-1">
-                                        <a class="read-more" href="#">more</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
+        </section>
+        <section class="content service">
+            <div class="container">
+                <div class="row sub_content">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="serviceBox_2 green">
+                            <div class="service-icon">
+                                <i class="fa fa-gears"></i>
                             </div>
-                        </li>
-                        <li>
-                            <div class="vero-top">
-                                <div class="col-md-4 vero-1">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                    <label> </label>
-                                    <h6>At vero eos et accusamus</h6>
-                                    <div class="button-1">
-                                        <a class="read-more" href="#">more</a>
-                                    </div>
+                            <div class="service-content">
+                                <h3>Поиск работы</h3>
+                                <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
+                                <div class="read">
+                                    <a href="">Далее</a>
                                 </div>
-                                <div class="col-md-4 vero-2">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                    <label> </label>
-                                    <h6>At vero eos et accusamus</h6>
-                                    <div class="button-1">
-                                        <a class="read-more" href="#">more</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 vero-3">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                    <label> </label>
-                                    <h6>At vero eos et accusamus</h6>
-                                    <div class="button-1">
-                                        <a class="read-more" href="#">more</a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="serviceBox_2 orange">
+                            <div class="service-icon">
+                                <i class="fa fa-key"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Коучинг</h3>
+                                <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
+                                <div class="read">
+                                    <a href="">Далее</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="serviceBox_2 red">
+                            <div class="service-icon">
+                                <i class="fa fa-book"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Книги</h3>
+                                <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
+                                <div class="read">
+                                    <a href="">Далее</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="serviceBox_2 blue">
+                            <div class="service-icon">
+                                <i class="fa fa-headphones"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Аудио-Тренинги</h3>
+                                <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
+                                <div class="read">
+                                    <a href="">Далее</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </section>
-            <!-- FlexSlider -->
-            <script defer src="/js/jquery.flexslider.js"></script>
-            <script type="text/javascript">
-                $(function () {
-                    SyntaxHighlighter.all();
-                });
-                $(window).load(function () {
-                    $('.flexslider').flexslider({
-                        animation: "slide",
-                        start    : function (slider) {
-                            $('body').removeClass('loading');
-                        }
-                    });
-                });
-            </script>
-            <!-- FlexSlider -->
+            </div>
+        </section>
+        <section class="page_head">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="page_title">
+                            <h2>Отзывы</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content service">
+            <div class="container">
+                <div class="row">
+                    <div class="testimonial carousel slide col-sm-12" id="testimonial-carousel">
+                        <div class="carousel-inner">
+                            <div class="active item col-sm-6">
+                                <div class="testimonial-item">
+                                    <div class="icon"><i class="fa fa-quote-right"></i></div>
+                                    <blockquote>
+                                        <p>Donec convallis, metus nec tempus aliquet, nunc metus adipiscing leo, a lobortis nisi dui ut odio. Nullam ultrices, eros accumsan vulputate faucibus, turpis tortor dictum.</p>
+                                    </blockquote>
+                                    <div class="icon-tr"></div>
+                                    <div class="testimonial-review">
+                                        <img alt="testimoni" src="/img/testimonials/1.png">
+                                        <h1>Tom Jobs,<small>Company Inc.</small></h1>
+                                    </div>
+                                </div>
+                            </div>
 
-        </div>
-    </div>
+                            <div class="item col-sm-6">
+                                <div class="testimonial-item">
+                                    <div class="icon"><i class="fa fa-quote-right"></i></div>
+                                    <blockquote>
+                                        <p>Nunc aliquet tincidunt metus, sit amet mattis lectus sodales ac. Suspendisse rhoncus dictum eros, ut egestas eros luctus eget. Nam nibh sem, mattis et feugiat ut, porttitor nec risus.</p>
+                                    </blockquote>
+                                    <div class="icon-tr"></div>
+                                    <div class="testimonial-review">
+                                        <img alt="testimoni" src="/img/testimonials/2.png">
+                                        <h1>Tom Jobs<small>Leopard</small></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-buttons">
+                            <a data-slide="prev" href="#testimonial-carousel">
+                                <i class="fa fa-chevron-left"></i>
+                            </a>
+                            <a data-slide="next" href="#testimonial-carousel">
+                                <i class="fa fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="promo_box">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                        <div class="promo_content">
+                            <h3>Electrify is awesome responsive template, with clean design.</h3>
+                            <p>Lorem ipsum dolor sit amet, cons adipiscing elit. Aenean commodo ligula eget dolor. </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <div class="pb_action">
+                            <a class="btn btn-lg btn-default" href="#fakelink">
+                                <i class="fa fa-shopping-cart"></i>
+                                Download Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
 {% endblock %}
 {% block footer %}
     {{ parent() }}
