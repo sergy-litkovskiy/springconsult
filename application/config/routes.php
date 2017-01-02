@@ -154,6 +154,10 @@ $route['backend/spec_mailer_statistics/(:num)'] = 'admin/index_admin/spec_mailer
 $route['backend/(:any)']                        = 'admin/index_admin/show/$1';
 
 ////////////////////FRONTEND////////////////////////////
+$route['service/show/(:num)'] = 'service/show/$1';
+
+
+
 $route['contact_form/send'] = 'index/ajaxSendContactForm';
 $route['search']            = 'search/search_result';
 $route['rss']               = 'rss/show_rss';

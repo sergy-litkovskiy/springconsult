@@ -7,15 +7,16 @@
 //   });
 // })(this);
 (function (global) {
+console.log('_baseUrl', _baseUrl);
   System.config({
     paths: {
       // paths serve as alias
-      'npm:': 'app-angular/node_modules/'
+      'npm:': '/app-angular/node_modules/'
     },
     // map tells the System loader where to look for things
     map: {
       // our app is within the app folder
-      app: 'app-angular/app',
+      app: '/app-angular/app',
 
       // angular bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',

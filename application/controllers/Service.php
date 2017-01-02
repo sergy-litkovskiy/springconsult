@@ -19,7 +19,7 @@ class Service extends CI_Controller
     /** @var  Twig */
     public $twig;
 
-    public $topMenu   = array();
+    public $topMenu = [];
 
     public function __construct()
     {
@@ -31,16 +31,23 @@ class Service extends CI_Controller
 //        $this->dataMenu = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr) - 1]);
         $contentArr     = $this->index_model->getNewsList();
         $title          = ArrayHelper::arrayGet($contentArr, '0.slug_title');
-        $announcement   = $this->index_model->getFromTableByParams(array('status' => STATUS_ON), 'announcement');
+        $announcement   = $this->index_model->getFromTableByParams(['status' => STATUS_ON], 'announcement');
 
         $data = array();
 
         $this->twig->display('service/index.html', $data);
     }
 
+    private function getTopLevelMenuList()
+    {
+        $menuIdList = TopLevelMenuHelper::getTopLevelMenuIdList();
+
+        return $this->menu_model->getMenuListByIdList($menuIdList);
+    }
+
     public function show($id)
     {
-        $data = array();
+        $data = ['title' => 'Service title'];
 
         $this->twig->display('service/show.html', $data);
     }
