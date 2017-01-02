@@ -38,4 +38,10 @@ class Service extends CI_Controller
         $this->twig->display('service/index.html', $data);
     }
 
+    public function show($id)
+    {
+        $data = array();
+
+        $this->twig->display('service/show.html', $data);
+    }
 }

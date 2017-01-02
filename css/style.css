@@ -127,7 +127,7 @@ a:focus{
 .pdt-70{ padding-top: 70px; }
 
 .content{
-    padding:30px 0 60px;
+    padding: 20px 0 20px;
     position: relative;
 }
 
@@ -205,8 +205,7 @@ a:focus{
 
 #logo img
 {
-    /*width:100%;*/
-    width: 72%;
+    width:100%;
     height:auto;
 }
 
@@ -326,7 +325,7 @@ a:focus{
 }
 .navbar{
     margin-bottom: 0;
-    margin-top: 20px;
+    margin-top: 40px;
     min-height:35px;
     border:none;
     float: right;
@@ -3438,7 +3437,7 @@ ul.client_items .img{
     -o-transition:all 0.3s ease-in-out;
 }
 .btn-default:hover{
-    background:#444A6D;
+    background:#398439;
     color:#fff;
 }
 
@@ -4049,6 +4048,10 @@ h5.circular-title{
 
 .dividerHeading.text-center{
     margin-bottom: 45px;
+}
+
+.dividerHeading{
+    margin-top: 20px;
 }
 
 .dividerHeading.text-center h4{
@@ -5033,4 +5036,14 @@ ul{
     .copyright{
         line-height: 20px;
     }
+}
+
+.gift-form .form-control {
+    border-radius: 4px;
+    margin-bottom: 15px;
+    height: 20px;
+}
+
+.gift-form i.fa {
+    margin-right: 5px;
 }
