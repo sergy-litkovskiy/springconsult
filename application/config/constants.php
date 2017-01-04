@@ -108,6 +108,8 @@ define('MENU_TOP_LEVEL_ID_CONTACTS', 2);
 define('MENU_TOP_LEVEL_ID_BLOG', 9);
 define('MENU_TOP_LEVEL_ID_SHOP', 265);
 
+define('ASSIGNED_ARTICLE_LIST_LIMIT', 3);
+
 /*
 |--------------------------------------------------------------------------
 | Index for languages

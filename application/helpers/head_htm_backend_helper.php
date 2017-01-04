@@ -14,5 +14,3 @@ function head_htm_backend()
 		
 		return $code; 
     }
-
-?>
