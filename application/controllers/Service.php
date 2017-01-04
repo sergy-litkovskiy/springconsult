@@ -40,7 +40,7 @@ class Service extends CI_Controller
 
     private function getTopLevelMenuList()
     {
-        $menuIdList = TopLevelMenuHelper::getTopLevelMenuIdList();
+        $menuIdList = MenuHelper::getTopLevelMenuIdList();
 
         return $this->menu_model->getMenuListByIdList($menuIdList);
     }

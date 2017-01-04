@@ -2,9 +2,9 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class TopLevelMenuHelper
+class MenuHelper
 {
-    protected static function getTopLevelMenuIdList()
+    public static function getTopLevelMenuIdList()
     {
         return [
           MENU_TOP_LEVEL_ID_SERVICE,

@@ -7,7 +7,6 @@
 //   });
 // })(this);
 (function (global) {
-console.log('_baseUrl', _baseUrl);
   System.config({
     paths: {
       // paths serve as alias
