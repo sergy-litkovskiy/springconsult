@@ -14,6 +14,7 @@
                         <img src="<?php echo base_url()?>img/img_main/add.png"/>&nbsp;Добавить подраздел
                     </a>
                 </td>
+                <td style="width:50px">Color|Icon</td>
                 <td style="width:150px">Meta keywords</td>
                 <td style="width:150px">Meta description</td>
                 <td class="menu_edit">
@@ -32,7 +33,8 @@
                     <a href="" class="arrow_down" title="move down"><img src="<?php echo base_url()?>img/img_main/arrow_down.png"/></a>
                     <?php echo $contentMenu[$i]->title;?>
                 </td>
-                <td>&nbsp;</td>
+                <td></td>
+                <td><?php echo $contentMenu[$i]->color_class.'|'.$contentMenu[$i]->icon_class;?></td>
                 <td><?php echo Common::cutString($contentMenu[$i]->meta_keywords, 10);?></td>
                 <td><?php echo Common::cutString($contentMenu[$i]->meta_description, 10);?></td>
                 <td>
@@ -64,6 +66,7 @@
                         <a href="" class="arrow_down" title="move down"><img src="<?php echo base_url()?>img/img_main/arrow_down.png"/></a>
                         <?php echo $child[$k]->title;?>
                     </td>
+                    <td><?php echo $child[$k]->color_class.'|'.$child[$k]->icon_class;?></td>
                     <td><?php echo Common::cutString($child[$k]->meta_keywords, 10);?></td>
                     <td><?php echo Common::cutString($child[$k]->meta_description, 10);?></td>
                     <td>
