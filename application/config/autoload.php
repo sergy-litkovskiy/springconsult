@@ -154,7 +154,7 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array(
+$autoload['model'] = [
     'crud',
     'index_model',
     'edit_menu_model',
@@ -169,4 +169,5 @@ $autoload['model'] = array(
     'sale_model',
     'saleCategory_model',
     'review_model',
-);
+    'gift_model',
+];

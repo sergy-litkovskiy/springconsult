@@ -9,7 +9,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Edit_menu_model extends Crud
 {
-    public  $id, $parent, $title, $slug, $status, $meta_description, $meta_keywords, $numSeq, $color_class, $icon_class;
+    public  $id, $parent, $title, $slug, $status, $meta_description, $meta_keywords, $numSeq, $color_class, $icon_class, $description;
     public  $childs = array();
     var $idkey = 'id';
     var $table = 'menu';
@@ -33,6 +33,7 @@ class Edit_menu_model extends Crud
         $this->slug    = empty($arr_menu_parent_item[0]['slug'])   ? 0 : $arr_menu_parent_item[0]['slug'];
         $this->color_class    = empty($arr_menu_parent_item[0]['color_class'])   ? 0 : $arr_menu_parent_item[0]['color_class'];
         $this->icon_class    = empty($arr_menu_parent_item[0]['icon_class'])   ? 0 : $arr_menu_parent_item[0]['icon_class'];
+        $this->description    = empty($arr_menu_parent_item[0]['description'])   ? 0 : $arr_menu_parent_item[0]['description'];
         $this->status  = empty($arr_menu_parent_item[0]['status']) ? 0 : $arr_menu_parent_item[0]['status'];
         $this->numSeq  = empty($arr_menu_parent_item[0]['num_sequence']) ? 0 : $arr_menu_parent_item[0]['num_sequence'];
 

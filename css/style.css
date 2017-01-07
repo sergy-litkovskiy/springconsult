@@ -5048,3 +5048,7 @@ ul{
 .gift-form i.fa {
     margin-right: 5px;
 }
+
+.shorten-description div {
+    text-align: justify;
+}

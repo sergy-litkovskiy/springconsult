@@ -155,6 +155,7 @@ $route['backend/(:any)']                        = 'admin/index_admin/show/$1';
 
 ////////////////////FRONTEND////////////////////////////
 $route['service/show/(:num)'] = 'service/show/$1';
+$route['gift/list'] = 'gift/ajax_get_gift_list';
 
 
 

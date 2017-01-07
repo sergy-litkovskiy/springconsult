@@ -15,6 +15,7 @@
                     </a>
                 </td>
                 <td style="width:50px">Color|Icon</td>
+                <td style="width:150px">Short description</td>
                 <td style="width:150px">Meta keywords</td>
                 <td style="width:150px">Meta description</td>
                 <td class="menu_edit">
@@ -35,6 +36,7 @@
                 </td>
                 <td></td>
                 <td><?php echo $contentMenu[$i]->color_class.'|'.$contentMenu[$i]->icon_class;?></td>
+                <td><?php echo Common::cutString($contentMenu[$i]->description, 10);?></td>
                 <td><?php echo Common::cutString($contentMenu[$i]->meta_keywords, 10);?></td>
                 <td><?php echo Common::cutString($contentMenu[$i]->meta_description, 10);?></td>
                 <td>
@@ -67,6 +69,7 @@
                         <?php echo $child[$k]->title;?>
                     </td>
                     <td><?php echo $child[$k]->color_class.'|'.$child[$k]->icon_class;?></td>
+                    <td><?php echo Common::cutString($child[$k]->description, 10);?></td>
                     <td><?php echo Common::cutString($child[$k]->meta_keywords, 10);?></td>
                     <td><?php echo Common::cutString($child[$k]->meta_description, 10);?></td>
                     <td>

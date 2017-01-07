@@ -23,6 +23,11 @@
         <p><b>Icon Class:</b></p>
         <input type="text" id='icon_class' name='icon_class' value="<?php echo $content['icon_class'];?>"/>
 
+        <p><b>Short description:</b></p>
+        <textarea  style="float:left"  id='description' name='description' cols='60' rows='4'>
+            <?php echo $content['description'];?>
+        </textarea>
+
         <p><b>Meta description:</b></p>
 		<textarea  style="float:left"  id='meta_description' name='meta_description' cols='60' rows='4'><?php echo $content['meta_description'];?></textarea>
         <!--        <input type="text" id='slug' name='meta_description' value="<?php echo $content['meta_description'];?>"/>-->

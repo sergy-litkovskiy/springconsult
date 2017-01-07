@@ -31,6 +31,7 @@ class Menu_admin extends CI_Controller
                                    ,'slug'              => null
                                    ,'color_class'              => null
                                    ,'icon_class'              => null
+                                   ,'description'              => null
                                    ,'text'              => null
                                    ,'title'             => null
                                    ,'num_sequence'      => null
@@ -193,6 +194,7 @@ private function _prepareMenuDataForAddUpdate($request)
                 ,'meta_keywords'    => $request['meta_keywords']
                 ,'color_class'    => $request['color_class']
                 ,'icon_class'    => $request['icon_class']
+                ,'description'    => $request['description']
                 ,'title'            => $request['title']
                 ,'slug'             => $request['slug']
                 ,'text'             => $request['text']

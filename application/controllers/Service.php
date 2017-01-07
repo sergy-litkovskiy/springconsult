@@ -30,14 +30,14 @@ class Service extends CI_Controller
 
     public function index()
     {
-        $metaData = $this->getMetaDataForPage($this->topLevelMenuList, MENU_TOP_LEVEL_ID_SERVICE);
-        $serviceList = $this->menu_model->getMenuListWithReviewsByParentId(MENU_TOP_LEVEL_ID_SERVICE);
+        $metaData            = $this->getMetaDataForPage($this->topLevelMenuList, MENU_TOP_LEVEL_ID_SERVICE);
+        $serviceList         = $this->menu_model->getMenuListWithReviewsByParentId(MENU_TOP_LEVEL_ID_SERVICE);
         $serviceToReviewsMap = $this->makeServiceToReviewsMap($serviceList);
 
         $data = [
-            'topLevelMenuList' => $this->topLevelMenuList,
+            'topLevelMenuList'    => $this->topLevelMenuList,
             'serviceToReviewsMap' => $serviceToReviewsMap,
-            'metaData' => $metaData
+            'metaData'            => $metaData
         ];
 
         $this->twig->display('service/index.html', $data);
@@ -45,8 +45,8 @@ class Service extends CI_Controller
 
     public function show($id)
     {
-        $menuData = $this->menu_model->getArrWhere('menu', ['id' => $id, 'status' => STATUS_ON], null);
-        $reviewList = $this->menu_model->getReviewListByMenuId($id);
+        $menuData    = $this->menu_model->getArrWhere('menu', ['id' => $id, 'status' => STATUS_ON], null);
+        $reviewList  = $this->menu_model->getReviewListByMenuId($id);
         $serviceList = $this->menu_model->getMenuListByParentId(MENU_TOP_LEVEL_ID_SERVICE);
         $articleList = $this->menu_model->getArticleListByMenuId($id, ASSIGNED_ARTICLE_LIST_LIMIT);
 
@@ -56,13 +56,13 @@ class Service extends CI_Controller
         });
 
         $data = [
-            'currentMenuId' => $id,
+            'currentMenuId'    => $id,
             'topLevelMenuList' => $this->topLevelMenuList,
-            'metaData' => $this->prepareMetaData(ArrayHelper::arrayGet($menuData, 0, [])),
-            'data' => ArrayHelper::arrayGet($menuData, 0),
-            'reviewList' => $reviewList,
-            'serviceList' => $serviceList,
-            'articleList' => $articleList
+            'metaData'         => $this->prepareMetaData(ArrayHelper::arrayGet($menuData, 0, [])),
+            'data'             => ArrayHelper::arrayGet($menuData, 0),
+            'reviewList'       => $reviewList,
+            'serviceList'      => $serviceList,
+            'articleList'      => $articleList
         ];
 
         $this->twig->display('service/show.html', $data);
@@ -85,14 +85,41 @@ class Service extends CI_Controller
         return $metaData;
     }
 
+    private function makeServiceToReviewsMap($serviceList)
+    {
+        $map = [];
+
+        foreach ($serviceList as $serviceData) {
+            $reviewsId = ArrayHelper::arrayGet($serviceData, 'reviews_id');
+            $menuId    = ArrayHelper::arrayGet($serviceData, 'id');
+
+            $map[$menuId]                        = $this->makeMainData($serviceData);
+            $map[$menuId]['reviews'][$reviewsId] = $reviewsId ? $this->makeReviewsData($serviceData) : [];
+        }
+
+        return $map;
+    }
+
+    private function makeMainData(array $serviceData)
+    {
+        return [
+            'id'               => ArrayHelper::arrayGet($serviceData, 'id'),
+            'title'            => ArrayHelper::arrayGet($serviceData, 'title'),
+            'text'             => ArrayHelper::arrayGet($serviceData, 'text'),
+            'description'      => ArrayHelper::arrayGet($serviceData, 'description'),
+            'color_class'      => ArrayHelper::arrayGet($serviceData, 'color_class'),
+            'icon_class'       => ArrayHelper::arrayGet($serviceData, 'icon_class'),
+        ];
+    }
+
     private function prepareMetaData($data)
     {
         $metaData = [];
 
         $metaData['metaDescription'] = ArrayHelper::arrayGet($data, 'meta_description');
-        $metaData['metaKeywords'] = ArrayHelper::arrayGet($data, 'meta_keywords');
-        $metaData['fbTitle'] = sprintf('%s - %s', SITE_TITLE, ArrayHelper::arrayGet($data, 'title'));
-        $metaData['fbImg'] = ImageHelper::getFirstImgFromText(
+        $metaData['metaKeywords']    = ArrayHelper::arrayGet($data, 'meta_keywords');
+        $metaData['fbTitle']         = sprintf('%s - %s', SITE_TITLE, ArrayHelper::arrayGet($data, 'title'));
+        $metaData['fbImg']           = ImageHelper::getFirstImgFromText(
             ArrayHelper::arrayGet($data, 'text'),
             DEFAULT_FB_IMAGE
         );
@@ -100,14 +127,13 @@ class Service extends CI_Controller
         return $metaData;
     }
 
-    private function makeServiceToReviewsMap($serviceList)
+    private function makeReviewsData($serviceData)
     {
-        $map = [];
-
-        foreach ($serviceList as $serviceData) {
-            $map[ArrayHelper::arrayGet($serviceData, 'id')] = $serviceData;
-        }
-
-        return $map;
+        return [
+            'id'     => ArrayHelper::arrayGet($serviceData, 'reviews_id'),
+            'author' => ArrayHelper::arrayGet($serviceData, 'reviews_author'),
+            'text'   => ArrayHelper::arrayGet($serviceData, 'reviews_text'),
+            'image'  => ArrayHelper::arrayGet($serviceData, 'reviews_image'),
+        ];
     }
 }

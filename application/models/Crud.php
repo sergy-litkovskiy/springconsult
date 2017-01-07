@@ -78,30 +78,34 @@ class Crud extends CI_Model
 
         return $query->result_array();
     }
-	
 
     public function getFromTableByParams($params, $table)
     {
-        $this->db->where($params);
-        $query = $this->db->get($table);
-        
-        return $query->result_array();
+        $this->table = $table;
+
+        return $this->getListByParams($params);
     }
-	
+
+    public function getListFromTable($table)
+    {
+        $this->table = $table;
+
+        return $this->getList();
+    }
+
+    public function getListByParams($params)
+    {
+        $this->db->where($params);
+
+        return $this->getList();
+    }
 
     public function getList()
     {
         $query = $this->db->get($this->table);
-        return $query->result_array();
-    }
-    
 
-    public function getListFromTable($table)
-    {
-        $query = $this->db->get($table);
         return $query->result_array();
     }
-	
 
     public function getArrWhere($table, $params, $limit, $order_by = false)
     {

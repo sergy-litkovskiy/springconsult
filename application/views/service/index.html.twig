@@ -23,251 +23,54 @@
         <section class="content service">
             <div class="container">
                 <div class="row sub_content">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="serviceBox_2 green">
-                            <div class="service-icon">
-                                <i class="fa fa-gears"></i>
-                            </div>
-                            <div class="service-content">
-                                <h3>Поиск работы</h3>
-                                <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
-                                <div class="read">
-                                    <a href="{{ base_url() }}service/show/">Далее</a>
+                    {% for serviceToReviewsItem in serviceToReviewsMap %}
+                        <div class="col-md-3 col-sm-6">
+                            <div class="serviceBox_2 {{ serviceToReviewsItem.color_class }}">
+                                <div class="service-icon">
+                                    <i class="fa {{ serviceToReviewsItem.icon_class }}"></i>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="review-block">
-                            <div class="dividerHeading">
-                                <h4><span>Отзывы</span></h4>
-                            </div>
-                            <div class="testimonial carousel slide" id="testimonial-carousel-search" data-ride="carousel">
-                            <div class="carousel-inner" role="listbox">
-                                <div class="item active testimonial-item">
-                                    <div class="icon"><i class="fa fa-quote-right"></i></div>
-                                    <blockquote>
-                                        <p>Donec convallis, metus nec tempus aliquet, nunc metus adipiscing leo, a lobortis nisi dui ut odio. Nullam ultrices, eros accumsan vulputate faucibus, turpis tortor dictum.</p>
-                                    </blockquote>
-                                    <div class="icon-tr"></div>
-                                    <div class="testimonial-review">
-                                        <img alt="testimoni" src="/img/testimonials/1.png">
-                                        <h1>Tom Jobs, Поиск работы<small>Company Inc.</small></h1>
-                                    </div>
-                                </div>
-                                <div class="item testimonial-item">
-                                    <div class="icon"><i class="fa fa-quote-right"></i></div>
-                                    <blockquote>
-                                        <p>Nunc aliquet tincidunt metus, sit amet mattis lectus sodales ac. Suspendisse rhoncus dictum eros, ut egestas eros luctus eget. Nam nibh sem, mattis et feugiat ut, porttitor nec risus.</p>
-                                    </blockquote>
-                                    <div class="icon-tr"></div>
-                                    <div class="testimonial-review">
-                                        <img alt="testimoni" src="/img/testimonials/2.png">
-                                        <h1>Tom Jobs Поиск работы 2222<small>Leopard</small></h1>
+                                <div class="service-content">
+                                    <h3>{{ serviceToReviewsItem.title }}</h3>
+                                    <div class="shorten-description">{{ serviceToReviewsItem.description }}</div>
+                                    <div class="read">
+                                        <a href="{{ base_url() }}service/show/{{ serviceToReviewsItem.id }}">Далее</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="testimonial-buttons">
-                                <a data-slide="prev" href="#testimonial-carousel-search">
-                                    <i class="fa fa-chevron-left"></i>
-                                </a>
-                                <a data-slide="next" href="#testimonial-carousel-search">
-                                    <i class="fa fa-chevron-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="serviceBox_2 orange">
-                            <div class="service-icon">
-                                <i class="fa fa-key"></i>
-                            </div>
-                            <div class="service-content">
-                                <h3>Коучинг</h3>
-                                <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
-                                <div class="read">
-                                    <a href="">Далее</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-block">
-                            <div class="dividerHeading">
-                                <h4><span>Отзывы</span></h4>
-                            </div>
-                            <div class="testimonial carousel slide" id="testimonial-carousel-couching" data-ride="carousel">
-                            <div class="carousel-inner" role="listbox">
-                                <div class="item active testimonial-item">
-                                    <div class="icon"><i class="fa fa-quote-right"></i></div>
-                                    <blockquote>
-                                        <p>Donec convallis, metus nec tempus aliquet, nunc metus adipiscing leo, a lobortis nisi dui ut odio. Nullam ultrices, eros accumsan vulputate faucibus, turpis tortor dictum.</p>
-                                    </blockquote>
-                                    <div class="icon-tr"></div>
-                                    <div class="testimonial-review">
-                                        <img alt="testimoni" src="/img/testimonials/1.png">
-                                        <h1>Tom Jobs, Коучинг<small>Company Inc.</small></h1>
+                            {% if serviceToReviewsItem.reviews|length %}
+                                <div class="review-block">
+                                    <div class="dividerHeading">
+                                        <h4><span>Отзывы</span></h4>
                                     </div>
-                                </div>
-                                <div class="item testimonial-item">
-                                    <div class="icon"><i class="fa fa-quote-right"></i></div>
-                                    <blockquote>
-                                        <p>Nunc aliquet tincidunt metus, sit amet mattis lectus sodales ac. Suspendisse rhoncus dictum eros, ut egestas eros luctus eget. Nam nibh sem, mattis et feugiat ut, porttitor nec risus.</p>
-                                    </blockquote>
-                                    <div class="icon-tr"></div>
-                                    <div class="testimonial-review">
-                                        <img alt="testimoni" src="/img/testimonials/2.png">
-                                        <h1>Tom Jobs Коучинг 2222<small>Leopard</small></h1>
-                                    </div>
-                                </div>
-                                <div class="item testimonial-item">
-                                    <div class="icon"><i class="fa fa-quote-right"></i></div>
-                                    <blockquote>
-                                        <p>Nunc aliquet tincidunt metus, sit amet mattis lectus sodales ac. Suspendisse rhoncus dictum eros, ut egestas eros luctus eget. Nam nibh sem, mattis et feugiat ut, porttitor nec risus.</p>
-                                    </blockquote>
-                                    <div class="icon-tr"></div>
-                                    <div class="testimonial-review">
-                                        <img alt="testimoni" src="/img/testimonials/2.png">
-                                        <h1>Tom Jobs Коучинг 333<small>Leopard</small></h1>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="testimonial-buttons">
-                                <a data-slide="prev" href="#testimonial-carousel-couching">
-                                    <i class="fa fa-chevron-left"></i>
-                                </a>
-                                <a data-slide="next" href="#testimonial-carousel-couching">
-                                    <i class="fa fa-chevron-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="serviceBox_2 red">
-                            <div class="service-icon">
-                                <i class="fa fa-book"></i>
-                            </div>
-                            <div class="service-content">
-                                <h3>Книги</h3>
-                                <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
-                                <div class="read">
-                                    <a href="">Далее</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-block">
-                            <div class="dividerHeading">
-                                <h4><span>Отзывы</span></h4>
-                            </div>
-                            <div class="testimonial carousel slide" id="testimonial-carousel-books" data-ride="carousel">
-                            <div class="carousel-inner" role="listbox">
-                                <div class="item active testimonial-item">
-                                    <div class="icon"><i class="fa fa-quote-right"></i></div>
-                                    <blockquote>
-                                        <p>Donec convallis, metus nec tempus aliquet, nunc metus adipiscing leo, a lobortis nisi dui ut odio. Nullam ultrices, eros accumsan vulputate faucibus, turpis tortor dictum.</p>
-                                    </blockquote>
-                                    <div class="icon-tr"></div>
-                                    <div class="testimonial-review">
-                                        <img alt="testimoni" src="/img/testimonials/1.png">
-                                        <h1>Tom Jobs, Книги<small>Company Inc.</small></h1>
-                                    </div>
-                                </div>
-                                <div class="item testimonial-item">
-                                    <div class="icon"><i class="fa fa-quote-right"></i></div>
-                                    <blockquote>
-                                        <p>Nunc aliquet tincidunt metus, sit amet mattis lectus sodales ac. Suspendisse rhoncus dictum eros, ut egestas eros luctus eget. Nam nibh sem, mattis et feugiat ut, porttitor nec risus.</p>
-                                    </blockquote>
-                                    <div class="icon-tr"></div>
-                                    <div class="testimonial-review">
-                                        <img alt="testimoni" src="/img/testimonials/2.png">
-                                        <h1>Tom Jobs Книги 2222<small>Leopard</small></h1>
-                                    </div>
-                                </div>
-                                <div class="item testimonial-item">
-                                    <div class="icon"><i class="fa fa-quote-right"></i></div>
-                                    <blockquote>
-                                        <p>Nunc aliquet tincidunt metus, sit amet mattis lectus sodales ac. Suspendisse rhoncus dictum eros, ut egestas eros luctus eget. Nam nibh sem, mattis et feugiat ut, porttitor nec risus.</p>
-                                    </blockquote>
-                                    <div class="icon-tr"></div>
-                                    <div class="testimonial-review">
-                                        <img alt="testimoni" src="/img/testimonials/2.png">
-                                        <h1>Tom Jobs Книги 333<small>Leopard</small></h1>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="testimonial-buttons">
-                                <a data-slide="prev" href="#testimonial-carousel-books">
-                                    <i class="fa fa-chevron-left"></i>
-                                </a>
-                                <a data-slide="next" href="#testimonial-carousel-books">
-                                    <i class="fa fa-chevron-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="serviceBox_2 blue">
-                            <div class="service-icon">
-                                <i class="fa fa-headphones"></i>
-                            </div>
-                            <div class="service-content">
-                                <h3>Аудио-Тренинги</h3>
-                                <p> sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura. sit amet, consec tetuer adipis elit, aliquam eget nibh etlibura.</p>
-                                <div class="read">
-                                    <a href="">Далее</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-block">
-                            <div class="dividerHeading">
-                                <h4><span>Отзывы</span></h4>
-                            </div>
-                            <div class="testimonial carousel slide" id="testimonial-carousel-audio" data-ride="carousel">
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item active testimonial-item">
-                                        <div class="icon"><i class="fa fa-quote-right"></i></div>
-                                        <blockquote>
-                                            <p>Donec convallis, metus nec tempus aliquet, nunc metus adipiscing leo, a lobortis nisi dui ut odio. Nullam ultrices, eros accumsan vulputate faucibus, turpis tortor dictum.</p>
-                                        </blockquote>
-                                        <div class="icon-tr"></div>
-                                        <div class="testimonial-review">
-                                            <img alt="testimoni" src="/img/testimonials/1.png">
-                                            <h1>Tom Jobs, Аудио-Тренинги<small>Company Inc.</small></h1>
+                                    <div class="testimonial carousel slide" id="testimonial-carousel-search" data-ride="carousel">
+                                        <div class="carousel-inner" role="listbox">
+                                            {% for review in serviceToReviewsItem.reviews %}
+                                                <div class="item active testimonial-item">
+                                                    <div class="icon"><i class="fa fa-quote-right"></i></div>
+                                                    <blockquote>
+                                                        <p>{{ review.text }}</p>
+                                                    </blockquote>
+                                                    <div class="icon-tr"></div>
+                                                    <div class="testimonial-review">
+                                                        <img alt="testimoni" src="{{ base_url() }}img/reviews/{{ review.image }}"/>
+                                                        <h1>{{ review.author }}</h1>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
                                         </div>
-                                    </div>
-                                    <div class="item testimonial-item">
-                                        <div class="icon"><i class="fa fa-quote-right"></i></div>
-                                        <blockquote>
-                                            <p>Nunc aliquet tincidunt metus, sit amet mattis lectus sodales ac. Suspendisse rhoncus dictum eros, ut egestas eros luctus eget. Nam nibh sem, mattis et feugiat ut, porttitor nec risus.</p>
-                                        </blockquote>
-                                        <div class="icon-tr"></div>
-                                        <div class="testimonial-review">
-                                            <img alt="testimoni" src="/img/testimonials/2.png">
-                                            <h1>Tom Jobs Аудио-Тренинги 2222<small>Leopard</small></h1>
-                                        </div>
-                                    </div>
-                                    <div class="item testimonial-item">
-                                        <div class="icon"><i class="fa fa-quote-right"></i></div>
-                                        <blockquote>
-                                            <p>Nunc aliquet tincidunt metus, sit amet mattis lectus sodales ac. Suspendisse rhoncus dictum eros, ut egestas eros luctus eget. Nam nibh sem, mattis et feugiat ut, porttitor nec risus.</p>
-                                        </blockquote>
-                                        <div class="icon-tr"></div>
-                                        <div class="testimonial-review">
-                                            <img alt="testimoni" src="/img/testimonials/2.png">
-                                            <h1>Tom Jobs Аудио-Тренинги 333<small>Leopard</small></h1>
+                                        <div class="testimonial-buttons">
+                                            <a data-slide="prev" href="#testimonial-carousel-search">
+                                                <i class="fa fa-chevron-left"></i>
+                                            </a>
+                                            <a data-slide="next" href="#testimonial-carousel-search">
+                                                <i class="fa fa-chevron-right"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="testimonial-buttons">
-                                    <a data-slide="prev" href="#testimonial-carousel-audio">
-                                        <i class="fa fa-chevron-left"></i>
-                                    </a>
-                                    <a data-slide="next" href="#testimonial-carousel-audio">
-                                        <i class="fa fa-chevron-right"></i>
-                                    </a>
-                                </div>
-                            </div>
+                            {% endif %}
                         </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>
@@ -280,4 +83,11 @@
 
 {% block footer %}
     {{ parent() }}
+    <script type="text/javascript">
+        $('.shorten-description').shorten({
+            showChars: 150,
+            moreText: '<i class="fa fa-angle-down"></i>',
+            lessText: '<i class="fa fa-angle-up"></i>'
+        });
+    </script>
 {% endblock %}
