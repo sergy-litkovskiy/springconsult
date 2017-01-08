@@ -4,7 +4,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Review_model extends Crud
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -12,6 +11,7 @@ class Review_model extends Crud
         $this->idkey = 'id';
         $this->table = 'reviews';
     }
+
 
     public function getReviewListWithAssignedItemsAdmin()
     {

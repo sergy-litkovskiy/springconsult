@@ -6,6 +6,7 @@ class Menu_model extends Crud
 {
     public $id, $parent, $title, $slug, $meta_description, $meta_keywords;
     public  $childs = array();
+    protected $table = 'menu';
 
     function __construct($id = 0)
     {
@@ -149,7 +150,7 @@ class Menu_model extends Crud
         return $query->result_array();
     }
 
-    public function getArticleListByMenuId($id, $limit)
+    public function getArticleListByMenuId($id, $limit = null)
     {
         $sql = sprintf(
             '
@@ -170,11 +171,11 @@ class Menu_model extends Crud
                 aa.menu_id = %s
             ORDER BY 
                 articles.date DESC  
-            LIMIT %s 
+            %s 
             ',
             STATUS_ON,
             $id,
-            $limit
+            $limit ? ' LIMIT '.$limit : null
         );
 
         $query = $this->db->query($sql);

@@ -1,7 +1,6 @@
 {% extends "layout.html.twig" %}
 
 {% block head %}
-    //TODO: set title
     {{ parent() }}
 {% endblock %}
 
@@ -15,7 +14,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="page_title">
-                            <h2>{{ title }}</h2>
+                            <h2>{{ data.title }}</h2>
                         </div>
                     </div>
                 </div>
@@ -28,20 +27,7 @@
                         <div class="blog_single">
                             <article class="post">
                                 <div class="post_content">
-                                    <div class="post_meta">
-                                        <h2>
-                                            <a href="#">perferendis doloribus asperiores ut labore</a>
-                                        </h2>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt  ut aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus asperiores ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-                                    <blockquote class="default">
-                                        Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque eget tempor tellus. Fusce lacinia tempor malesuada. Ut lacus sapien, placerat a ornare nec, elementum sit amet felis. Maecenas pretium lorem hendrerit eros sagittis fermentum.
-                                    </blockquote>
-
-                                    <p>Morbi augue velit, tempus mattis dignissim nec, porta sed risus. Donec eget magna eu lorem tristique pellentesque eget eu dui. Fusce lacinia tempor malesuada. Ut lacus sapien, placerat a ornare nec, elementum sit amet felis. Maecenas pretium hendrerit fermentum. Fusce lacinia tempor malesuada. Ut lacus sapien, placerat a ornare nec, elementum sit amet felis. Maecenas pretium lorem hendrerit eros sagittis fermentum.</p>
-
-                                    <p>Donec in ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Cras suscipit, quam vitae adipiscing faucibus, risus nibh laoreet odio, a porttitor metus eros ut enim. Morbi augue velit, tempus mattis dignissim nec, porta sed risus. Donec eget magna eu lorem tristique pellentesque eget eu duiport titor metus eros ut enim. </p>
+                                    {{ data.text|raw }}
                                 </div>
                                 <ul class="shares">
                                     <li class="shareslabel"><h3>Share This Story</h3></li>
@@ -53,35 +39,23 @@
                             <div class="widget_title">
                                 <h4><span>Отзывы</span></h4>
                             </div>
-                            <div class="about_author">
-                                <div class="author_desc">
-                                    <img src="/img/blog/author.png" alt="about author">
+                            {% for review in reviewList %}
+                                <div class="about_author">
+                                    <div class="author_desc">
+                                        <img src="{{ base_url() }}img/reviews/{{ review.image }}" alt="about author">
+                                    </div>
+                                    <div class="author_bio">
+                                        <h3 class="author_name">
+                                            {{ review.author }}
+                                        </h3>
+                                        <p class="author_det shorten-review">
+                                            {{ review.text }}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="author_bio">
-                                    <h3 class="author_name">
-                                        <a href="#">Tom Jobs</a>
-                                    </h3>
-                                    <p class="author_det">
-                                        Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt  ut aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus omnis saperet docendi nec, eos ea alii molestiae aliquand.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="about_author">
-                                <div class="author_desc">
-                                    <img src="/img/blog/author.png" alt="about author">
-                                </div>
-                                <div class="author_bio">
-                                    <h3 class="author_name">
-                                        <a href="#">Tom Jobs</a>
-                                    </h3>
-                                    <p class="author_det">
-                                        Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt  ut aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus omnis saperet docendi nec, eos ea alii molestiae aliquand.
-                                    </p>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
 
-                        <!--News Comments-->
                         <div class="news_comments">
                             <div class="dividerHeading">
                                 <h4><span>Comments (6)</span></h4>
@@ -91,7 +65,6 @@
                         </div>
                     </div>
 
-                    <!--Sidebar Widget-->
                     <div class="col-xs-12 col-md-4 col-lg-4 col-sm-4">
                         <div class="sidebar">
                             <div class="widget widget_categories">
@@ -99,9 +72,13 @@
                                     <h4><span>Услуги</span></h4>
                                 </div>
                                 <ul class="arrows_list list_style">
-                                    <li><a href="#"> Книги</a></li>
-                                    <li><a href="#"> Аудио-тренинги</a></li>
-                                    <li><a href="#"> Коучинг</a></li>
+                                    {% for service in serviceList %}
+                                        <li>
+                                            <a href="{{ base_url() }}service/show/{{ service.id }}">
+                                                {{ service.title }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
 
@@ -113,21 +90,18 @@
 
                             <div class="widget">
                                 <ul class="recent_tab_list">
-                                    <li>
-                                        <span><a href="#"><img src="images/content/recent_1.png" alt="" /></a></span>
-                                        <a href="#">Publishing packag esanse web page editos</a>
-                                        <i>October 09, 2015</i>
-                                    </li>
-                                    <li>
-                                        <span><a href="#"><img src="images/content/recent_2.png" alt="" /></a></span>
-                                        <a href="#">Sublishing packag esanse web page editos</a>
-                                        <i>October 08, 2015</i>
-                                    </li>
-                                    <li class="last-tab">
-                                        <span><a href="#"><img src="images/content/recent_3.png" alt="" /></a></span>
-                                        <a href="#">Mublishing packag esanse web page editos</a>
-                                        <i>October 07, 2015</i>
-                                    </li>
+                                    {% for article in articleList %}
+                                        <li>
+                                            <span>
+                                                <a href="{{ base_url() }}blog/show/{{ article.id }}">
+                                                    <img src="{{ base_url() }}img/blog/{{ article.thumb }}" alt="" />
+                                                </a>
+                                            </span>
+                                            <a href="{{ base_url() }}blog/show/{{ article.id }}">
+                                                {{ article.title }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -144,4 +118,11 @@
 
 {% block footer %}
     {{ parent() }}
+    <script type="text/javascript">
+        $('.shorten-review').shorten({
+            showChars: 350,
+            moreText: '<i class="fa fa-angle-down"></i>',
+            lessText: '<i class="fa fa-angle-up"></i>'
+        });
+    </script>
 {% endblock %}

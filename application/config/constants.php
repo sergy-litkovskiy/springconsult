@@ -123,6 +123,10 @@ define('LANGUAGE_ID_RU', '1');
 define('STATUS_ON', '1');
 define('STATUS_OFF', '0');
 
+define('ORDER_DIRECTION_ASC', 'ASC');
+define('ORDER_DIRECTION_DESC', 'DESC');
+define('ORDER_BY_DEFAULT', 'id');
+
 define('ERROR_SRC_SPEC_MAILER', '1');
 define('ERROR_SRC_ARTICLE_MAILER', '2');
 define('ERROR_PAYMENT_REGISTRATION', '3');

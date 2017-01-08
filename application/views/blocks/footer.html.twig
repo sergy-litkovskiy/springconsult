@@ -25,9 +25,11 @@
                 </div>
                 <div class="widget_content">
                     <ul class="links">
-                        <li><a href="#">Aenean commodo ligula eget dolor<span>November 07, 2015</span></a></li>
-                        <li><a href="#">Temporibus autem quibusdam <span>November 05, 2015</span></a></li>
-                        <li><a href="#">Debitis aut rerum saepe <span>November 03, 2015</span></a></li>
+                        {% for article in lastArticleList %}
+                            <li>
+                                <a href="{{ base_url() }}blog/show/{{ article.id }}">{{ article.title }}</a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
@@ -39,9 +41,11 @@
                 <div class="widget_content">
                     <div class="widget_content">
                         <ul class="links">
-                            <li><a href="#">Aenean commodo ligula eget dolor<span>November 07, 2015</span></a></li>
-                            <li><a href="#">Temporibus autem quibusdam <span>November 05, 2015</span></a></li>
-                            <li><a href="#">Debitis aut rerum saepe <span>November 03, 2015</span></a></li>
+                            {% for product in lastSaleProductList %}
+                                <li>
+                                    <a href="{{ base_url() }}sale/show/{{ product.id }}">{{ product.title }}</a>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>

@@ -2,12 +2,10 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Gift extends CI_Controller
+class Gift extends MY_Controller
 {
     /** @var Gift_model */
     public $gift_model;
-    /** @var  Twig */
-    public $twig;
 
     public function ajax_get_gift_list()
     {

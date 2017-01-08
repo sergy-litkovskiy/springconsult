@@ -37,18 +37,18 @@
                                     </div>
                                 </div>
                             </div>
-                            {% if serviceToReviewsItem.reviews|length %}
+                            {% if serviceToReviewsItem.reviewList|length %}
                                 <div class="review-block">
                                     <div class="dividerHeading">
                                         <h4><span>Отзывы</span></h4>
                                     </div>
                                     <div class="testimonial carousel slide" id="testimonial-carousel-search" data-ride="carousel">
                                         <div class="carousel-inner" role="listbox">
-                                            {% for review in serviceToReviewsItem.reviews %}
+                                            {% for review in serviceToReviewsItem.reviewList %}
                                                 <div class="item active testimonial-item">
                                                     <div class="icon"><i class="fa fa-quote-right"></i></div>
                                                     <blockquote>
-                                                        <p>{{ review.text }}</p>
+                                                        <p class="shorten-review">{{ review.text }}</p>
                                                     </blockquote>
                                                     <div class="icon-tr"></div>
                                                     <div class="testimonial-review">
@@ -86,6 +86,11 @@
     <script type="text/javascript">
         $('.shorten-description').shorten({
             showChars: 150,
+            moreText: '<i class="fa fa-angle-down"></i>',
+            lessText: '<i class="fa fa-angle-up"></i>'
+        });
+        $('.shorten-review').shorten({
+            showChars: 350,
             moreText: '<i class="fa fa-angle-down"></i>',
             lessText: '<i class="fa fa-angle-up"></i>'
         });

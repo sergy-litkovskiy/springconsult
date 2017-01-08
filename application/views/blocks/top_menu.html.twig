@@ -2,12 +2,23 @@
     <div class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                {% set currentItemId = currentMenuId is defined ? currentMenuId : topLevelMenuList[0].id %}
-                {% for topLevelMenu in topLevelMenuList %}
-                    <li {% if currentItemId == topLevelMenu.id %}class="active"{% endif %}>
-                        <a href="{{ base_url() }}show/{{ topLevelMenu.id }}">{{ topLevelMenu.title }}</a>
-                    </li>
-                {% endfor %}
+                {% set currentItemName = currentItemName is defined ? currentItemName : 'service' %}
+
+                <li {% if currentItemName == 'service' %}class="active"{% endif %}>
+                    <a href="{{ base_url() }}">Услуги</a>
+                </li>
+                <li {% if currentItemName == 'about' %}class="active"{% endif %}>
+                    <a href="{{ base_url() }}about">Об авторе проекта</a>
+                </li>
+                <li {% if currentItemName == 'shop' %}class="active"{% endif %}>
+                    <a href="{{ base_url() }}shop">Магазин</a>
+                </li>
+                <li {% if currentItemName == 'blog' %}class="active"{% endif %}>
+                    <a href="{{ base_url() }}blog">Блог</a>
+                </li>
+                <li {% if currentItemName == 'review' %}class="active"{% endif %}>
+                    <a href="{{ base_url() }}review">Отзывы</a>
+                </li>
             </ul>
         </div>
     </div>

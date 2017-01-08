@@ -48,28 +48,23 @@ class Crud extends CI_Model
         return true;
     }
 
-
     public function del($id)
     {
         $this->db->where($this->idkey, $id);
-        if(!$this->db->delete($this->table))
-        {
+        if(!$this->db->delete($this->table)) {
             return false;
         }
         return true;
     }
-	
 
     public function delFromTable($id, $table)
     {
         $this->db->where($this->idkey, $id);
-        if(!$this->db->delete($table))
-        {
+        if(!$this->db->delete($table)) {
             return false;
         }
         return true;
     }
-    
 
     public function get($id)
     {
@@ -93,9 +88,22 @@ class Crud extends CI_Model
         return $this->getList();
     }
 
-    public function getListByParams($params)
+    public function getListByParams(
+        $params,
+        $orderBy = ORDER_BY_DEFAULT,
+        $orderDirection = ORDER_DIRECTION_ASC,
+        $limit = null
+    )
     {
         $this->db->where($params);
+
+        if ($orderBy) {
+            $this->db->order_by($orderBy, $orderDirection);
+        }
+
+        if ($limit) {
+            $this->db->limit($limit);
+        }
 
         return $this->getList();
     }
@@ -107,9 +115,9 @@ class Crud extends CI_Model
         return $query->result_array();
     }
 
-    public function getArrWhere($table, $params, $limit, $order_by = false)
+    public function getArrWhere($table, $params, $limit, $orderBy = false)
     {
-        $orderBy = $order_by ? " ORDER BY ".$order_by : false;
+        $orderBy = $orderBy ? " ORDER BY ".$orderBy : false;
         $sqlLimit = $limit ? " LIMIT ".$limit : false;
         $sqlWhere = count($params) ? $this->_makeSqlWhereFromParams($params) : null;
 
@@ -123,11 +131,13 @@ class Crud extends CI_Model
         $sqlWhere = " WHERE";
         $paramsCount = count($params);
         $count = 1;
+
         foreach($params as $col => $val){
             $sqlAnd = ( $count < $paramsCount ) ? "AND" : null;
             $sqlWhere .= " " . $col ." = '". $val ."' ".$sqlAnd;
             $count++;
         }
+
         return $sqlWhere;
     }
 }
