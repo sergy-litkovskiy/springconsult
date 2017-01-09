@@ -36,11 +36,11 @@
                                 {% for article in assignedArticleList %}
                                     <li>
                                         <span>
-                                            <a href="{{ base_url() }}blog/show/{{ article.id }}">
+                                            <a href="{{ base_url() }}articles/{{ article.id }}">
                                                 <img src="{{ base_url() }}img/blog/{{ article.thumb }}" alt="" />
                                             </a>
                                         </span>
-                                        <a href="{{ base_url() }}blog/show/{{ article.id }}">
+                                        <a href="{{ base_url() }}articles/{{ article.id }}">
                                             {{ article.title }}
                                         </a>
                                     </li>
@@ -75,17 +75,15 @@
                         <div id="testimonial-carousel" class="testimonial carousel slide">
                             <div class="carousel-inner">
                                 {% for review in reviewList %}
-                                    <div class="item">
-                                        <div class="testimonial-item">
-                                            <div class="icon"><i class="fa fa-quote-right"></i></div>
-                                            <blockquote>
-                                                <p class="shorten-review">{{ review.text }}</p>
-                                            </blockquote>
-                                            <div class="icon-tr"></div>
-                                            <div class="testimonial-review">
-                                                <img src="{{ base_url() }}img/reviews/{{ review.image }}" alt="testimoni">
-                                                <h1>{{ review.author }}</h1>
-                                            </div>
+                                    <div class="item active testimonial-item">
+                                        <div class="icon"><i class="fa fa-quote-right"></i></div>
+                                        <blockquote>
+                                            <p class="shorten-review">{{ review.text }}</p>
+                                        </blockquote>
+                                        <div class="icon-tr"></div>
+                                        <div class="testimonial-review">
+                                            <img src="{{ base_url() }}img/reviews/{{ review.image }}" alt="testimoni">
+                                            <h1>{{ review.author }}</h1>
                                         </div>
                                     </div>
                                 {% endfor %}

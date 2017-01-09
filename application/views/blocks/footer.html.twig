@@ -27,7 +27,7 @@
                     <ul class="links">
                         {% for article in lastArticleList %}
                             <li>
-                                <a href="{{ base_url() }}blog/show/{{ article.id }}">{{ article.title }}</a>
+                                <a href="{{ base_url() }}articles/{{ article.id }}">{{ article.title }}</a>
                             </li>
                         {% endfor %}
                     </ul>
@@ -43,7 +43,7 @@
                         <ul class="links">
                             {% for product in lastSaleProductList %}
                                 <li>
-                                    <a href="{{ base_url() }}sale/show/{{ product.id }}">{{ product.title }}</a>
+                                    <a href="{{ base_url() }}shop/product/{{ product.id }}">{{ product.title }}</a>
                                 </li>
                             {% endfor %}
                         </ul>

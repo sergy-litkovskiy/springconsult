@@ -10,6 +10,7 @@ class Topic_model extends Crud
         parent::__construct();
 
         $this->idkey = 'id';
+        $this->table = 'topics';
     }
 
     public function getTopicListWithArticles()

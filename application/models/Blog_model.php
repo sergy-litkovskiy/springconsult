@@ -11,5 +11,4 @@ class Blog_model extends Crud
         $this->idkey = 'id';
         $this->table = 'articles';
     }
-
 }

@@ -3724,6 +3724,7 @@ ul.recent_tab_list li
     -moz-opacity: 0.8;
     -khtml-opacity: 0.8;
     opacity: 0.8;
+    width: 50px;
 }
 .recent_tab_list li span img:hover {
     float: left;

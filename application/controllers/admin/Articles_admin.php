@@ -43,6 +43,7 @@ class Articles_admin extends CI_Controller
         , 'slug'             => null
         , 'text'             => null
         , 'title'            => null
+        , 'thumb'            => null
         , 'num_sequence'     => null
         , 'status'           => null
         , 'meta_description' => null
@@ -213,6 +214,7 @@ class Articles_admin extends CI_Controller
         , 'title'                       => $request['title']
         , 'slug'                        => $request['slug']
         , 'text'                        => $request['text']
+        , 'thumb'                        => $request['thumb']
         , 'date'                        => isset($request['date']) ? $request['date'] : Common::getDateTime('Y-m-d')
         , 'time'                        => isset($request['time']) ? $request['time'] : Common::getDateTime('H:i:s'));
     }

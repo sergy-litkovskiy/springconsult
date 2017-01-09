@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Service extends MY_Controller
 {
+    protected $entityName = 'service';
+
     public function index()
     {
         $serviceList         = $this->menu_model->getMenuListWithReviewsByParentId(MENU_TOP_LEVEL_ID_SERVICE);
@@ -19,7 +21,7 @@ class Service extends MY_Controller
 
         $data = array_merge($data, $this->baseResult);
 
-        $this->twig->display('service/index.html', $data);
+        $this->twig->display($this->entityName.'/index.html', $data);
     }
 
     public function show($id)
@@ -47,7 +49,7 @@ class Service extends MY_Controller
 
         $data = array_merge($data, $this->baseResult);
 
-        $this->twig->display('service/show.html', $data);
+        $this->twig->display($this->entityName.'/show.html', $data);
     }
 
     private function makeServiceToReviewsMap($serviceList)

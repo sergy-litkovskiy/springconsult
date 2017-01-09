@@ -129,12 +129,12 @@ class Common
     }
     
     
-    public static function cutString ($text, $counttext)
+    public static function cutString ($text, $length)
     {
         $sep = " ";
         $words = explode($sep, $text);
-        if ( count($words) > $counttext ){
-            $text = strip_tags(implode($sep, array_slice($words, 0, $counttext))."...");
+        if ( count($words) > $length ){
+            $text = strip_tags(implode($sep, array_slice($words, 0, $length))."...");
         }
         
         return $text;

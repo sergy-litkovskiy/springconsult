@@ -14,6 +14,8 @@ abstract class MY_Controller extends CI_Controller
     public $menu_model;
     /** @var  Review_model */
     public $review_model;
+    /** @var  Topic_model */
+    public $topic_model;
     /** @var  Mailer_model */
     public $mailer_model;
 
@@ -29,6 +31,8 @@ abstract class MY_Controller extends CI_Controller
     protected $lastArticleList     = [];
     protected $lastSaleProductList = [];
     protected $baseResult = [];
+
+    protected $entityName;
 
     public function __construct()
     {

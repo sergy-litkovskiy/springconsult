@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class About extends MY_Controller
 {
+    protected $entityName = 'about';
+
     public function index()
     {
         $mainData = $this->menu_model->get(MENU_TOP_LEVEL_ID_ABOUT);
@@ -14,8 +16,8 @@ class About extends MY_Controller
         $reviewList          = $this->review_model->getListByParams(['status' => STATUS_ON]);
 
         $data = [
-            'currentItemName'     => 'about',
-            'data'            => $mainData,
+            'currentItemName'     => $this->entityName,
+            'data'                => $mainData,
             'metaData'            => $metaData,
             'assignedArticleList' => $assignedArticleList,
             'reviewList'          => $reviewList,
@@ -24,6 +26,6 @@ class About extends MY_Controller
 
         $data = array_merge($data, $this->baseResult);
 
-        $this->twig->display('about/index.html', $data);
+        $this->twig->display($this->entityName . '/index.html', $data);
     }
 }

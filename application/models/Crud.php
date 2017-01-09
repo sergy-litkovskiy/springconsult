@@ -7,25 +7,22 @@ class Crud extends CI_Model
     protected $table = '';
     protected $idkey = 'id';
     
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
-
 
     public function add($data)
     {
         $this->db->insert($this->table, $data);
         return $this->db->insert_id();
     }
-	 
 
     public function addInTable($data, $table)
     {
         $this->db->insert($table, $data);
         return $this->db->insert_id();
     }
-    
 
     public function update($id, $data)
     {
@@ -34,17 +31,18 @@ class Crud extends CI_Model
         {
             return false;
         }
+
         return true;
     }
-	
 
     public function updateInTable($id, $data, $table)
     {
         $this->db->where($this->idkey, $id);
-        if(!$this->db->update($table, $data))
-        {
+
+        if(!$this->db->update($table, $data)) {
             return false;
         }
+
         return true;
     }
 
@@ -66,10 +64,10 @@ class Crud extends CI_Model
         return true;
     }
 
-    public function get($id)
+    public function get($id, $limit = NULL, $offset = NULL)
     {
         $this->db->where($this->idkey, $id);
-        $query = $this->db->get($this->table);
+        $query = $this->db->get($this->table, $limit, $offset);
 
         return $query->result_array();
     }
@@ -92,7 +90,8 @@ class Crud extends CI_Model
         $params,
         $orderBy = ORDER_BY_DEFAULT,
         $orderDirection = ORDER_DIRECTION_ASC,
-        $limit = null
+        $limit = 0,
+        $offset = 0
     )
     {
         $this->db->where($params);
@@ -101,8 +100,8 @@ class Crud extends CI_Model
             $this->db->order_by($orderBy, $orderDirection);
         }
 
-        if ($limit) {
-            $this->db->limit($limit);
+        if ($limit || $offset) {
+            $this->db->limit($limit, $offset);
         }
 
         return $this->getList();
@@ -113,6 +112,24 @@ class Crud extends CI_Model
         $query = $this->db->get($this->table);
 
         return $query->result_array();
+    }
+
+    public function getTotalCount()
+    {
+        return $this->db->count_all_results($this->table);
+    }
+
+    public function getCountByParams($params, $limit = null, $offset = null)
+    {
+        $this->db->where($params);
+
+        if ($limit) {
+            $this->db->limit($limit, $offset);
+        }
+
+        $query = $this->db->get($this->table);
+
+        return $query->num_rows();
     }
 
     public function getArrWhere($table, $params, $limit, $orderBy = false)

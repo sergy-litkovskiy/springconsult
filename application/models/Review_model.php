@@ -12,7 +12,6 @@ class Review_model extends Crud
         $this->table = 'reviews';
     }
 
-
     public function getReviewListWithAssignedItemsAdmin()
     {
         $sql = "SELECT

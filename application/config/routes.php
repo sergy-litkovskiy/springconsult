@@ -154,15 +154,17 @@ $route['backend/spec_mailer_statistics/(:num)'] = 'admin/index_admin/spec_mailer
 $route['backend/(:any)']                        = 'admin/index_admin/show/$1';
 
 ////////////////////FRONTEND////////////////////////////
-$route['service/show/(:num)'] = 'service/show/$1';
+$route['service/(:num)'] = 'service/show/$1';
 
 $route['about'] = 'about/index';
 
-$route['blog/list'] = 'blog/index';
-$route['blog/show/(:num)'] = 'blog/show/$1';
+$route['blog'] = 'blog/index';
+$route['blog/page/(:num)'] = 'blog/index/$1';
+$route['blog/topic/(:num)'] = 'blog/topic/$1';
+$route['articles/(:num)'] = 'blog/show/$1';
 
-$route['sale/list'] = 'product/index';
-$route['sale/show/(:num)'] = 'product/show/$1';
+$route['shop'] = 'product/index';
+$route['shop/product/(:num)'] = 'product/show/$1';
 
 $route['gift/list'] = 'gift/ajax_get_gift_list';
 

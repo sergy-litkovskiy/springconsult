@@ -44,20 +44,36 @@ class Index extends CI_Controller
 
     public function index($currentPage = null)
     {
-//        $this->dataMenu = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr) - 1]);
-        $contentArr     = $this->index_model->getNewsList();
+        $countTotal = $this->index_model->getCountArticles('news');
+        //prepare pager config
+        $config               = prepare_pager_config();
+        $config['base_url']   = base_url() . 'news/page/';
+        $config['total_rows'] = $countTotal;
+        $this->pagination->initialize($config);
+        $pager          = $this->pagination->create_links();
+        $pagerParam     = array('current_page' => $currentPage, 'per_page' => $config['per_page']);
+        $this->dataMenu = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr) - 1]);
+        $contentArr     = $this->index_model->getNewsList($pagerParam);
         $title          = ArrayHelper::arrayGet($contentArr, '0.slug_title');
         $announcement   = $this->index_model->getFromTableByParams(array('status' => STATUS_ON), 'announcement');
 
-        $data = array_merge($this->_getDataArrForAction($title, $contentArr),
+        $this->data = array_merge($this->_getDataArrForAction($title, $contentArr),
             array(
-//                'content'        => $contentArr
-//                , 'current_page' => $currentPage
-//                , 'disqus'       => show_disqus()
-//                , 'announcement' => count($announcement) ? $announcement[0] : null
+                'content'        => $contentArr
+                , 'pager'        => $pager
+                , 'current_page' => $currentPage
+                , 'disqus'       => show_disqus()
+                , 'announcement' => count($announcement) ? $announcement[0] : null
             ));
 
-        $this->twig->display('index/index.html', $data);
+        $data = array(
+            'menu'      => $this->load->view(MENU, $this->dataMenu, true),
+            'content'   => $this->load->view('index/show_news', $this->data, true),
+            'cloud_tag' => $this->load->view('blocks/cloud_tag', $this->cloudsTag, true),
+            'subscribe' => $this->load->view('blocks/subscribe', count($this->subscribe) ? $this->subscribe : null, true));
+
+//        $this->load->view('layout', $data);
+        $this->twig->display('index/index.html', $this->data);
     }
 
     public function show($slug)
