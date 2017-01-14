@@ -44,8 +44,8 @@ abstract class MY_Controller extends CI_Controller
         ];
 
         $limitParams = [
-            'limit' => 0,
-            'offset' => ASSIGNED_ARTICLE_LIST_LIMIT
+            'limit' => ASSIGNED_ARTICLE_LIST_LIMIT,
+            'offset' => 0
         ];
 
         $this->lastArticleList = $this->blog_model->getListByParams(

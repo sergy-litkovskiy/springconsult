@@ -4,12 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Crud extends CI_Model
 {
-    protected $table = '';
-    protected $idkey = 'id';
+    protected $table;
+    protected $idkey;
     
     public function __construct()
     {
         parent::__construct();
+
+        $this->idkey = 'id';
     }
 
     public function add($data)
@@ -106,8 +108,8 @@ class Crud extends CI_Model
 
         if ($limit && $offset) {
             $this->db->limit($limit, $offset);
-        } elseif ($offset) {
-            $this->db->limit($offset);
+        } elseif ($limit) {
+            $this->db->limit($limit);
         }
 
         return $this->getList();

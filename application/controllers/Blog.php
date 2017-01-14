@@ -20,7 +20,7 @@ class Blog extends MY_Controller
 
         $articleList = $this->blog_model->getListByParams(['status' => STATUS_ON], $orderParams, $limitParams);
 
-        $topicList = $this->topic_model->getListByParams(['status' => STATUS_ON]);
+        $topicList = $this->topic_model->getTopicListByParamsWithArticleCount(['status' => STATUS_ON]);
 
         $data = [
             'currentItemName' => $this->entityName,
@@ -44,7 +44,7 @@ class Blog extends MY_Controller
 
         $baseUrl = sprintf('%s%s/topic/%s', base_url(), $this->entityName, $topicId);
 
-        $pagerView = $this->preparePager($baseUrl, $countTotal);
+        $pagerView = $this->preparePager($baseUrl, $countTotal, 5);
 
         list($orderParams, $limitParams) = $this->makeSqlParams($page);
 
@@ -55,7 +55,7 @@ class Blog extends MY_Controller
             $limitParams
         );
 
-        $topicList = $this->topic_model->getListByParams(['status' => STATUS_ON]);
+        $topicList = $this->topic_model->getTopicListByParamsWithArticleCount(['status' => STATUS_ON]);
 
         //remove current topic from the list
         $topicList = array_filter($topicList, function ($value) use ($topicId) {
@@ -84,13 +84,17 @@ class Blog extends MY_Controller
         return $this->prepareMetaData($mainData);
     }
 
-    private function preparePager($baseUrl, $countTotal)
+    private function preparePager($baseUrl, $countTotal, $uriSegment = null)
     {
         //prepare pager config
         $config               = prepare_pager_config();
         $config['base_url']   = $baseUrl . '/page/';
         $config['first_url']   = $baseUrl;
         $config['total_rows'] = $countTotal;
+
+        if ($uriSegment) {
+            $config['uri_segment'] = $uriSegment;
+        }
 
         $this->pagination->initialize($config);
 

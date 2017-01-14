@@ -68,7 +68,7 @@
                                     {% for topic in topicList %}
                                         <li>
                                             <a href="{{ base_url() }}blog/topic/{{ topic.id }}">
-                                                {{ topic.name }} (10)
+                                                {{ topic.name }} ({{ topic.articles_count }})
                                             </a>
                                         </li>
                                     {% endfor %}

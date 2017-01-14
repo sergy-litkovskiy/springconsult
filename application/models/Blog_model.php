@@ -36,8 +36,8 @@ class Blog_model extends Crud
 
         if ($limit && $offset) {
             $this->db->limit($limit, $offset);
-        } elseif ($offset) {
-            $this->db->limit($offset);
+        } elseif ($limit) {
+            $this->db->limit($limit);
         }
 
         $query = $this->db->get($this->table);

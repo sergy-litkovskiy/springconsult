@@ -45,6 +45,31 @@ class Topic_model extends Crud
         return $query->result_array();
     }
 
+    public function getTopicListByParamsWithArticleCount($params)
+    {
+        $selectSql = '
+            topics.*, 
+            (
+                SELECT count(0) 
+                FROM topics_articles_assignment as taa 
+                INNER JOIN articles ON articles.id = taa.articles_id AND articles.status = '.STATUS_ON.' 
+                WHERE taa.topics_id = topics.id
+            ) as articles_count
+        ';
+
+        $this->db->select($selectSql);
+        $this->db->where($params);
+        $this->db->join(
+            'topics_articles_assignment as taa',
+            $this->table . '.id = taa.topics_id',
+            'LEFT'
+        );
+        $this->db->group_by('topics.id');
+
+        $query = $this->db->get($this->table);
+
+        return $query->result_array();
+    }
 
     private function _getSelectSql()
     {
