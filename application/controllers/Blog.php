@@ -36,6 +36,27 @@ class Blog extends MY_Controller
         $this->twig->display($this->entityName . '/index.html', $data);
     }
 
+    public function show($articleId)
+    {
+        $metaData = $this->getMainData();
+
+        $articleList = $this->blog_model->getListByParams(['status' => STATUS_ON, 'id' => $articleId]);
+
+        $topicList = $this->topic_model->getTopicListByParamsWithArticleCount(['status' => STATUS_ON]);
+
+        $data = [
+            'currentItemName' => $this->entityName,
+            'data'     => ArrayHelper::arrayGet($articleList, 0, []),
+            'metaData'        => $metaData,
+            'topicList'       => $topicList,
+            'pageTitle'       => ArrayHelper::arrayGet($articleList, '0.title')
+        ];
+
+        $data = array_merge($data, $this->baseResult);
+
+        $this->twig->display($this->entityName . '/show.html', $data);
+    }
+
     public function topic($topicId, $page = 1)
     {
         $metaData = $this->getMainData();

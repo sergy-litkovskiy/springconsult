@@ -47,6 +47,7 @@ class Blog_model extends Crud
 
     private function prepareSqlQuery($params, $topicId)
     {
+        $this->db->select($this->table . '.*');
         $this->db->where($params);
         $this->db->join(
             'topics_articles_assignment as taa',
