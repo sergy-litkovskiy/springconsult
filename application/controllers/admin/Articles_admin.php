@@ -42,6 +42,7 @@ class Articles_admin extends CI_Controller
             'id'             => null
         , 'slug'             => null
         , 'text'             => null
+        , 'description'             => null
         , 'title'            => null
         , 'thumb'            => null
         , 'num_sequence'     => null
@@ -212,6 +213,7 @@ class Articles_admin extends CI_Controller
         return array('meta_description' => $request['meta_description']
         , 'meta_keywords'               => $request['meta_keywords']
         , 'title'                       => $request['title']
+        , 'description'                       => $request['description']
         , 'slug'                        => $request['slug']
         , 'text'                        => $request['text']
         , 'thumb'                        => $request['thumb']

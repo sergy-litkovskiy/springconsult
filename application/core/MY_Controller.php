@@ -38,18 +38,27 @@ abstract class MY_Controller extends CI_Controller
     {
         parent::__construct();
 
+        $orderParams = [
+            'orderBy' => 'date',
+            'orderDirection' => ORDER_DIRECTION_DESC
+        ];
+
+        $limitParams = [
+            'limit' => 0,
+            'offset' => ASSIGNED_ARTICLE_LIST_LIMIT
+        ];
+
         $this->lastArticleList = $this->blog_model->getListByParams(
             ['status' => STATUS_ON],
-            'date',
-            ORDER_DIRECTION_DESC,
-            ASSIGNED_ARTICLE_LIST_LIMIT
+            $orderParams,
+            $limitParams
         );
 
+        $orderParams['orderBy'] = 'created_at';
         $this->lastSaleProductList = $this->sale_model->getListByParams(
             ['status' => STATUS_ON],
-            'created_at',
-            ORDER_DIRECTION_DESC,
-            ASSIGNED_ARTICLE_LIST_LIMIT
+            $orderParams,
+            $limitParams
         );
 
         $this->baseResult = [

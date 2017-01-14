@@ -160,7 +160,7 @@ $route['about'] = 'about/index';
 
 $route['blog'] = 'blog/index';
 $route['blog/page/(:num)'] = 'blog/index/$1';
-$route['blog/topic/(:num)'] = 'blog/topic/$1';
+$route['blog/topic/(:num)/page/(:num)'] = 'blog/topic/$1/$2';
 $route['articles/(:num)'] = 'blog/show/$1';
 
 $route['shop'] = 'product/index';

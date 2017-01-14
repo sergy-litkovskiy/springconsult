@@ -18,4 +18,15 @@ class ImageHelper
 
         return $result;
     }
+
+    public static function deleteImagesFromText($text)
+    {
+        if (!$text) {
+            return $text;
+        }
+
+        $text = preg_replace('/\\<img.*?src=.*?\/\\>/is', '', $text);
+
+        return $text;
+    }
 }

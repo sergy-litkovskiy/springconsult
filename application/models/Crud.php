@@ -88,20 +88,26 @@ class Crud extends CI_Model
 
     public function getListByParams(
         $params,
-        $orderBy = ORDER_BY_DEFAULT,
-        $orderDirection = ORDER_DIRECTION_ASC,
-        $limit = 0,
-        $offset = 0
+        $orderParams = [],
+        $limitParams = []
     )
     {
+        $orderBy = ArrayHelper::arrayGet($orderParams, 'orderBy', ORDER_BY_DEFAULT);
+        $orderDirection = ArrayHelper::arrayGet($orderParams, 'orderDirection', ORDER_DIRECTION_ASC);
+
+        $limit = ArrayHelper::arrayGet($limitParams, 'limit', 0);
+        $offset = ArrayHelper::arrayGet($limitParams, 'offset', 0);
+
         $this->db->where($params);
 
         if ($orderBy) {
             $this->db->order_by($orderBy, $orderDirection);
         }
 
-        if ($limit || $offset) {
+        if ($limit && $offset) {
             $this->db->limit($limit, $offset);
+        } elseif ($offset) {
+            $this->db->limit($offset);
         }
 
         return $this->getList();
@@ -119,13 +125,9 @@ class Crud extends CI_Model
         return $this->db->count_all_results($this->table);
     }
 
-    public function getCountByParams($params, $limit = null, $offset = null)
+    public function getCountByParams($params)
     {
         $this->db->where($params);
-
-        if ($limit) {
-            $this->db->limit($limit, $offset);
-        }
 
         $query = $this->db->get($this->table);
 

@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         ,'full_tag_open'    => '<ul class="pagination pull-left mrgt-0">'
         ,'full_tag_close'   => '</ul>'
 
-        ,'first_link'       => null
+        ,'first_link'       => false
         ,'first_tag_open'   => '<li>'
         ,'first_tag_close'  => '</li>'
 
@@ -35,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             //digits links
         ,'num_tag_open'     => '<li>'
         ,'num_tag_close'    => '</li>'
-        ,'use_page_numbers' => TRUE
+        ,'use_page_numbers' => true
         ,'first_url'        => base_url()
      );
 }
