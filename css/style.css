@@ -5053,3 +5053,8 @@ ul{
 .shorten-description div {
     text-align: justify;
 }
+
+.share-box {
+    padding: 14px 5px 0;
+    border: none !important;
+}

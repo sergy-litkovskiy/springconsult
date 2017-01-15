@@ -104,7 +104,7 @@ define('MENU_ADMIN', 'admin/blocks/menu_admin');
 
 define('MENU_TOP_LEVEL_ID_SERVICE', 4);
 define('MENU_TOP_LEVEL_ID_ABOUT', 1);
-define('MENU_TOP_LEVEL_ID_CONTACTS', 2);
+define('MENU_TOP_LEVEL_ID_REVIEW', 239);
 define('MENU_TOP_LEVEL_ID_BLOG', 9);
 define('MENU_TOP_LEVEL_ID_SHOP', 265);
 

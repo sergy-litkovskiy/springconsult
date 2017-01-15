@@ -163,6 +163,8 @@ $route['blog/page/(:num)'] = 'blog/index/$1';
 $route['blog/topic/(:num)/page/(:num)'] = 'blog/topic/$1/$2';
 $route['articles/(:num)'] = 'blog/show/$1';
 
+$route['review'] = 'review/index';
+
 $route['shop'] = 'product/index';
 $route['shop/product/(:num)'] = 'product/show/$1';
 

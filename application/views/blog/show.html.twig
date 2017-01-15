@@ -29,21 +29,45 @@
                                 <div class="post_content">
                                     {{ data.text|raw }}
                                 </div>
-                                <ul class="shares">
-                                    <li class="shareslabel"><h3>Share This Story</h3></li>
-                                    <li><a class="facebook" href="#" data-placement="bottom" data-toggle="tooltip" title="Facebook"></a></li>
-                                    <li><a class="gplus" href="#" data-placement="bottom" data-toggle="tooltip" title="Google Plus"></a></li>
-                                    <li><a class="linkedin" href="#" data-placement="bottom" data-toggle="tooltip" title="LinkedIn"></a></li>
+                                <noindex>
+                                    <ul class="shares">
+                                    <li class="shareslabel">
+                                        <h3>Поделитесь с друзьями</h3>
+                                    </li>
+                                    <li class="share-box">
+                                        <div class="fb-like" data-href="{{ base_url() }}articles/{{ data.id }}" data-send="true" data-layout="button_count" data-width="215" data-show-faces="false"></div>
+                                    </li>
+                                    <li class="share-box">
+                                        <div>
+                                            <a href="https://twitter.com/share" class="twitter-share-button" data-via="Litkovska" data-lang="ru">Твитнуть</a>
+                                        </div>
+                                    </li>
+                                    <li class="share-box">
+                                        <div>
+                                            <a class="odkl-klass-stat" href="{{ base_url() }}" onclick="ODKL.Share(this);return false;" >
+                                                <span class="custom_count">0</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="share-box">
+                                        <div id="vk_like"></div>
+                                        {#<script type="text/javascript">#}
+                                            {#VK.Widgets.Like("vk_like", {type: "mini"});#}
+                                        {#</script>#}
+                                    </li>
                                 </ul>
+                                </noindex>
                             </article>
                         </div>
 
                         <div class="news_comments">
-                            <div class="dividerHeading">
-                                <h4><span>Comments (6)</span></h4>
-                            </div>
-                            <div id="comment">
-                            </div>
+                            <script type="text/javascript">
+                                var disqus_identifier = '{{ disqusId }}';
+                            </script>
+                            <noindex>
+                                <div id="disqus_thread"></div>
+                            </noindex>
+                            {{ disqus|raw }}
                         </div>
                     </div>
 

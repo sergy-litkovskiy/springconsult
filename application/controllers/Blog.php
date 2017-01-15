@@ -46,10 +46,12 @@ class Blog extends MY_Controller
 
         $data = [
             'currentItemName' => $this->entityName,
-            'data'     => ArrayHelper::arrayGet($articleList, 0, []),
+            'data'            => ArrayHelper::arrayGet($articleList, 0, []),
             'metaData'        => $metaData,
             'topicList'       => $topicList,
-            'pageTitle'       => ArrayHelper::arrayGet($articleList, '0.title')
+            'pageTitle'       => ArrayHelper::arrayGet($articleList, '0.title'),
+            'disqus'          => show_disqus(),
+            'disqusId'        => sprintf('article_%s_identifier', $articleId)
         ];
 
         $data = array_merge($data, $this->baseResult);
@@ -110,7 +112,7 @@ class Blog extends MY_Controller
         //prepare pager config
         $config               = prepare_pager_config();
         $config['base_url']   = $baseUrl . '/page/';
-        $config['first_url']   = $baseUrl;
+        $config['first_url']  = $baseUrl;
         $config['total_rows'] = $countTotal;
 
         if ($uriSegment) {
@@ -124,16 +126,16 @@ class Blog extends MY_Controller
 
     private function makeSqlParams($page)
     {
-        $limit = $this->pagination->per_page;
+        $limit  = $this->pagination->per_page;
         $offset = $limit * ($page - 1);
 
         $orderParams = [
-            'orderBy' => 'date',
+            'orderBy'        => 'date',
             'orderDirection' => ORDER_DIRECTION_DESC
         ];
 
         $limitParams = [
-            'limit' => $limit,
+            'limit'  => $limit,
             'offset' => $offset
         ];
 
