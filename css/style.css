@@ -5058,3 +5058,8 @@ ul{
     padding: 14px 5px 0;
     border: none !important;
 }
+
+.shares li.share-box a {
+    width: auto;
+    height: auto;
+}

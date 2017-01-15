@@ -29,34 +29,7 @@
                                 <div class="post_content">
                                     {{ data.text|raw }}
                                 </div>
-                                <noindex>
-                                    <ul class="shares">
-                                    <li class="shareslabel">
-                                        <h3>Поделитесь с друзьями</h3>
-                                    </li>
-                                    <li class="share-box">
-                                        <div class="fb-like" data-href="{{ base_url() }}articles/{{ data.id }}" data-send="true" data-layout="button_count" data-width="215" data-show-faces="false"></div>
-                                    </li>
-                                    <li class="share-box">
-                                        <div>
-                                            <a href="https://twitter.com/share" class="twitter-share-button" data-via="Litkovska" data-lang="ru">Твитнуть</a>
-                                        </div>
-                                    </li>
-                                    <li class="share-box">
-                                        <div>
-                                            <a class="odkl-klass-stat" href="{{ base_url() }}" onclick="ODKL.Share(this);return false;" >
-                                                <span class="custom_count">0</span>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li class="share-box">
-                                        <div id="vk_like"></div>
-                                        {#<script type="text/javascript">#}
-                                            {#VK.Widgets.Like("vk_like", {type: "mini"});#}
-                                        {#</script>#}
-                                    </li>
-                                </ul>
-                                </noindex>
+                                {% include 'blocks/social_share.html.twig' with {'entity': 'articles'} %}
                             </article>
                         </div>
 

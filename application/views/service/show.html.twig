@@ -29,12 +29,7 @@
                                 <div class="post_content">
                                     {{ data.text|raw }}
                                 </div>
-                                <ul class="shares">
-                                    <li class="shareslabel"><h3>Share This Story</h3></li>
-                                    <li><a class="facebook" href="#" data-placement="bottom" data-toggle="tooltip" title="Facebook"></a></li>
-                                    <li><a class="gplus" href="#" data-placement="bottom" data-toggle="tooltip" title="Google Plus"></a></li>
-                                    <li><a class="linkedin" href="#" data-placement="bottom" data-toggle="tooltip" title="LinkedIn"></a></li>
-                                </ul>
+                                {% include 'blocks/social_share.html.twig' with {'entity': 'service'} %}
                             </article>
                             <div class="widget_title">
                                 <h4><span>Отзывы</span></h4>
