@@ -60,12 +60,16 @@ $autoload['packages'] = array(APPPATH.'third_party');
 */
 
 $autoload['libraries'] = array('database'
-                                , 'firephp'
+//                                , 'firephp'
                                 , 'form_validation'
                                 , 'fileloader'
                                 , 'session'
                                 , 'common'
+                                , 'arrayHelper'
+                                , 'menuHelper'
+                                , 'imageHelper'
                                 , 'pagination'
+                                , 'twig'
 //                                , 'security'
                                 , 'email');
 
@@ -105,7 +109,7 @@ $autoload['helper'] = array('url'
                             ,'pager'
                             ,'security'
                             ,'disqus'
-                            ,'firephp'
+//                            ,'firephp'
                             ,'unisender_curl');
 
 /*
@@ -150,15 +154,22 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array(
-                        'crud',
-                        'index_model',
-                        'edit_menu_model',
-                        'menu_model',
-                        'login_model',
-                        'search_model',
-                        'mailer_model',
-                        'landing_model',
-                        'assign_model',
-                        'tags_model',
-                        'sale_model');
+$autoload['model'] = [
+    'crud',
+    'index_model',
+    'edit_menu_model',
+    'login_model',
+    'search_model',
+    'mailer_model',
+    'landing_model',
+    'assign_model',
+    'tags_model',
+
+    'menu_model',
+    'topic_model',
+    'sale_model',
+    'saleCategory_model',
+    'review_model',
+    'gift_model',
+    'blog_model',
+];

@@ -7,6 +7,7 @@
  */
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
+
 class Common
 {
     public static function getDateTime($format = null, $time = 'now')
@@ -102,8 +103,8 @@ class Common
      *
      * @param string $val
      * @param string $message
-     *
-     * @return string|bool
+     * @return bool|string
+     * @throws Exception
      */
     public static function assertTrue($val, $message)
     {
@@ -117,8 +118,8 @@ class Common
      *
      * @param string $val
      * @param string $message
-     *
-     * @return string|bool
+     * @return bool|string
+     * @throws Exception
      */
     public static function assertFalse($val, $message)
     {
@@ -128,12 +129,12 @@ class Common
     }
     
     
-    public static function cutString ($text, $counttext)
+    public static function cutString ($text, $length)
     {
         $sep = " ";
         $words = explode($sep, $text);
-        if ( count($words) > $counttext ){
-            $text = strip_tags(implode($sep, array_slice($words, 0, $counttext))."...");
+        if ( count($words) > $length ){
+            $text = strip_tags(implode($sep, array_slice($words, 0, $length))."...");
         }
         
         return $text;

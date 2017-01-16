@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url();?>css/style.css" type="text/css" />
+<link rel="stylesheet" href="<?php echo base_url();?>css/style-old.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url();?>js/jquery-ui-1.8.2/css/ui-lightness/jquery-ui-1.8.2.css" />
 
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />

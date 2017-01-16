@@ -1,0 +1,115 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+    <section class="wrapper">
+        <section class="page_head">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="page_title">
+                            <h2>{{ data.title }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                        <div class="blog_single">
+                            <article class="post">
+                                <div class="post_content">
+                                    {{ data.text|raw }}
+                                </div>
+                                {% include 'blocks/social_share.html.twig' with {'entity': 'service'} %}
+                            </article>
+                            <div class="widget_title">
+                                <h4><span>Отзывы</span></h4>
+                            </div>
+                            {% for review in reviewList %}
+                                <div class="about_author">
+                                    <div class="author_desc">
+                                        <img src="{{ base_url() }}img/reviews/{{ review.image }}" alt="about author">
+                                    </div>
+                                    <div class="author_bio">
+                                        <h3 class="author_name">
+                                            {{ review.author }}
+                                        </h3>
+                                        <p class="author_det shorten-review">
+                                            {{ review.text }}
+                                        </p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-4 col-lg-4 col-sm-4">
+                        <div class="sidebar">
+                            <div class="widget widget_categories">
+                                <div class="widget_title">
+                                    <h4><span>Услуги</span></h4>
+                                </div>
+                                <ul class="arrows_list list_style">
+                                    {% for service in serviceList %}
+                                        <li>
+                                            <a href="{{ base_url() }}service/{{ service.id }}">
+                                                {{ service.title }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div class="widget widget_about">
+                                <div class="widget_title">
+                                    <h4><span>Статьи</span></h4>
+                                </div>
+                            </div>
+
+                            <div class="widget">
+                                <ul class="recent_tab_list">
+                                    {% for article in articleList %}
+                                        <li>
+                                            <span>
+                                                <a href="{{ base_url() }}articles/{{ article.id }}">
+                                                    <img src="{{ base_url() }}img/blog/{{ article.thumb }}" alt="" />
+                                                </a>
+                                            </span>
+                                            <a href="{{ base_url() }}articles/{{ article.id }}">
+                                                {{ article.title }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+{% endblock %}
+
+{% block gift %}
+    {{ parent() }}
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('.shorten-review').shorten({
+            showChars: 350,
+            moreText: '<i class="fa fa-angle-down"></i>',
+            lessText: '<i class="fa fa-angle-up"></i>'
+        });
+    </script>
+{% endblock %}

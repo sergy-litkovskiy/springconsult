@@ -1,0 +1,116 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+    <section class="wrapper">
+        <section class="page_head">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="page_title">
+                            <h2>{{ pageTitle }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content service">
+            <div class="container">
+                <div class="row sub_content">
+                    <div class="who">
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            {{ data.text|raw }}
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="dividerHeading">
+                                <h4><span>Вопросы/Ответы</span></h4>
+                            </div>
+                            <ul class="recent_tab_list">
+                                {% for article in assignedArticleList %}
+                                    <li>
+                                        <span>
+                                            <a href="{{ base_url() }}articles/{{ article.id }}">
+                                                <img src="{{ base_url() }}img/blog/{{ article.thumb }}" alt="" />
+                                            </a>
+                                        </span>
+                                        <a href="{{ base_url() }}articles/{{ article.id }}">
+                                            {{ article.title }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row sub_content">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="dividerHeading">
+                            <h4><span>Мое образование</span></h4>
+
+                        </div>
+                        <ul class="list_style circle">
+                            <li><a href="#"> Donec convallis, metus nec tempus aliquet</a></li>
+                            <li><a href="#"> Aenean commodo ligula eget dolor</a></li>
+                            <li><a href="#"> Cum sociis natoque penatibus mag dis parturient</a></li>
+                            <li><a href="#"> Lorem ipsum dolor sit amet cons adipiscing</a></li>
+                            <li><a href="#"> Accumsan vulputate faucibus turpis tortor dictum</a></li>
+                            <li><a href="#"> Nullam ultrices eros accumsan vulputate faucibus</a></li>
+                            <li><a href="#"> Nunc aliquet tincidunt metus sit amet</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="dividerHeading">
+                            <h4><span>Отзывы клиентов</span></h4>
+
+                        </div>
+                        <div id="testimonial-carousel" class="testimonial carousel slide">
+                            <div class="carousel-inner">
+                                {% for review in reviewList %}
+                                    <div class="item active testimonial-item">
+                                        <div class="icon"><i class="fa fa-quote-right"></i></div>
+                                        <blockquote>
+                                            <p class="shorten-review">{{ review.text }}</p>
+                                        </blockquote>
+                                        <div class="icon-tr"></div>
+                                        <div class="testimonial-review">
+                                            <img src="{{ base_url() }}img/reviews/{{ review.image }}" alt="testimoni">
+                                            <h1>{{ review.author }}</h1>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="testimonial-buttons">
+                                <a href="#testimonial-carousel" data-slide="prev"><i class="fa fa-chevron-left"></i></a>&#32;
+                                <a href="#testimonial-carousel" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+{% endblock %}
+
+{% block gift %}
+    {{ parent() }}
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('.shorten-review').shorten({
+            showChars: 350,
+            moreText: '<i class="fa fa-angle-down"></i>',
+            lessText: '<i class="fa fa-angle-up"></i>'
+        });
+    </script>
+{% endblock %}

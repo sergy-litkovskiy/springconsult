@@ -102,6 +102,14 @@ define('MESS_ERROR', "<h2 class='mess_bad'>The action was not executed. Please, 
 define('MENU', 'blocks/menu');
 define('MENU_ADMIN', 'admin/blocks/menu_admin');
 
+define('MENU_TOP_LEVEL_ID_SERVICE', 4);
+define('MENU_TOP_LEVEL_ID_ABOUT', 1);
+define('MENU_TOP_LEVEL_ID_REVIEW', 239);
+define('MENU_TOP_LEVEL_ID_BLOG', 9);
+define('MENU_TOP_LEVEL_ID_SHOP', 265);
+
+define('ASSIGNED_ARTICLE_LIST_LIMIT', 3);
+
 /*
 |--------------------------------------------------------------------------
 | Index for languages
@@ -114,6 +122,10 @@ define('LANGUAGE_ID_RU', '1');
 
 define('STATUS_ON', '1');
 define('STATUS_OFF', '0');
+
+define('ORDER_DIRECTION_ASC', 'ASC');
+define('ORDER_DIRECTION_DESC', 'DESC');
+define('ORDER_BY_DEFAULT', 'id');
 
 define('ERROR_SRC_SPEC_MAILER', '1');
 define('ERROR_SRC_ARTICLE_MAILER', '2');
@@ -144,3 +156,7 @@ define('LIQPAY_HTTP_REQUEST_URI', 'https://www.liqpay.com/api/3/checkout');
 define('UNISENDERAPIKEY', '581woumrc4iedxpdtsahhsy8hxkfew5q8xpp8tyy');
 define('UNISENDERMAINLISTID', 1237963);
 define('UNISENDERTESTLISTID', 1238223);
+
+define('DEFAULT_META_DESCRIPTION', 'SpringСonsulting - ваша возможность понять себя, реализовать свой потенциал, мечты, желания, цели! Профессиональная поддержка опытного коуча-консультанта и сопровождение в поисках ответов на жизненно важные вопросы, в поиске работы, в построении гармоничных отношений,  в достижении счастья и успеха');
+define('DEFAULT_META_KEYWORDS', '');
+define('DEFAULT_FB_IMAGE', 'spring_logo.png');

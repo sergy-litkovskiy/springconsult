@@ -1,0 +1,98 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+    <section class="wrapper">
+        <section class="page_head">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="page_title">
+                            <h2>Услуги</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content service">
+            <div class="container">
+                <div class="row sub_content">
+                    {% for serviceToReviewsItem in serviceToReviewsMap %}
+                        <div class="col-md-3 col-sm-6">
+                            <div class="serviceBox_2 {{ serviceToReviewsItem.color_class }}">
+                                <div class="service-icon">
+                                    <i class="fa {{ serviceToReviewsItem.icon_class }}"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h3>{{ serviceToReviewsItem.title }}</h3>
+                                    <div class="shorten-description">{{ serviceToReviewsItem.description }}</div>
+                                    <div class="read">
+                                        <a href="{{ base_url() }}service/{{ serviceToReviewsItem.id }}">Далее</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if serviceToReviewsItem.reviewList|length %}
+                                <div class="review-block">
+                                    <div class="dividerHeading">
+                                        <h4><span>Отзывы</span></h4>
+                                    </div>
+                                    <div class="testimonial carousel slide" id="testimonial-carousel-search" data-ride="carousel">
+                                        <div class="carousel-inner" role="listbox">
+                                            {% for review in serviceToReviewsItem.reviewList %}
+                                                <div class="item active testimonial-item">
+                                                    <div class="icon"><i class="fa fa-quote-right"></i></div>
+                                                    <blockquote>
+                                                        <p class="shorten-review">{{ review.text }}</p>
+                                                    </blockquote>
+                                                    <div class="icon-tr"></div>
+                                                    <div class="testimonial-review">
+                                                        <img alt="testimoni" src="{{ base_url() }}img/reviews/{{ review.image }}"/>
+                                                        <h1>{{ review.author }}</h1>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="testimonial-buttons">
+                                            <a data-slide="prev" href="#testimonial-carousel-search">
+                                                <i class="fa fa-chevron-left"></i>
+                                            </a>
+                                            <a data-slide="next" href="#testimonial-carousel-search">
+                                                <i class="fa fa-chevron-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </section>
+{% endblock %}
+
+{% block gift %}
+    {{ parent() }}
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('.shorten-description').shorten({
+            showChars: 150,
+            moreText: '<i class="fa fa-angle-down"></i>',
+            lessText: '<i class="fa fa-angle-up"></i>'
+        });
+        $('.shorten-review').shorten({
+            showChars: 350,
+            moreText: '<i class="fa fa-angle-down"></i>',
+            lessText: '<i class="fa fa-angle-up"></i>'
+        });
+    </script>
+{% endblock %}

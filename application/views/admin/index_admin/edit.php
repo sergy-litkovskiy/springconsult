@@ -35,6 +35,9 @@
             </select>
         </p>
         <br/>
+        <p><b>Thumbnail:</b></p>
+        <p><input type="text" id='thumb' name='thumb' value="<?php echo $content['thumb'];?>"/></p>
+        <br/>
         <p><b>Название:</b></p>
         <p><input type="text" id='title' name='title' value="<?php echo $content['title'];?>"/></p>
         <br/>
@@ -58,6 +61,9 @@
 
             <input class="tag" value="" type="text" name="tag[]">
         </p>
+        <br/>
+        <p><b>Описание:</b></p>
+        <textarea style='width:100%' name='description' cols='80' rows='8'><?php echo $content['description'];?></textarea>
         <br/>
         <p><b>Текст:</b></p>
         <textarea id="full" style='width:100%' name='text' cols='80' rows='8'><?php echo $content['text'];?></textarea>

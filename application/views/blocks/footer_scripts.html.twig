@@ -1,0 +1,118 @@
+<script type="text/javascript" src="/js/front/jquery-1.10.2.min.js"></script>
+<script src="/js/front/bootstrap.min.js"></script>
+<script src="/js/front/jquery.easing.1.3.js"></script>
+<script src="/js/front/retina-1.1.0.min.js"></script>
+<script type="text/javascript" src="/js/front/jquery.cookie.js"></script> <!-- jQuery cookie -->
+<script type="text/javascript" src="/js/front/styleswitch.js"></script> <!-- Style Colors Switcher -->
+<script src="/js/front/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/js/front/jquery.smartmenus.min.js"></script>
+<script type="text/javascript" src="/js/front/jquery.smartmenus.bootstrap.min.js"></script>
+{#<script type="text/javascript" src="/js/front/owl.carousel.min.js"></script>#}
+<script type="text/javascript" src="/js/front/jflickrfeed.js"></script>
+<script type="text/javascript" src="/js/front/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="/js/front/jquery.isotope.min.js"></script>
+<script type="text/javascript" src="/js/front/jquery-hoverdirection.min.js"></script>
+<script type="text/javascript" src="/js/front/jquery.easypiechart.min.js"></script>
+<script type="text/javascript" src="/js/front/swipe.js"></script>
+<script type="text/javascript" src="/js/front/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="/js/front/jquery-scrolltofixed-min.js"></script>
+<script type="text/javascript" src="/js/front/jquery.shorten.min.js"></script>
+
+<script src="/js/front/main.js"></script>
+
+<!-- Start Style Switcher -->
+{#<div class="switcher"></div>#}
+<!-- End Style Switcher -->
+
+{#<script>#}
+    {#/*portfolio*/#}
+    {#(function($) {#}
+        {#"use strict";#}
+        {#var $container = $('.portfolio'),#}
+            {#$items = $container.find('.portfolio-item'),#}
+            {#portfolioLayout = 'fitRows';#}
+
+        {#if( $container.hasClass('portfolio-centered') ) {#}
+            {#portfolioLayout = 'masonry';#}
+        {#}#}
+
+        {#$container.isotope({#}
+            {#filter: '*',#}
+            {#animationEngine: 'best-available',#}
+            {#layoutMode: portfolioLayout,#}
+            {#animationOptions: {#}
+                {#duration: 750,#}
+                {#easing: 'linear',#}
+                {#queue: false#}
+            {#},#}
+            {#masonry: {#}
+            {#}#}
+        {#}, refreshWaypoints());#}
+
+        {#function refreshWaypoints() {#}
+            {#setTimeout(function() {#}
+            {#}, 1000);#}
+        {#}#}
+
+        {#$('ul#filter li').on('click', function() {#}
+            {#var selector = $(this).attr('data-filter');#}
+            {#$container.isotope({ filter: selector }, refreshWaypoints());#}
+            {#$('ul#filter li').removeClass('selected');#}
+            {#$(this).addClass('selected');#}
+            {#return false;#}
+        {#});#}
+
+        {#function getColumnNumber() {#}
+            {#var winWidth = $(window).width(),#}
+                {#columnNumber = 1;#}
+
+            {#if (winWidth > 1200) {#}
+                {#columnNumber = 5;#}
+            {#} else if (winWidth > 950) {#}
+                {#columnNumber = 4;#}
+            {#} else if (winWidth > 600) {#}
+                {#columnNumber = 3;#}
+            {#} else if (winWidth > 400) {#}
+                {#columnNumber = 2;#}
+            {#} else if (winWidth > 250) {#}
+                {#columnNumber = 1;#}
+            {#}#}
+            {#return columnNumber;#}
+        {#}#}
+
+        {#function setColumns() {#}
+            {#var winWidth = $(window).width(),#}
+                {#columnNumber = getColumnNumber(),#}
+                {#itemWidth = Math.floor(winWidth / columnNumber);#}
+
+            {#$container.find('.portfolio-item').each(function() {#}
+                {#$(this).css( {#}
+                    {#width : itemWidth + 'px'#}
+                {#});#}
+            {#});#}
+        {#}#}
+
+        {#function setPortfolio() {#}
+            {#setColumns();#}
+            {#$container.isotope('reLayout');#}
+        {#}#}
+
+        {#$container.imagesLoaded(function () {#}
+            {#setPortfolio();#}
+        {#});#}
+
+        {#$(window).on('resize', function () {#}
+            {#setPortfolio();#}
+        {#});#}
+    {#})(jQuery);#}
+<!--</script>-->
+
+{#<!-- WARNING: Wow.js doesn't work in IE 9 or less -->#}
+{#<!--[if gte IE 9 | !IE ]><!-->#}
+{#<script type="text/javascript" src="/js/front/wow.min.js"></script>#}
+{#<script>#}
+    {#// WOW Animation#}
+    {#new WOW().init();#}
+{#</script>#}
+
+<!--[endif]-->

@@ -3,7 +3,7 @@
     <?php foreach ($subscribeArr as $key => $subscribe):?>
         <div id="subscribe">
             <?php if($subscribe['img_path']){?>
-                <img class="img_subscribe" src="<?php echo base_url()."subscribe/".$subscribe['img_path'];?>"/>
+                <img class="img_subscribe" src="<?php echo base_url()."img/subscribe/".$subscribe['img_path'];?>"/>
                 <div class="subscribe"><?php echo $subscribe['description'];?></div>
             <?php }?>
             <form class="subscribe_form" action='#' method='post' name='add_new' enctype='multipart/form-data'>
