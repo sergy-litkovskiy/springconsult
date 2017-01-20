@@ -29,16 +29,16 @@ class Edit_menu_model extends Crud
 
         $this->id      = empty($arr_menu_parent_item)              ? 0 : $arr_menu_parent_item[0]['id'];
         $this->parent  = empty($arr_menu_parent_item[0]['parent']) ? 0 : $arr_menu_parent_item[0]['parent'];
-        $this->title   = empty($arr_menu_parent_item[0]['title'])  ? 0 : $arr_menu_parent_item[0]['title'];
-        $this->slug    = empty($arr_menu_parent_item[0]['slug'])   ? 0 : $arr_menu_parent_item[0]['slug'];
+        $this->title   = empty($arr_menu_parent_item[0]['title'])  ? 0 : trim($arr_menu_parent_item[0]['title']);
+        $this->slug    = empty($arr_menu_parent_item[0]['slug'])   ? 0 : trim($arr_menu_parent_item[0]['slug']);
         $this->color_class    = empty($arr_menu_parent_item[0]['color_class'])   ? 0 : $arr_menu_parent_item[0]['color_class'];
         $this->icon_class    = empty($arr_menu_parent_item[0]['icon_class'])   ? 0 : $arr_menu_parent_item[0]['icon_class'];
-        $this->description    = empty($arr_menu_parent_item[0]['description'])   ? 0 : $arr_menu_parent_item[0]['description'];
+        $this->description    = empty($arr_menu_parent_item[0]['description'])   ? 0 : trim($arr_menu_parent_item[0]['description']);
         $this->status  = empty($arr_menu_parent_item[0]['status']) ? 0 : $arr_menu_parent_item[0]['status'];
         $this->numSeq  = empty($arr_menu_parent_item[0]['num_sequence']) ? 0 : $arr_menu_parent_item[0]['num_sequence'];
 
-        $this->meta_description = empty($arr_menu_parent_item[0]['meta_description'])   ? 0 : $arr_menu_parent_item[0]['meta_description'];
-        $this->meta_keywords    = empty($arr_menu_parent_item[0]['meta_keywords'])      ? 0 : $arr_menu_parent_item[0]['meta_keywords'];
+        $this->meta_description = empty($arr_menu_parent_item[0]['meta_description'])   ? 0 : trim($arr_menu_parent_item[0]['meta_description']);
+        $this->meta_keywords    = empty($arr_menu_parent_item[0]['meta_keywords'])      ? 0 : trim($arr_menu_parent_item[0]['meta_keywords']);
         $query_childs  = $this->db->query("SELECT
                                                 menu.*
                                             FROM

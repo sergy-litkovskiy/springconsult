@@ -132,7 +132,8 @@ a:focus{
 }
 
 .sub_content {
-    padding: 30px 0;
+    /*padding: 30px 0;*/
+    padding: 10px 0;
 }
 
 .super_sub_content{
@@ -2860,13 +2861,13 @@ blockquote{font-size:14px;}
     width: 70px;
 }
 .testimonial-review > h1 {
-    float: left;
+    /*float: left;*/
     color:#555;
     font-size: 14px;
     font-weight: 700;
     line-height: normal;
     margin-top: 15px;
-    padding-left: 20px;
+    padding-left: 80px;
 }
 .testimonial-item blockquote p {
     margin-bottom: 0;
@@ -3209,6 +3210,9 @@ section.parallax h2 {
     top:-47px;
     left:39%;
 }
+.serviceBox_4 .service-icon.service-education {
+    left:24%;
+}
 .serviceBox_4 .service-icon:before {
     border: 3px solid #449d44;
     border-radius: 100%;
@@ -3227,7 +3231,8 @@ section.parallax h2 {
 .serviceBox_4 .service-content {
     padding: 30px 0 12px;
 }
-.serviceBox_4 .service-content > h3{
+.serviceBox_4 .service-content > h3,
+.serviceBox_4 .service-content > h3.my-result{
     color: #373a41;
     font: bold 16px/1.2em 'Open Sans',Helvetica, Arial, sans-serif;
     text-transform: uppercase;
@@ -3236,6 +3241,14 @@ section.parallax h2 {
     color: #8d9095;
     font: 14px/23px 'Open Sans',Helvetica, Arial, sans-serif;
     padding: 0 40px;
+}
+.serviceBox_4 .service-content > h3.my-result{
+    font: bold 14px/1em 'Open Sans',Helvetica, Arial, sans-serif;
+}
+.serviceBox_4 .service-content > p.my-result{
+    color: #8d9095;
+    font: 12px/21px 'Open Sans',Helvetica, Arial, sans-serif;
+    padding: 0 10px;
 }
 .serviceBox_4 .read i.fa-angle-right{
     margin: 0 0 0 5px;

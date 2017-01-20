@@ -60,7 +60,7 @@ class Service extends MY_Controller
             $reviewsId = ArrayHelper::arrayGet($serviceData, 'reviews_id');
             $menuId    = ArrayHelper::arrayGet($serviceData, 'id');
 
-            $map[$menuId]                           = $this->makeMainData($serviceData);
+            $map[$menuId]['data'] = $this->makeMainData($serviceData);
             $map[$menuId]['reviewList'][$reviewsId] = $reviewsId ? $this->makeReviewsData($serviceData) : [];
         }
 
@@ -72,8 +72,8 @@ class Service extends MY_Controller
         return [
             'id'          => ArrayHelper::arrayGet($serviceData, 'id'),
             'title'       => ArrayHelper::arrayGet($serviceData, 'title'),
-            'text'        => ArrayHelper::arrayGet($serviceData, 'text'),
-            'description' => ArrayHelper::arrayGet($serviceData, 'description'),
+            'text'        => trim(ArrayHelper::arrayGet($serviceData, 'text')),
+            'description' => trim(ArrayHelper::arrayGet($serviceData, 'description')),
             'color_class' => ArrayHelper::arrayGet($serviceData, 'color_class'),
             'icon_class'  => ArrayHelper::arrayGet($serviceData, 'icon_class'),
         ];

@@ -34,12 +34,8 @@
                             </div>
                             <ul class="recent_tab_list">
                                 {% for article in assignedArticleList %}
-                                    <li>
-                                        <span>
-                                            <a href="{{ base_url() }}articles/{{ article.id }}">
-                                                <img src="{{ base_url() }}img/blog/{{ article.thumb }}" alt="" />
-                                            </a>
-                                        </span>
+                                    <li class="serviceBox_7">
+                                        <span class="service-icon fa fa-question"></span>
                                         <a href="{{ base_url() }}articles/{{ article.id }}">
                                             {{ article.title }}
                                         </a>
@@ -49,22 +45,74 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="row sub_content">
+                    <div class="col-md-16 col-lg-16">
+                        <div class="dividerHeading">
+                            <h4><span>Мои результаты</span></h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="serviceBox_4">
+                            <div class="service-icon service-education">
+                                <i class="fa">600</i>
+                            </div>
+                            <div class="service-content">
+                                <h3 class="my-result">часов консультаций</h3>
+                                <p class="my-result">индивидуальных коуч-сессий</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="serviceBox_4">
+                            <div class="service-icon service-education">
+                                <i class="fa">150</i>
+                            </div>
+                            <div class="service-content">
+                                <h3 class="my-result">Составленных резюме</h3>
+                                <p class="my-result">успешно пройденных собеседований моими клиентами</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="serviceBox_4">
+                            <div class="service-icon service-education">
+                                <i class="fa">45</i>
+                            </div>
+                            <div class="service-content">
+                                <h3 class="my-result">авторских тренингов</h3>
+                                <p class="my-result">практикумов, мастер-классов и вебинаров</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="serviceBox_4">
+                            <div class="service-icon service-education">
+                                <i class="fa">4</i>
+                            </div>
+                            <div class="service-content service-education">
+                                <h3 class="my-result">Книги</h3>
+                                <p class="my-result">по личной эфективности (2 печатных издания и 2 электронных)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="serviceBox_4">
+                            <div class="service-icon service-education">
+                                <i class="fa">200</i>
+                            </div>
+                            <div class="service-content">
+                                <h3 class="my-result">Статей</h3>
+                                <p class="my-result">на тему понимания, развития себя и реализации своего потенциалана</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row sub_content">
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="dividerHeading">
-                            <h4><span>Мое образование</span></h4>
-
+                            <h4><span>{{ educationData.title }}</span></h4>
                         </div>
-                        <ul class="list_style circle">
-                            <li><a href="#"> Donec convallis, metus nec tempus aliquet</a></li>
-                            <li><a href="#"> Aenean commodo ligula eget dolor</a></li>
-                            <li><a href="#"> Cum sociis natoque penatibus mag dis parturient</a></li>
-                            <li><a href="#"> Lorem ipsum dolor sit amet cons adipiscing</a></li>
-                            <li><a href="#"> Accumsan vulputate faucibus turpis tortor dictum</a></li>
-                            <li><a href="#"> Nullam ultrices eros accumsan vulputate faucibus</a></li>
-                            <li><a href="#"> Nunc aliquet tincidunt metus sit amet</a></li>
-                        </ul>
+                        {{ educationData.text|raw }}
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6">
@@ -75,7 +123,7 @@
                         <div id="testimonial-carousel" class="testimonial carousel slide">
                             <div class="carousel-inner">
                                 {% for review in reviewList %}
-                                    <div class="item active testimonial-item">
+                                    <div class="item testimonial-item {% if loop.index == 1 %}active{% endif %}">
                                         <div class="icon"><i class="fa fa-quote-right"></i></div>
                                         <blockquote>
                                             <p class="shorten-review">{{ review.text }}</p>
@@ -109,6 +157,11 @@
     <script type="text/javascript">
         $('.shorten-review').shorten({
             showChars: 350,
+            moreText: '<i class="fa fa-angle-down"></i>',
+            lessText: '<i class="fa fa-angle-up"></i>'
+        });
+        $('.shorten-education').shorten({
+            showChars: 650,
             moreText: '<i class="fa fa-angle-down"></i>',
             lessText: '<i class="fa fa-angle-up"></i>'
         });

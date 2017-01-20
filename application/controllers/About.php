@@ -10,6 +10,10 @@ class About extends MY_Controller
     {
         $mainData = $this->menu_model->get(MENU_TOP_LEVEL_ID_ABOUT);
         $mainData = ArrayHelper::arrayGet($mainData, 0, []);
+
+        $educationData = $this->menu_model->get(MENU_TOP_LEVEL_ID_ABOUT_EDUCATION);
+        $educationData = ArrayHelper::arrayGet($educationData, 0, []);
+
         $metaData = $this->prepareMetaData($mainData);
 
         $assignedArticleList = $this->menu_model->getArticleListByMenuId(MENU_TOP_LEVEL_ID_ABOUT);
@@ -18,6 +22,7 @@ class About extends MY_Controller
         $data = [
             'currentItemName'     => $this->entityName,
             'data'                => $mainData,
+            'educationData'       => $educationData,
             'metaData'            => $metaData,
             'assignedArticleList' => $assignedArticleList,
             'reviewList'          => $reviewList,

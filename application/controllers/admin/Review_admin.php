@@ -147,7 +147,7 @@ class Review_admin extends CI_Controller
 
         try {
             $data['author'] = ArrayHelper::arrayGet($_REQUEST, 'author');
-            $data['text']   = ArrayHelper::arrayGet($_REQUEST, 'text');
+            $data['text']   = trim(ArrayHelper::arrayGet($_REQUEST, 'text'));
             $data['image']  = ArrayHelper::arrayGet($_REQUEST, 'image');
             $data['date']   = ArrayHelper::arrayGet($_REQUEST, 'date', date('Y-m-d H:i:s'));
 

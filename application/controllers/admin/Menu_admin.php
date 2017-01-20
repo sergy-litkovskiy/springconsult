@@ -190,14 +190,14 @@ private function _prepareSubMenuValidationRules()
 //---------------------------------------------------------------
 private function _prepareMenuDataForAddUpdate($request)
 {
-    return array('meta_description' => $request['meta_description']
-                ,'meta_keywords'    => $request['meta_keywords']
+    return array('meta_description' => trim($request['meta_description'])
+                ,'meta_keywords'    => trim($request['meta_keywords'])
                 ,'color_class'    => $request['color_class']
                 ,'icon_class'    => $request['icon_class']
-                ,'description'    => $request['description']
-                ,'title'            => $request['title']
-                ,'slug'             => $request['slug']
-                ,'text'             => $request['text']
+                ,'description'    => trim($request['description'])
+                ,'title'            => trim($request['title'])
+                ,'slug'             => trim($request['slug'])
+                ,'text'             => trim($request['text'])
                 ,'parent'           => isset($request['parent']) ? $request['parent'] : '0');
 }
 
