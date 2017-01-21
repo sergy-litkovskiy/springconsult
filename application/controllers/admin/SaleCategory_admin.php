@@ -78,14 +78,14 @@ class SaleCategory_admin extends CI_Controller
 
     public function edit($id = null)
     {
-        $topicData               = array();
+        $categoryData               = array();
         $assignedSaleProductList = array();
         $title                   = "Добавить sale category";
 
         $saleProductList = $this->sale_model->getListFromTable('sale_products');
 
         if ($id) {
-            $topicData                   = $this->saleCategory_model->getFromTableByParams(['id' => $id], 'topics');
+            $categoryData                   = $this->saleCategory_model->getFromTableByParams(['id' => $id], 'sale_categories');
             $assignedSaleProductDataList = $this->sale_model->getAssignedASaleProductListBySaleCategoryId($id);
 
             foreach ($assignedSaleProductDataList as $assignedSaleProductData) {
@@ -93,10 +93,10 @@ class SaleCategory_admin extends CI_Controller
                 $assignedSaleProductList[$saleProductsId] = $assignedSaleProductData;
             }
 
-            $title = "Редактировать topic";
+            $title = "Редактировать категорию";
         }
 
-        $content        = ArrayHelper::arrayGet($topicData, 0, $this->emptyCategoryList);
+        $content        = ArrayHelper::arrayGet($categoryData, 0, $this->emptyCategoryList);
         $url            = $this->index_model->prepareUrl($this->urlArr);
         $content['url'] = $url;
 

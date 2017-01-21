@@ -165,8 +165,8 @@ $route['articles/(:num)'] = 'blog/show/$1';
 
 $route['review'] = 'review/index';
 
-$route['shop'] = 'product/index';
-$route['shop/product/(:num)'] = 'product/show/$1';
+$route['shop'] = 'shop/index';
+$route['shop/sale/(:num)/(:any)'] = 'shop/show/$1';
 
 $route['gift/list'] = 'gift/ajax_get_gift_list';
 

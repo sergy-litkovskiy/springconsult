@@ -18,6 +18,10 @@ abstract class MY_Controller extends CI_Controller
     public $topic_model;
     /** @var  Mailer_model */
     public $mailer_model;
+    /** @var  SaleCategory_model */
+    public $saleCategory_model;
+    /** @var  SalePage_model */
+    public $salePage_model;
 
     /** @var  CI_Pagination */
     public $pagination;

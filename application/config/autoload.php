@@ -168,6 +168,7 @@ $autoload['model'] = [
     'menu_model',
     'topic_model',
     'sale_model',
+    'salePage_model',
     'saleCategory_model',
     'review_model',
     'gift_model',
