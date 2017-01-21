@@ -28,22 +28,26 @@ class Shop extends MY_Controller
         $this->twig->display($this->entityName . '/index.html', $data);
     }
 
-    public function show($id)
+    public function show($salePageId)
     {
-        $salePageData = $this->salePage_model->getSalePageWithAssignedProducts($id);
-        $metaData    = $this->prepareMetaData(ArrayHelper::arrayGet($salePageData, 0, []));
+        $salePageData = $this->salePage_model->getSalePageWithAssignedProducts($salePageId);
+        $metaData     = $this->prepareMetaData(ArrayHelper::arrayGet($salePageData, 0, []));
 
-        $salePageData  = $this->_makeMainDataToProductMap($salePageData, 'makeSalePageMainData');
+        $salePageData = $this->_makeMainDataToProductMap($salePageData, 'makeSalePageMainData');
+
+        $reviewList = $this->review_model->getReviewListBySalePageId($salePageId);;
 
         $data = [
-            'metaData'            => $metaData,
-            'salePageData'          => $salePageData,
-            'pageTitle'           => ArrayHelper::arrayGet($salePageData, '0.title')
+            'currentItemName' => 'salePage',
+            'metaData'        => $metaData,
+            'reviewList'        => $reviewList,
+            'data'            => ArrayHelper::arrayGet(array_values($salePageData), 0),
+            'pageTitle'       => ArrayHelper::arrayGet($salePageData, '0.title')
         ];
 
         $data = array_merge($data, $this->baseResult);
 
-        $this->twig->display($this->entityName.'/show.html', $data);
+        $this->twig->display($this->entityName . '/show.html', $data);
     }
 
     private function _makeMainDataToProductMap($dataList, $mainDataMethod)
@@ -82,9 +86,9 @@ class Shop extends MY_Controller
     private function makeSalePageMainData(array $mainData)
     {
         return [
-            'id'   => ArrayHelper::arrayGet($mainData, 'id'),
+            'id'    => ArrayHelper::arrayGet($mainData, 'id'),
             'title' => ArrayHelper::arrayGet($mainData, 'title'),
-            'slug' => ArrayHelper::arrayGet($mainData, 'slug'),
+            'slug'  => ArrayHelper::arrayGet($mainData, 'slug'),
             'text1' => ArrayHelper::arrayGet($mainData, 'text1'),
             'text2' => ArrayHelper::arrayGet($mainData, 'text2'),
         ];
@@ -93,13 +97,13 @@ class Shop extends MY_Controller
     private function makeProductsData($categoryData)
     {
         return [
-            'id'          => ArrayHelper::arrayGet($categoryData, 'sale_products_id'),
-            'title'       => ArrayHelper::arrayGet($categoryData, 'sale_products_title'),
-            'thumb'       => ArrayHelper::arrayGet($categoryData, 'sale_products_thumb'),
-            'description' => ArrayHelper::arrayGet($categoryData, 'sale_products_description'),
-            'price'       => ArrayHelper::arrayGet($categoryData, 'sale_products_price'),
-            'salePageSlug'       => ArrayHelper::arrayGet($categoryData, 'sale_page_slug'),
-            'salePageId'       => ArrayHelper::arrayGet($categoryData, 'sale_page_id'),
+            'id'           => ArrayHelper::arrayGet($categoryData, 'sale_products_id'),
+            'title'        => ArrayHelper::arrayGet($categoryData, 'sale_products_title'),
+            'thumb'        => ArrayHelper::arrayGet($categoryData, 'sale_products_thumb'),
+            'description'  => ArrayHelper::arrayGet($categoryData, 'sale_products_description'),
+            'price'        => ArrayHelper::arrayGet($categoryData, 'sale_products_price'),
+            'salePageSlug' => ArrayHelper::arrayGet($categoryData, 'sale_page_slug'),
+            'salePageId'   => ArrayHelper::arrayGet($categoryData, 'sale_page_id'),
         ];
     }
 }

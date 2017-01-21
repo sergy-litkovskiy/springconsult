@@ -14,7 +14,7 @@
                 <td>Автор</td>
                 <td>Фото</td>
                 <td>Текст</td>
-                <td>Sale product list</td>
+                <td>Sale page list</td>
                 <td>Разделы</td>
                 <td><p>edit<p></td>
                 <td><p>del</p></td>
@@ -28,19 +28,19 @@
                 <td class="article_table title" style="padding: 1em">
                     <p><b><?php echo $map['data']['author'];?></b></p>
                 </td>
-                <td class="article_table title" style="padding: 1em">
+                <td class="article_table title" style="padding: 5px;text-overflow: ellipsis;">
                     <p><b><?php echo $map['data']['image'];?></b></p>
                 </td>
                 <td class="article_table title" style="padding: 1em">
-                    <p><b><?php echo $map['data']['text'];?></b></p>
+                    <p><?php echo Common::cutString($map['data']['text'], 40);?></p>
                 </td>
                 <td class="article_table" style="padding: 1em">
                     <ul>
-                        <?php if(isset($map['sale_product_list']) && count($map['sale_product_list'])){
-                            foreach ($map['sale_product_list'] as $saleProductData):?>
-                                <?php if($saleProductData['sale_products_status']){
-                                    $status = ($saleProductData['sale_products_status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
-                                    <li><?php  echo $saleProductData['sale_products_title'].' - '.$status;?></li>
+                        <?php if(isset($map['sale_page_list']) && count($map['sale_page_list'])){
+                            foreach ($map['sale_page_list'] as $salePageData):?>
+                                <?php if($salePageData['sale_page_status']){
+                                    $status = ($salePageData['sale_page_status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
+                                    <li><?php  echo $salePageData['sale_page_title'].' - '.$status;?></li>
                                 <?php };?>
                             <?php endforeach;
                         }?>

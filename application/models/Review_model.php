@@ -16,9 +16,9 @@ class Review_model extends Crud
     {
         $sql = "SELECT
                     reviews.*,
-                    sale_products.id as sale_products_id,
-                    sale_products.title as sale_products_title,
-                    sale_products.status as sale_products_status,
+                    sale_page.id as sale_page_id,
+                    sale_page.title as sale_page_title,
+                    sale_page.status as sale_page_status,
                     
                     menu.id as menu_id,
                     menu.title as menu_title,
@@ -26,9 +26,9 @@ class Review_model extends Crud
                 FROM
                     reviews
                 LEFT JOIN
-                    sale_products_reviews_assignment ON sale_products_reviews_assignment.reviews_id = reviews.id
+                    sale_page_reviews_assignment ON sale_page_reviews_assignment.reviews_id = reviews.id
                 LEFT JOIN 
-                    sale_products ON sale_products.id = sale_products_reviews_assignment.sale_products_id                    
+                    sale_page ON sale_page.id = sale_page_reviews_assignment.sale_page_id                    
                 LEFT JOIN
                     menu_reviews_assignment ON menu_reviews_assignment.reviews_id = reviews.id
                 LEFT JOIN 
@@ -40,16 +40,16 @@ class Review_model extends Crud
         return $query->result_array();
     }
 
-    public function getAssignedReviewListBySaleProductId($saleProductsId)
+    public function getReviewListBySalePageId($salePageId)
     {
         $sql = "SELECT
-                    sale_products_reviews_assignment.id as sale_products_reviews_assignment_id,
+                    sale_page_reviews_assignment.id as sale_page_reviews_assignment_id,
                     reviews.*
                 FROM
                     reviews
                 INNER JOIN
-                    sale_products_reviews_assignment ON sale_products_reviews_assignment.reviews_id = reviews.id";
-        $sql .= " AND sale_products_reviews_assignment.sale_products_id = ".$saleProductsId;
+                    sale_page_reviews_assignment ON sale_page_reviews_assignment.reviews_id = reviews.id";
+        $sql .= " AND sale_page_reviews_assignment.sale_page_id = ".$salePageId;
 
         $query = $this->db->query($sql);
 

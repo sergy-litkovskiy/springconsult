@@ -12,7 +12,6 @@ class Sale_model extends Crud
         $this->table = 'sale_products';
     }
 
-
     public function getSalePageArrWithProducts($slug)
     {
         $sql  = $this->_getSelectSql();
@@ -123,24 +122,6 @@ class Sale_model extends Crud
                 INNER JOIN
                     sale_categories_sale_products_assignment ON sale_categories_sale_products_assignment.sale_products_id = sale_products.id";
         $sql .= " AND sale_categories_sale_products_assignment.sale_categories_id = ".$saleCategoryId;
-
-        $query = $this->db->query($sql);
-
-        return $query->result_array();
-    }
-
-    public function getAssignedSaleProductListByReviewId($reviewId)
-    {
-        $sql = "SELECT
-                    sale_products_reviews_assignment.id as sale_products_reviews_assignment_id,
-                    sale_products.id as sale_products_id,
-                    sale_products.title as sale_products_title,
-                    sale_products.status as sale_products_status
-                FROM
-                    sale_products
-                INNER JOIN
-                    sale_products_reviews_assignment ON sale_products_reviews_assignment.sale_products_id = sale_products.id";
-        $sql .= " AND sale_products_reviews_assignment.reviews_id = ".$reviewId;
 
         $query = $this->db->query($sql);
 

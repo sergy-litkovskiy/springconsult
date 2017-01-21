@@ -41,4 +41,22 @@ class SalePage_model extends Crud
                 LEFT JOIN
                     assign_sale ON assign_sale.sale_page_id = %s.id", $this->table, $this->table, $this->table);
     }
+
+    public function getAssignedSalePageListByReviewId($reviewId)
+    {
+        $sql = "SELECT
+                    sale_page_reviews_assignment.id as sale_page_reviews_assignment_id,
+                    sale_page.id as sale_page_id,
+                    sale_page.title as sale_page_title,
+                    sale_page.status as sale_page_status
+                FROM
+                    sale_page
+                INNER JOIN
+                    sale_page_reviews_assignment ON sale_page_reviews_assignment.sale_page_id = sale_page.id";
+        $sql .= " AND sale_page_reviews_assignment.reviews_id = ".$reviewId;
+
+        $query = $this->db->query($sql);
+
+        return $query->result_array();
+    }
 }

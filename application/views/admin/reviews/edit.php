@@ -15,19 +15,19 @@
         </textarea>
     </p>
     <br/>
-    <p><b>Выбрать sale products:</b></p>
+    <p><b>Выбрать sale pages:</b></p>
     <br/>
     <ul class="topic-article-list" style="float: left; margin-left: 2em;">
-        <?php foreach($saleProductList as $saleProduct):?>
+        <?php foreach($salePageList as $salePage):?>
             <li style="float: left; list-style-type: none;">
-                <input type="checkbox" class="edit_detail" name="new_sale_products_id[]" value="<?php echo $saleProduct['id']?>"
+                <input type="checkbox" class="edit_detail" name="new_sale_page_id[]" value="<?php echo $salePage['id']?>"
                     <?php
-                        echo $assignedSaleProductList && array_key_exists($saleProduct['id'], $assignedSaleProductList) ?
+                        echo $assignedSalePageList && array_key_exists($salePage['id'], $assignedSalePageList) ?
                         'checked="checked"':
                         ''
                     ;?>
                 >
-                <span class="landing_title_list">&nbsp;<?php echo $saleProduct['title']?></span>&nbsp;|&nbsp;
+                <span class="landing_title_list">&nbsp;<?php echo $salePage['title']?></span>&nbsp;|&nbsp;
             </li>
         <?php endforeach;?>
     </ul>
@@ -52,8 +52,8 @@
     <input id="id" name="id" type="hidden" value="<?php echo set_value('id', $content['id']);?>"/>
     <input id="status" name="status" type="hidden" value="<?php echo set_value('status', $content['status']);?>"/>
     <input id="date" name="date" type="hidden" value="<?php echo set_value('date', $content['date']);?>"/>
-    <?php foreach($assignedSaleProductList as $assignedSaleProductId => $saleProductData):?>
-        <input name="old_sale_products_id[]" type="hidden" value="<?php echo set_value('old_sale_products_id', $assignedSaleProductId);?>">
+    <?php foreach($assignedSalePageList as $assignedSalePageId => $salePageData):?>
+        <input name="old_sale_page_id[]" type="hidden" value="<?php echo set_value('old_sale_page_id', $assignedSalePageId);?>">
     <?php endforeach;?>
     <?php foreach($assignedMenuList as $assignedMenuId => $assignedMenuData):?>
         <input name="old_menu_id[]" type="hidden" value="<?php echo set_value('old_menu_id', $assignedMenuId);?>">
