@@ -30,7 +30,7 @@
                         <?php if(isset($map['sale_product_list']) && count($map['sale_product_list'])){
                             foreach ($map['sale_product_list'] as $saleProductData):?>
                                 <?php if($saleProductData['sale_products_title']){
-                                    $status = ($saleProductData['sale_products_title'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
+                                    $status = ($saleProductData['sale_products_status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
                                     <li><?php  echo $saleProductData['sale_products_title'].' - '.$status;?></li>
                                 <?php };?>
                             <?php endforeach;

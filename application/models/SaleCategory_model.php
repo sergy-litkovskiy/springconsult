@@ -19,11 +19,11 @@ class SaleCategory_model extends Crud
         $sql .= " , sale_page.id as sale_page_id, sale_page.slug as sale_page_slug";
         $sql .= $this->_getSqlFrom();
 
-        $sql .= " LEFT JOIN sale_products ON sale_products.id = sale_categories_sale_products_assignment.sale_products_id";
-        $sql .= " AND sale_categories.status = ".STATUS_ON;
+        $sql .= " INNER JOIN sale_products ON sale_products.id = sale_categories_sale_products_assignment.sale_products_id";
         $sql .= " AND sale_products.status = ".STATUS_ON;
         $sql .= " LEFT JOIN sale_page ON sale_products.sale_page_id = sale_page.id";
         $sql .= " AND sale_page.status = ".STATUS_ON;
+        $sql .= " WHERE sale_categories.status = ".STATUS_ON;
 
         $query = $this->db->query($sql);
 
