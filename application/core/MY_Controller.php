@@ -31,6 +31,8 @@ abstract class MY_Controller extends CI_Controller
     public $form_validation;
     /** @var  Twig */
     public $twig;
+    /** @var  CI_Input */
+    public $input;
 
     protected $lastArticleList     = [];
     protected $lastSaleProductList = [];

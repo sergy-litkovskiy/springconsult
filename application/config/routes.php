@@ -168,7 +168,8 @@ $route['review'] = 'review/index';
 $route['shop'] = 'shop/index';
 $route['shop/sale/(:num)/(:any)'] = 'shop/show/$1';
 
-$route['gift/list'] = 'gift/ajax_get_gift_list';
+$route['gift/list'] = 'gift/ajaxGetGiftList';
+$route['gift/subscribe'] = 'gift/ajaxGiftSubscribe';
 
 
 

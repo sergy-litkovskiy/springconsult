@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { GiftService } from '../services/gift-service';
 import { GiftModel } from '../models/gift-model';
+import { GiftSubscribeModel } from '../models/gift-subscribe-model';
 
 @Component({
   selector: 'gift-container',
@@ -79,23 +80,28 @@ export class GiftContainerComponent implements OnInit
 {
   giftModelList: GiftModel[];
 
-  constructor (private _giftService: GiftService) {}
+  constructor (private giftService: GiftService) {}
 
   ngOnInit () {
     this.getModelList();
   }
 
   getModelList () {
-    this._giftService
+    this.giftService
         .getGiftModelList()
-        .then(giftModelList => this.giftModelList = giftModelList);
+        .subscribe((giftList: GiftModel[]) => this.giftModelList = giftList);
   }
 
-  sendGift(userName: HTMLInputElement, email: HTMLInputElement, giftId: HTMLInputElement, giftName: HTMLInputElement): boolean {
+  sendGift(userName: HTMLInputElement, email: HTMLInputElement, giftId: HTMLInputElement, giftName: HTMLInputElement): void {
     console.log(`
       Adding giftId: ${giftId.value} | giftName: ${giftName.value} | email: ${email.value} | user: ${userName.value}
     `);
-    return false;
+
+    let giftSubscribeModel = new GiftSubscribeModel(userName.value, email.value, giftId.value, giftName.value);
+
+    this.giftService
+        .sendGiftRequest(giftSubscribeModel)
+        .subscribe(data => console.log(data));
   }
 }
 
