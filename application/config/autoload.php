@@ -173,4 +173,6 @@ $autoload['model'] = [
     'review_model',
     'gift_model',
     'blog_model',
+    'recipient_model',
+    'linkspacker_model',
 ];

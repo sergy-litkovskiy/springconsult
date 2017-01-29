@@ -170,6 +170,8 @@ $route['shop/sale/(:num)/(:any)'] = 'shop/show/$1';
 
 $route['gift/list'] = 'gift/ajaxGetGiftList';
 $route['gift/subscribe'] = 'gift/ajaxGiftSubscribe';
+$route['gift/finishsubscribe/(:num)/(:num)'] = 'gift/outputSubscribe/$1/$2';
+$route['finishsubscribe/(:any)'] = 'gift/finishSubscribe/$1';
 
 
 

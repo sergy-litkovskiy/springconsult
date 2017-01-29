@@ -88,6 +88,14 @@ class Crud extends CI_Model
         return $this->getList();
     }
 
+    public function getOneByParams($params)
+    {
+        $this->db->where($params);
+        $query = $this->db->get($this->table);
+
+        return ArrayHelper::arrayGet($query->result_array(), 0);
+    }
+
     public function getListByParams(
         $params,
         $orderParams = [],

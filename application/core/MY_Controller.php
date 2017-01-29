@@ -22,6 +22,10 @@ abstract class MY_Controller extends CI_Controller
     public $saleCategory_model;
     /** @var  SalePage_model */
     public $salePage_model;
+    /** @var  Recipient_model */
+    public $recipient_model;
+    /** @var  Linkspacker_model */
+    public $linkspacker_model;
 
     /** @var  CI_Pagination */
     public $pagination;

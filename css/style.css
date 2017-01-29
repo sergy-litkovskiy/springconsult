@@ -3981,7 +3981,7 @@ h5.circular-title{
 /* 24. PROMO BOX											 */
 /* ===================================================== */
 .promo_box {
-    background:#f2f2f2;
+    /*background:#f2f2f2;*/
     padding: 30px 0;
     overflow: hidden;
 }

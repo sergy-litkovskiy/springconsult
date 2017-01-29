@@ -31,7 +31,7 @@ export class GiftService
 
         if (dataList) {
             for (let data of dataList) {
-                giftList.push(new GiftModel(data.giftName, data.giftDescription, data. giftId, data.giftImage));
+                giftList.push(new GiftModel(data.subscribe_name, data.description, data.id, data.img_path));
             }
         }
 
