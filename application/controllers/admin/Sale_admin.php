@@ -49,13 +49,15 @@ class Sale_admin extends CI_Controller
         $this->emptySaleProductArr = array(
             'id'             => null
             , 'title'        => null
+            , 'label'        => null
             , 'description'  => null
             , 'price'        => null
+            , 'gift'        => null
             , 'sale_page_id' => null
             , 'sale_page'    => array()
             , 'sequence_num' => null
             , 'status'       => null
-            , 'thumb'        => null
+            , 'image'        => null
             , 'created_at'   => null
         );
 
@@ -81,8 +83,10 @@ class Sale_admin extends CI_Controller
             $saleArr[$salePage['id']]['created_at']                                             = $salePage['created_at'];
             $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['id']     = $salePage['sale_products_id'];
             $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['title']  = $salePage['sale_products_title'];
+            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['label']  = $salePage['sale_products_label'];
             $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['status'] = $salePage['sale_products_status'];
-            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['thumb']  = $salePage['sale_products_thumb'];
+            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['image']  = $salePage['sale_products_image'];
+            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['gift']  = $salePage['sale_products_gift'];
         }
 
         $contentData = array(
@@ -159,7 +163,7 @@ class Sale_admin extends CI_Controller
                 'slug'  => ArrayHelper::arrayGet($_REQUEST, 'slug'),
                 'text1' => ArrayHelper::arrayGet($_REQUEST, 'text1'),
                 'text2' => ArrayHelper::arrayGet($_REQUEST, 'text2'),
-                'thumb' => ArrayHelper::arrayGet($_REQUEST, 'thumb'),
+                'image' => ArrayHelper::arrayGet($_REQUEST, 'image'),
             );
 
             if ($id) {
@@ -235,10 +239,12 @@ class Sale_admin extends CI_Controller
             $saleArr[$saleProducts['id']]['created_at']            = $saleProducts['created_at'];
             $saleArr[$saleProducts['id']]['id']                    = $saleProducts['id'];
             $saleArr[$saleProducts['id']]['title']                 = $saleProducts['title'];
+            $saleArr[$saleProducts['id']]['label']                 = $saleProducts['label'];
             $saleArr[$saleProducts['id']]['price']                 = $saleProducts['price'];
+            $saleArr[$saleProducts['id']]['gift']                 = $saleProducts['gift'];
             $saleArr[$saleProducts['id']]['description']           = $saleProducts['description'];
             $saleArr[$saleProducts['id']]['status']                = $saleProducts['status'];
-            $saleArr[$saleProducts['id']]['thumb']                 = $saleProducts['thumb'];
+            $saleArr[$saleProducts['id']]['image']                 = $saleProducts['image'];
             $saleArr[$saleProducts['id']]['sale_products_letters'] = $saleProductsLetters;
 
             if ($saleProducts['sale_page_id']) {
@@ -324,9 +330,11 @@ class Sale_admin extends CI_Controller
             $this->_formSaleProductsValidation();
             $dataMain = array(
                 'title'       => ArrayHelper::arrayGet($_REQUEST, 'title'),
+                'label'       => ArrayHelper::arrayGet($_REQUEST, 'label'),
                 'description' => ArrayHelper::arrayGet($_REQUEST, 'description'),
                 'price'       => ArrayHelper::arrayGet($_REQUEST, 'price'),
-                'thumb'       => ArrayHelper::arrayGet($_REQUEST, 'thumb'),
+                'gift'       => ArrayHelper::arrayGet($_REQUEST, 'gift'),
+                'image'       => ArrayHelper::arrayGet($_REQUEST, 'image'),
             );
 
             if ($id) {

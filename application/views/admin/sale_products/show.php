@@ -27,6 +27,7 @@
             <tr data-article-id="<?php echo $item['id'];?>" data-article-title="<?php echo $item['title'];?>">
                 <td class="article_table title">
                     <p><b><?php echo $item['title'];?></b></p>
+                    <p><b><?php echo $item['label'];?></b></p>
                 </td>
                 <td class="article_table">
                     <p><?php echo $item['description'];?></p>

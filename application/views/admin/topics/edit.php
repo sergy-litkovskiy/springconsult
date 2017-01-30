@@ -7,9 +7,9 @@
     <br/>
     <p><b>Выбрать статьи:</b></p>
     <br/>
-    <ul class="topic-article-list" style="float: left; margin-left: 2em;">
+    <div class="topic-article-list" style="float: left;">
         <?php foreach($articleList as $article):?>
-            <li style="float: left; list-style-type: none;">
+            <p>
                 <input type="checkbox" class="edit_detail" name="new_article_id[]" value="<?php echo $article['id']?>"
                     <?php
                         echo $assignArticles && array_key_exists($article['id'], $assignArticles) ?
@@ -17,10 +17,10 @@
                         ''
                     ;?>
                 >
-                <span class="landing_title_list">&nbsp;<?php echo $article['title']?></span>&nbsp;|&nbsp;
-            </li>
+                <span class="landing_title_list">&nbsp;<?php echo $article['title']?></span>
+            </p>
         <?php endforeach;?>
-    </ul> 
+    </div>
     <input id="id" name="id" type="hidden" value="<?php echo set_value('id', $content['id']);?>"/>
     <input id="status" name="status" type="hidden" value="<?php echo set_value('status', $content['status']);?>"/>
     <?php foreach($assignArticles as $assignArticleId => $articleData):?>

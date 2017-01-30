@@ -35,20 +35,21 @@
                                 <div class="col-lg-3 col-md-3 col-sm-3">
                                     <div class="pricingTable">
                                         <div class="pricingTable-header">
-                                            <img src="{{ base_url() }}img/sale_products/{{ product.thumb }}"/>
-                                            <span class="heading">{{ product.title }}</span>
+                                            <img src="{{ base_url() }}img/sale_products/{{ product.image }}"/>
+                                            <span class="heading">
+                                                {{ product.title }}
+                                                {% if product.label|length %}
+                                                    <br/>{{ product.label }}
+                                                {% endif %}
+                                            </span>
                                             <span class="price-value">UAH<span>{{ product.price }}</span></span>
                                         </div>
 
                                         <div class="pricingContent">
                                             {{ product.description|raw }}
-                                            {#<ul>#}
-                                                {#<li><strong>50GB</strong> Disk Space</li>#}
-                                                {#<li><strong>50</strong> Email Accounts</li>#}
-                                                {#<li><strong>50GB</strong> Monthly Bandwidth</li>#}
-                                                {#<li><strong>50</strong> Domains</li>#}
-                                                {#<li><strong>Unlimited</strong> Subdomains</li>#}
-                                            {#</ul>#}
+                                            {% if product.gift|length %}
+                                                <i class="fa fa-gift price"></i> {{ product.gift|raw }}
+                                            {% endif %}
                                         </div>
 
                                         <div class="pricingTable-sign-up">

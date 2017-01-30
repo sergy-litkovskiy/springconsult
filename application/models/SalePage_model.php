@@ -32,10 +32,11 @@ class SalePage_model extends Crud
                     %s.*,
                     sale_products.id as sale_products_id,
                     sale_products.title as sale_products_title,
+                    sale_products.label as sale_products_label,
                     sale_products.status as sale_products_status,
                     sale_products.price as sale_products_price,
                     sale_products.description as sale_products_description,
-                    sale_products.thumb as sale_products_thumb
+                    sale_products.image as sale_products_image
                 FROM
                     %s
                 LEFT JOIN

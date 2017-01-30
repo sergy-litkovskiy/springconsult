@@ -142,7 +142,7 @@ class SaleCategory_admin extends CI_Controller
 
                 $data = array_merge($data, $dataAdd);
 
-                $this->saleCategory_model->add($data);
+                $id = $this->saleCategory_model->add($data);
 
                 if ($assignedNewSaleProductIds) {
                     $this->_assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $id);

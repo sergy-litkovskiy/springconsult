@@ -32,7 +32,7 @@
                     <p><b><?php echo $map['data']['image'];?></b></p>
                 </td>
                 <td class="article_table title" style="padding: 1em">
-                    <p><?php echo Common::cutString($map['data']['text'], 40);?></p>
+                    <p><?php echo Common::cutString($map['data']['text'], 5);?></p>
                 </td>
                 <td class="article_table" style="padding: 1em">
                     <ul>

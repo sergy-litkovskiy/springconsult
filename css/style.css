@@ -3645,11 +3645,11 @@ ul.client_items .img{
 {
     background:#F4F4F4;
 }
-.pricingBlock.theme-color-pt .pricingContent ul li:hover,
-.pricingContent ul li:hover
-{
-    padding-left:15px;
-}
+/*.pricingBlock.theme-color-pt .pricingContent ul li:hover,*/
+/*.pricingContent ul li:hover*/
+/*{*/
+    /*padding-left:15px;*/
+/*}*/
 .pricingContent ul{margin: 0;padding:0;}
 
 /* -------------------------------------------------- */
@@ -5072,6 +5072,11 @@ ul{
 
 .gift-form i.fa {
     margin-right: 5px;
+}
+
+.fa.fa-gift.price {
+    font-size: 24px;
+    color: #449d44;
 }
 
 .shorten-description div {

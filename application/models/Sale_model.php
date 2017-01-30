@@ -31,7 +31,9 @@ class Sale_model extends Crud
         $sql = "SELECT
                     sale_history.*,
                     sale_products.title as sale_products_title,
+                    sale_products.label as sale_products_label,
                     sale_products.price as sale_products_price,
+                    sale_products.gift as sale_products_gift,
                     recipients.name as recipients_name,
                     recipients.email as recipients_email
                 FROM
@@ -81,10 +83,12 @@ class Sale_model extends Crud
                     sale_page.*,
                     sale_products.id as sale_products_id,
                     sale_products.title as sale_products_title,
+                    sale_products.label as sale_products_label,
                     sale_products.status as sale_products_status,
                     sale_products.price as sale_products_price,
+                    sale_products.gift as sale_products_gift,
                     sale_products.description as sale_products_description,
-                    sale_products.thumb as sale_products_thumb
+                    sale_products.image as sale_products_image
                 FROM
                     sale_page
                 LEFT JOIN
@@ -116,7 +120,9 @@ class Sale_model extends Crud
                     sale_categories_sale_products_assignment.id as sale_categories_sale_products_assignment_id,
                     sale_products.id as sale_products_id,
                     sale_products.title as sale_products_title,
-                    sale_products.status as sale_products_status
+                    sale_products.label as sale_products_label,
+                    sale_products.status as sale_products_status,
+                    sale_products.gift as sale_products_gift
                 FROM
                     sale_products
                 INNER JOIN

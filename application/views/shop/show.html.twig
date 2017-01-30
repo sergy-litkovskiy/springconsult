@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="page_title">
-                            <h2>{{ data.data.title }}</h2>
+                            <h2>{{ data.data.title }} {{ data.data.label }}</h2>
                         </div>
                     </div>
                 </div>
@@ -37,13 +37,21 @@
                                     <div class="col-lg-4 col-md-4 col-sm-4">
                                         <div class="pricingTable">
                                             <div class="pricingTable-header">
-                                                <img src="{{ base_url() }}img/sale_products/{{ product.thumb }}"/>
-                                                <span class="heading">{{ product.title }}</span>
+                                                <img src="{{ base_url() }}img/sale_products/{{ product.image }}"/>
+                                                <span class="heading">
+                                                    {{ product.title }}
+                                                    {% if product.label|length %}
+                                                        <br/>{{ product.label }}
+                                                    {% endif %}
+                                                </span>
                                                 <span class="price-value">UAH<span>{{ product.price }}</span></span>
                                             </div>
 
                                             <div class="pricingContent">
                                                 {{ product.description|raw }}
+                                                {% if product.gift|length %}
+                                                    <i class="fa fa-gift price"></i> {{ product.gift|raw }}
+                                                {% endif %}
                                             </div>
 
                                             <div class="pricingTable-sign-up">

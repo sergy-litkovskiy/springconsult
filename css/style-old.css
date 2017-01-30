@@ -1002,14 +1002,18 @@ p.title span.date{
     color: red;
 }
 
-#main_content, #add_new_content{
+#main_content,
+#add_new_content{
     font-size: 10pt;
     color: #3C3C3C;
+    vertical-align: top;
 }
 
-#main_content tr td, #add_new_content tr td{
+#main_content tr td,
+#add_new_content tr td{
     padding: 0.3em;
     border-bottom: dotted 1px #969696;
+    vertical-align: top;
 }
 
 #add_new_content_container{

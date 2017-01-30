@@ -99,9 +99,11 @@ class Shop extends MY_Controller
         return [
             'id'           => ArrayHelper::arrayGet($categoryData, 'sale_products_id'),
             'title'        => ArrayHelper::arrayGet($categoryData, 'sale_products_title'),
-            'thumb'        => ArrayHelper::arrayGet($categoryData, 'sale_products_thumb'),
+            'label'        => ArrayHelper::arrayGet($categoryData, 'sale_products_label'),
+            'image'        => ArrayHelper::arrayGet($categoryData, 'sale_products_image'),
             'description'  => ArrayHelper::arrayGet($categoryData, 'sale_products_description'),
             'price'        => ArrayHelper::arrayGet($categoryData, 'sale_products_price'),
+            'gift'        => ArrayHelper::arrayGet($categoryData, 'sale_products_gift'),
             'salePageSlug' => ArrayHelper::arrayGet($categoryData, 'sale_page_slug'),
             'salePageId'   => ArrayHelper::arrayGet($categoryData, 'sale_page_id'),
         ];

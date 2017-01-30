@@ -6,8 +6,14 @@
     <p><b>Название:</b></p>
     <p><input type="text" class="main_inputs" id='title' name='title' value="<?php echo $content['title'];?>"/></p>
     <br/>
-    <p><b>Thumbnail:</b></p>
-    <p><input type="text" id='thumb' name='thumb' value="<?php echo $content['thumb'];?>"/></p>
+    <p><b>Доп. Название:</b></p>
+    <p><input type="text" class="main_inputs" id='label' name='label' value="<?php echo $content['label'];?>"/></p>
+    <br/>
+    <p><b>Подарок:</b></p>
+    <p><input type="text" class="main_inputs" id='gift' name='gift' value="<?php echo $content['gift'];?>"/></p>
+    <br/>
+    <p><b>Image:</b></p>
+    <p><input type="text" id='image' name='image' value="<?php echo $content['image'];?>"/></p>
     <br/>
     <p><b>Описание:</b></p>
     <textarea id="sale-products-mce" style='width:100%' name='description' cols='80' rows='8'><?php echo $content['description'];?></textarea>
