@@ -138,14 +138,14 @@ class Review_admin extends CI_Controller
 
     public function save()
     {
-        $data = $params = array();
+        $data = $params = $salePageDataToAssign = $menuDataToAssign = [];
         $id   = ArrayHelper::arrayGet($_REQUEST, 'id');
 
-        $assignedNewSalePageIds = ArrayHelper::arrayGet($_REQUEST, 'new_sale_page_id', array());
-        $assignedOldSalePageIds = ArrayHelper::arrayGet($_REQUEST, 'old_sale_page_id', array());
+        $assignedNewSalePageIds = ArrayHelper::arrayGet($_REQUEST, 'new_sale_page_id', []);
+        $assignedOldSalePageIds = ArrayHelper::arrayGet($_REQUEST, 'old_sale_page_id', []);
 
-        $assignedNewMenuIds = ArrayHelper::arrayGet($_REQUEST, 'new_menu_id', array());
-        $assignedOldMenuIds = ArrayHelper::arrayGet($_REQUEST, 'old_menu_id', array());
+        $assignedNewMenuIds = ArrayHelper::arrayGet($_REQUEST, 'new_menu_id', []);
+        $assignedOldMenuIds = ArrayHelper::arrayGet($_REQUEST, 'old_menu_id', []);
 
         try {
             $data['author'] = ArrayHelper::arrayGet($_REQUEST, 'author');
@@ -153,29 +153,35 @@ class Review_admin extends CI_Controller
             $data['image']  = ArrayHelper::arrayGet($_REQUEST, 'image');
             $data['date']   = ArrayHelper::arrayGet($_REQUEST, 'date', date('Y-m-d H:i:s'));
 
+            if ($assignedNewSalePageIds) {
+                $salePageDataToAssign = [
+                    'assignFieldName' => 'reviews_id',
+                    'sourceFieldName' => 'sale_page_id',
+                    'table'           => 'sale_page_reviews_assignment'
+                ];
+            }
+
+            if ($assignedNewMenuIds) {
+                $menuDataToAssign = [
+                    'assignFieldName' => 'reviews_id',
+                    'sourceFieldName' => 'menu_id',
+                    'table'           => 'menu_reviews_assignment'
+                ];
+            }
+
             if ($id) {
                 $dataUpdate = array('status' => ArrayHelper::arrayGet($_REQUEST, 'status'));
 
                 $data = array_merge($data, $dataUpdate);
 
-                if ($assignedNewSalePageIds) {
-                    $dataToAssign = array(
-                        'assignId'        => $id,
-                        'assignFieldName' => 'reviews_id',
-                        'sourceFieldName' => 'sale_page_id',
-                        'table'           => 'sale_page_reviews_assignment'
-                    );
+                if ($salePageDataToAssign) {
+                    $dataToAssign = array_merge($salePageDataToAssign, ['assignId' => $id]);
 
                     $this->_assignProcess($assignedNewSalePageIds, $assignedOldSalePageIds, $dataToAssign);
                 }
 
-                if ($assignedNewMenuIds) {
-                    $dataToAssign = array(
-                        'assignId'        => $id,
-                        'assignFieldName' => 'reviews_id',
-                        'sourceFieldName' => 'menu_id',
-                        'table'           => 'menu_reviews_assignment'
-                    );
+                if ($menuDataToAssign) {
+                    $dataToAssign = array_merge($menuDataToAssign, ['assignId' => $id]);
 
                     $this->_assignProcess($assignedNewMenuIds, $assignedOldMenuIds, $dataToAssign);
                 }
@@ -189,8 +195,16 @@ class Review_admin extends CI_Controller
                 $id = $this->review_model->add($data);
                 Common::assertTrue($id, 'Форма заполнена неверно');
 
-                if (count($assignedNewSalePageIds)) {
-                    $this->_assignProcess($assignedNewSalePageIds, $assignedOldSalePageIds, $id);
+                if ($salePageDataToAssign) {
+                    $dataToAssign = array_merge($salePageDataToAssign, ['assignId' => $id]);
+
+                    $this->_assignProcess($assignedNewSalePageIds, $assignedOldSalePageIds, $dataToAssign);
+                }
+
+                if ($menuDataToAssign) {
+                    $dataToAssign = array_merge($menuDataToAssign, ['assignId' => $id]);
+
+                    $this->_assignProcess($assignedNewMenuIds, $assignedOldMenuIds, $dataToAssign);
                 }
 
                 redirect('backend/review');

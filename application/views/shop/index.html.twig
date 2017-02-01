@@ -30,9 +30,9 @@
                             </div>
                         </div>
                         <div class="mrgb-50 clearfix"></div>
-                        <div class="pricingBlock theme-color-pt">
+                        <ul class="pricingBlock theme-color-pt">
                             {% for product in saleCategory.productList %}
-                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                <li class="col-lg-3 col-md-3 col-sm-3" style="height: 550px">
                                     <div class="pricingTable">
                                         <div class="pricingTable-header">
                                             <img src="{{ base_url() }}img/sale_products/{{ product.image }}"/>
@@ -56,9 +56,9 @@
                                             <a href="{{ base_url() }}shop/sale/{{ product.salePageId }}/{{ product.salePageSlug }}" class="btn btn-block btn-default">ЗАКАЗАТЬ</a>
                                         </div>
                                     </div>
-                                </div>
+                                </li>
                             {% endfor %}
-                        </div>
+                        </ul>
                     </div>
                 {% endfor %}
             </div>

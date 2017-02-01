@@ -3524,7 +3524,8 @@ ul.client_items .img{
     font-weight:400;
 }
 .pricingTable-sign-up {
-    padding:20px;
+    /*padding:20px;*/
+    padding:10px;
     text-align:center;
     background:#f2f2f2;
 }
@@ -3536,10 +3537,14 @@ ul.client_items .img{
     background:#fff;
     border-left: 1px solid #f2f2f2;
     border-right: 1px solid #f2f2f2;
+    padding-bottom: 5px;
 }
 .pricingTable .pricingTable-header {
     color:#fff;
     padding:0px;
+}
+.pricingTable-header img {
+    max-width: 220px;
 }
 .pricingTable-header .heading{
     display:inline-block;
@@ -3554,11 +3559,12 @@ ul.client_items .img{
 .pricingTable-header .price-value {
     display:inline-block;
     width:100%;
-    padding:20px 0px;
+    /*padding:20px 0px;*/
+    padding:10px 0px;
 }
 .pricingBlock.theme-color-pt .pricingTable-header .price-value{background:#449d44;}
 
-.pricingTable-header .price-value span{font-size:250%;}
+.pricingTable-header .price-value span{font-size:150%;}
 .pricingTable-header .price-value span.mo{font-size:150%;}
 .pricingTable {
     text-align:center;
@@ -3630,7 +3636,8 @@ ul.client_items .img{
 }
 .pricingContent ul li {
     border-bottom: 1px solid #F0F0F0;
-    padding: 15px 0;
+    /*padding: 15px 0;*/
+    padding: 5px 0;
     text-align: center;
     overflow: hidden;
     display: block;
