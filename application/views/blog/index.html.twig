@@ -39,16 +39,16 @@
                                                     {{ article.title }}
                                                 </a>
                                             </h2>
-                                            <div class="metaInfo">
-                                                <span>
-                                                    <i class="fa fa-comments"></i> <a href="#">12 Comments</a>
-                                                </span>
-                                            </div>
                                         </div>
                                         <p>{{ article.description[:250]|raw }}...</p>
-                                        <a class="btn btn-small btn-default" href="{{ base_url() }}articles/{{ article.id }}">
-                                            Подробнее
-                                        </a>
+                                        <div class="metaInfo">
+                                            <a class="btn btn-small btn-default" href="{{ base_url() }}articles/{{ article.id }}">
+                                                Подробнее
+                                            </a>
+                                            <span>
+                                                <i class="fa fa-comments"></i> <a href="{{ base_url() }}articles/{{ article.id }}#disqus_thread" data-disqus-identifier="article_{{ article.id }}_identifier"></a>
+                                            </span>
+                                        </div>
                                     </div>
                                 </article>
                             {% endfor %}
@@ -87,5 +87,6 @@
 {% endblock %}
 
 {% block footer %}
+    {% include 'blocks/footer_disqus_comment_count_script.html.twig' %}
     {{ parent() }}
 {% endblock %}

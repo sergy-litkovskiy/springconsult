@@ -1726,8 +1726,8 @@ ul.tags {
 }
 
 .blog_medium .post{
-    padding-bottom:50px;
-    margin-bottom:50px;
+    padding-bottom:15px;
+    margin-bottom:15px;
     border-bottom:1px solid #f2f2f2;
 }
 .blog_medium .post_img {
@@ -1837,7 +1837,7 @@ ul.tags {
     color:#449d44;
 }
 .blog_medium .post_content > p {
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
 }
 
 /*  Masonry Blog Style
@@ -2028,7 +2028,7 @@ ul.tags {
 }
 .metaInfo > span {
     display: inline-block;
-    padding-right: 15px;
+    padding-left: 15px;
     color:#777;
 }
 .metaInfo > span > a{color:#777;}
@@ -2036,7 +2036,7 @@ ul.tags {
 .metaInfo {
     font-size: 0.95em;
     margin: 0 auto;
-    padding: 15px 0 20px;
+    vertical-align: bottom;
 }
 .metaInfo i {
     margin-right: 3px;
