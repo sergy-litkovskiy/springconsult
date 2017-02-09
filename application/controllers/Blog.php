@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Blog extends MY_Controller
 {
     protected $entityName = 'blog';
+    protected $defaultPageTitle = 'Блог';
 
     public function index($page = 1)
     {
@@ -28,7 +29,7 @@ class Blog extends MY_Controller
             'metaData'        => $metaData,
             'topicList'       => $topicList,
             'pager'           => $pagerView,
-            'pageTitle'       => 'Блог'
+            'pageTitle'       => $this->defaultPageTitle
         ];
 
         $data = array_merge($data, $this->baseResult);
@@ -61,6 +62,7 @@ class Blog extends MY_Controller
 
     public function topic($topicId, $page = 1)
     {
+        $topicTitle = '';
         $metaData = $this->getMainData();
 
         $countTotal = $this->blog_model->getCountArticlesForTopicByParams($topicId, ['status' => STATUS_ON]);
@@ -80,9 +82,14 @@ class Blog extends MY_Controller
 
         $topicList = $this->topic_model->getTopicListByParamsWithArticleCount(['status' => STATUS_ON]);
 
-        //remove current topic from the list
-        $topicList = array_filter($topicList, function ($value) use ($topicId) {
-            return ArrayHelper::arrayGet($value, 'id') != $topicId;
+        //remove current topic from the list and set current topic name
+        $topicList = array_filter($topicList, function ($value) use ($topicId, &$topicTitle) {
+            if (ArrayHelper::arrayGet($value, 'id') == $topicId) {
+                $topicTitle = ArrayHelper::arrayGet($value, 'name');
+                return false;
+            }
+
+            return true;
         });
 
         $data = [
@@ -91,7 +98,8 @@ class Blog extends MY_Controller
             'metaData'        => $metaData,
             'topicList'       => $topicList,
             'pager'           => $pagerView,
-            'pageTitle'       => 'Блог'
+            'pageTitle'       => $this->defaultPageTitle,
+            'topicTitle'      => $topicTitle
         ];
 
         $data = array_merge($data, $this->baseResult);

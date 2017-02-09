@@ -1735,7 +1735,7 @@ ul.tags {
     margin-bottom: 0;
     margin-right: 20px;
     position: relative;
-    width: 35%;
+    width: 27%;
 }
 .blog_medium .post_img img {
     height: auto;
@@ -1792,7 +1792,7 @@ ul.tags {
 .blog_medium .post_content {
     float: left;
     margin: 0;
-    width: 50%;
+    width: 70%;
 }
 .blog_medium .post.no_images .post_content {
     max-width: 88%;
@@ -3519,6 +3519,7 @@ ul.client_items .img{
     padding-bottom:30px;
     position: relative;
 }
+
 .pricingTable {
     text-align:center;
     font-weight:400;
@@ -3528,6 +3529,16 @@ ul.client_items .img{
     padding:10px;
     text-align:center;
     background:#f2f2f2;
+}
+.product-processing i {
+    font-size: 18px;
+}
+.product-processing .product-detail,
+.product-processing .product-cart {
+    width: 40%;
+}
+.product-processing .product-cart {
+    margin-left: 10px;
 }
 .pricingContent ul li {
     padding:5px 20px;
@@ -3586,6 +3597,8 @@ ul.client_items .img{
     -moz-box-shadow:    0px 1px 4px 0px #cccccc;
     box-shadow:         0px 1px 4px 0px #cccccc;
     border-bottom:3px solid #449d44;
+    border-top:3px solid #449d44;
+    padding-top: 5px;
 }
 .theme-color-pt .pricingTable:hover
 {
@@ -3595,13 +3608,13 @@ ul.client_items .img{
 .theme-color-pt .pricingTable:before,
 .pricingTable:before
 {
-    content:"";
-    right: 23%;
-    top: -3px;
-    width: 50%;
-    height:3px;
-    background:#449d44;
-    position:absolute;
+    /*content:"";*/
+    /*right: 23%;*/
+    /*top: -3px;*/
+    /*width: 100%;*/
+    /*height:3px;*/
+    /*background:#449d44;*/
+    /*position:absolute;*/
 }
 .pricingTable
 {
@@ -4720,7 +4733,7 @@ ul{
 
     .post-title{font-size:14px}
 
-    .blog_medium .post_img{width:30%; }
+    .blog_medium .post_img{width:27%; }
 
     .shares li.shareslabel h3{padding:8px 14px;}
 

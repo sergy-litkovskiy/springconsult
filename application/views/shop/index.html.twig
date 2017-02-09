@@ -29,10 +29,10 @@
                                 <h4><span>{{ saleCategory.data.name }}</span></h4>
                             </div>
                         </div>
-                        <div class="mrgb-50 clearfix"></div>
+                        <div class="clearfix"></div>
                         <ul class="pricingBlock theme-color-pt">
                             {% for product in saleCategory.productList %}
-                                <li class="col-lg-3 col-md-3 col-sm-3" style="height: 550px">
+                                <li class="col-lg-3 col-md-3 col-sm-3"  style="height: 520px">
                                     <div class="pricingTable">
                                         <div class="pricingTable-header">
                                             <img src="{{ base_url() }}img/sale_products/{{ product.image }}"/>
@@ -52,8 +52,13 @@
                                             {% endif %}
                                         </div>
 
-                                        <div class="pricingTable-sign-up">
-                                            <a href="{{ base_url() }}shop/sale/{{ product.salePageId }}/{{ product.salePageSlug }}" class="btn btn-block btn-default">ЗАКАЗАТЬ</a>
+                                        <div class="pricingTable-sign-up product-processing">
+                                            <a href="{{ base_url() }}shop/sale/{{ product.salePageId }}/{{ product.salePageSlug }}" class="btn btn-default product-detail">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <span class="btn btn-default product-cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </span>
                                         </div>
                                     </div>
                                 </li>
