@@ -1,14 +1,16 @@
 export class GiftModel
 {
   giftName: string;
-  giftDescription: string;
+  giftLabel: string;
   giftId: string;
   giftImage: string;
+  articleId: string;
 
-  constructor (giftName: string, giftDescription: string, giftId: string, giftImage: string) {
+  constructor (giftName: string, giftLabel: string, giftId: string, giftImage: string, articleId: string) {
     this.giftName = giftName;
-    this.giftDescription = giftDescription;
+    this.giftLabel = giftLabel;
     this.giftId = giftId;
     this.giftImage = giftImage;
+    this.articleId = articleId;
   }
 }

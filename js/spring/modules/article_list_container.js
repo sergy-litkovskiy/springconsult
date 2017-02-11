@@ -88,17 +88,17 @@ function ArticleListContainerModule() {
         };
 
 
-        var _onClickChangeIsTop = function (e) {
-            var _currentCheckbox = $(this);
-
-            var data = {};
-            data.id = $(this).val();
-            data.table = $(this).data('table');
-            data.is_top = _currentCheckbox.is(':checked') ? 1 : 0;
-
-            $(this).hide().after(_loader);
-            sb.Status.statusIsTopChange(data, _reloadPage, _onChangeStatusError);
-        };
+        // var _onClickChangeIsTop = function (e) {
+        //     var _currentCheckbox = $(this);
+        //
+        //     var data = {};
+        //     data.id = $(this).val();
+        //     data.table = $(this).data('table');
+        //     data.is_top = _currentCheckbox.is(':checked') ? 1 : 0;
+        //
+        //     $(this).hide().after(_loader);
+        //     sb.Status.statusIsTopChange(data, _reloadPage, _onChangeStatusError);
+        // };
 
 
         var _base64_decode = function (data) {
@@ -169,7 +169,7 @@ function ArticleListContainerModule() {
             sb.bind('.send_subscribe', 'click', _onClickSendSubscribe);
             sb.bind('.status-change input:radio', 'change', _onClickChangeStatus);
             sb.bind('.drop', 'click', _onClickDrop);
-            sb.bind('input:checkbox[name=is_top]', 'click', _onClickChangeIsTop);
+            // sb.bind('input:checkbox[name=is_top]', 'click', _onClickChangeIsTop);
             sb.bind('.edit_sale_products_letters', 'click', _onClickEditSaleLetter);
             sb.bind('.new_sale_products_letters', 'click', _onClickAddSaleLetter);
             sb.bind('a.registred_detail', 'click', _subscribeEmailList);

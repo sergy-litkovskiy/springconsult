@@ -3,7 +3,7 @@
     <li><a id='cat_name' href='/backend/news'>Статьи</a></li>
     <li><a id='cat_name' href='/backend/topic'>Темы</a></li>
     <li><a id='cat_name' href='/backend/material'>Материалы</a></li>
-    <li><a id='cat_name' href='/backend/subscribe'>Бесплатный продукт</a></li>
+    <li><a id='cat_name' href='/backend/gift'>Бесплатный продукт</a></li>
     <li><a id='cat_name' href='/backend/aforizmus'>Афоризмы</a></li>
     <li><a id='cat_name' href='/backend/landing'>Landing pages</a></li>
     <li><a id='cat_name' href='/backend/landing_articles'>Closed trening sistem</a></li>

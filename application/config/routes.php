@@ -101,11 +101,11 @@ $route['backend/review']        = 'admin/review_admin/index';
 
 //$route['backend/send_nl_subscribe/(:num)']        = 'admin/articles_admin/ajax_send_article_to_subscribers/$1';
 
-$route['backend/subscribe']             = 'admin/index_admin/subscribe_list';
-$route['backend/check_valid_subscribe'] = 'admin/index_admin/check_valid_subscribe';
-$route['backend/subscribe_edit']        = 'admin/index_admin/subscribe_edit';
-$route['backend/subscribe_edit/(:num)'] = 'admin/index_admin/subscribe_edit/$1';
-$route['backend/subscribe_drop/(:num)'] = 'admin/index_admin/subscribe_drop/$1';
+$route['backend/gift']             = 'admin/index_admin/gift_list';
+$route['backend/check_valid_gift'] = 'admin/index_admin/check_valid_gift';
+$route['backend/gift_edit']        = 'admin/index_admin/gift_edit';
+$route['backend/gift_edit/(:num)'] = 'admin/index_admin/gift_edit/$1';
+$route['backend/gift_drop/(:num)'] = 'admin/index_admin/gift_drop/$1';
 
 $route['backend/material']             = 'admin/material_admin/material_list';
 $route['backend/material_drop/(:num)'] = 'admin/material_admin/material_drop/$1';

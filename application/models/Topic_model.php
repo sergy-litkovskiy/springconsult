@@ -34,16 +34,16 @@ class Topic_model extends Crud
         return $query->result_array();
     }
 
-    public function getAssignedArticleListByTopicId($id)
-    {
-        $sql = $this->_getSelectSql();
-        $sql .= " LEFT JOIN articles ON articles.id = topics_articles_assignment.articles_id";
-        $sql .= " AND topics.id = ".$id;
-
-        $query = $this->db->query($sql);
-
-        return $query->result_array();
-    }
+//    public function getAssignedArticleListByTopicId($id)
+//    {
+//        $sql = $this->_getSelectSql();
+//        $sql .= " LEFT JOIN articles ON articles.id = topics_articles_assignment.articles_id";
+//        $sql .= " AND topics.id = ".$id;
+//
+//        $query = $this->db->query($sql);
+//
+//        return $query->result_array();
+//    }
 
     public function getTopicListByParamsWithArticleCount($params)
     {

@@ -9,7 +9,7 @@ class Gift extends MY_Controller
 
     public function ajaxGetGiftList()
     {
-        $giftList = $this->gift_model->getListByParams(['status' => STATUS_ON, 'is_top' => 1]);
+        $giftList = $this->gift_model->getGiftListWithArticles();
 
         print json_encode(['data' => $giftList]);
         exit;
@@ -85,8 +85,8 @@ class Gift extends MY_Controller
         $subscribeName = ArrayHelper::arrayGet($data, 'giftName', '');
         $subscribeId = ArrayHelper::arrayGet($data, 'giftId', 0);
 
-        $recipientData['subscribe_name'] = trim(strip_tags($subscribeName));
-        $recipientData['subscribe_id']   = $subscribeId;
+        $recipientData['subscribe']['name'] = trim(strip_tags($subscribeName));
+        $recipientData['subscribe']['id']   = $subscribeId;
 
         if (!$hashData = $this->linkspacker_model->hashProcess($recipientData, $recipientId)) {
             throw new RuntimeException(
@@ -195,7 +195,7 @@ class Gift extends MY_Controller
     {
         try {
             Common::assertTrue($subscribeId, "");
-            $subscribeDataArr = $this->index_model->getSubscribeDataArrById($subscribeId);
+            $subscribeDataArr = $this->index_model->getGiftDataArrById($subscribeId);
             Common::assertTrue($subscribeDataArr, "");
 
             $this->_outputFile(ArrayHelper::arrayGet($subscribeDataArr, 'material_path'));

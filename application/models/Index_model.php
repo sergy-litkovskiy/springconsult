@@ -192,10 +192,10 @@ class Index_model extends Crud
     }
 
 
-    public function getSubscribeListAdmin($id = null)
+    public function getGiftListAdmin($id = null)
     {
-        $where = $id ? "WHERE subscribe.id = ".$id : null;
-        $sql =  "SELECT subscribe.* FROM subscribe ".$where;
+        $where = $id ? "WHERE gift.id = ".$id : null;
+        $sql =  "SELECT gift.* FROM gift ".$where;
 
         $sql_query = $this->db->query($sql);
         return $sql_query->result_array();
@@ -208,16 +208,16 @@ class Index_model extends Crud
     }
 
 
-    public function getSubscribe()
-    {
-        return $this->getFromTableByParams(array('status' => STATUS_ON, 'is_top' => STATUS_ON), 'subscribe');
-    }
-
-
-    public function getSubscribePage()
-    {
-        return $this->getFromTableByParams(array('status' => STATUS_ON, 'is_top' => STATUS_OFF), 'subscribe');
-    }
+//    public function getSubscribe()
+//    {
+//        return $this->getFromTableByParams(array('status' => STATUS_ON), 'gift');
+//    }
+//
+//
+//    public function getSubscribePage()
+//    {
+//        return $this->getFromTableByParams(array('status' => STATUS_ON), 'gift');
+//    }
 
 
     public function getContentFromTableByMenuId($table, $menuId)
@@ -364,9 +364,9 @@ class Index_model extends Crud
     }
 
 
-    public function getSubscribeDataArrById($id)
+    public function getGiftDataArrById($id)
     {
-        $qweryResult    = $this->getFromTableByParams(array('id' => $id), 'subscribe');
+        $qweryResult    = $this->getFromTableByParams(array('id' => $id), 'gift');
         $result         = $qweryResult ? $qweryResult[0] : null;
 
         return $result;
@@ -548,21 +548,21 @@ class Index_model extends Crud
         return $imgFB;
     }
 
-    public function getAssignedArticleListByTopicId($id)
-    {
-        $sql = "SELECT
-                    topics_articles_assignment.id as topics_articles_assignment_id,
-                    articles.id as article_id,
-                    articles.title as article_title,
-                    articles.status as article_status
-                FROM
-                    articles
-                INNER JOIN
-                    topics_articles_assignment ON topics_articles_assignment.articles_id = articles.id";
-        $sql .= " AND topics_articles_assignment.topics_id = ".$id;
-
-        $query = $this->db->query($sql);
-
-        return $query->result_array();
-    }
+//    public function getAssignedArticleListByTopicId($id)
+//    {
+//        $sql = "SELECT
+//                    topics_articles_assignment.id as topics_articles_assignment_id,
+//                    articles.id as article_id,
+//                    articles.title as article_title,
+//                    articles.status as article_status
+//                FROM
+//                    articles
+//                INNER JOIN
+//                    topics_articles_assignment ON topics_articles_assignment.articles_id = articles.id";
+//        $sql .= " AND topics_articles_assignment.topics_id = ".$id;
+//
+//        $query = $this->db->query($sql);
+//
+//        return $query->result_array();
+//    }
 }

@@ -55,4 +55,47 @@ class Blog_model extends Crud
             'INNER'
         );
     }
+
+    public function getAssignedArticleListByGiftId($giftId)
+    {
+        $sqlSelect = '
+            gaa.id as gift_articles_assignment_id,
+            articles.id as article_id,
+            articles.title as article_title,
+            articles.status as article_status
+        ';
+
+        $this->db->select($sqlSelect);
+        $this->db->join(
+            'gift_articles_assignment as gaa',
+            $this->table . '.id = gaa.articles_id AND gaa.gift_id = ' . $giftId,
+            'INNER'
+        );
+
+        $query = $this->db->get($this->table);
+
+        return $query->result_array();
+    }
+
+
+    public function getAssignedArticleListByTopicId($giftId)
+    {
+        $sqlSelect = '
+            taa.id as topics_articles_assignment_id,
+            articles.id as article_id,
+            articles.title as article_title,
+            articles.status as article_status
+        ';
+
+        $this->db->select($sqlSelect);
+        $this->db->join(
+            'topics_articles_assignment as taa',
+            $this->table . '.id = taa.articles_id AND taa.topics_id = ' . $giftId,
+            'INNER'
+        );
+
+        $query = $this->db->get($this->table);
+
+        return $query->result_array();
+    }
 }

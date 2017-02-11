@@ -157,7 +157,7 @@ class Menu_model extends Crud
             SELECT 
                 articles.id,
                 articles.title,
-                articles.thumb,
+                articles.image,
                 articles.date
             FROM 
                 articles 

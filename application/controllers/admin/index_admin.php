@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Index_admin extends CI_Controller
 {
     public $arrMenu = array();
-    public $subscribe = array();
+    public $gift = array();
     public $emptyAforizmusArr = array();
     public $defaultDescription = '';
     public $defaultKeywords = '';
@@ -27,10 +27,10 @@ class Index_admin extends CI_Controller
 
         $this->subscribeArr = array(
             'id'           => null
-        , 'subscribe_name' => null
-        , 'description'    => null
-        , 'img_path'       => null
-        , 'material_path'  => null
+        , 'name' => null
+        , 'label'    => null
+        , 'image'       => null
+        , 'material'  => null
         , 'status'         => null);
 
         $this->emptyAforizmusArr = array(
@@ -87,32 +87,55 @@ class Index_admin extends CI_Controller
 
 
 ////////////////////////SUBSCRIBE////////////////////////////////
-    public function subscribe_list()
+    public function gift_list()
     {
         $this->data_menu = array('menu' => $this->arrMenu);
-        $contentArr      = $this->index_model->getSubscribeListAdmin();
+//        $contentArr      = $this->index_model->getGiftListAdmin();
+        $giftListWithArticles      = $this->gift_model->getGiftListWithArticlesAdmin();
+        $giftArticlesMap      = $this->_prepareGiftArticlesMap($giftListWithArticles);
+
         $this->data_arr  = array(
             'title' => 'Springconsulting - admin'
-        , 'content' => $contentArr
+        , 'content' => $giftArticlesMap
         , 'message' => $this->message
         );
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, $this->data_menu, true),
-            'content' => $this->load->view('admin/subscribe/show', $this->data_arr, true));
+            'content' => $this->load->view('admin/gift/show', $this->data_arr, true));
 
         $this->load->view('layout_admin', $data);
 
     }
 
-
-    public function subscribe_edit($id = null)
+    private function _prepareGiftArticlesMap(array $giftListWithArticles)
     {
-        $subscribes = array(0);
+        $map = array();
+
+        foreach ($giftListWithArticles as $giftData) {
+            $map[ArrayHelper::arrayGet($giftData, 'id')]['data']          = $giftData;
+            $map[ArrayHelper::arrayGet($giftData, 'id')]['articleList'][] = $giftData;
+        }
+
+        return $map;
+    }
+
+    public function gift_edit($id = null)
+    {
+        $subscribes = [0];
+        $assignArticleList = [];
         $title      = "Добавить продукт";
         if ($id) {
-            $subscribes = $this->index_model->getSubscribeListAdmin($id);
+            $subscribes = $this->index_model->getGiftListAdmin($id);
             $title      = "Редактировать бесплатный продукт";
+        }
+
+        $articleList = $this->blog_model->getList();
+
+        $assignArticles = $this->blog_model->getAssignedArticleListByGiftId($id);
+
+        foreach ($assignArticles as $assignArticle) {
+            $assignArticleList[ArrayHelper::arrayGet($assignArticle, 'article_id')] = $assignArticle;
         }
 
         $contentArr        = $subscribes[0] ? $subscribes[0] : $this->subscribeArr;
@@ -120,76 +143,100 @@ class Index_admin extends CI_Controller
         $contentArr['url'] = $url;
 
         $this->data_arr = array(
-            'title'    => $title
-        , 'content'    => $contentArr
-        , 'menu_items' => $this->arrMenu
-        , 'message'    => $this->message
+            'title'    => $title,
+        'content'    => $contentArr,
+        'menu_items' => $this->arrMenu,
+        'message'    => $this->message,
+            'articleList' => $articleList,
+            'assignArticles' => $assignArticleList
         );
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/subscribe/edit', $this->data_arr, true));
+            'content' => $this->load->view('admin/gift/edit', $this->data_arr, true));
 
         $this->load->view('layout_admin', $data);
     }
 
 
-    public function check_valid_subscribe()
+    public function check_valid_gift()
     {
         $data          = $params = array();
         $fileName      = $materialName = null;
         $imgUploadPath = './subscribe/';
 //        $materialUploadPath = './subscribegift/';
         $id = isset($_REQUEST['id']) && $_REQUEST['id'] ? $_REQUEST['id'] : null;
+        $assignedNewArticleIds = ArrayHelper::arrayGet($_REQUEST, 'new_article_id', []);
+        $assignedOldArticleIds = ArrayHelper::arrayGet($_REQUEST, 'old_article_id', []);
 
         try {
-            if ($_FILES['img_path']['size'] > 0) {
-                $fileName = $this->index_model->tryUploadFile($_FILES['img_path'], $imgUploadPath);
+            if ($_FILES['image']['size'] > 0) {
+                $fileName = $this->index_model->tryUploadFile($_FILES['image'], $imgUploadPath);
             }
-            //if($_FILES['material_path']['size'] > 0){
-//                $materialName = $this->_tryUploadFile($_FILES['material_path'], $materialUploadPath);
+            //if($_FILES['material']['size'] > 0){
+//                $materialName = $this->_tryUploadFile($_FILES['material'], $materialUploadPath);
 //            }
 
-            $validationRules = $this->_prepareRulesSubscribeValidation();
-            $this->_formSubscribeValidation($validationRules);
+            $validationRules = $this->_prepareRulesGiftValidation();
+            $this->_formGiftValidation($validationRules);
             if ($id) {
                 //$this->_formSubscribeValidation($validationRules);
                 $params ['id'] = $id;
-                $dataUpdate    = array('subscribe_name' => $_REQUEST['subscribe_name']
-                , 'description'                         => $_REQUEST['description']
+                $dataUpdate    = array('name' => $_REQUEST['name']
+                , 'label'                         => $_REQUEST['label']
                 , 'status'                              => $_REQUEST['status']
-                , 'material_path'                       => $_REQUEST['material_path']);
+                , 'material'                       => $_REQUEST['material']);
 
-                $data               = $fileName ? array_merge(array('img_path' => $fileName), $dataUpdate) : $dataUpdate;
-                $params['img_file'] = $fileName && $_REQUEST['old_img_path'] ? $_REQUEST['old_img_path'] : null;
+                $data               = $fileName ? array_merge(array('image' => $fileName), $dataUpdate) : $dataUpdate;
+                $params['img_file'] = $fileName && $_REQUEST['old_image'] ? $_REQUEST['old_image'] : null;
 
-                // $data = $materialName ? array_merge(array('material_path' => $materialName), $data) : $data;
-//                $params['material_file'] = $materialName && $_REQUEST['old_material_path'] ? $_REQUEST['old_material_path'] : null;
+                // $data = $materialName ? array_merge(array('material' => $materialName), $data) : $data;
+//                $params['material_file'] = $materialName && $_REQUEST['old_material'] ? $_REQUEST['old_material'] : null;
+                if (count($assignedNewArticleIds)) {
+                    $this->_assignProcess($assignedNewArticleIds, $assignedOldArticleIds, $id);
+                }
 
-                $this->_updateSubscribe($data, $params);
+                $this->_updateGift($data, $params);
             } else {
                 Common::assertTrue($fileName, 'Не загружена картинка');
                 //Common::assertTrue($materialName, 'Не загружен материал');
 
-                $data = array('subscribe_name' => $_REQUEST['subscribe_name']
-                , 'description'                => $_REQUEST['description']
+                $data = array('name' => $_REQUEST['name']
+                , 'label'                => $_REQUEST['label']
                 , 'status'                     => STATUS_ON
-                , 'img_path'                   => $fileName
-                , 'material_path'              => $_REQUEST['material_path']);
+                , 'image'                   => $fileName
+                , 'material'              => $_REQUEST['material']);
 
-                $id = $this->_addSubscribe($data);
-                Common::assertTrue($id, 'Форма заполнена неверно');
+                $id = $this->_addGift($data);
 
-                redirect('backend/subscribe');
+                if (count($assignedNewArticleIds)) {
+                    $this->_assignProcess($assignedNewArticleIds, $assignedOldArticleIds, $id);
+                }
+
+                redirect('backend/gift');
             }
         } catch (Exception $e) {
             $this->message = $e->getMessage();
-            $this->subscribe_edit($id);
+            $this->gift_edit($id);
         }
     }
 
+    private function _assignProcess($assignedNewArticleIds, $assignedOldArticleIds, $id)
+    {
+        $assignsArr = array(
+            'newSourceIdArr'  => $assignedNewArticleIds,
+            'oldSourceIdArr'  => $assignedOldArticleIds,
+            'assignId'        => $id,
+            'assignFieldName' => 'gift_id',
+            'sourceFieldName' => 'articles_id',
+            'table'           => 'gift_articles_assignment'
+        );
 
-    private function _formSubscribeValidation($rules)
+        $this->assign_model->setAssignArr($assignsArr);
+        $this->assign_model->addOrDeleteAssigns();
+    }
+
+    private function _formGiftValidation($rules)
     {
         $this->form_validation->set_rules($rules);
 
@@ -198,33 +245,33 @@ class Index_admin extends CI_Controller
     }
 
 
-    private function _prepareRulesSubscribeValidation()
+    private function _prepareRulesGiftValidation()
     {
         return array(
             array(
-                'field' => 'subscribe_name',
+                'field' => 'name',
                 'label' => '<Название продукта>',
                 'rules' => 'required'),
             array(
-                'field' => 'description',
+                'field' => 'label',
                 'label' => '<Описание>',
                 'rules' => 'required'),
             array(
-                'field' => 'material_path',
+                'field' => 'material',
                 'label' => '<Материал>',
                 'rules' => 'required'));
     }
 
 
-    private function _addSubscribe($data)
+    private function _addGift($data)
     {
-        return $this->index_model->addInTable($data, 'subscribe');
+        return $this->index_model->addInTable($data, 'gift');
     }
 
 
-    private function _updateSubscribe($data, $params)
+    private function _updateGift($data, $params)
     {
-        $isUpdated = $this->index_model->updateInTable($params['id'], $data, 'subscribe');
+        $isUpdated = $this->index_model->updateInTable($params['id'], $data, 'gift');
         Common::assertTrue($isUpdated, 'Not updated');
         if (isset($params['img_file']) && $params['img_file']) {
             unlink('./subscribe/' . $params['img_file']);
@@ -232,14 +279,25 @@ class Index_admin extends CI_Controller
         //if(isset($params['material_file']) && $params['material_file']){
 //            unlink('./subscribegift/'.$params['material_file']);
 //        }
-        redirect('backend/subscribe');
+        redirect('backend/gift');
     }
 
 
-    public function subscribe_drop($id)
+    public function gift_drop($id)
     {
         try {
-            $this->index_model->dropWithFile($id, $_REQUEST['file'], 'subscribe');
+            $this->index_model->dropWithFile($id, $_REQUEST['file'], 'gift');
+
+            $assignArticles = $this->blog_model->getAssignedArticleListByGiftId($id);
+            if ($assignArticles) {
+                foreach ($assignArticles as $assignArticleData) {
+                    $this->index_model->delFromTable(
+                        ArrayHelper::arrayGet($assignArticleData, 'gift_articles_assignment_id'),
+                        'gift_articles_assignment'
+                    );
+                }
+            }
+
             $this->result['success'] = true;
         } catch (Exception $e) {
             $this->result['message'] = $e->getMessage();

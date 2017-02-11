@@ -19,7 +19,7 @@ class Linkspacker_model extends Crud
      */
     public function hashProcess($data, $recipientId)
     {
-        $subscribeId = ArrayHelper::arrayGet($data, 'subscribe_id');
+        $subscribeId = ArrayHelper::arrayGet($data, 'subscribe.id');
         $url = sprintf('/gift/finishsubscribe/%s/%s', $subscribeId, $recipientId);
         $dateNow = date('Y-m-d H:i:s');
 

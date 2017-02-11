@@ -3,14 +3,14 @@
         <div class="row">
             <div class="post-recent col-sm-6 col-md-6 col-lg-6" *ngFor="let giftModel of giftModelList">
                 <div class="post-images">
-                    <a href="/articles/">
+                    <a href="/articles/{{ giftModel.articleId }}">
                         <img class="img-rounded img-responsive" src="/img/subscribe/{{ giftModel.giftImage }}" alt=""/>
                     </a>
                 </div>
 
                 <div class="post-detail">
                     <h5>
-                        <a href="/articles/">
+                        <a href="/articles/{{ giftModel.articleId }}">
                             {{ giftModel.giftName }}
                         </a>
                     </h5>

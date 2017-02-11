@@ -83,8 +83,8 @@ class Topic_admin extends CI_Controller
         $articleList = $this->index_model->getListFromTable('articles');
 
         if ($id) {
-            $topicData      = $this->topic_model->getFromTableByParams(['id' => $id], 'topics');
-            $assignArticles = $this->index_model->getAssignedArticleListByTopicId($id);
+            $topicData      = $this->topic_model->getListByParams(['id' => $id]);
+            $assignArticles = $this->blog_model->getAssignedArticleListByTopicId($id);
 
             foreach ($assignArticles as $assignArticle) {
                 $assignArticleList[ArrayHelper::arrayGet($assignArticle, 'article_id')] = $assignArticle;
@@ -207,7 +207,7 @@ class Topic_admin extends CI_Controller
     {
         try {
             $this->topic_model->delFromTable($id, 'topics');
-            $assignArticles = $this->index_model->getAssignedArticleListByTopicId($id);
+            $assignArticles = $this->blog_model->getAssignedArticleListByTopicId($id);
 
             if ($assignArticles) {
                 foreach ($assignArticles as $assignArticleData) {
