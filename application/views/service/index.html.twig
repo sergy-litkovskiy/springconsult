@@ -31,7 +31,10 @@
                                 </div>
                                 <div class="service-content">
                                     <h3>{{ serviceToReviewsItem.data.title }}</h3>
-                                    <div class="shorten-description">{{ serviceToReviewsItem.data.description }}</div>
+                                    <div>
+                                        {{ serviceToReviewsItem.data.description[:150]|raw }}
+                                        <span class="show-more" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ serviceToReviewsItem.data.description }}"> ...<i class="fa fa-search-plus"></i></span>
+                                    </div>
                                     <div class="read">
                                         <a href="{{ base_url() }}service/{{ serviceToReviewsItem.data.id }}">Далее</a>
                                     </div>
@@ -49,7 +52,10 @@
                                                     <div class="testimonial-item">
                                                         <div class="icon"><i class="fa fa-quote-right"></i></div>
                                                         <blockquote>
-                                                            <p class="shorten-review">{{ review.text }}</p>
+                                                            <p>
+                                                                {{ review.text[:150]|raw }}
+                                                                <span class="show-more" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ review.text }}"> ...<i class="fa fa-search-plus"></i></span>
+                                                            </p>
                                                         </blockquote>
                                                         <div class="icon-tr"></div>
                                                         <div class="testimonial-review">
@@ -86,15 +92,9 @@
 {% block footer %}
     {{ parent() }}
     <script type="text/javascript">
-        $('.shorten-description').shorten({
-            showChars: 150,
-            moreText: '<i class="fa fa-angle-down"></i>',
-            lessText: '<i class="fa fa-angle-up"></i>'
-        });
-        $('.shorten-review').shorten({
-            showChars: 350,
-            moreText: '<i class="fa fa-angle-down"></i>',
-            lessText: '<i class="fa fa-angle-up"></i>'
+        $('[data-toggle="popover"]').popover({
+            placement : 'top',
+            trigger : 'hover'
         });
     </script>
 {% endblock %}

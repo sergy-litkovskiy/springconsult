@@ -32,7 +32,7 @@
                         <div class="clearfix"></div>
                         <ul class="pricingBlock theme-color-pt">
                             {% for product in saleCategory.productList %}
-                                <li class="col-lg-3 col-md-3 col-sm-3"  style="height: 520px">
+                                <li id="product-{{ product.id }}" class="col-lg-3 col-md-3 col-sm-3"  style="height: 520px">
                                     <div class="pricingTable">
                                         <div class="pricingTable-header">
                                             <img src="{{ base_url() }}img/sale_products/{{ product.image }}"/>

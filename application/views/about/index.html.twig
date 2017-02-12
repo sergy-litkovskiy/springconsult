@@ -118,7 +118,6 @@
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="dividerHeading">
                             <h4><span>Отзывы клиентов</span></h4>
-
                         </div>
                         <div id="testimonial-carousel" class="testimonial carousel slide">
                             <div class="carousel-inner">
@@ -126,7 +125,10 @@
                                     <div class="item testimonial-item {% if loop.index == 1 %}active{% endif %}">
                                         <div class="icon"><i class="fa fa-quote-right"></i></div>
                                         <blockquote>
-                                            <p class="shorten-review">{{ review.text }}</p>
+                                            <p>
+                                                {{ review.text[:150]|raw }}
+                                                <span class="show-more" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ review.text }}"> ...<i class="fa fa-search-plus"></i></span>
+                                            </p>
                                         </blockquote>
                                         <div class="icon-tr"></div>
                                         <div class="testimonial-review">
@@ -156,11 +158,11 @@
 {% block footer %}
     {{ parent() }}
     <script type="text/javascript">
-        $('.shorten-review').shorten({
-            showChars: 350,
-            moreText: '<i class="fa fa-angle-down"></i>',
-            lessText: '<i class="fa fa-angle-up"></i>'
+        $('[data-toggle="popover"]').popover({
+            placement : 'top',
+            trigger : 'hover'
         });
+
         $('.shorten-education').shorten({
             showChars: 650,
             moreText: '<i class="fa fa-angle-down"></i>',

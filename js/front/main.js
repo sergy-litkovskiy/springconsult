@@ -36,35 +36,35 @@
         /*----------------------------------------------------*/
         /*	EasyPie Chart Effects
          /*----------------------------------------------------*/
-        if(jQuery.isFunction(jQuery.fn.easyPieChart)){
-
-            // Big EasyPie Chart Effects;
-            $('.circular-chart-big').easyPieChart({
-                animate : 2000,
-                barColor: "#727CB6",
-                trackColor : '#f9f9f9',
-                scaleColor: false,
-                lineWidth: 11,
-                size: 180,
-                onStep: function(from, to, percent) {
-                    $(this.el).find('.percent').text(Math.round(percent)+'%');
-                }
-            });
-
-            // Small EasyPie Chart Effects;
-            $('.circular-chart-small').easyPieChart({
-                size : 120,
-                animate : 2000,
-                lineWidth : 7,
-                lineCap : 'square',
-                barColor : '#727CB6',
-                trackColor : '#f9f9f9',
-                scaleColor : false,
-                onStep: function(from, to, percent) {
-                    $(this.el).find('.percent').text(Math.round(percent)+'%');
-                }
-            });
-        }
+        // if(jQuery.isFunction(jQuery.fn.easyPieChart)){
+        //
+        //     // Big EasyPie Chart Effects;
+        //     $('.circular-chart-big').easyPieChart({
+        //         animate : 2000,
+        //         barColor: "#727CB6",
+        //         trackColor : '#f9f9f9',
+        //         scaleColor: false,
+        //         lineWidth: 11,
+        //         size: 180,
+        //         onStep: function(from, to, percent) {
+        //             $(this.el).find('.percent').text(Math.round(percent)+'%');
+        //         }
+        //     });
+        //
+        //     // Small EasyPie Chart Effects;
+        //     $('.circular-chart-small').easyPieChart({
+        //         size : 120,
+        //         animate : 2000,
+        //         lineWidth : 7,
+        //         lineCap : 'square',
+        //         barColor : '#727CB6',
+        //         trackColor : '#f9f9f9',
+        //         scaleColor : false,
+        //         onStep: function(from, to, percent) {
+        //             $(this.el).find('.percent').text(Math.round(percent)+'%');
+        //         }
+        //     });
+        // }
 
         /*----------------------------------------------------*/
         /*	Owl Carousel
@@ -204,14 +204,14 @@
             }
         });
 
-        $('.mfp-youtube, .mfp-vimeo, .mfp-gmaps').magnificPopup({
-            disableOn: 700,
-            type: 'iframe',
-            mainClass: 'mfp-fade',
-            removalDelay: 0,
-            preloader: false,
-            fixedContentPos: false
-        });
+        // $('.mfp-youtube, .mfp-vimeo, .mfp-gmaps').magnificPopup({
+        //     disableOn: 700,
+        //     type: 'iframe',
+        //     mainClass: 'mfp-fade',
+        //     removalDelay: 0,
+        //     preloader: false,
+        //     fixedContentPos: false
+        // });
 
         /*----------------------------------------------------*/
         /*	Swipe Slider
@@ -257,49 +257,49 @@ $(document).ready(function() {
      * #contact
      ===================*/
 
-    try{
-        jQuery('#contact').validate({
-            submitHandler: function(form) {
-                jQuery('#contact .message').hide();
-                var ajaxurl = 'contact.php';
-                var data = {
-                    action: 'contact_us',
-                    datas: jQuery(form).serialize()
-                };
-
-                jQuery.ajax({
-                    type: 'POST',
-                    url: ajaxurl,
-                    data: data,
-                    success: function(response){
-                        jQuery('#contact .message').text(response.error).css({'display' : 'inline-block'});
-                    },
-                    dataType: 'json'
-                });
-                return false;
-            },
-            rules: {
-                c_name: {
-                    required: true,
-                    minlength: 3
-                },
-                c_mail: {
-                    required: true,
-                    email: true
-                },
-                c_subject: {
-                    required: true,
-                    minlength: 6
-                },
-                c_message:{
-                    required: true,
-                    minlength: 20
-                }
-            }
-        });
-    }catch(e){
-
-    }
+    // try{
+    //     jQuery('#contact').validate({
+    //         submitHandler: function(form) {
+    //             jQuery('#contact .message').hide();
+    //             var ajaxurl = 'contact.php';
+    //             var data = {
+    //                 action: 'contact_us',
+    //                 datas: jQuery(form).serialize()
+    //             };
+    //
+    //             jQuery.ajax({
+    //                 type: 'POST',
+    //                 url: ajaxurl,
+    //                 data: data,
+    //                 success: function(response){
+    //                     jQuery('#contact .message').text(response.error).css({'display' : 'inline-block'});
+    //                 },
+    //                 dataType: 'json'
+    //             });
+    //             return false;
+    //         },
+    //         rules: {
+    //             c_name: {
+    //                 required: true,
+    //                 minlength: 3
+    //             },
+    //             c_mail: {
+    //                 required: true,
+    //                 email: true
+    //             },
+    //             c_subject: {
+    //                 required: true,
+    //                 minlength: 6
+    //             },
+    //             c_message:{
+    //                 required: true,
+    //                 minlength: 20
+    //             }
+    //         }
+    //     });
+    // }catch(e){
+    //
+    // }
 
     /*============
      BUTTON UP

@@ -188,8 +188,8 @@ a:focus{
 .top-info li:hover a.my-tweet       {background:#3ABDD1;}
 .top-info li:hover a.my-facebook    {background:#648CD5;}
 .top-info li:hover a.my-skype       {background:#00AFFF;}
-.top-info li:hover a.my-pint        {background:#DE5656;}
-.top-info li:hover a.my-rss         {background:#EF8D1F;}
+/*.top-info li:hover a.my-pint        {background:#DE5656;}*/
+/*.top-info li:hover a.my-rss         {background:#EF8D1F;}*/
 .top-info li:hover a.my-google      {background:#E73904;}
 
 /* Logo
@@ -206,7 +206,7 @@ a:focus{
 
 #logo img
 {
-    width:100%;
+    width:80%;
     height:auto;
 }
 
@@ -5111,4 +5111,12 @@ ul{
 .shares li.share-box a {
     width: auto;
     height: auto;
+}
+
+.popover {
+    max-width: 800px!important;
+}
+
+.show-more {
+    cursor: pointer;
 }
