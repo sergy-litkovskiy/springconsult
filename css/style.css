@@ -5120,3 +5120,7 @@ ul{
 .show-more {
     cursor: pointer;
 }
+
+.gift-form {
+    padding-top: 5px;
+}
