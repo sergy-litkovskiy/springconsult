@@ -80,6 +80,8 @@ $route['backend/sale_category_edit/(:num)'] = 'admin/saleCategory_admin/edit/$1'
 $route['backend/sale_category_drop/(:num)'] = 'admin/saleCategory_admin/drop/$1';
 $route['backend/sale_category_save']        = 'admin/saleCategory_admin/save';
 
+$route['backend/sale_category_number_edit/(:num)'] = 'admin/saleCategory_admin/editNumber/$1';
+
 $route['backend/review_edit']        = 'admin/review_admin/edit';
 $route['backend/review_edit/(:num)'] = 'admin/review_admin/edit/$1';
 $route['backend/review_drop/(:num)'] = 'admin/review_admin/drop/$1';
@@ -142,6 +144,7 @@ $route['backend/sale_products_edit/(:num)'] = 'admin/sale_admin/sale_products_ed
 $route['backend/sale_products_drop/(:num)'] = 'admin/sale_admin/sale_products_drop/$1';
 $route['backend/sale_products_save']        = 'admin/sale_admin/sale_products_save';
 $route['backend/sale_products_statistic']   = 'admin/sale_admin/sale_products_statistic';
+$route['backend/sale_products_number_edit/(:num)'] = 'admin/sale_admin/editNumber/$1';
 
 $route['backend/announce_list']        = 'admin/announce_admin/announce_list';
 $route['backend/check_valid_announce'] = 'admin/announce_admin/check_valid_announce';
@@ -166,6 +169,7 @@ $route['articles/(:num)'] = 'blog/show/$1';
 $route['review'] = 'review/index';
 
 $route['shop'] = 'shop/index';
+$route['shop/payment'] = 'shop/productPayment';
 $route['shop/sale/(:num)/(:any)'] = 'shop/show/$1';
 
 $route['gift/list'] = 'gift/ajaxGetGiftList';

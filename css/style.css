@@ -804,7 +804,7 @@ ul.sm li *,ul.sm li *:before,ul.sm li *:after{-moz-box-sizing:content-box;-webki
     border-bottom:1px solid #f2f2f2;
     font-size: 12px;
     line-height: 20px;
-    padding: 8px 2px 8px 12px;
+    padding: 4px 2px 8px 22px;
 }
 .sidebar .list_style li:before
 {
@@ -1672,7 +1672,7 @@ ul.tags {
 }
 
 .blog_large .post_content, .blog_single .post_content {
-    margin: 0 0 0 70px;
+    margin: 0 0 0 10px;
 }
 .blog_large .post_meta .metaInfo, .blog_single .post_meta .metaInfo {
     font-size: 0.9em;
@@ -1831,7 +1831,7 @@ ul.tags {
     font-weight: 600;
     color:#555;
     line-height: 34px;
-    text-transform:capitalize;
+    /*text-transform:capitalize;*/
 }
 .blog_medium .post_meta h2:hover a {
     color:#449d44;
@@ -1884,6 +1884,8 @@ ul.tags {
     overflow: hidden;
     position: relative;
     margin-bottom: 20px;
+    max-height: 120px;
+    min-height: 120px;
 }
 .author_desc {
     background:#449d44;
@@ -1919,7 +1921,7 @@ ul.tags {
 .author_bio {
     display: block;
     float: right;
-    padding: 20px;
+    padding: 5px 10px;
     position: relative;
     width: 75%;
 }
@@ -2859,16 +2861,9 @@ blockquote{font-size:14px;}
     overflow: hidden;
     padding: 2px;
     width: 70px;
+    margin-right: 10px;
 }
-.testimonial-review > h1 {
-    /*float: left;*/
-    color:#555;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: normal;
-    margin-top: 15px;
-    padding-left: 80px;
-}
+
 .testimonial-item blockquote p {
     margin-bottom: 0;
     font-size: 14px;
@@ -2879,7 +2874,6 @@ blockquote{font-size:14px;}
     position: relative;
     z-index: 10;
     font-style:italic;
-    font-weight: 500;
 }
 
 .testimonial blockquote small {
@@ -2894,11 +2888,11 @@ blockquote{font-size:14px;}
     padding-top: 20px;
 }
 
-.testimonial-item blockquote:after {
+.testimonial-item blockquote > p:after {
     font-family: FontAwesome;
     content: "\f0D7";
     position: absolute;
-    bottom: 4%;
+    bottom: -35px;
     left: 23px;
     font-size: 40px;
     color:#EAEAEA;
@@ -4069,7 +4063,7 @@ h5.circular-title{
 ================================================== */
 .dividerHeading,
 .widget_title{
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 .dividerHeading h4,
 .widget_title h4{
@@ -4077,7 +4071,7 @@ h5.circular-title{
     font-weight: normal;
     padding: 0 0 10px;
     position: relative;
-    text-transform: capitalize;
+    /*text-transform: capitalize;*/
 }
 
 .dividerHeading h4::before,
@@ -4525,7 +4519,8 @@ ul{
     position: relative;
 }
 
-.list_style li a {
+.list_style li a,
+.list_style.service-list li a {
     color: #666;
     font-family: PT sans,Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -4542,10 +4537,19 @@ ul{
 }
 
 /* --------list style 2 : Circle CSS---------- */
-.list_style.circle li {
+.list_style.circle li,
+.list_style.service-list li {
     padding:3px 2px 3px 23px;
 }
-.list_style.circle li:before{
+.list_style.service-list li {
+    line-height: 25px !important;
+}
+.list_style.service-list li a {
+    font-size: 16px !important;
+    padding-left: 16px;
+}
+.list_style.circle li:before,
+.list_style.service-list li:before {
     font-family: FontAwesome;
     content: "\f105";
     background: #449d44;
@@ -4565,7 +4569,51 @@ ul{
     left: 0;
     top: 5px;
 }
+.list_style.service-list li.green:before {
+    background: #58B25E;
+}
+.list_style.service-list li.orange:before {
+    background: #ec971f;
+}
+.list_style.service-list li.blue:before {
+    background: #02A2DD;
+}
+.list_style.service-list li.red:before {
+    background: #F35958;
+}
 
+.list_style.service-list li.fa-gears:before {
+    content: "\f085";
+    font-size: 18px;
+    padding-top: 7px;
+    width: 30px;
+    height: 30px;
+    margin-top: -2px;
+}
+.list_style.service-list li.fa-book:before {
+    content: "\f02d";
+    font-size: 18px;
+    padding-top: 7px;
+    width: 30px;
+    height: 30px;
+    margin-top: -2px;
+}
+.list_style.service-list li.fa-headphones:before {
+    content: "\f025";
+    font-size: 18px;
+    padding-top: 7px;
+    width: 30px;
+    height: 30px;
+    margin-top: -2px;
+}
+.list_style.service-list li.fa-key:before {
+    content: "\f084";
+    font-size: 18px;
+    padding-top: 7px;
+    width: 30px;
+    height: 30px;
+    margin-top: -2px;
+}
 /* --------list style 3 : Square CSS---------- */
 .list_style.square li {
     padding:3px 2px 3px 23px;
@@ -5123,4 +5171,19 @@ ul{
 
 .gift-form {
     padding-top: 5px;
+}
+
+.blog_single ul {
+    list-style: disc;
+    padding: 0 0 20px 40px;
+}
+
+.blog_single ul.shares {
+    list-style: none;
+    padding: 0;
+}
+
+.blog_single ul li,
+.blog_single ol li {
+    margin-bottom: 10px;
 }

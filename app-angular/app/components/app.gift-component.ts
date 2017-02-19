@@ -26,15 +26,15 @@ export class GiftContainerComponent implements OnInit
   }
 
   sendGift(userName: HTMLInputElement, email: HTMLInputElement, giftId: HTMLInputElement, giftName: HTMLInputElement): void {
-    console.log(`
-      Adding giftId: ${giftId.value} | giftName: ${giftName.value} | email: ${email.value} | user: ${userName.value}
-    `);
-
     let giftSubscribeModel = new GiftSubscribeModel(userName.value, email.value, giftId.value, giftName.value);
 
     this.giftService
         .sendGiftRequest(giftSubscribeModel)
-        .subscribe(data => console.log(data));
+        .subscribe(
+            data => {
+              window.location.href = data.data;
+            }
+        );
   }
 }
 

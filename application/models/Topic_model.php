@@ -64,6 +64,7 @@ class Topic_model extends Crud
             $this->table . '.id = taa.topics_id',
             'LEFT'
         );
+        $this->db->order_by('topics.name');
         $this->db->group_by('topics.id');
 
         $query = $this->db->get($this->table);

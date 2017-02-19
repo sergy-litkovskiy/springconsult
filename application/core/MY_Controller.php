@@ -20,12 +20,16 @@ abstract class MY_Controller extends CI_Controller
     public $mailer_model;
     /** @var  SaleCategory_model */
     public $saleCategory_model;
+    /** @var  SaleHistory_model */
+    public $saleHistory_model;
     /** @var  SalePage_model */
     public $salePage_model;
     /** @var  Recipient_model */
     public $recipient_model;
     /** @var  Linkspacker_model */
     public $linkspacker_model;
+    /** @var  ErrorLog_model */
+    public $errorLog_model;
 
     /** @var  CI_Pagination */
     public $pagination;

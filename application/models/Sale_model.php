@@ -71,7 +71,9 @@ class Sale_model extends Crud
                 LEFT JOIN
                     assign_sale ON assign_sale.sale_products_id = sale_products.id
                 LEFT JOIN
-                    sale_page ON sale_page.id = assign_sale.sale_page_id";
+                    sale_page ON sale_page.id = assign_sale.sale_page_id
+                ORDER by sale_products.sequence_num";
+
         $query = $this->db->query($sql);
         return $query->result_array();
     }
@@ -108,7 +110,8 @@ class Sale_model extends Crud
                 LEFT JOIN
                     sale_page ON sale_page.id = assign_sale.sale_page_id
                 WHERE
-                    sale_products.id = ".$saleProductsId;
+                    sale_products.id = ".$saleProductsId." 
+                ORDER by sale_products.sequence_num";
 
         $query = $this->db->query($sql);
         return $query->result_array();
@@ -127,7 +130,7 @@ class Sale_model extends Crud
                     sale_products
                 INNER JOIN
                     sale_categories_sale_products_assignment ON sale_categories_sale_products_assignment.sale_products_id = sale_products.id";
-        $sql .= " AND sale_categories_sale_products_assignment.sale_categories_id = ".$saleCategoryId;
+        $sql .= " AND sale_categories_sale_products_assignment.sale_categories_id = ".$saleCategoryId." ORDER by sale_products.sequence_num";
 
         $query = $this->db->query($sql);
 

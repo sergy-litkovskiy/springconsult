@@ -191,31 +191,34 @@ class Gift extends MY_Controller
 //        return (['url' => $url, 'subscribe_id' => $subscribeId, 'recipient_id' => $recipientId]);
 //    }
 
-    public function outputSubscribe($subscribeId, $recipientId)
+    public function outputSubscribe($giftId, $recipientId)
     {
         try {
-            Common::assertTrue($subscribeId, "");
-            $subscribeDataArr = $this->index_model->getGiftDataArrById($subscribeId);
+            Common::assertTrue($giftId, "");
+            $subscribeDataArr = $this->gift_model->getOneByParams(['id' => $giftId]);
+            $recipient = $this->recipient_model->getOneByParams(['id' => $recipientId]);
+
+            Common::assertTrue($recipient, "");
             Common::assertTrue($subscribeDataArr, "");
 
-            $this->_outputFile(ArrayHelper::arrayGet($subscribeDataArr, 'material_path'));
+            $this->_outputFile(ArrayHelper::arrayGet($subscribeDataArr, 'material'));
         } catch (Exception $e) {
             redirect('/index');
         }
     }
 
-
     private function _outputFile($fileName)
     {
         $filePath = './subscribegift/' . $fileName;
-        if (file_exists($filePath)) {
-            header("Content-Type: application/octet-stream");
-            header("Accept-Ranges: bytes");
-            header("Content-Length: " . filesize($filePath));
-            header("Content-Disposition: attachment; filename=" . $fileName);
-            readfile($filePath);
-        } else {
+
+        if (!file_exists($filePath)) {
             redirect('/index');
         }
+
+        header("Content-Type: application/octet-stream");
+        header("Accept-Ranges: bytes");
+        header("Content-Length: " . filesize($filePath));
+        header("Content-Disposition: attachment; filename=" . $fileName);
+        readfile($filePath);
     }
 }

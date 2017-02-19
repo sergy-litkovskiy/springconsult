@@ -364,13 +364,13 @@ class Index_model extends Crud
     }
 
 
-    public function getGiftDataArrById($id)
-    {
-        $qweryResult    = $this->getFromTableByParams(array('id' => $id), 'gift');
-        $result         = $qweryResult ? $qweryResult[0] : null;
-
-        return $result;
-    }
+//    public function getGiftDataArrById($id)
+//    {
+//        $qweryResult    = $this->getFromTableByParams(array('id' => $id), 'gift');
+//        $result         = $qweryResult ? $qweryResult[0] : null;
+//
+//        return $result;
+//    }
 
 
     public function getAforizmusByRandom()
@@ -444,46 +444,46 @@ class Index_model extends Crud
     }
 
 
-    public function tryUnisenderSubscribe($recipientDataArr)
-    {
-        $postArr = array (
-            'api_key'               => UNISENDERAPIKEY,
-            'list_ids'              => UNISENDERMAINLISTID,
-            'fields[email]'         => $recipientDataArr['email'],
-            'fields[Name]'          => $recipientDataArr['name'],
-            'fields[confirmed]'     => $recipientDataArr['confirmed'],
-            'fields[unsubscribed]'  => $recipientDataArr['unsubscribed'],
-            'double_optin'          => "3"
-        );
-
-        startCurlExec($postArr, 'http://api.unisender.com/ru/api/subscribe?format=json');
-    }
-
-
-    public function getRecipientData($data)
-    {
-        $recipientDataArr = array();
-        $recipientDataArr = $this->getRecipientByEmail($data['email']);
-
-        if(!count($recipientDataArr)){
-            $data['confirmed']      = isset($data['confirmed']) ? $data['confirmed'] : STATUS_OFF;
-            $data['unsubscribed']   = STATUS_OFF;
-
-            $recipientDataArr['id'] = $this->addInTable($data, 'recipients');
-            Common::assertTrue($recipientDataArr['id'], "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>");
-            $recipientDataArr['name']           = $data['name'];
-            $recipientDataArr['email']          = $data['email'];
-            $recipientDataArr['phone']          = $data['phone'];
-            $recipientDataArr['confirmed']	    = $data['confirmed'] == STATUS_ON ? STATUS_ON : STATUS_OFF;
-            $recipientDataArr['unsubscribed']   = 0;
-
-            if($data['confirmed'] == STATUS_ON){
-                $this->tryUnisenderSubscribe($recipientDataArr);
-            }
-        }
-
-        return $recipientDataArr;
-    }
+//    public function tryUnisenderSubscribe($recipientDataArr)
+//    {
+//        $postArr = array (
+//            'api_key'               => UNISENDERAPIKEY,
+//            'list_ids'              => UNISENDERMAINLISTID,
+//            'fields[email]'         => $recipientDataArr['email'],
+//            'fields[Name]'          => $recipientDataArr['name'],
+//            'fields[confirmed]'     => $recipientDataArr['confirmed'],
+//            'fields[unsubscribed]'  => $recipientDataArr['unsubscribed'],
+//            'double_optin'          => "3"
+//        );
+//
+//        startCurlExec($postArr, 'http://api.unisender.com/ru/api/subscribe?format=json');
+//    }
+//
+//
+//    public function getRecipientData($data)
+//    {
+//        $recipientDataArr = array();
+//        $recipientDataArr = $this->getRecipientByEmail($data['email']);
+//
+//        if(!count($recipientDataArr)){
+//            $data['confirmed']      = isset($data['confirmed']) ? $data['confirmed'] : STATUS_OFF;
+//            $data['unsubscribed']   = STATUS_OFF;
+//
+//            $recipientDataArr['id'] = $this->addInTable($data, 'recipients');
+//            Common::assertTrue($recipientDataArr['id'], "<p class='error'>К сожалению, при регистрации произошла ошибка.<br/>Пожалуйста, попробуйте еще раз</p>");
+//            $recipientDataArr['name']           = $data['name'];
+//            $recipientDataArr['email']          = $data['email'];
+//            $recipientDataArr['phone']          = $data['phone'];
+//            $recipientDataArr['confirmed']	    = $data['confirmed'] == STATUS_ON ? STATUS_ON : STATUS_OFF;
+//            $recipientDataArr['unsubscribed']   = 0;
+//
+//            if($data['confirmed'] == STATUS_ON){
+//                $this->tryUnisenderSubscribe($recipientDataArr);
+//            }
+//        }
+//
+//        return $recipientDataArr;
+//    }
 
 
     public function prepareUrl($urlArr)

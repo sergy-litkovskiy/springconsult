@@ -108,4 +108,71 @@ class Shop extends MY_Controller
             'salePageId'   => ArrayHelper::arrayGet($categoryData, 'sale_page_id'),
         ];
     }
+
+    public function productPayment()
+    {
+        $recipientData = [
+            'name'        => trim(strip_tags($this->input->post('name'))),
+            'email'       => trim(strip_tags($this->input->post('email'))),
+            'phone'       => trim(strip_tags($this->input->post('phone'))),
+            'created_at'  => date('Y-m-d H:i:s'),
+            'confirmed'   => STATUS_ON
+        ];
+
+        $extData = [
+            'productId' => trim(strip_tags($this->input->post('productId'))),
+            'price' => trim(strip_tags($this->input->post('price'))),
+            'title' => trim(strip_tags($this->input->post('title'))),
+        ];
+
+        $saleHistoryData['created_at']       = date('Y-m-d H:i:s');
+        $saleHistoryData['sale_products_id'] = trim(strip_tags($this->input->post('productId')));
+
+        return $this->processPayment($recipientData, $saleHistoryData, $extData);
+    }
+
+    public function processPayment($recipientData, $saleHistoryData, $extData)
+    {
+        $result = ['success' => true, 'error' => false];
+        $errLogData = [];
+
+        try {
+            //TODO: validate form fields
+            $recipient = $this->recipient_model->getRecipientData($recipientData, true);
+
+            $saleHistoryData['recipients_id'] = ArrayHelper::arrayGet($recipient, 'id');
+            $saleHistoryData['payment_state'] = NULL;
+            $saleHistoryData['payment_status'] = '';
+            $saleHistoryData['payment_trans_id'] = '';
+            $saleHistoryData['payment_message'] = '';
+
+            $saleHistoryId = $this->saleHistory_model->add($saleHistoryData);
+            Common::assertTrue(
+                $saleHistoryId,
+                'К сожалению, при регистрации произошла ошибка. Пожалуйста, попробуйте еще раз'
+            );
+
+            $mailData = array_merge($extData, $recipientData);
+            $this->mailer_model->sendAdminSaleEmailMessage($mailData);
+        } catch (Exception $e) {
+            $result['error'] = true;
+            $result['success'] = false;
+            $result['message'] = $e->getMessage();
+
+            $errLogData['resource_id'] = ERROR_PAYMENT_REGISTRATION;
+            $errLogData['text'] = sprintf(
+                '%s - Продающая страница: %s (%s - %s)',
+                $e->getMessage(),
+                ArrayHelper::arrayGet($saleHistoryData, 'sale_products_id'),
+                ArrayHelper::arrayGet($recipientData, 'name'),
+                ArrayHelper::arrayGet($recipientData, 'email')
+            );
+
+            $errLogData['created_at'] = date('Y-m-d H:i:s');
+            $this->errorLog_model->add($errLogData);
+        }
+
+        print json_encode($result);
+        exit;
+    }
 }

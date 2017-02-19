@@ -12,7 +12,7 @@ class Recipient_model extends Crud
         $this->table = 'recipients';
     }
 
-    public function getRecipientData($data)
+    public function getRecipientData($data, $runUnisender = false)
     {
         $recipientData = $this->getOneByParams(['email' => ArrayHelper::arrayGet($data, 'email')]);
 
@@ -34,8 +34,27 @@ class Recipient_model extends Crud
                 'confirmed' => ArrayHelper::arrayGet($data, 'confirmed', STATUS_OFF),
                 'unsubscribed' => STATUS_OFF,
             ];
+
+            if ($runUnisender) {
+                $this->tryUnisenderSubscribe($recipientData);
+            }
         }
 
         return $recipientData;
+    }
+
+    public function tryUnisenderSubscribe($recipientData)
+    {
+        $postArr = [
+            'api_key'               => UNISENDERAPIKEY,
+            'list_ids'              => UNISENDERMAINLISTID,
+            'fields[email]'         => ArrayHelper::arrayGet($recipientData, 'email'),
+            'fields[Name]'          => ArrayHelper::arrayGet($recipientData, 'name'),
+            'fields[confirmed]'     => ArrayHelper::arrayGet($recipientData, 'confirmed'),
+            'fields[unsubscribed]'  => ArrayHelper::arrayGet($recipientData, 'unsubscribed'),
+            'double_optin'          => '3'
+        ];
+
+        startCurlExec($postArr, 'http://api.unisender.com/ru/api/subscribe?format=json');
     }
 }

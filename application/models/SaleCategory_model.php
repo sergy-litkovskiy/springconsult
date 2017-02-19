@@ -24,6 +24,7 @@ class SaleCategory_model extends Crud
         $sql .= " LEFT JOIN sale_page ON sale_products.sale_page_id = sale_page.id";
         $sql .= " AND sale_page.status = ".STATUS_ON;
         $sql .= " WHERE sale_categories.status = ".STATUS_ON;
+        $sql .= ' ORDER BY sale_categories.sequence_num, sale_products.sequence_num';
 
         $query = $this->db->query($sql);
 
@@ -35,6 +36,7 @@ class SaleCategory_model extends Crud
         $sql = $this->_getSqlSelect();
         $sql .= $this->_getSqlFrom();
         $sql .= " LEFT JOIN sale_products ON sale_products.id = sale_categories_sale_products_assignment.sale_products_id";
+        $sql .= ' ORDER BY sale_categories.sequence_num, sale_products.sequence_num';
         $query = $this->db->query($sql);
 
         return $query->result_array();
@@ -51,6 +53,7 @@ class SaleCategory_model extends Crud
                     sale_products.price as sale_products_price,
                     sale_products.gift as sale_products_gift,
                     sale_products.image as sale_products_image,
+                    sale_products.sequence_num as sale_products_sequence_num,
                     sale_products.description as sale_products_description";
     }
 

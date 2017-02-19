@@ -8,12 +8,24 @@
                 <div class="widget_content">
                     <ul class="contact-details-alt">
                         <li>
-                            <i class="fa fa-user"></i>
-                            <p><strong>Phone</strong>:(097) 916-24-57</p>
+                            <i class="fa fa-phone"></i>
+                            <p>
+                                <strong>Phone:</strong>
+                                (097) 916-24-57</p>
                         </li>
                         <li>
                             <i class="fa fa-envelope"></i>
-                            <p><strong>Email</strong>: <a href="mail:spring@springconsult.com.ua">spring@springconsult.com.ua</a></p>
+                            <p>
+                                <strong>Email:</strong>
+                                <a href="mail:spring@springconsult.com.ua">spring@springconsult.com.ua</a>
+                            </p>
+                        </li>
+                        <li>
+                            <i class="fa fa-skype"></i>
+                            <p>
+                                <strong>Skype:</strong>
+                                <a href="skype:helen.litkovskaya?call" class="my-skype">helen.litkovskaya</a>
+                            </p>
                         </li>
                     </ul>
                 </div>
@@ -35,14 +47,13 @@
             <div class="col-sm-6 col-md-4 col-lg-4">
                 <div class="widget_title">
                     <h4><span>Продукты</span></h4>
-
                 </div>
                 <div class="widget_content">
                     <div class="widget_content">
                         <ul class="links">
                             {% for product in lastSaleProductList %}
                                 <li>
-                                    <a href="{{ base_url() }}shop#product-{{ product.id }}">{{ product.title }}</a>
+                                    <a href="{{ base_url() }}shop#product-{{ product.id }}">{{ product.title }} {{ product.label }}</a>
                                 </li>
                             {% endfor %}
                         </ul>

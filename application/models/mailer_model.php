@@ -49,13 +49,23 @@ class Mailer_model extends Crud
 
     public function sendAdminSaleEmailMessage($data)
     {
-        $message = "Type of message: 'Message from sale page'<br/>\r\n
-                    Date: ".date('Y-m-d')." / Time ".date('H:i:s')."<br/>\r\n
-                    Product name: ".@$data['description']."<br/>\r\n
-                    Product price: ".@$data['price']."<br/>\r\n
-                    Buyer name: ".$data['name']."<br/>\r\n
-                    Buyer email: ".$data['email']."<br/>\r\n
-                    Buyer email: ".$data['phone']."<br/>\r\n";
+        $message = sprintf(
+            "Type of message: 'Message from shop page'<br/>\r\n
+            Date: %s / Time %s<br/>\r\n
+            Product name: %s (%s)<br/>\r\n
+            Product price: %s<br/>\r\n
+            Buyer name: %s<br/>\r\n
+            Buyer email: %s<br/>\r\n
+            Buyer email: %s<br/>\r\n",
+            date('Y-m-d'),
+            date('H:i:s'),
+            ArrayHelper::arrayGet($data, 'title'),
+            ArrayHelper::arrayGet($data, 'productId'),
+            ArrayHelper::arrayGet($data, 'price'),
+            ArrayHelper::arrayGet($data, 'name'),
+            ArrayHelper::arrayGet($data, 'email'),
+            ArrayHelper::arrayGet($data, 'phone')
+        );
 
         return $this->_sendAdminEmailMessage($message);
     }

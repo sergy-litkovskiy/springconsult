@@ -472,4 +472,11 @@ class Sale_admin extends CI_Controller
         exit;
     }
 
+    public function editNumber($id)
+    {
+        $sequenceNum = ArrayHelper::arrayGet($_REQUEST, 'sequence_num');
+        $this->sale_model->update($id, ['sequence_num' => $sequenceNum]);
+
+        redirect('backend/sale_category');
+    }
 }

@@ -51,22 +51,31 @@ class SaleCategory_admin extends CI_Controller
         $categoryListWithProductList = $this->saleCategory_model->getCategoryListWithProductListAdmin();
         $categoriesToProductsMap     = $this->_prepareCategoriesToProductsMap($categoryListWithProductList);
 
-        $contentData = array(
+        $contentData = [
             'title'                   => 'Springconsulting - admin',
             'categoriesToProductsMap' => $categoriesToProductsMap,
             'message'                 => $this->message
-        );
+        ];
 
-        $data = array(
+        $data = [
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/sale_categories/show', $contentData, true));
+            'content' => $this->load->view('admin/sale_categories/show', $contentData, true)
+        ];
 
         $this->load->view('layout_admin', $data);
     }
 
+    public function editNumber($id)
+    {
+        $sequenceNum = ArrayHelper::arrayGet($_REQUEST, 'sequence_num');
+        $this->saleCategory_model->update($id, ['sequence_num' => $sequenceNum]);
+
+        redirect('backend/sale_category');
+    }
+
     private function _prepareCategoriesToProductsMap(array $categoryListWithProductList)
     {
-        $map = array();
+        $map = [];
 
         foreach ($categoryListWithProductList as $categoryData) {
             $map[ArrayHelper::arrayGet($categoryData, 'id')]['data']                = $categoryData;

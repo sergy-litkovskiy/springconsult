@@ -23,7 +23,13 @@
         <?php foreach ($categoriesToProductsMap as $categoryId => $map):?>
             <tr data-topic-id="<?php echo $map['data']['id'];?>" data-topic-title="<?php echo $map['data']['name'];?>">
                 <td class="article_table title" style="padding: 1em">
-                    <p><b><?php echo $map['data']['name'];?></b></p>
+                    <p>
+                        <b><?php echo $map['data']['name'];?></b>
+                        <form action="<?php echo base_url().'backend/sale_category_number_edit/'.$map['data']['id'] ?>" method="PUT">
+                            <input name="sequence_num" value="<?php echo $map['data']['sequence_num'];?>"/>
+                            <button type="submit">Save</button>
+                        </form>
+                    </p>
                 </td>
                 <td class="article_table" style="padding: 1em">
                     <ul>
@@ -31,7 +37,13 @@
                             foreach ($map['sale_product_list'] as $saleProductData):?>
                                 <?php if($saleProductData['sale_products_title']){
                                     $status = ($saleProductData['sale_products_status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
-                                    <li><?php  echo $saleProductData['sale_products_title'].' - '.$status;?></li>
+                                    <li>
+                                        <?php  echo $saleProductData['sale_products_title'].' - '.$status;?>
+                                        <form action="<?php echo base_url().'backend/sale_products_number_edit/'.$saleProductData['sale_products_id'] ?>" method="PUT">
+                                            <input name="sequence_num" value="<?php echo $saleProductData['sale_products_sequence_num'];?>"/>
+                                            <button type="submit">Save</button>
+                                        </form>
+                                    </li>
                                 <?php };?>
                             <?php endforeach;
                         }?>

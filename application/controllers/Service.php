@@ -31,7 +31,7 @@ class Service extends MY_Controller
 
         $reviewList  = $this->menu_model->getReviewListByMenuId($id);
         $serviceList = $this->menu_model->getMenuListByParentId(MENU_TOP_LEVEL_ID_SERVICE);
-        $articleList = $this->menu_model->getArticleListByMenuId($id, ASSIGNED_ARTICLE_LIST_LIMIT);
+        $articleList = $this->menu_model->getArticleListByMenuId($id);
 
         //remove current item from available service list
         $serviceList = array_filter($serviceList, function ($val) use ($id) {

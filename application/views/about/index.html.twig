@@ -126,14 +126,14 @@
                                         <div class="icon"><i class="fa fa-quote-right"></i></div>
                                         <blockquote>
                                             <p>
-                                                {{ review.text[:150]|raw }}
+                                                {{ review.text[:550]|raw }}
                                                 <span class="show-more" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ review.text }}"> ...<i class="fa fa-search-plus"></i></span>
                                             </p>
                                         </blockquote>
                                         <div class="icon-tr"></div>
                                         <div class="testimonial-review">
                                             <img src="{{ base_url() }}img/reviews/{{ review.image }}" alt="testimoni">
-                                            <h1>{{ review.author }}</h1>
+                                            <p>{{ review.author }}</p>
                                         </div>
                                     </div>
                                 {% endfor %}

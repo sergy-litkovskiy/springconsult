@@ -43,8 +43,9 @@
                                         <h3 class="author_name">
                                             {{ review.author }}
                                         </h3>
-                                        <p class="author_det shorten-review">
-                                            {{ review.text }}
+                                        <p class="author_det">
+                                            {{ review.text[:200]|raw }}
+                                            <span class="show-more" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ review.text }}"> ...<i class="fa fa-search-plus"></i></span>
                                         </p>
                                     </div>
                                 </div>
@@ -58,9 +59,9 @@
                                 <div class="widget_title">
                                     <h4><span>Услуги</span></h4>
                                 </div>
-                                <ul class="arrows_list list_style">
+                                <ul class="list_style service-list">
                                     {% for service in serviceList %}
-                                        <li>
+                                        <li class="{{ service.color_class }} {{ service.icon_class }}">
                                             <a href="{{ base_url() }}service/{{ service.id }}">
                                                 {{ service.title }}
                                             </a>
@@ -106,10 +107,9 @@
 {% block footer %}
     {{ parent() }}
     <script type="text/javascript">
-        $('.shorten-review').shorten({
-            showChars: 350,
-            moreText: '<i class="fa fa-angle-down"></i>',
-            lessText: '<i class="fa fa-angle-up"></i>'
+        $('[data-toggle="popover"]').popover({
+            placement : 'top',
+            trigger : 'hover'
         });
     </script>
 {% endblock %}
