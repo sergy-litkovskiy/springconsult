@@ -21,17 +21,13 @@ class Gift extends MY_Controller
 
         try {
             if (!$data = json_decode(file_get_contents('php://input'), true)) {
-                throw new HttpRequestException('Subscribe form is not filled');
+                throw new Exception('Subscribe form is not filled');
             }
 
             if ($this->validateSubscribeData($data)) {
                 $result = $this->trySubscribeProcess($data);
             }
 
-        } catch (RuntimeException $e) {
-            $result['error'] = $e->getMessage();
-        } catch (HttpRequestException $e) {
-            $result['error'] = $e->getMessage();
         } catch (Exception $e) {
             $result['error'] = $e->getMessage();
         }
@@ -43,23 +39,23 @@ class Gift extends MY_Controller
     private function validateSubscribeData($data)
     {
         if (!$giftId = ArrayHelper::arrayGet($data, 'giftId')) {
-            throw new HttpRequestException('Форма заполнена неверно');
+            throw new Exception('Форма заполнена неверно');
         }
 
         if (!$giftName = ArrayHelper::arrayGet($data, 'giftName')) {
-            throw new HttpRequestException('Форма заполнена неверно');
+            throw new Exception('Форма заполнена неверно');
         }
 
         if (!$userName = ArrayHelper::arrayGet($data, 'userName')) {
-            throw new HttpRequestException('Форма заполнена неверно');
+            throw new Exception('Форма заполнена неверно');
         }
 
         if (!$email = ArrayHelper::arrayGet($data, 'email')) {
-            throw new HttpRequestException('Форма заполнена неверно');
+            throw new Exception('Форма заполнена неверно');
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new HttpRequestException('Форма заполнена неверно');
+            throw new Exception('Форма заполнена неверно');
         }
 
         return true;
@@ -77,7 +73,7 @@ class Gift extends MY_Controller
         $recipientData = $this->recipient_model->getRecipientData($recipientCandidateData);
 
         if (!$recipientId = ArrayHelper::arrayGet($recipientData, 'id')) {
-            throw new RuntimeException(
+            throw new Exception(
                 'К сожалению, при регистрации произошла ошибка. Пожалуйста, попробуйте еще раз'
             );
         }
@@ -89,7 +85,7 @@ class Gift extends MY_Controller
         $recipientData['subscribe']['id']   = $subscribeId;
 
         if (!$hashData = $this->linkspacker_model->hashProcess($recipientData, $recipientId)) {
-            throw new RuntimeException(
+            throw new Exception(
                 'К сожалению, при регистрации произошла ошибка. Пожалуйста, попробуйте еще раз'
             );
         }

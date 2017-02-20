@@ -118,8 +118,7 @@ class Shop extends MY_Controller
             'created_at'  => date('Y-m-d H:i:s'),
             'confirmed'   => STATUS_ON
         ];
-//TODO: validate
-//        $this->validateSubscribeData($recipientData);
+
         $extData = [
             'productId' => trim(strip_tags($this->input->post('productId'))),
             'price' => trim(strip_tags($this->input->post('price'))),
@@ -132,30 +131,14 @@ class Shop extends MY_Controller
         return $this->processPayment($recipientData, $saleHistoryData, $extData);
     }
 
-    private function validateSubscribeData($data)
-    {
-        if (!$userName = ArrayHelper::arrayGet($data, 'name')) {
-            throw new HttpRequestException('Форма заполнена неверно');
-        }
-
-        if (!$email = ArrayHelper::arrayGet($data, 'email')) {
-            throw new HttpRequestException('Форма заполнена неверно');
-        }
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new HttpRequestException('Форма заполнена неверно');
-        }
-
-        return true;
-    }
-
     public function processPayment($recipientData, $saleHistoryData, $extData)
     {
         $result = ['success' => true, 'error' => false];
         $errLogData = [];
 
         try {
-            //TODO: validate form fields
+            $this->validatePaymentData($recipientData);
+
             $recipient = $this->recipient_model->getRecipientData($recipientData, true);
 
             $saleHistoryData['recipients_id'] = ArrayHelper::arrayGet($recipient, 'id');
@@ -192,5 +175,25 @@ class Shop extends MY_Controller
 
         print json_encode($result);
         exit;
+    }
+
+    private function validatePaymentData($data)
+    {
+        if (!$userName = ArrayHelper::arrayGet($data, 'name')) {
+            throw new Exception('Поле Имя обязательно');
+        }
+
+        $email = ArrayHelper::arrayGet($data, 'email');
+        $phone = ArrayHelper::arrayGet($data, 'phone');
+
+        if (!$email && !$phone) {
+            throw new Exception('Укажите Email или Телефон');
+        }
+
+        if ($email && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception('Неверный формат Email');
+        }
+
+        return true;
     }
 }
