@@ -118,7 +118,8 @@ class Shop extends MY_Controller
             'created_at'  => date('Y-m-d H:i:s'),
             'confirmed'   => STATUS_ON
         ];
-
+//TODO: validate
+//        $this->validateSubscribeData($recipientData);
         $extData = [
             'productId' => trim(strip_tags($this->input->post('productId'))),
             'price' => trim(strip_tags($this->input->post('price'))),
@@ -129,6 +130,23 @@ class Shop extends MY_Controller
         $saleHistoryData['sale_products_id'] = trim(strip_tags($this->input->post('productId')));
 
         return $this->processPayment($recipientData, $saleHistoryData, $extData);
+    }
+
+    private function validateSubscribeData($data)
+    {
+        if (!$userName = ArrayHelper::arrayGet($data, 'name')) {
+            throw new HttpRequestException('Форма заполнена неверно');
+        }
+
+        if (!$email = ArrayHelper::arrayGet($data, 'email')) {
+            throw new HttpRequestException('Форма заполнена неверно');
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new HttpRequestException('Форма заполнена неверно');
+        }
+
+        return true;
     }
 
     public function processPayment($recipientData, $saleHistoryData, $extData)

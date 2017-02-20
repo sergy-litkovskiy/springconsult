@@ -137,7 +137,8 @@ define('ALLOWED_UPLOAD_SIZE', 2111111);
 define('ALLOWED_FORMAT', 'txt,doc,ppt,pps,pdf,docx,pptx,ppsx,pdfx,xls,xlsx,jpeg,jpg,gif,png,flw,swt');
 
 define('ADMIN_EMAIL', 'spring@springconsult.com.ua');
-define('SUPERADMIN_EMAIL', 'avdik77@mail.ru');
+//define('SUPERADMIN_EMAIL', 'avdik77@mail.ru');
+define('SUPERADMIN_EMAIL', 'spring@springconsult.com.ua');
 define('SITE_TITLE', 'Spring Consulting');
 
 define('SALESTATUSID', '813A6CE48D37');

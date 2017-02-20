@@ -94,55 +94,48 @@ class Gift extends MY_Controller
             );
         }
 
+        $this->mailer_model->sendAdminSubscribeEmailMessage($recipientData);
+        $this->_tryAddMailHistory($recipientData);
+
         return ['success' => true, 'data' => ArrayHelper::arrayGet($hashData, 'url')];
     }
 
-    protected function _subscribeMailProcess($data, $recipientDataArr, $hashLink)
+    protected function _tryAddMailHistory($recipientData)
     {
-        $this->_trySendSubscribeMail($data, $recipientDataArr, $hashLink);
-        try {
-            $this->_trySendSubscribeAdminMail($data);
-            $this->_tryAddMailHistory($data, $recipientDataArr);
-        } catch (Exception $e) {
-            $this->mailer_model->sendAdminErrorEmailMessage($e->getMessage());
-        }
+        $dataMailHistory = [
+            'subscribe_id'  => ArrayHelper::arrayGet($recipientData, 'subscribe.id'),
+            'recipients_id' => ArrayHelper::arrayGet($recipientData, 'id'),
+            'date' => date('Y-m-d'),
+            'time' => date('H:i:s')
+        ];
+
+        $this->index_model->addInTable($dataMailHistory, 'mail_history');
     }
 
+//    protected function _subscribeMailProcess($data, $recipientDataArr, $hashLink)
+//    {
+//        $this->_trySendSubscribeMail($data, $recipientDataArr, $hashLink);
+//        try {
+//            $this->_trySendSubscribeAdminMail($data);
+//            $this->_tryAddMailHistory($data, $recipientDataArr);
+//        } catch (Exception $e) {
+//            $this->mailer_model->sendAdminErrorEmailMessage($e->getMessage());
+//        }
+//    }
+//
+//
+//    protected function _trySendSubscribeMail($data, $recipientDataArr, $hashLink)
+//    {
+//        $messId = ArrayHelper::arrayGet($data, 'subscribe_id') ?
+//            $this->mailer_model->sendFreeProductSubscribeEmailMessage($data, $recipientDataArr, $hashLink) :
+//            $this->mailer_model->sendArticleSubscribeConfirmationEmailMessage($recipientDataArr, $hashLink);
+//
+//        Common::assertTrue($messId, "<p class='error'>К сожалению, письмо с сылкой на материал не было отправлено.<br/>Пожалуйста, попробуйте еще раз</p>");
+//
+//        $this->result['success'] = true;
+//        $this->result["data"]    = "<p class='success'>Спасибо за подписку!<br>На Ваш e-mail отправлено письмо для подтверждения вашей подписки. Проверьте Ваш почтовый ящик - папку Входящие и СПАМ.</p>";
+//    }
 
-    protected function _trySendSubscribeMail($data, $recipientDataArr, $hashLink)
-    {
-        $messId = ArrayHelper::arrayGet($data, 'subscribe_id') ?
-            $this->mailer_model->sendFreeProductSubscribeEmailMessage($data, $recipientDataArr, $hashLink) :
-            $this->mailer_model->sendArticleSubscribeConfirmationEmailMessage($recipientDataArr, $hashLink);
-
-        Common::assertTrue($messId, "<p class='error'>К сожалению, письмо с сылкой на материал не было отправлено.<br/>Пожалуйста, попробуйте еще раз</p>");
-
-        $this->result['success'] = true;
-        $this->result["data"]    = "<p class='success'>Спасибо за подписку!<br>На Ваш e-mail отправлено письмо для подтверждения вашей подписки. Проверьте Ваш почтовый ящик - папку Входящие и СПАМ.</p>";
-    }
-
-
-    protected function _trySendSubscribeAdminMail($data)
-    {
-        $messId = $this->mailer_model->sendAdminSubscribeEmailMessage($data);
-        Common::assertTrue($messId, "<p class='error'>Ошибка при попытке отправить AdminSubscribeEmailMessage</p>");
-    }
-
-    protected function _tryAddMailHistory($data, $recipientDataArr)
-    {
-        $dataMailHistory['subscribe_id']  = ArrayHelper::arrayGet($data, 'subscribe_id');
-        $dataMailHistory['recipients_id'] = ArrayHelper::arrayGet($recipientDataArr, 'id');
-        $dataMailHistory['date']          = date('Y-m-d');
-        $dataMailHistory['time']          = date('H:i:s');
-        $mailHistoryId                    = $this->index_model->addInTable($dataMailHistory, 'mail_history');
-        Common::assertTrue(
-            $mailHistoryId,
-            sprintf("<p class='error'>Ошибка! Запись в Mail_history для subscribe_id=%s и recipients_id=%s не произошла</p>",
-                ArrayHelper::arrayGet($dataMailHistory, 'subscribe_id'),
-                ArrayHelper::arrayGet($dataMailHistory, 'recipients_id')
-            )
-        );
-    }
 
 //    public function showFinishSubscribe($finishSubscribeProcessDataArr)
 //    {

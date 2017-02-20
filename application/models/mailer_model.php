@@ -18,10 +18,16 @@ class Mailer_model extends Crud
 
     public function sendAdminSubscribeEmailMessage($data)
     {
-        $type   = $data['subscribe_id'] > 0 ? "'Free product subscribe action( ".$data['subscribe_name']." )'" : "'Articles subscribe action'";
-        $message = "Type of message: ".$type."<br/>\r\n
-                    Date: ".date('Y-m-d')." / Time ".date('H:i:s')."<br/>\r\n
-                    Subscriber: ".$data['name']." (email of author :".$data['email'].")\r\n";
+        $message = sprintf(
+            "Type of message: Free product subscribe action (%s)<br/>\r\n
+            Date: %s / Time %s<br/>\r\n
+            Subscriber: %s (email of author : %s)\r\n",
+            ArrayHelper::arrayGet($data, 'subscribe.name'),
+            date('Y-m-d'),
+            date('H:i:s'),
+            ArrayHelper::arrayGet($data, 'name'),
+            ArrayHelper::arrayGet($data, 'email')
+        );
 
         return $this->_sendAdminEmailMessage($message);
     }
