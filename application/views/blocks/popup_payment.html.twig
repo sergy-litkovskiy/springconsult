@@ -2,12 +2,12 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body">
-                <form>
-                    <p>Введите Ваше имя, E-mail и номер телефона для оформления заказа.</p>
-                    <p>Мы свяжемся с вами для уточнения способа оплаты и доставки.</p>
+                <form role="form">
+                    <p class="text-center">Введите Ваше имя, E-mail и номер телефона для оформления заказа.</p>
+                    <p class="text-center">Мы свяжемся с вами для уточнения способа оплаты и доставки.</p>
                     <input type="text" name="name" placeholder="Имя" class="form-control form-control-sm"/>
-                    <input type="email" name="email" placeholder="email" class="form-control form-control-sm"/>
-                    <input type="number" name="phone" placeholder="Тел." class="form-control form-control-sm"/>
+                    <input type="email" name="email" placeholder="Email" class="form-control form-control-sm"/>
+                    <input type="number" name="phone" placeholder="Номер Телефона" class="form-control form-control-sm"/>
                 </form>
             </div>
             <div class="modal-footer">
@@ -30,12 +30,38 @@
 
         var _paymentSend = function (e) {
             modalPopup.find('.error').remove();
-//TODO: validate form fields
+
+            var name = modalPopup.find('input[name=name]').val(),
+                email = modalPopup.find('input[name=email]').val(),
+                phone = modalPopup.find('input[name=phone]').val();
+
+            if (!name.length) {
+                modalPopup.find('form').after('<label class="error">Поле Имя обязательно</label>');
+
+                return false;
+            }
+
+            if (!email.length && !phone.length) {
+                modalPopup.find('form').after('<label class="error">Заполните поле Email или Телефон, чтобы мы могли связаться с вами</label>');
+
+                return false;
+            }
+
+            if (email.length) {
+                var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+                if (!email.match(emailPattern)) {
+                    modalPopup.find('form').after('<label class="error">Неверный формат поля Email</label>');
+
+                    return false;
+                }
+            }
+
             var paymentUrl = '/shop/payment',
                 data = {
-                    name: modalPopup.find('input[name=name]').val(),
-                    email: modalPopup.find('input[name=email]').val(),
-                    phone: modalPopup.find('input[name=phone]').val(),
+                    name: name,
+                    email: email,
+                    phone: phone,
                     price: price,
                     title: title,
                     productId: productId
@@ -56,7 +82,7 @@
 
                     if (response.success == true) {
                         modalPopup.find('form input').val('');
-                        modalPopup.find('form').hide().after('<h2>Заказ успешно принят!</h2>');
+                        modalPopup.find('form').hide().after('<h2>Заказ успешно принят!</h2><p class="text-center">С вами свяжется наш менеджер для уточнения деталей заказа</p>');
 
                         setTimeout(function () {
                             modalPopup.find('h2').remove();

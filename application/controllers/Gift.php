@@ -11,14 +11,13 @@ class Gift extends MY_Controller
     {
         $giftList = $this->gift_model->getGiftListWithArticles();
 
-        print json_encode(['data' => $giftList]);
-        exit;
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode(['data' => $giftList]));
     }
 
     public function ajaxGiftSubscribe()
     {
-        $result = ['success' => false];
-
         try {
             if (!$data = json_decode(file_get_contents('php://input'), true)) {
                 throw new Exception('Subscribe form is not filled');
@@ -29,33 +28,36 @@ class Gift extends MY_Controller
             }
 
         } catch (Exception $e) {
-            $result['error'] = $e->getMessage();
+            return $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(400, $e->getMessage());
         }
 
-        print json_encode($result);
-        exit;
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($result));
     }
 
     private function validateSubscribeData($data)
     {
         if (!$giftId = ArrayHelper::arrayGet($data, 'giftId')) {
-            throw new Exception('Форма заполнена неверно');
+            throw new Exception('form');
         }
 
         if (!$giftName = ArrayHelper::arrayGet($data, 'giftName')) {
-            throw new Exception('Форма заполнена неверно');
+            throw new Exception('form');
         }
 
         if (!$userName = ArrayHelper::arrayGet($data, 'userName')) {
-            throw new Exception('Форма заполнена неверно');
+            throw new Exception('username');
         }
 
         if (!$email = ArrayHelper::arrayGet($data, 'email')) {
-            throw new Exception('Форма заполнена неверно');
+            throw new Exception('email');
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new Exception('Форма заполнена неверно');
+            throw new Exception('email');
         }
 
         return true;
@@ -93,7 +95,7 @@ class Gift extends MY_Controller
         $this->mailer_model->sendAdminSubscribeEmailMessage($recipientData);
         $this->_tryAddMailHistory($recipientData);
 
-        return ['success' => true, 'data' => ArrayHelper::arrayGet($hashData, 'url')];
+        return ['data' => ArrayHelper::arrayGet($hashData, 'url')];
     }
 
     protected function _tryAddMailHistory($recipientData)

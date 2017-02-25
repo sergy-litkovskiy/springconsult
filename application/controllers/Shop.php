@@ -173,8 +173,9 @@ class Shop extends MY_Controller
             $this->errorLog_model->add($errLogData);
         }
 
-        print json_encode($result);
-        exit;
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($result));
     }
 
     private function validatePaymentData($data)
@@ -187,7 +188,7 @@ class Shop extends MY_Controller
         $phone = ArrayHelper::arrayGet($data, 'phone');
 
         if (!$email && !$phone) {
-            throw new Exception('Укажите Email или Телефон');
+            throw new Exception('Заполните поле Email или Телефон, чтобы мы могли связаться с вами');
         }
 
         if ($email && !filter_var($email, FILTER_VALIDATE_EMAIL)) {

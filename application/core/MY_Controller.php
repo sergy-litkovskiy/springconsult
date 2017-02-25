@@ -41,6 +41,8 @@ abstract class MY_Controller extends CI_Controller
     public $twig;
     /** @var  CI_Input */
     public $input;
+    /** @var  CI_Output */
+    public $output;
 
     protected $lastArticleList     = [];
     protected $lastSaleProductList = [];

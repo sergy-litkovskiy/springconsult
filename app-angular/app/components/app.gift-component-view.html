@@ -17,51 +17,7 @@
                             {{ giftModel.giftLabel }}
                         </p>
                     </h5>
-                    <form class="gift-form" action="" novalidate="novalidate">
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-md-6">
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        class="form-control form-control-sm"
-                                        data-msg-email="Введите валидный email"
-                                        data-msg-required="Введите ваш email"
-                                        value=""
-                                        placeholder="Ваш E-mail"
-                                        #email
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-md-6">
-                                    <input
-                                        type="text"
-                                        id="username"
-                                        name="username"
-                                        class="form-control form-control-sm"
-                                        data-msg-required="Введите ваше имя"
-                                        value=""
-                                        placeholder="Имя"
-                                        #userName
-                                    />
-                                    <input name="gid" type="hidden" value="{{ giftModel.giftId }}" #giftId>
-                                    <input name="gname" type="hidden" value="{{ giftModel.giftName }}" #giftName>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3 text-right">
-                                <button data-loading-text="Loading..." class="btn btn-default btn-sm" (click)="sendGift(userName, email, giftId, giftName)">
-                                    <i class="fa fa-envelope-o"></i>
-                                    Получить
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <gift-form [giftModel]="giftModel"></gift-form>
                 </div>
             </div>
         </div>

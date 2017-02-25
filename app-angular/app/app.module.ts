@@ -3,12 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { GiftContainerComponent }  from './components/app.gift-component';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { GiftFormComponent } from "./components/app.gift-form-component";
 
-// import { GiftService }  from './services/gift-service';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule ],
-  declarations: [ GiftContainerComponent ],
+  declarations: [ GiftContainerComponent, GiftFormComponent ],
   bootstrap:    [ GiftContainerComponent ]
 })
 
