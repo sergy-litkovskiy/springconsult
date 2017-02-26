@@ -49,8 +49,7 @@ class Gift extends MY_Controller
         }
 
         if (!$userName = ArrayHelper::arrayGet($data, 'userName')) {
-//            throw new Exception('userName|required');
-            throw new Exception('form');
+            throw new Exception('userName|required');
         }
 
         if (!$email = ArrayHelper::arrayGet($data, 'email')) {

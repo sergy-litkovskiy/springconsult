@@ -88,7 +88,7 @@ export class GiftFormComponent implements OnInit {
     }
 
     renderFormError (message: string) : void {
-console.log('renderFormError', message);
+
         let patternForm = new RegExp("form");
         let patternEmailRequired = new RegExp("email|required");
         let patternEmailInvalid = new RegExp("email|pattern");
@@ -102,9 +102,7 @@ console.log('renderFormError', message);
         } else if (patternEmailInvalid.test(message)) {
             this.formErrors.email = this.validationMessages.email.pattern;
         } else if (patternUsernameRequired.test(message)) {
-            console.log('HERE');
-            console.log(this.validationMessages.userName.required);
-            this.formErrors.email = this.validationMessages.userName.required;
+            this.formErrors.userName = this.validationMessages.userName.required;
         }
     }
 
