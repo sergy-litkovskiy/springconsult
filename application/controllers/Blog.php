@@ -15,7 +15,7 @@ class Blog extends MY_Controller
 
         $baseUrl = sprintf('%s%s', base_url(), $this->entityName);
 
-        $pagerView = $this->preparePager($baseUrl, $countTotal);
+        $pagerView = $this->preparePager($baseUrl, $countTotal, null);
 
         list($orderParams, $limitParams) = $this->makeSqlParams($page);
 
@@ -60,7 +60,7 @@ class Blog extends MY_Controller
         $this->twig->display($this->entityName . '/show.html', $data);
     }
 
-    public function topic($topicId, $page = 1)
+    public function topic($topicId, $slug, $page = 1)
     {
         $topicTitle = '';
         $metaData = $this->getMainData();
@@ -69,7 +69,7 @@ class Blog extends MY_Controller
 
         $baseUrl = sprintf('%s%s/topic/%s', base_url(), $this->entityName, $topicId);
 
-        $pagerView = $this->preparePager($baseUrl, $countTotal, 5);
+        $pagerView = $this->preparePager($baseUrl, $countTotal, $slug, 6);
 
         list($orderParams, $limitParams) = $this->makeSqlParams($page);
 
@@ -115,16 +115,20 @@ class Blog extends MY_Controller
         return $this->prepareMetaData($mainData);
     }
 
-    private function preparePager($baseUrl, $countTotal, $uriSegment = null)
+    private function preparePager($baseUrl, $countTotal, $slug, $uriSegment = null)
     {
         //prepare pager config
         $config               = prepare_pager_config();
-        $config['base_url']   = $baseUrl . '/page/';
+        $config['base_url']   = sprintf('%s/%s/page/', $baseUrl, $slug);
         $config['first_url']  = $baseUrl;
         $config['total_rows'] = $countTotal;
 
         if ($uriSegment) {
             $config['uri_segment'] = $uriSegment;
+        }
+
+        if ($slug) {
+            $config['first_url'] = $baseUrl.'/'.$slug;
         }
 
         $this->pagination->initialize($config);

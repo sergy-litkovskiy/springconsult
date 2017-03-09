@@ -71,6 +71,7 @@ class Service extends MY_Controller
     {
         return [
             'id'          => ArrayHelper::arrayGet($serviceData, 'id'),
+            'slug'        => ArrayHelper::arrayGet($serviceData, 'slug'),
             'title'       => ArrayHelper::arrayGet($serviceData, 'title'),
             'text'        => trim(ArrayHelper::arrayGet($serviceData, 'text')),
             'description' => trim(ArrayHelper::arrayGet($serviceData, 'description')),

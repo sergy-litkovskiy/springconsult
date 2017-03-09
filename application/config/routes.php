@@ -157,13 +157,14 @@ $route['backend/spec_mailer_statistics/(:num)'] = 'admin/index_admin/spec_mailer
 $route['backend/(:any)']                        = 'admin/index_admin/show/$1';
 
 ////////////////////FRONTEND////////////////////////////
-$route['service/(:num)'] = 'service/show/$1';
+$route['service/(:num)/(:any)'] = 'service/show/$1';
 
 $route['about'] = 'about/index';
 
 $route['blog'] = 'blog/index';
 $route['blog/page/(:num)'] = 'blog/index/$1';
-$route['blog/topic/(:num)/page/(:num)'] = 'blog/topic/$1/$2';
+$route['blog/topic/(:num)/(:any)'] = 'blog/topic/$1/$2';
+$route['blog/topic/(:num)/(:any)/page/(:num)'] = 'blog/topic/$1/$2/$3';
 $route['articles/(:num)'] = 'blog/show/$1';
 
 $route['review'] = 'review/index';

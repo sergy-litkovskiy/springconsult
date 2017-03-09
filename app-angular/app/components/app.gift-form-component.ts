@@ -23,7 +23,8 @@ export class GiftFormComponent implements OnInit {
 
     formErrors = {
         'userName': '',
-        'email': ''
+        'email': '',
+        'isEmpty': true
     };
 
     validationMessages = {
@@ -42,7 +43,9 @@ export class GiftFormComponent implements OnInit {
     }
 
     buildForm(): void {
-        const EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+        // const EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+        const EMAIL_REGEXP = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i;
+
         this.giftForm = this.fb.group({
             'userName': [
                 this.giftSubscribeModel.userName, [
@@ -62,7 +65,6 @@ export class GiftFormComponent implements OnInit {
             .subscribe(data => {
                 this.onValueChanged(data)
             });
-
     }
 
     onValueChanged (data?: any) {
@@ -70,15 +72,34 @@ export class GiftFormComponent implements OnInit {
             return false;
         }
 
+        for (let fieldName in data) {
+            if (!data.hasOwnProperty(fieldName)) {
+                continue;
+            }
+            // clear previous error message (if any)
+            this.formErrors[fieldName] = '';
+        }
+    }
+
+    validateForm () {
+        if (!this.giftForm) {
+            return false;
+        }
+
         const form = this.giftForm;
 
         for (const field in this.formErrors) {
-            // clear previous error message (if any)
-            this.formErrors[field] = '';
+            if (field != 'isEmpty') {
+                // clear previous error message (if any)
+                this.formErrors[field] = '';
+            }
+
             const control = form.get(field);
 
-            if (control && control.dirty && !control.valid) {
+            if (control && !control.valid) {
                 const messages = this.validationMessages[field];
+
+                this.formErrors.isEmpty = false;
 
                 for (const key in control.errors) {
                     this.formErrors[field] += messages[key] + ' ';
@@ -88,48 +109,46 @@ export class GiftFormComponent implements OnInit {
     }
 
     renderFormError (message: string) : void {
+        this.formErrors.isEmpty = false;
 
-        let patternForm = new RegExp("form");
-        let patternEmailRequired = new RegExp("email|required");
-        let patternEmailInvalid = new RegExp("email|pattern");
-        let patternUsernameRequired = new RegExp("userName|pattern");
-
-        if (patternForm.test(message)) {
+        if (message.match(/form/i)) {
             this.formErrors.email = 'Форма заполнена неверно';
             this.formErrors.userName = 'Форма заполнена неверно';
-        } else if (patternEmailRequired.test(message)) {
+        } else if (message.match(/email\|required/i)) {
             this.formErrors.email = this.validationMessages.email.required;
-        } else if (patternEmailInvalid.test(message)) {
+        } else if (message.match(/email\|pattern/i)) {
             this.formErrors.email = this.validationMessages.email.pattern;
-        } else if (patternUsernameRequired.test(message)) {
+        } else if (message.match(/userName\|required/i)) {
             this.formErrors.userName = this.validationMessages.userName.required;
         }
     }
 
     onSubmit(): void {
-        this.onValueChanged();
-console.log('onSubmit - formErrors', this.formErrors);
-        this.submitted = true;
+        this.formErrors.isEmpty = true;
 
-        this.giftSubscribeModel.email = this.formErrors.email;
-        this.giftSubscribeModel.userName = this.formErrors.userName;
-        this.giftSubscribeModel.giftId = this.giftModel.giftId;
-        this.giftSubscribeModel.giftName = this.giftModel.giftImage;
+        this.validateForm();
 
-        this.giftService
-            .sendGiftRequest(this.giftSubscribeModel)
-            .subscribe(
-                data => {
-                    this.giftForm.get('email').setValue('');
-                    this.giftForm.get('userName').setValue('');
+        if (this.formErrors.isEmpty) {
 
-                    window.location.href = data.data;
-                },
-                errorMessage => {
-console.log('sendGift subscribe - errorMessage', errorMessage);
-                    this.renderFormError(errorMessage);
-                }
-            );
+            this.giftSubscribeModel.email = this.giftForm.get('email').value;
+            this.giftSubscribeModel.userName = this.giftForm.get('userName').value;
+            this.giftSubscribeModel.giftId = this.giftModel.giftId;
+            this.giftSubscribeModel.giftName = this.giftModel.giftImage;
+
+            this.giftService
+                .sendGiftRequest(this.giftSubscribeModel)
+                .subscribe(
+                    data => {
+                        this.giftForm.get('email').setValue('');
+                        this.giftForm.get('userName').setValue('');
+
+                        window.location.href = data.data;
+                    },
+                    errorMessage => {
+                        this.renderFormError(errorMessage);
+                    }
+                );
+        }
     }
 }
 

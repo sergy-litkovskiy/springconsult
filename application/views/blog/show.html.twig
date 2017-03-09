@@ -53,7 +53,7 @@
                                 <ul class="list_style circle">
                                     {% for topic in topicList %}
                                         <li>
-                                            <a href="{{ base_url() }}blog/topic/{{ topic.id }}">
+                                            <a href="{{ base_url() }}blog/topic/{{ topic.id }}/{{ topic.slug }}">
                                                 {{ topic.name }} ({{ topic.articles_count }})
                                             </a>
                                         </li>

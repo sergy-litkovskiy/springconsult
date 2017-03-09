@@ -36,6 +36,7 @@ class Topic_admin extends CI_Controller
         $this->emptyTopicList = array(
             'id'     => null,
             'name'   => null,
+            'slug'   => null,
             'status' => null
         );
 
@@ -124,6 +125,7 @@ class Topic_admin extends CI_Controller
         try {
             $this->_formValidation();
             $data['name'] = ArrayHelper::arrayGet($_REQUEST, 'name');
+            $data['slug'] = ArrayHelper::arrayGet($_REQUEST, 'slug');
 
             if ($id) {
                 $params['id'] = $id;

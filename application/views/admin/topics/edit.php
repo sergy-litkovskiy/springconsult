@@ -5,6 +5,9 @@
     <p><b>Название:</b></p>
     <p><input type="text" class="main_inputs" id='name' name='name' value="<?php echo $content['name'];?>"/></p>
     <br/>
+    <p><b>Alias (slug):</b></p>
+    <p><input type="text" class="main_inputs" id='slug' name='slug' value="<?php echo $content['slug'];?>"/></p>
+    <br/>
     <p><b>Выбрать статьи:</b></p>
     <br/>
     <div class="topic-article-list" style="float: left;">

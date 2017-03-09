@@ -62,7 +62,7 @@
                                 <ul class="list_style service-list">
                                     {% for service in serviceList %}
                                         <li class="{{ service.color_class }} {{ service.icon_class }}">
-                                            <a href="{{ base_url() }}service/{{ service.id }}">
+                                            <a href="{{ base_url() }}service/{{ service.id }}/{{ service.slug }}">
                                                 {{ service.title }}
                                             </a>
                                         </li>
