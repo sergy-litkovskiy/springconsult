@@ -23,7 +23,7 @@
         <?php foreach ($topicArticlesMap as $topicId => $topic):?>
             <tr data-topic-id="<?php echo $topic['data']['id'];?>" data-topic-title="<?php echo $topic['data']['name'];?>">
                 <td class="article_table title" style="padding: 1em">
-                    <p><b><?php echo $topic['data']['name'];?></b></p>
+                    <p><b><?php echo $topic['data']['name'];?></b> (<?php echo $topic['data']['slug'];?>)</p>
                 </td>
                 <td class="article_table" style="padding: 1em">
                     <ul>
