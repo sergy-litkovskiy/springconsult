@@ -15,12 +15,29 @@ class Topic_model extends Crud
 
     public function getTopicListWithArticles()
     {
-        $sql  = $this->_getSelectSql();
-        $sql .= " LEFT JOIN articles ON articles.id = topics_articles_assignment.articles_id";
-        $sql .= " AND topics.status = ".STATUS_ON;
-        $sql .= " AND articles.status = ".STATUS_ON;
+        $selectSql =
+            $this->table . '.*,
+            articles.id as article_id,
+            articles.title as article_title,
+            articles.status as article_status
+        ';
 
-        $query = $this->db->query($sql);
+        $this->db->select($selectSql);
+        $this->db->join(
+            'topics_articles_assignment as taa',
+            $this->table . '.id = taa.topics_id',
+            'LEFT'
+        );
+
+        $this->db->join(
+            'articles',
+            'articles.id = taa.articles_id AND articles.status = ' . STATUS_ON,
+            'LEFT'
+        );
+
+        $this->db->where([$this->table.'.status' => STATUS_ON]);
+
+        $query = $this->db->get($this->table);
 
         return $query->result_array();
     }
