@@ -6,12 +6,8 @@ class ErrorController extends MY_Controller
 {
     public function index()
     {
-//        $mainServiceData = $this->menu_model->get(MENU_TOP_LEVEL_ID_SERVICE);
-//        $metaData        = $this->prepareMetaData(ArrayHelper::arrayGet($mainServiceData, 0, []));
-
         $data = [
-//            'metaData'  => $metaData,
-            'pageTitle' => 'Not found'
+            'pageTitle' => '404 Страница не найдена'
         ];
 
         $data = array_merge($data, $this->baseResult);
