@@ -1695,3 +1695,8 @@ ul.tagit input[type="text"] {
 .button-payment.add_payment_data {
     float: none;
 }
+
+.sale-product-list input {
+    margin: 0 !important;
+    width: auto !important;
+}

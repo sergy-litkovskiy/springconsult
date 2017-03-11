@@ -16,6 +16,10 @@ class Menu_admin extends CI_Controller
     public $menu_model;
     /** @var  Edit_menu_model */
     public $edit_menu_model;
+    /** @var  Sale_model */
+    public $sale_model;
+    /** @var  Assign_model */
+    public $assign_model;
 
     function __construct()
     {
@@ -65,10 +69,16 @@ class Menu_admin extends CI_Controller
         $contentArr     = $contentItems[0] ? $contentItems[0] : $this->emptyMenuArr;
         $url            = $this->_prepareUrl($this->urlArr);
         $contentArr['url'] = $url;
+        $saleProductList = $this->sale_model->getList();
+        $assignedSaleProductList = $itemId ? $this->sale_model->getSaleProductListByMenuId($itemId) : [];
 
         $this->data_arr      = array(
-             'title'     => 'Редактировать раздел меню'
-            ,'content'   => $contentArr
+             'title'     => 'Редактировать раздел меню',
+             'content'   => $contentArr,
+             'saleProductList' => $saleProductList,
+             'assignedSaleProductList' => array_values(array_map(function ($itemData) {
+                 return ArrayHelper::arrayGet($itemData, 'id');
+             }, $assignedSaleProductList))
         );
 
         $data = array(
@@ -86,11 +96,17 @@ class Menu_admin extends CI_Controller
         $itemtArr           = $this->edit_menu_model->getMenuItems();
         $url                = $this->_prepareUrl($this->urlArr);
         $contentArr['url']  = $url;
+        $saleProductList = $this->sale_model->getList();
+        $assignedSaleProductList = $subItemId ? $this->sale_model->getSaleProductListByMenuId($subItemId) : [];
 
         $this->data_arr      = array(
-             'title'         => 'Редактировать подраздел меню'
-            ,'itemArr'   => $itemtArr
-            ,'content'   => $contentArr
+             'title'         => 'Редактировать подраздел меню',
+             'itemArr'   => $itemtArr,
+             'content'   => $contentArr,
+             'saleProductList' => $saleProductList,
+             'assignedSaleProductList' => array_values(array_map(function ($itemData) {
+                 return ArrayHelper::arrayGet($itemData, 'id');
+             }, $assignedSaleProductList))
         );
 
         $data = array(
@@ -115,35 +131,62 @@ class Menu_admin extends CI_Controller
         return $url;
     }
 
-//---------------------------------------------------------------
-public function check_valid_menu()
-{
-    $data  = $params = array();
-    $params ['url'] = $_REQUEST['url'];
-    $id             = isset($_REQUEST['id']) && $_REQUEST['id'] ? $_REQUEST['id'] : null;
-    $parent         = isset($_REQUEST['parent']) ? $_REQUEST['parent'] : null;
-    try{
-        $this->_formValidation($parent);
-        $data = $this->_prepareMenuDataForAddUpdate($_REQUEST);
+    //---------------------------------------------------------------
+    public function check_valid_menu()
+    {
+        $data  = $params = array();
+        $params ['url'] = $_REQUEST['url'];
+        $id             = isset($_REQUEST['id']) && $_REQUEST['id'] ? $_REQUEST['id'] : null;
+        $parent         = isset($_REQUEST['parent']) ? $_REQUEST['parent'] : null;
 
-        if($id){
-            $params ['id']  = $id;
-            $dataUpdate = array('num_sequence'    => $_REQUEST['num_sequence']
-                                ,'status'         => $_REQUEST['status']);
-            $data = array_merge($data, $dataUpdate);
+        $assignedNewSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'new_sale_products_id', []);
+        $assignedOldSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'old_sale_products_id', []);
 
-            $this->_update($data, $params);
-        } else {
-            $dataAdd = array('num_sequence'    => '0'
-                            ,'status'          => STATUS_ON);
-            $data = array_merge($data, $dataAdd);
+        try{
+            $this->_formValidation($parent);
+            $data = $this->_prepareMenuDataForAddUpdate($_REQUEST);
 
-            $this->_add($data);
+            if($id){
+                $params ['id']  = $id;
+                $dataUpdate = array('num_sequence'    => $_REQUEST['num_sequence']
+                                    ,'status'         => $_REQUEST['status']);
+                $data = array_merge($data, $dataUpdate);
+
+                if (count($assignedNewSaleProductIds)) {
+                    $this->_assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $id);
+                }
+
+                $this->_update($data, $params);
+            } else {
+                $dataAdd = array('num_sequence'    => '0'
+                                ,'status'          => STATUS_ON);
+                $data = array_merge($data, $dataAdd);
+
+                $id = $this->edit_menu_model->add($data);
+
+                if ($assignedNewSaleProductIds) {
+                    $this->_assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $id);
+                }
+            }
+        } catch (Exception $e){
+            isset($parent) ? $this->edit_menu_subitem($id) : $this->edit_menu_item($id);
         }
-    } catch (Exception $e){
-        isset($parent) ? $this->edit_menu_subitem($id) : $this->edit_menu_item($id);
     }
-}
+
+    private function _assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $id)
+    {
+        $assignsArr = array(
+            'newSourceIdArr'  => $assignedNewSaleProductIds,
+            'oldSourceIdArr'  => $assignedOldSaleProductIds,
+            'assignId'        => $id,
+            'assignFieldName' => 'menu_id',
+            'sourceFieldName' => 'sale_products_id',
+            'table'           => 'menu_sale_products_assignment'
+        );
+
+        $this->assign_model->setAssignArr($assignsArr);
+        $this->assign_model->addOrDeleteAssigns();
+    }
 
 //---------------------------------------------------------------
 private function _formValidation($parent = null)

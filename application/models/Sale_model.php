@@ -136,4 +136,18 @@ class Sale_model extends Crud
 
         return $query->result_array();
     }
+
+    public function getSaleProductListByMenuId($menuId)
+    {
+        $this->db->select($this->table . '.*');
+        $this->db->join(
+            'menu_sale_products_assignment as mspa',
+            'mspa.sale_products_id = sale_products.id AND mspa.menu_id = ' . $menuId,
+            'INNER'
+        );
+
+        $query = $this->db->get($this->table);
+
+        return $query->result_array();
+    }
 }
