@@ -50,6 +50,7 @@ class Sale_admin extends CI_Controller
             'id'             => null
             , 'title'        => null
             , 'label'        => null
+            , 'slug'        => null
             , 'description'  => null
             , 'price'        => null
             , 'gift'        => null
@@ -83,6 +84,7 @@ class Sale_admin extends CI_Controller
             $saleArr[$salePage['id']]['created_at']                                             = $salePage['created_at'];
             $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['id']     = $salePage['sale_products_id'];
             $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['title']  = $salePage['sale_products_title'];
+            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['slug']  = $salePage['sale_products_slug'];
             $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['label']  = $salePage['sale_products_label'];
             $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['status'] = $salePage['sale_products_status'];
             $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['image']  = $salePage['sale_products_image'];
@@ -239,6 +241,7 @@ class Sale_admin extends CI_Controller
             $saleArr[$saleProducts['id']]['created_at']            = $saleProducts['created_at'];
             $saleArr[$saleProducts['id']]['id']                    = $saleProducts['id'];
             $saleArr[$saleProducts['id']]['title']                 = $saleProducts['title'];
+            $saleArr[$saleProducts['id']]['slug']                 = $saleProducts['slug'];
             $saleArr[$saleProducts['id']]['label']                 = $saleProducts['label'];
             $saleArr[$saleProducts['id']]['price']                 = $saleProducts['price'];
             $saleArr[$saleProducts['id']]['gift']                 = $saleProducts['gift'];
@@ -331,6 +334,7 @@ class Sale_admin extends CI_Controller
             $dataMain = array(
                 'title'       => ArrayHelper::arrayGet($_REQUEST, 'title'),
                 'label'       => ArrayHelper::arrayGet($_REQUEST, 'label'),
+                'slug'       => ArrayHelper::arrayGet($_REQUEST, 'slug'),
                 'description' => ArrayHelper::arrayGet($_REQUEST, 'description'),
                 'price'       => ArrayHelper::arrayGet($_REQUEST, 'price'),
                 'gift'       => ArrayHelper::arrayGet($_REQUEST, 'gift'),

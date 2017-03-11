@@ -86,6 +86,7 @@ class Sale_model extends Crud
                     sale_products.id as sale_products_id,
                     sale_products.title as sale_products_title,
                     sale_products.label as sale_products_label,
+                    sale_products.slug as sale_products_slug,
                     sale_products.status as sale_products_status,
                     sale_products.price as sale_products_price,
                     sale_products.gift as sale_products_gift,
@@ -124,6 +125,7 @@ class Sale_model extends Crud
                     sale_products.id as sale_products_id,
                     sale_products.title as sale_products_title,
                     sale_products.label as sale_products_label,
+                    sale_products.slug as sale_products_slug,
                     sale_products.status as sale_products_status,
                     sale_products.gift as sale_products_gift
                 FROM

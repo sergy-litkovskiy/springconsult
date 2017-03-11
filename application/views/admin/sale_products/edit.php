@@ -9,6 +9,9 @@
     <p><b>Доп. Название:</b></p>
     <p><input type="text" class="main_inputs" id='label' name='label' value="<?php echo $content['label'];?>"/></p>
     <br/>
+    <p><b>Alias (slug):</b></p>
+    <p><input type="text" class="main_inputs" id='slug' name='slug' value="<?php echo $content['slug'];?>"/></p>
+    <br/>
     <p><b>Подарок:</b></p>
     <p><input type="text" class="main_inputs" id='gift' name='gift' value="<?php echo $content['gift'];?>"/></p>
     <br/>
