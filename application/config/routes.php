@@ -50,8 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-$route['default_controller'] = "service";
-$route['404_override']       = '';
+$route['default_controller'] = 'service';
+$route['404_override']       = 'errorController/index';
 
 $route['message/send']        = 'index/ajax_message';
 $route['(:any)/message/send'] = 'index/ajax_message';
