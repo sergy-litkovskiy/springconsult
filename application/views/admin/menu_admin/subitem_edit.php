@@ -58,7 +58,7 @@
         <input id="num_sequence" name="num_sequence" type="hidden" value="<?php echo set_value('num_sequence', $content['num_sequence']);?>"/>
         <input id="id" name="id" type="hidden" value="<?php echo set_value('id', $content['id']);?>"/>
         <input id="url" name="url" type="hidden" value="<?php echo set_value('id', $content['url']);?>"/>
-        <?php foreach($assignedSaleProductList as $assignedSaleProductId => $saleProductData):?>
+        <?php foreach($assignedSaleProductList as $assignedSaleProductId):?>
             <input name="old_sale_products_id[]" type="hidden" value="<?php echo set_value('old_sale_products_id', $assignedSaleProductId);?>">
         <?php endforeach;?>
         <div style="width:600px; clear:both">&nbsp;</div>
