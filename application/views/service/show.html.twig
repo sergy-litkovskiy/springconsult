@@ -70,14 +70,11 @@
                                 </ul>
                             </div>
 
-                            {% if saleProductList %}
-                                <div class="list_style service-list">
+                            {% if saleProductList|length %}
+                                <div class="widget widget_categories">
                                     <div class="widget_title">
                                         <h4><span>Заказать</span></h4>
                                     </div>
-                                </div>
-
-                                <div class="widget">
                                     <ul class="list_style circle">
                                         {% for saleProduct in saleProductList %}
                                             <li>
