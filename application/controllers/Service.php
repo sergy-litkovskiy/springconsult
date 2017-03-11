@@ -32,6 +32,7 @@ class Service extends MY_Controller
         $reviewList  = $this->menu_model->getReviewListByMenuId($id);
         $serviceList = $this->menu_model->getMenuListByParentId(MENU_TOP_LEVEL_ID_SERVICE);
         $articleList = $this->menu_model->getArticleListByMenuId($id);
+        $saleProductList = $this->sale_model->getSaleProductListByMenuId($id);
 
         //remove current item from available service list
         $serviceList = array_filter($serviceList, function ($val) use ($id) {
@@ -44,6 +45,7 @@ class Service extends MY_Controller
             'reviewList'          => $reviewList,
             'serviceList'         => $serviceList,
             'articleList'         => $articleList,
+            'saleProductList'     => $saleProductList,
             'pageTitle'           => ArrayHelper::arrayGet($serviceData, '0.title')
         ];
 

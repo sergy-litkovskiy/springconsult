@@ -70,6 +70,29 @@
                                 </ul>
                             </div>
 
+                            {% if saleProductList %}
+                                <div class="list_style service-list">
+                                    <div class="widget_title">
+                                        <h4><span>Продукты</span></h4>
+                                    </div>
+                                </div>
+
+                                <div class="widget">
+                                    <ul class="list_style circle">
+                                        {% for saleProduct in saleProductList %}
+                                            <li>
+                                                <a href="{{ base_url() }}shop/sale/{{ saleProduct.id }}/{{ saleProduct.slug }}">
+                                                    {{ saleProduct.title }}
+                                                    {% if saleProduct.label|length %}
+                                                        ({{ saleProduct.label }})
+                                                    {% endif %}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+
                             <div class="widget widget_about">
                                 <div class="widget_title">
                                     <h4><span>Статьи</span></h4>
