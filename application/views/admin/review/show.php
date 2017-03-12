@@ -70,7 +70,7 @@
                 </td>
 
                 <td colspan="2" class="status-change" style="text-align: center">
-                    <form id="<?php echo $reviewId;?>" data-table="reviews">
+                    <form id="<?php echo $reviewId;?>" data-table="review">
                         <input type="radio" name="status" value="1" <?php echo ($map['data']['status'] == '1') ? 'checked="checked"': null;?>/>
                         <img src="<?php echo base_url()?>img/img_main/on.png"/>
                         &nbsp;&nbsp;

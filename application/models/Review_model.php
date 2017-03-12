@@ -9,13 +9,13 @@ class Review_model extends Crud
         parent::__construct();
 
         $this->idkey = 'id';
-        $this->table = 'reviews';
+        $this->table = 'review';
     }
 
     public function getReviewListWithAssignedItemsAdmin()
     {
         $sql = "SELECT
-                    reviews.*,
+                    review.*,
                     sale_page.id as sale_page_id,
                     sale_page.title as sale_page_title,
                     sale_page.status as sale_page_status,
@@ -24,15 +24,15 @@ class Review_model extends Crud
                     menu.title as menu_title,
                     menu.status as menu_status
                 FROM
-                    reviews
+                    review
                 LEFT JOIN
-                    sale_page_reviews_assignment ON sale_page_reviews_assignment.reviews_id = reviews.id
+                    sale_page_review_assignment ON sale_page_review_assignment.review_id = review.id
                 LEFT JOIN 
-                    sale_page ON sale_page.id = sale_page_reviews_assignment.sale_page_id                    
+                    sale_page ON sale_page.id = sale_page_review_assignment.sale_page_id                    
                 LEFT JOIN
-                    menu_reviews_assignment ON menu_reviews_assignment.reviews_id = reviews.id
+                    menu_review_assignment ON menu_review_assignment.review_id = review.id
                 LEFT JOIN 
-                    menu ON menu.id = menu_reviews_assignment.menu_id"
+                    menu ON menu.id = menu_review_assignment.menu_id"
         ;
 
         $query = $this->db->query($sql);
@@ -43,13 +43,13 @@ class Review_model extends Crud
     public function getReviewListBySalePageId($salePageId)
     {
         $sql = "SELECT
-                    sale_page_reviews_assignment.id as sale_page_reviews_assignment_id,
-                    reviews.*
+                    sale_page_review_assignment.id as sale_page_review_assignment_id,
+                    review.*
                 FROM
-                    reviews
+                    review
                 INNER JOIN
-                    sale_page_reviews_assignment ON sale_page_reviews_assignment.reviews_id = reviews.id";
-        $sql .= " AND sale_page_reviews_assignment.sale_page_id = ".$salePageId;
+                    sale_page_review_assignment ON sale_page_review_assignment.review_id = review.id";
+        $sql .= " AND sale_page_review_assignment.sale_page_id = ".$salePageId;
 
         $query = $this->db->query($sql);
 

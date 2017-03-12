@@ -63,7 +63,7 @@ class Review_admin extends CI_Controller
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/reviews/show', $contentData, true));
+            'content' => $this->load->view('admin/review/show', $contentData, true));
 
         $this->load->view('layout_admin', $data);
     }
@@ -130,7 +130,7 @@ class Review_admin extends CI_Controller
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/reviews/edit', $contentData, true));
+            'content' => $this->load->view('admin/review/edit', $contentData, true));
 
         $this->load->view('layout_admin', $data);
     }
@@ -155,17 +155,17 @@ class Review_admin extends CI_Controller
 
             if ($assignedNewSalePageIds) {
                 $salePageDataToAssign = [
-                    'assignFieldName' => 'reviews_id',
+                    'assignFieldName' => 'review_id',
                     'sourceFieldName' => 'sale_page_id',
-                    'table'           => 'sale_page_reviews_assignment'
+                    'table'           => 'sale_page_review_assignment'
                 ];
             }
 
             if ($assignedNewMenuIds) {
                 $menuDataToAssign = [
-                    'assignFieldName' => 'reviews_id',
+                    'assignFieldName' => 'review_id',
                     'sourceFieldName' => 'menu_id',
-                    'table'           => 'menu_reviews_assignment'
+                    'table'           => 'menu_review_assignment'
                 ];
             }
 
@@ -246,8 +246,8 @@ class Review_admin extends CI_Controller
             if ($assignedSalePageDataList) {
                 foreach ($assignedSalePageDataList as $assignedSalePageData) {
                     $this->review_model->delFromTable(
-                        ArrayHelper::arrayGet($assignedSalePageData, 'sale_page_reviews_assignment_id'),
-                        'sale_page_reviews_assignment'
+                        ArrayHelper::arrayGet($assignedSalePageData, 'sale_page_review_assignment_id'),
+                        'sale_page_review_assignment'
                     );
                 }
             }

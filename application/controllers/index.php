@@ -97,7 +97,7 @@ class Index extends CI_Controller
             'materials'    => $materialsArr,
             'contact_form' => $slug == 'contacts' ? $this->load->view('blocks/contact_form', $this->contactFormArr, true) : null,
             'is_article'   => false,
-            'disqus'       => $slug == 'reviews' ? show_disqus() : null
+            'disqus'       => $slug == 'review' ? show_disqus() : null
         );
 
         $this->data = array_merge($this->_getDataArrForAction($slug, $contentArr), $contentData);

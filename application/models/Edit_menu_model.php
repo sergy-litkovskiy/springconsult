@@ -76,13 +76,13 @@ class Edit_menu_model extends Crud
     public function getAssignedMenuListByReviewId($reviewId)
     {
         $sql = "SELECT
-                    menu_reviews_assignment.id as menu_reviews_assignment_id,
+                    menu_review_assignment.id as menu_review_assignment_id,
                     menu.*
                 FROM
                     menu
                 INNER JOIN
-                    menu_reviews_assignment ON menu_reviews_assignment.menu_id = menu.id";
-        $sql .= " AND menu_reviews_assignment.reviews_id = ".$reviewId;
+                    menu_review_assignment ON menu_review_assignment.menu_id = menu.id";
+        $sql .= " AND menu_review_assignment.review_id = ".$reviewId;
 
         $query = $this->db->query($sql);
 

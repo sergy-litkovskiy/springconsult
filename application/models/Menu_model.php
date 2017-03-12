@@ -93,20 +93,20 @@ class Menu_model extends Crud
             '
             SELECT 
                 menu.*,
-                reviews.id as reviews_id, 
-                reviews.author as reviews_author, 
-                reviews.text as reviews_text, 
-                reviews.image as reviews_image
+                review.id as review_id, 
+                review.author as review_author, 
+                review.text as review_text, 
+                review.image as review_image
             FROM 
                 menu 
             LEFT JOIN 
-                menu_reviews_assignment as mra
+                menu_review_assignment as mra
               ON 
                 mra.menu_id = menu.id 
             LEFT JOIN 
-                reviews
+                review
               ON 
-                mra.reviews_id = reviews.id AND reviews.status = %s              
+                mra.review_id = review.id AND review.status = %s              
             WHERE 
                 menu.parent = %s 
             AND 
@@ -129,15 +129,15 @@ class Menu_model extends Crud
         $sql = sprintf(
             '
             SELECT 
-                reviews.*
+                review.*
             FROM 
-                reviews 
+                review 
             INNER JOIN 
-                menu_reviews_assignment as mra
+                menu_review_assignment as mra
             ON 
-                mra.reviews_id = reviews.id 
+                mra.review_id = review.id 
             AND 
-                reviews.status = %s    
+                review.status = %s    
             AND 
                 mra.menu_id = %s
             ',

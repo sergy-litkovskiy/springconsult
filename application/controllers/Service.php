@@ -59,11 +59,11 @@ class Service extends MY_Controller
         $map = [];
 
         foreach ($serviceList as $serviceData) {
-            $reviewsId = ArrayHelper::arrayGet($serviceData, 'reviews_id');
+            $reviewId = ArrayHelper::arrayGet($serviceData, 'review_id');
             $menuId    = ArrayHelper::arrayGet($serviceData, 'id');
 
             $map[$menuId]['data'] = $this->makeMainData($serviceData);
-            $map[$menuId]['reviewList'][$reviewsId] = $reviewsId ? $this->makeReviewsData($serviceData) : [];
+            $map[$menuId]['reviewList'][$reviewId] = $reviewId ? $this->makeReviewsData($serviceData) : [];
         }
 
         return $map;
@@ -85,10 +85,10 @@ class Service extends MY_Controller
     private function makeReviewsData($serviceData)
     {
         return [
-            'id'     => ArrayHelper::arrayGet($serviceData, 'reviews_id'),
-            'author' => ArrayHelper::arrayGet($serviceData, 'reviews_author'),
-            'text'   => ArrayHelper::arrayGet($serviceData, 'reviews_text'),
-            'image'  => ArrayHelper::arrayGet($serviceData, 'reviews_image'),
+            'id'     => ArrayHelper::arrayGet($serviceData, 'review_id'),
+            'author' => ArrayHelper::arrayGet($serviceData, 'review_author'),
+            'text'   => ArrayHelper::arrayGet($serviceData, 'review_text'),
+            'image'  => ArrayHelper::arrayGet($serviceData, 'review_image'),
         ];
     }
 }
