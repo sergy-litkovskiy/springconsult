@@ -40,7 +40,7 @@ class Shop extends MY_Controller
         $data = [
             'currentItemName' => 'salePage',
             'metaData'        => $metaData,
-            'reviewList'        => $reviewList,
+            'reviewList'      => $reviewList,
             'data'            => ArrayHelper::arrayGet(array_values($salePageData), 0),
             'pageTitle'       => ArrayHelper::arrayGet($salePageData, '0.title')
         ];
@@ -55,19 +55,19 @@ class Shop extends MY_Controller
         $map = [];
 
         foreach ($dataList as $data) {
-            $saleProductsId = ArrayHelper::arrayGet($data, 'sale_products_id');
+            $saleProductId = ArrayHelper::arrayGet($data, 'sale_product_id');
             $mainDataId     = ArrayHelper::arrayGet($data, 'id');
 
             if (!ArrayHelper::arrayHas($map, $mainDataId)) {
                 $map[$mainDataId]['data'] = $this->$mainDataMethod($data);
             }
 
-            if (!$saleProductsId) {
+            if (!$saleProductId) {
                 continue;
             }
 
-            $map[$mainDataId]['productList'][$saleProductsId] =
-                $saleProductsId
+            $map[$mainDataId]['productList'][$saleProductId] =
+                $saleProductId
                     ? $this->makeProductsData($data)
                     : [];
         }
@@ -97,13 +97,13 @@ class Shop extends MY_Controller
     private function makeProductsData($categoryData)
     {
         return [
-            'id'           => ArrayHelper::arrayGet($categoryData, 'sale_products_id'),
-            'title'        => ArrayHelper::arrayGet($categoryData, 'sale_products_title'),
-            'label'        => ArrayHelper::arrayGet($categoryData, 'sale_products_label'),
-            'image'        => ArrayHelper::arrayGet($categoryData, 'sale_products_image'),
-            'description'  => ArrayHelper::arrayGet($categoryData, 'sale_products_description'),
-            'price'        => ArrayHelper::arrayGet($categoryData, 'sale_products_price'),
-            'gift'        => ArrayHelper::arrayGet($categoryData, 'sale_products_gift'),
+            'id'           => ArrayHelper::arrayGet($categoryData, 'sale_product_id'),
+            'title'        => ArrayHelper::arrayGet($categoryData, 'sale_product_title'),
+            'label'        => ArrayHelper::arrayGet($categoryData, 'sale_product_label'),
+            'image'        => ArrayHelper::arrayGet($categoryData, 'sale_product_image'),
+            'description'  => ArrayHelper::arrayGet($categoryData, 'sale_product_description'),
+            'price'        => ArrayHelper::arrayGet($categoryData, 'sale_product_price'),
+            'gift'         => ArrayHelper::arrayGet($categoryData, 'sale_product_gift'),
             'salePageSlug' => ArrayHelper::arrayGet($categoryData, 'sale_page_slug'),
             'salePageId'   => ArrayHelper::arrayGet($categoryData, 'sale_page_id'),
         ];
@@ -112,28 +112,28 @@ class Shop extends MY_Controller
     public function productPayment()
     {
         $recipientData = [
-            'name'        => trim(strip_tags($this->input->post('name'))),
-            'email'       => trim(strip_tags($this->input->post('email'))),
-            'phone'       => trim(strip_tags($this->input->post('phone'))),
-            'created_at'  => date('Y-m-d H:i:s'),
-            'confirmed'   => STATUS_ON
+            'name'       => trim(strip_tags($this->input->post('name'))),
+            'email'      => trim(strip_tags($this->input->post('email'))),
+            'phone'      => trim(strip_tags($this->input->post('phone'))),
+            'created_at' => date('Y-m-d H:i:s'),
+            'confirmed'  => STATUS_ON
         ];
 
         $extData = [
             'productId' => trim(strip_tags($this->input->post('productId'))),
-            'price' => trim(strip_tags($this->input->post('price'))),
-            'title' => trim(strip_tags($this->input->post('title'))),
+            'price'     => trim(strip_tags($this->input->post('price'))),
+            'title'     => trim(strip_tags($this->input->post('title'))),
         ];
 
         $saleHistoryData['created_at']       = date('Y-m-d H:i:s');
-        $saleHistoryData['sale_products_id'] = trim(strip_tags($this->input->post('productId')));
+        $saleHistoryData['sale_product_id'] = trim(strip_tags($this->input->post('productId')));
 
         return $this->processPayment($recipientData, $saleHistoryData, $extData);
     }
 
     public function processPayment($recipientData, $saleHistoryData, $extData)
     {
-        $result = ['success' => true, 'error' => false];
+        $result     = ['success' => true, 'error' => false];
         $errLogData = [];
 
         try {
@@ -141,11 +141,11 @@ class Shop extends MY_Controller
 
             $recipient = $this->recipient_model->getRecipientData($recipientData, true);
 
-            $saleHistoryData['recipients_id'] = ArrayHelper::arrayGet($recipient, 'id');
-            $saleHistoryData['payment_state'] = NULL;
-            $saleHistoryData['payment_status'] = '';
+            $saleHistoryData['recipients_id']    = ArrayHelper::arrayGet($recipient, 'id');
+            $saleHistoryData['payment_state']    = NULL;
+            $saleHistoryData['payment_status']   = '';
             $saleHistoryData['payment_trans_id'] = '';
-            $saleHistoryData['payment_message'] = '';
+            $saleHistoryData['payment_message']  = '';
 
             $saleHistoryId = $this->saleHistory_model->add($saleHistoryData);
             Common::assertTrue(
@@ -156,15 +156,15 @@ class Shop extends MY_Controller
             $mailData = array_merge($extData, $recipientData);
             $this->mailer_model->sendAdminSaleEmailMessage($mailData);
         } catch (Exception $e) {
-            $result['error'] = true;
+            $result['error']   = true;
             $result['success'] = false;
             $result['message'] = $e->getMessage();
 
             $errLogData['resource_id'] = ERROR_PAYMENT_REGISTRATION;
-            $errLogData['text'] = sprintf(
+            $errLogData['text']        = sprintf(
                 '%s - Продающая страница: %s (%s - %s)',
                 $e->getMessage(),
-                ArrayHelper::arrayGet($saleHistoryData, 'sale_products_id'),
+                ArrayHelper::arrayGet($saleHistoryData, 'sale_product_id'),
                 ArrayHelper::arrayGet($recipientData, 'name'),
                 ArrayHelper::arrayGet($recipientData, 'email')
             );

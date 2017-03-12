@@ -10,28 +10,28 @@ class Topic_model extends Crud
         parent::__construct();
 
         $this->idkey = 'id';
-        $this->table = 'topics';
+        $this->table = 'topic';
     }
 
     public function getTopicListWithArticles()
     {
         $selectSql =
             $this->table . '.*,
-            articles.id as article_id,
-            articles.title as article_title,
-            articles.status as article_status
+            article.id as article_id,
+            article.title as article_title,
+            article.status as article_status
         ';
 
         $this->db->select($selectSql);
         $this->db->join(
-            'topics_articles_assignment as taa',
-            $this->table . '.id = taa.topics_id',
+            'topic_article_assignment as taa',
+            $this->table . '.id = taa.topic_id',
             'LEFT'
         );
 
         $this->db->join(
-            'articles',
-            'articles.id = taa.articles_id AND articles.status = ' . STATUS_ON,
+            'article',
+            'article.id = taa.article_id AND article.status = ' . STATUS_ON,
             'LEFT'
         );
 
@@ -45,7 +45,7 @@ class Topic_model extends Crud
     public function getTopicListWithArticlesAdmin()
     {
         $sql = $this->_getSelectSql();
-        $sql .= " LEFT JOIN articles ON articles.id = topics_articles_assignment.articles_id";
+        $sql .= " LEFT JOIN article ON article.id = topic_article_assignment.article_id";
         $query = $this->db->query($sql);
 
         return $query->result_array();
@@ -54,8 +54,8 @@ class Topic_model extends Crud
 //    public function getAssignedArticleListByTopicId($id)
 //    {
 //        $sql = $this->_getSelectSql();
-//        $sql .= " LEFT JOIN articles ON articles.id = topics_articles_assignment.articles_id";
-//        $sql .= " AND topics.id = ".$id;
+//        $sql .= " LEFT JOIN article ON article.id = topic_article_assignment.article_id";
+//        $sql .= " AND topic.id = ".$id;
 //
 //        $query = $this->db->query($sql);
 //
@@ -65,24 +65,24 @@ class Topic_model extends Crud
     public function getTopicListByParamsWithArticleCount($params)
     {
         $selectSql = '
-            topics.*, 
+            topic.*, 
             (
                 SELECT count(0) 
-                FROM topics_articles_assignment as taa 
-                INNER JOIN articles ON articles.id = taa.articles_id AND articles.status = '.STATUS_ON.' 
-                WHERE taa.topics_id = topics.id
+                FROM topic_article_assignment as taa 
+                INNER JOIN article ON article.id = taa.article_id AND article.status = '.STATUS_ON.' 
+                WHERE taa.topic_id = topic.id
             ) as articles_count
         ';
 
         $this->db->select($selectSql);
         $this->db->where($params);
         $this->db->join(
-            'topics_articles_assignment as taa',
-            $this->table . '.id = taa.topics_id',
+            'topic_article_assignment as taa',
+            $this->table . '.id = taa.topic_id',
             'LEFT'
         );
-        $this->db->order_by('topics.name');
-        $this->db->group_by('topics.id');
+        $this->db->order_by('topic.name');
+        $this->db->group_by('topic.id');
 
         $query = $this->db->get($this->table);
 
@@ -92,14 +92,14 @@ class Topic_model extends Crud
     private function _getSelectSql()
     {
         return "SELECT
-                    topics.*,
-                    articles.id as article_id,
-                    articles.title as article_title,
-                    articles.status as article_status
+                    topic.*,
+                    article.id as article_id,
+                    article.title as article_title,
+                    article.status as article_status
                 FROM
-                    topics
+                    topic
                 LEFT JOIN
-                    topics_articles_assignment ON topics_articles_assignment.topics_id = topics.id"
+                    topic_article_assignment ON topic_article_assignment.topic_id = topic.id"
             ;
     }
 }

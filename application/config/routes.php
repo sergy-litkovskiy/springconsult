@@ -65,10 +65,10 @@ $route['backend/logout'] = "admin/index_admin/logout";
 $route['ajax_change_status'] = "admin/menu_admin/ajax_change_status";
 //$route['backend/ajax_change_status']              = "admin/index_admin/ajax_change_status";
 
-$route['backend/article_edit/(:num)'] = 'admin/articles_admin/article_edit/$1';
-$route['backend/article_edit']        = 'admin/articles_admin/article_edit';
-$route['backend/check_valid_article'] = 'admin/articles_admin/check_valid_article';
-$route['backend/article_drop/(:num)'] = 'admin/articles_admin/drop/$1';
+$route['backend/article_edit/(:num)'] = 'admin/article_admin/article_edit/$1';
+$route['backend/article_edit']        = 'admin/article_admin/article_edit';
+$route['backend/check_valid_article'] = 'admin/article_admin/check_valid_article';
+$route['backend/article_drop/(:num)'] = 'admin/article_admin/drop/$1';
 
 $route['backend/topic_edit']        = 'admin/topic_admin/edit';
 $route['backend/topic_edit/(:num)'] = 'admin/topic_admin/edit/$1';
@@ -101,7 +101,7 @@ $route['backend/topic']         = 'admin/topic_admin/index';
 $route['backend/sale_category'] = 'admin/saleCategory_admin/index';
 $route['backend/review']        = 'admin/review_admin/index';
 
-//$route['backend/send_nl_subscribe/(:num)']        = 'admin/articles_admin/ajax_send_article_to_subscribers/$1';
+//$route['backend/send_nl_subscribe/(:num)']        = 'admin/article_admin/ajax_send_article_to_subscribers/$1';
 
 $route['backend/gift']             = 'admin/index_admin/gift_list';
 $route['backend/check_valid_gift'] = 'admin/index_admin/check_valid_gift';
@@ -115,10 +115,10 @@ $route['backend/material_edit']        = 'admin/material_admin/material_edit';
 $route['backend/material_edit/(:num)'] = 'admin/material_admin/material_edit/$1';
 $route['backend/check_valid_material'] = 'admin/material_admin/check_valid_materials';
 
-$route['backend/aforizmus']             = 'admin/index_admin/aforizmus_list';
-$route['backend/aforizmus_edit']        = 'admin/index_admin/aforizmus_edit';
-$route['backend/aforizmus_edit/(:num)'] = 'admin/index_admin/aforizmus_edit/$1';
-$route['backend/aforizmus_drop/(:num)'] = 'admin/index_admin/aforizmus_drop/$1';
+//$route['backend/aforizmus']             = 'admin/index_admin/aforizmus_list';
+//$route['backend/aforizmus_edit']        = 'admin/index_admin/aforizmus_edit';
+//$route['backend/aforizmus_edit/(:num)'] = 'admin/index_admin/aforizmus_edit/$1';
+//$route['backend/aforizmus_drop/(:num)'] = 'admin/index_admin/aforizmus_drop/$1';
 
 $route['backend/landing']             = 'admin/landing_admin/landing_list';
 $route['backend/landing_edit']        = 'admin/landing_admin/landing_edit';
@@ -138,13 +138,13 @@ $route['backend/sale_page_edit/(:num)'] = 'admin/sale_admin/sale_page_edit/$1';
 $route['backend/sale_page_drop/(:num)'] = 'admin/sale_admin/sale_page_drop/$1';
 $route['backend/sale_page_save']        = 'admin/sale_admin/sale_page_save';
 
-$route['backend/sale_products_list']        = 'admin/sale_admin/sale_products_list';
-$route['backend/sale_products_edit']        = 'admin/sale_admin/sale_products_edit';
-$route['backend/sale_products_edit/(:num)'] = 'admin/sale_admin/sale_products_edit/$1';
-$route['backend/sale_products_drop/(:num)'] = 'admin/sale_admin/sale_products_drop/$1';
-$route['backend/sale_products_save']        = 'admin/sale_admin/sale_products_save';
-$route['backend/sale_products_statistic']   = 'admin/sale_admin/sale_products_statistic';
-$route['backend/sale_products_number_edit/(:num)'] = 'admin/sale_admin/editNumber/$1';
+$route['backend/sale_product_list']        = 'admin/sale_admin/sale_product_list';
+$route['backend/sale_product_edit']        = 'admin/sale_admin/sale_product_edit';
+$route['backend/sale_product_edit/(:num)'] = 'admin/sale_admin/sale_product_edit/$1';
+$route['backend/sale_product_drop/(:num)'] = 'admin/sale_admin/sale_product_drop/$1';
+$route['backend/sale_product_save']        = 'admin/sale_admin/sale_product_save';
+$route['backend/sale_product_statistic']   = 'admin/sale_admin/sale_product_statistic';
+$route['backend/sale_product_number_edit/(:num)'] = 'admin/sale_admin/editNumber/$1';
 
 $route['backend/announce_list']        = 'admin/announce_admin/announce_list';
 $route['backend/check_valid_announce'] = 'admin/announce_admin/check_valid_announce';
@@ -165,7 +165,7 @@ $route['blog'] = 'blog/index';
 $route['blog/page/(:num)'] = 'blog/index/$1';
 $route['blog/topic/(:num)/(:any)'] = 'blog/topic/$1/$2';
 $route['blog/topic/(:num)/(:any)/page/(:num)'] = 'blog/topic/$1/$2/$3';
-$route['articles/(:num)'] = 'blog/show/$1';
+$route['article/(:num)'] = 'blog/show/$1';
 
 $route['review'] = 'review/index';
 
@@ -200,7 +200,7 @@ $route['finishsubscribe/(:any)'] = 'gift/finishSubscribe/$1';
 //$route['ajax_get_landing_mp3']                         = 'landing/ajax_get_landing_mp3';
 //$route['landing/(:any)']                               = 'landing/show_landing_page/$1';
 //$route['landing_subscribe']                            = 'landing/ajax_landing_subscribe';
-//$route['landing_articles/(:any)']                      = 'landing/show_landing_article/$1';
+//$route['landing_article/(:any)']                      = 'landing/show_landing_article/$1';
 //$route['payment/response']                             = 'sale/payment_response';
 //$route['ajax_payment_registration']                    = 'sale/ajax_payment_registration';
 //$route['sale/(:any)']                                  = 'sale/sale_show/$1';

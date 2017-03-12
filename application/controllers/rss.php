@@ -18,7 +18,7 @@ class Rss extends CI_Controller
     {
         $articlesArr = null;
         $rssTotalArr = $rssItemsArr = array();
-        //set limit of articles's amount
+        //set limit of article's amount
         $params = array(
             'limit' => 3
         );
@@ -27,7 +27,7 @@ class Rss extends CI_Controller
 
         foreach($articlesArr as $key => $item){
             $rssItemsArr[$key]['title']       = $item['title'];
-            $rssItemsArr[$key]['link']        = 'http://'.$_SERVER['SERVER_NAME'].'/articles/'.$item['id'];
+            $rssItemsArr[$key]['link']        = 'http://'.$_SERVER['SERVER_NAME'].'/article/'.$item['id'];
             $rssItemsArr[$key]['description'] = Common::cutString($item['text'], 60);
         }
         $rssTotalArr = array(

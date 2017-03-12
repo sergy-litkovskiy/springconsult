@@ -1,7 +1,7 @@
 <h2><?php echo $title;?></h2>
 <?php echo @$message; ?>
 <?php echo validation_errors(); ?>
-<form id="back_form_sale_products" class="add_new" action='<?php echo base_url()?>backend/review_save' method='post' name='edit_text' enctype='multipart/form-data'>
+<form id="back_form_sale_product" class="add_new" action='<?php echo base_url()?>backend/review_save' method='post' name='edit_text' enctype='multipart/form-data'>
     <p><b>Автор:</b></p>
     <p><input type="text" class="main_inputs" id='author' name='author' value="<?php echo $content['author'];?>"/></p>
     <br/>

@@ -32,11 +32,11 @@ class Sale extends MY_Controller
             $saleArr['title'] = $salePage['title'];
             $saleArr['text1'] = $salePage['text1'];
             $saleArr['text2'] = $salePage['text2'];
-            if ($salePage['sale_products_id']) {
-                $saleArr['sale_products'][$salePage['sale_products_id']]['id']          = $salePage['sale_products_id'];
-                $saleArr['sale_products'][$salePage['sale_products_id']]['title']       = $salePage['sale_products_title'];
-                $saleArr['sale_products'][$salePage['sale_products_id']]['description'] = $salePage['sale_products_description'];
-                $saleArr['sale_products'][$salePage['sale_products_id']]['price']       = $salePage['sale_products_price'];
+            if ($salePage['sale_product_id']) {
+                $saleArr['sale_product'][$salePage['sale_product_id']]['id']          = $salePage['sale_product_id'];
+                $saleArr['sale_product'][$salePage['sale_product_id']]['title']       = $salePage['sale_product_title'];
+                $saleArr['sale_product'][$salePage['sale_product_id']]['description'] = $salePage['sale_product_description'];
+                $saleArr['sale_product'][$salePage['sale_product_id']]['price']       = $salePage['sale_product_price'];
             }
         }
 
@@ -111,7 +111,7 @@ class Sale extends MY_Controller
 
 
         $saleHistoryArr['created_at']       = date('Y-m-d H:i:s');
-        $saleHistoryArr['sale_products_id'] = trim(strip_tags($_REQUEST['product_id']));
+        $saleHistoryArr['sale_product_id'] = trim(strip_tags($_REQUEST['product_id']));
 
         return $this->check_valid_payment_registration($recipientDataArr, $saleHistoryArr, $extDataArr);
     }
@@ -163,7 +163,7 @@ class Sale extends MY_Controller
             $this->result['message'] = $e->getMessage();
 
             $errLogData['resource_id'] = ERROR_PAYMENT_REGISTRATION;
-            $errLogData['text']        = $e->getMessage() . " - Продающая страница: " . $saleHistoryArr['sale_products_id'] . "(" . $recipientDataArr['name'] . " - " . $recipientDataArr['email'] . ")";
+            $errLogData['text']        = $e->getMessage() . " - Продающая страница: " . $saleHistoryArr['sale_product_id'] . "(" . $recipientDataArr['name'] . " - " . $recipientDataArr['email'] . ")";
             $errLogData['created_at']  = date('Y-m-d H:i:s');
             $this->sale_model->addInTable($errLogData, 'error_log');
         }
@@ -185,13 +185,13 @@ class Sale extends MY_Controller
             Common::assertTrue(count($paymentUpdateRules), 'Данных(paymentUpdateRules) для апдейта не достаточно');
 
             $updateResult = $this->index_model->updateSaleHistoryByParams($paymentData, $paymentUpdateRules);
-            Common::assertTrue($updateResult, "Sale history table was not updated by: id-" . $paymentUpdateRules['sale_history_id'] . '|sale_products_id-' . $paymentUpdateRules['sale_products_id'] . '|recipients_id-' . $paymentUpdateRules['recipients_id']);
+            Common::assertTrue($updateResult, "Sale history table was not updated by: id-" . $paymentUpdateRules['sale_history_id'] . '|sale_product_id-' . $paymentUpdateRules['sale_product_id'] . '|recipients_id-' . $paymentUpdateRules['recipients_id']);
 
             $this->_sendPaymentConfirmationLetter($paymentUpdateRules);
 
         } catch (Exception $e) {
             $errLogData['resource_id'] = ERROR_PAYMENT_CALLBACK;
-            $errLogData['text']        = $e->getMessage() . " - Продающая страница: " . $paymentUpdateRules['sale_products_id'] . "(recipient#" . $paymentUpdateRules['recipients_id'] . ")";
+            $errLogData['text']        = $e->getMessage() . " - Продающая страница: " . $paymentUpdateRules['sale_product_id'] . "(recipient#" . $paymentUpdateRules['recipients_id'] . ")";
             $errLogData['created_at']  = date('Y-m-d H:i:s');
             $this->sale_model->addInTable($errLogData, 'error_log');
         }
@@ -208,7 +208,7 @@ class Sale extends MY_Controller
         $recipSaleIdArr                         = explode('|', trim(strip_tags($_REQUEST['ik_baggage_fields'])));
         $paymentUpdateRules['recipients_id']    = $recipSaleIdArr[0];
         $paymentUpdateRules['sale_history_id']  = $recipSaleIdArr[1];
-        $paymentUpdateRules['sale_products_id'] = trim(strip_tags($_REQUEST['ik_payment_id']));
+        $paymentUpdateRules['sale_product_id'] = trim(strip_tags($_REQUEST['ik_payment_id']));
 
         return array($paymentData, $paymentUpdateRules);
     }
@@ -216,13 +216,13 @@ class Sale extends MY_Controller
 
     private function _sendPaymentConfirmationLetter($paymentUpdateRules)
     {
-        $saleProductLetterArr = $this->sale_model->getFromTableByParams(array('sale_products_id' => $paymentUpdateRules['sale_products_id']), "sale_products_letters");
+        $saleProductLetterArr = $this->sale_model->getFromTableByParams(array('sale_product_id' => $paymentUpdateRules['sale_product_id']), "sale_product_letter");
         if (count($saleProductLetterArr)) {
             $recipientDataArr = $this->sale_model->getFromTableByParams(array('id' => $paymentUpdateRules['recipients_id']), "recipients");
-            Common::assertTrue(count($recipientDataArr), "Any recipient was not found within: sale_history_id-" . $paymentUpdateRules['sale_history_id'] . '|sale_products_id-' . $paymentUpdateRules['sale_products_id'] . '|recipients_id-' . $paymentUpdateRules['recipients_id']);
+            Common::assertTrue(count($recipientDataArr), "Any recipient was not found within: sale_history_id-" . $paymentUpdateRules['sale_history_id'] . '|sale_product_id-' . $paymentUpdateRules['sale_product_id'] . '|recipients_id-' . $paymentUpdateRules['recipients_id']);
 
             $isMailSent = $this->mailer_model->sendSaleMailerEmail($recipientDataArr[0], $saleProductLetterArr[0]);
-            Common::assertTrue($isMailSent, "Payment confirmation letter was not send within: sale_history_id-" . $paymentUpdateRules['sale_history_id'] . '|sale_products_id-' . $paymentUpdateRules['sale_products_id'] . '|recipients_id-' . $paymentUpdateRules['recipients_id']);
+            Common::assertTrue($isMailSent, "Payment confirmation letter was not send within: sale_history_id-" . $paymentUpdateRules['sale_history_id'] . '|sale_product_id-' . $paymentUpdateRules['sale_product_id'] . '|recipients_id-' . $paymentUpdateRules['recipients_id']);
 
             $data = $this->_makeSaleMailerHistoryData($recipientDataArr[0]['email'], $saleProductLetterArr[0]['id'], $paymentUpdateRules['sale_history_id']);
             $this->sale_model->addInTable($data, "sale_mailer_history");
@@ -234,7 +234,7 @@ class Sale extends MY_Controller
     {
         return array(
             "sale_history_id"          => $saleHistoryId,
-            "sale_products_letters_id" => $saleProductsLettersId,
+            "sale_product_letter_id" => $saleProductsLettersId,
             "email"                    => $email,
             "created_at"               => date("Y-m-d H:i:s"));
     }

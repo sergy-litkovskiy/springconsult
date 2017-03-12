@@ -36,7 +36,7 @@
 	<noindex>
 	<ul class="social_likes">
 		<li>
-			<div style="width:215px" class="fb-like" data-href="http://www.springconsult.com.ua/articles/<?php echo @$content['id'];?>" data-send="true" data-layout="button_count" data-width="215" data-show-faces="false"></div>
+			<div style="width:215px" class="fb-like" data-href="http://www.springconsult.com.ua/article/<?php echo @$content['id'];?>" data-send="true" data-layout="button_count" data-width="215" data-show-faces="false"></div>
 		</li>
 		<li>
 			<div class="twitter-like"><a href="https://twitter.com/share" class="twitter-share-button" data-via="Litkovska" data-lang="ru">Твитнуть</a></div>

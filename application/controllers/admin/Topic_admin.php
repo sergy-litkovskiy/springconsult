@@ -58,7 +58,7 @@ class Topic_admin extends CI_Controller
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/topics/show', $contentData, true));
+            'content' => $this->load->view('admin/topic/show', $contentData, true));
 
         $this->load->view('layout_admin', $data);
     }
@@ -81,7 +81,7 @@ class Topic_admin extends CI_Controller
         $assignArticleList = array();
         $title          = "Добавить topic";
 
-        $articleList = $this->index_model->getListFromTable('articles');
+        $articleList = $this->index_model->getListFromTable('article');
 
         if ($id) {
             $topicData      = $this->topic_model->getListByParams(['id' => $id]);
@@ -109,7 +109,7 @@ class Topic_admin extends CI_Controller
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/topics/edit', $this->data, true));
+            'content' => $this->load->view('admin/topic/edit', $this->data, true));
 
         $this->load->view('layout_admin', $data);
     }
@@ -164,9 +164,9 @@ class Topic_admin extends CI_Controller
             'newSourceIdArr'  => $assignedNewArticleIds,
             'oldSourceIdArr'  => $assignedOldArticleIds,
             'assignId'        => $id,
-            'assignFieldName' => 'topics_id',
-            'sourceFieldName' => 'articles_id',
-            'table'           => 'topics_articles_assignment'
+            'assignFieldName' => 'topic_id',
+            'sourceFieldName' => 'article_id',
+            'table'           => 'topic_article_assignment'
         );
 
         $this->assign_model->setAssignArr($assignsArr);
@@ -193,12 +193,12 @@ class Topic_admin extends CI_Controller
 
     private function _add($data)
     {
-        return $this->index_model->addInTable($data, 'topics');
+        return $this->index_model->addInTable($data, 'topic');
     }
 
     private function _update($data, $params)
     {
-        if ($this->index_model->updateInTable(ArrayHelper::arrayGet($params, 'id'), $data, 'topics')) {
+        if ($this->index_model->updateInTable(ArrayHelper::arrayGet($params, 'id'), $data, 'topic')) {
             redirect('backend/topic');
         } else {
             throw new Exception('Not updated');
@@ -208,14 +208,14 @@ class Topic_admin extends CI_Controller
     public function drop($id)
     {
         try {
-            $this->topic_model->delFromTable($id, 'topics');
+            $this->topic_model->delFromTable($id, 'topic');
             $assignArticles = $this->blog_model->getAssignedArticleListByTopicId($id);
 
             if ($assignArticles) {
                 foreach ($assignArticles as $assignArticleData) {
                     $this->index_model->delFromTable(
-                        ArrayHelper::arrayGet($assignArticleData, 'topics_articles_assignment_id'),
-                        'topics_articles_assignment'
+                        ArrayHelper::arrayGet($assignArticleData, 'topic_article_assignment_id'),
+                        'topic_article_assignment'
                     );
                 }
             }

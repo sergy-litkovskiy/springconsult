@@ -139,8 +139,8 @@ class Menu_admin extends CI_Controller
         $id             = isset($_REQUEST['id']) && $_REQUEST['id'] ? $_REQUEST['id'] : null;
         $parent         = isset($_REQUEST['parent']) ? $_REQUEST['parent'] : null;
 
-        $assignedNewSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'new_sale_products_id', []);
-        $assignedOldSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'old_sale_products_id', []);
+        $assignedNewSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'new_sale_product_id', []);
+        $assignedOldSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'old_sale_product_id', []);
 
         try{
             $this->_formValidation($parent);
@@ -180,8 +180,8 @@ class Menu_admin extends CI_Controller
             'oldSourceIdArr'  => $assignedOldSaleProductIds,
             'assignId'        => $id,
             'assignFieldName' => 'menu_id',
-            'sourceFieldName' => 'sale_products_id',
-            'table'           => 'menu_sale_products_assignment'
+            'sourceFieldName' => 'sale_product_id',
+            'table'           => 'menu_sale_product_assignment'
         );
 
         $this->assign_model->setAssignArr($assignsArr);

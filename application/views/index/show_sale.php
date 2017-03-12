@@ -1,9 +1,9 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>js/spring/modules/sale_products_list.js"></script>
 <div id="sale-page-content">
     <?php echo $content['text1']; ?>
-    <?php if (isset($content['sale_products']) && count($content['sale_products'])) { ?>
+    <?php if (isset($content['sale_product']) && count($content['sale_product'])) { ?>
         <div id="sale-products-list">
-            <?php foreach ($content['sale_products'] as $product) { ?>
+            <?php foreach ($content['sale_product'] as $product) { ?>
                 <table class="sale-page-products">
                     <tr class="sale-block-description">
                         <td class="description" colspan="2">

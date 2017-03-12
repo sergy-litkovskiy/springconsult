@@ -49,7 +49,7 @@
                 </td>
 
                 <td colspan="2" class="status-change" style="text-align: center">
-                    <form id="<?php echo $topicId;?>" data-table="topics">
+                    <form id="<?php echo $topicId;?>" data-table="topic">
                         <input type="radio" name="status" value="1" <?php echo ($topic['data']['status'] == '1') ? 'checked="checked"': null;?>/>
                         <img src="<?php echo base_url()?>img/img_main/on.png"/>
                         &nbsp;&nbsp;

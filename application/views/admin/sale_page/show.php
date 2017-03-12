@@ -34,11 +34,11 @@
                 </td>
                 <td class="article_table">
                     <ul>
-                    <?php if(count($item['sale_products'])){
-                        foreach ($item['sale_products'] as $sale_products):?>
-                            <?php if($sale_products['title']){
-                                $status = ($sale_products['status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
-                                <li><?php  echo $sale_products['title'].' - '.$status;?></li>
+                    <?php if(count($item['sale_product'])){
+                        foreach ($item['sale_product'] as $sale_product):?>
+                            <?php if($sale_product['title']){
+                                $status = ($sale_product['status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
+                                <li><?php  echo $sale_product['title'].' - '.$status;?></li>
                             <?php };?>
                         <?php endforeach;
                     }?>

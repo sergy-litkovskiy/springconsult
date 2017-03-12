@@ -5,7 +5,7 @@ function ShortTextListModule() {
             sb.$('.short_text').each(function(i){
                 var $this       = $(this),
                     article_id  = sb.$('#article_' + i).text(),
-                    link        = $('<a class="detail_show_text" href="http://' + location.hostname + '/articles/'+article_id+'"></a>');
+                    link        = $('<a class="detail_show_text" href="http://' + location.hostname + '/article/'+article_id+'"></a>');
 
                 $this.data('full-text', $this.html());
                 $this.data('short-text', $this.text().substr(0,340));
@@ -14,7 +14,7 @@ function ShortTextListModule() {
                 }
 
                 var $linkedText = link.html($this.data('short-text'));
-                $this.html($linkedText).append('<a class="detail_show" href="http://' + location.hostname + '/articles/'+article_id+'">...Подробнее</a>');
+                $this.html($linkedText).append('<a class="detail_show" href="http://' + location.hostname + '/article/'+article_id+'">...Подробнее</a>');
             });
 
             if(!sb.$('.short_text').html()){

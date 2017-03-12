@@ -16,20 +16,20 @@ class Gift_model extends Crud
     {
         $sqlSelect = '
             ' . $this->table . '.*,
-            articles.id as article_id,
-            articles.title as article_title,
-            articles.status as article_status
+            article.id as article_id,
+            article.title as article_title,
+            article.status as article_status
         ';
 
         $this->db->select($sqlSelect);
         $this->db->join(
-            'gift_articles_assignment as gaa',
+            'gift_article_assignment as gaa',
             $this->table . '.id = gaa.gift_id',
             'LEFT'
         );
         $this->db->join(
-            'articles',
-            'articles.id = gaa.articles_id AND articles.status = ' . STATUS_ON,
+            'article',
+            'article.id = gaa.article_id AND article.status = ' . STATUS_ON,
             'LEFT'
         );
 
@@ -45,21 +45,21 @@ class Gift_model extends Crud
     {
         $sqlSelect = '
             ' . $this->table . '.*,
-            articles.id as article_id,
-            articles.title as article_title,
-            articles.status as article_status
+            article.id as article_id,
+            article.title as article_title,
+            article.status as article_status
         ';
 
         $this->db->select($sqlSelect);
         $this->db->join(
-            'gift_articles_assignment as gaa',
+            'gift_article_assignment as gaa',
             $this->table . '.id = gaa.gift_id',
             'LEFT'
         );
 
         $this->db->join(
-            'articles',
-            'articles.id = gaa.articles_id',
+            'article',
+            'article.id = gaa.article_id',
             'LEFT'
         );
 

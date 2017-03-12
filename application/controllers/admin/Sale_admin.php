@@ -82,13 +82,13 @@ class Sale_admin extends CI_Controller
             $saleArr[$salePage['id']]['text2']                                                  = $salePage['text2'];
             $saleArr[$salePage['id']]['status']                                                 = $salePage['status'];
             $saleArr[$salePage['id']]['created_at']                                             = $salePage['created_at'];
-            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['id']     = $salePage['sale_products_id'];
-            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['title']  = $salePage['sale_products_title'];
-            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['slug']  = $salePage['sale_products_slug'];
-            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['label']  = $salePage['sale_products_label'];
-            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['status'] = $salePage['sale_products_status'];
-            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['image']  = $salePage['sale_products_image'];
-            $saleArr[$salePage['id']]['sale_products'][$salePage['sale_products_id']]['gift']  = $salePage['sale_products_gift'];
+            $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['id']     = $salePage['sale_product_id'];
+            $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['title']  = $salePage['sale_product_title'];
+            $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['slug']  = $salePage['sale_product_slug'];
+            $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['label']  = $salePage['sale_product_label'];
+            $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['status'] = $salePage['sale_product_status'];
+            $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['image']  = $salePage['sale_product_image'];
+            $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['gift']  = $salePage['sale_product_gift'];
         }
 
         $contentData = array(
@@ -224,14 +224,14 @@ class Sale_admin extends CI_Controller
     }
 
 ////////////////////////////////SALE PRODUCTS//////////////////////////
-    public function sale_products_list()
+    public function sale_product_list()
     {
         $title                 = "Продукты для продажи";
         $saleProductsArr       = $this->sale_model->getSaleProductsArrWithProductsAdmin();
-        $saleProductsLetterArr = $this->sale_model->getListFromTable('sale_products_letters');
+        $saleProductsLetterArr = $this->sale_model->getListFromTable('sale_product_letter');
         $saleArr               = $saleProductsLetterArrMap = array();
         foreach ($saleProductsLetterArr as $saleProductsLetter) {
-            $saleProductsLetterArrMap[$saleProductsLetter['sale_products_id']] = $saleProductsLetter;
+            $saleProductsLetterArrMap[$saleProductsLetter['sale_product_id']] = $saleProductsLetter;
         }
 
         foreach ($saleProductsArr as $saleProducts) {
@@ -248,7 +248,7 @@ class Sale_admin extends CI_Controller
             $saleArr[$saleProducts['id']]['description']           = $saleProducts['description'];
             $saleArr[$saleProducts['id']]['status']                = $saleProducts['status'];
             $saleArr[$saleProducts['id']]['image']                 = $saleProducts['image'];
-            $saleArr[$saleProducts['id']]['sale_products_letters'] = $saleProductsLetters;
+            $saleArr[$saleProducts['id']]['sale_product_letter'] = $saleProductsLetters;
 
             if ($saleProducts['sale_page_id']) {
                 $saleArr[$saleProducts['id']]['sale_page'][$saleProducts['sale_page_id']]['title']  = $saleProducts['sale_page_title'];
@@ -264,16 +264,16 @@ class Sale_admin extends CI_Controller
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/sale_products/show', $contentData, true));
+            'content' => $this->load->view('admin/sale_product/show', $contentData, true));
 
         $this->load->view('layout_admin', $data);
     }
 
 
-    public function sale_products_drop($id)
+    public function sale_product_drop($id)
     {
-        $this->index_model->delFromTable($id, 'sale_products');
-        $assignSaleArr = $this->index_model->getFromTableByParams(array('sale_products_id' => $id), 'assign_sale');
+        $this->index_model->delFromTable($id, 'sale_product');
+        $assignSaleArr = $this->index_model->getFromTableByParams(array('sale_product_id' => $id), 'assign_sale');
 
         if (count($assignSaleArr)) {
             foreach ($assignSaleArr as $assignSale) {
@@ -281,11 +281,11 @@ class Sale_admin extends CI_Controller
             }
         }
 
-        redirect('backend/sale_products_list');
+        redirect('backend/sale_product_list');
     }
 
 
-    public function sale_products_edit($id = null)
+    public function sale_product_edit($id = null)
     {
         $saleProductArr = null;
         $title          = "Создать sale produst";
@@ -316,13 +316,13 @@ class Sale_admin extends CI_Controller
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/sale_products/edit', $contentData, true));
+            'content' => $this->load->view('admin/sale_product/edit', $contentData, true));
 
         $this->load->view('layout_admin', $data);
     }
 
 
-    public function sale_products_save()
+    public function sale_product_save()
     {
         $data             = $params = array();
         $id               = ArrayHelper::arrayGet($_REQUEST, 'id');
@@ -364,11 +364,11 @@ class Sale_admin extends CI_Controller
                 if (count($newSalePageIdArr)) {
                     $this->_assignProcess($newSalePageIdArr, $oldSalePageIdArr, $id);
                 }
-                redirect('backend/sale_products_list');
+                redirect('backend/sale_product_list');
             }
         } catch (Exception $e) {
             $this->message = $e->getMessage();
-            $this->sale_products_edit($id);
+            $this->sale_product_edit($id);
         }
     }
 
@@ -379,7 +379,7 @@ class Sale_admin extends CI_Controller
             'newSourceIdArr'    => $newSalePageIdArr
             , 'oldSourceIdArr'  => $oldSalePageIdArr
             , 'assignId'        => $saleProductId
-            , 'assignFieldName' => 'sale_products_id'
+            , 'assignFieldName' => 'sale_product_id'
             , 'sourceFieldName' => 'sale_page_id'
             , 'table'           => 'assign_sale');
 
@@ -405,7 +405,7 @@ class Sale_admin extends CI_Controller
 
     private function _addSaleProducts($data)
     {
-        $id = $this->index_model->addInTable($data, 'sale_products');
+        $id = $this->index_model->addInTable($data, 'sale_product');
         Common::assertTrue($id, 'Информация не добавлена в базу');
         return $id;
     }
@@ -413,13 +413,13 @@ class Sale_admin extends CI_Controller
 
     private function _updateSaleProducts($data, $params)
     {
-        $isUpdated = $this->index_model->updateInTable(ArrayHelper::arrayGet($params, 'id'), $data, 'sale_products');
+        $isUpdated = $this->index_model->updateInTable(ArrayHelper::arrayGet($params, 'id'), $data, 'sale_product');
         Common::assertTrue($isUpdated, 'Not updated');
-        redirect('backend/sale_products_list');
+        redirect('backend/sale_product_list');
     }
 
 
-    public function sale_products_statistic()
+    public function sale_product_statistic()
     {
         $i              = 0;
         $title          = "Статистика продаж";
@@ -439,13 +439,13 @@ class Sale_admin extends CI_Controller
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/sale_products/show_statistic', $contentData, true));
+            'content' => $this->load->view('admin/sale_product/show_statistic', $contentData, true));
 
         $this->load->view('layout_admin', $data);
     }
 
 
-    public function ajax_sale_products_letters_edit()
+    public function ajax_sale_product_letter_edit()
     {
         $id             = ArrayHelper::arrayGet($_REQUEST, 'id');
         $saleProductsId = ArrayHelper::arrayGet($_REQUEST, 'saleProductsId');
@@ -453,15 +453,15 @@ class Sale_admin extends CI_Controller
         try {
             Common::assertTrue($saleProductsId, 'Не установлен ID продукта');
             $data = array(
-                'sale_products_id' => $saleProductsId,
+                'sale_product_id' => $saleProductsId,
                 'text'             => ArrayHelper::arrayGet($_REQUEST, 'text'),
                 'subject'          => ArrayHelper::arrayGet($_REQUEST, 'subject')
             );
 
             if ($id) {
-                $result = $this->sale_model->updateInTable($id, $data, 'sale_products_letters');
+                $result = $this->sale_model->updateInTable($id, $data, 'sale_product_letter');
             } else {
-                $result = $this->sale_model->addInTable($data, 'sale_products_letters');
+                $result = $this->sale_model->addInTable($data, 'sale_product_letter');
             }
 
             Common::assertTrue($result, 'Ошибка! Текст письма НЕ сохраненю. Попробуйте еще раз');

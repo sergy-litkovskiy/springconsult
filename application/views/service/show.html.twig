@@ -101,11 +101,11 @@
                                     {% for article in articleList %}
                                         <li>
                                             <span>
-                                                <a href="{{ base_url() }}articles/{{ article.id }}">
+                                                <a href="{{ base_url() }}article/{{ article.id }}">
                                                     <img src="{{ base_url() }}img/blog/{{ article.image }}" alt="" />
                                                 </a>
                                             </span>
-                                            <a href="{{ base_url() }}articles/{{ article.id }}">
+                                            <a href="{{ base_url() }}article/{{ article.id }}">
                                                 {{ article.title }}
                                             </a>
                                         </li>

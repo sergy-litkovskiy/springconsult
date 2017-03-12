@@ -156,11 +156,11 @@ class Mailer_model extends Crud
         $body       = '<p><b>Добрый день, '.$recipient['name'].'!</b></p>
 
                         <p>Для вас новая статья <b>"'.$articleDetail['title'].'"</b> на сайте "Spring Сonsulting",<br>
-                        читайте здесь: <a href="'.base_url().'articles/'.$articleDetail['id'].'">'.base_url().'articles/'.$articleDetail['id'].'</a></p>
+                        читайте здесь: <a href="'.base_url().'article/'.$articleDetail['id'].'">'.base_url().'article/'.$articleDetail['id'].'</a></p>
 
-                        <p><i><a style="color:#58753E; text-decoration: none; " href="'.base_url().'articles/'.$articleDetail['id'].'">'.Common::cutString($articleDetail['text'], 100).'</a></i></p>
+                        <p><i><a style="color:#58753E; text-decoration: none; " href="'.base_url().'article/'.$articleDetail['id'].'">'.Common::cutString($articleDetail['text'], 100).'</a></i></p>
 
-                        <p>Продолжение читайте здесь: <a href="'.base_url().'articles/'.$articleDetail['id'].'">'.base_url().'articles/'.$articleDetail['id'].'</a></p>
+                        <p>Продолжение читайте здесь: <a href="'.base_url().'article/'.$articleDetail['id'].'">'.base_url().'article/'.$articleDetail['id'].'</a></p>
 
                         <p>Приятного вам чтения!</p>
 
@@ -190,11 +190,11 @@ class Mailer_model extends Crud
                             <p><b>Добрый день, {{Name}}!</b></p>
 
                             <p>Для вас новая статья <b>"'.$articleDetail['title'].'"</b> на сайте "Spring Сonsulting",<br>
-                            читайте здесь: <a href="'.base_url().'articles/'.$articleDetail['id'].'">'.base_url().'articles/'.$articleDetail['id'].'</a></p>
+                            читайте здесь: <a href="'.base_url().'article/'.$articleDetail['id'].'">'.base_url().'article/'.$articleDetail['id'].'</a></p>
 
-                            <p><i><a style="color:#58753E; text-decoration: none; " href="'.base_url().'articles/'.$articleDetail['id'].'">'.Common::cutString($articleDetail['text'], 100).'</a></i></p>
+                            <p><i><a style="color:#58753E; text-decoration: none; " href="'.base_url().'article/'.$articleDetail['id'].'">'.Common::cutString($articleDetail['text'], 100).'</a></i></p>
 
-                            <p>Продолжение читайте здесь: <a href="'.base_url().'articles/'.$articleDetail['id'].'">'.base_url().'articles/'.$articleDetail['id'].'</a></p>
+                            <p>Продолжение читайте здесь: <a href="'.base_url().'article/'.$articleDetail['id'].'">'.base_url().'article/'.$articleDetail['id'].'</a></p>
 
                             <p>Приятного вам чтения!</p>
 
@@ -265,7 +265,7 @@ class Mailer_model extends Crud
         $subject    = $data['theme'];
         $body       = "<p><b>Здравствуйте, ".$recipientDataArr['name']."!</b></p>
                        ".$data['text']."   
-                        <p>Читайте подробнее в статье <b>'".$data['articles_title']."'</b> <br/>на сайте Spring Сonsulting: <a href='".$data['article_link']."'>".$data['article_link']."</a></p>
+                        <p>Читайте подробнее в статье <b>'".$data['article_title']."'</b> <br/>на сайте Spring Сonsulting: <a href='".$data['article_link']."'>".$data['article_link']."</a></p>
                         <p>С наилучшими пожеланиями,</p>
                         <p>Команда <a href='".base_url()."'>Spring Consulting</a></p>";
         $message    = $this->_getEmailTamplate($body);

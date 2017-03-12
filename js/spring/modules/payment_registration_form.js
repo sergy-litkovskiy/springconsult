@@ -57,7 +57,7 @@ function PaymentRegistrationFormModule() {
         var _registrationProcess = function(){
             var _formData = {name : $('input[name=recipient_name]', $overlayContainer).val(),
                             email : $('input[name=email]', $overlayContainer).val(),
-                            sale_products_id : _saleProductsId};
+                            sale_product_id : _saleProductsId};
             sb.Payment.registration(_formData, _onSuccesPaymentRegistration, _onError);
         }; 
         

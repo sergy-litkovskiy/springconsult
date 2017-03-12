@@ -59,7 +59,7 @@ class SaleCategory_admin extends CI_Controller
 
         $data = [
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/sale_categories/show', $contentData, true)
+            'content' => $this->load->view('admin/sale_category/show', $contentData, true)
         ];
 
         $this->load->view('layout_admin', $data);
@@ -91,14 +91,14 @@ class SaleCategory_admin extends CI_Controller
         $assignedSaleProductList = array();
         $title                   = "Добавить sale category";
 
-        $saleProductList = $this->sale_model->getListFromTable('sale_products');
+        $saleProductList = $this->sale_model->getListFromTable('sale_product');
 
         if ($id) {
-            $categoryData                   = $this->saleCategory_model->getFromTableByParams(['id' => $id], 'sale_categories');
+            $categoryData                   = $this->saleCategory_model->getFromTableByParams(['id' => $id], 'sale_category');
             $assignedSaleProductDataList = $this->sale_model->getAssignedASaleProductListBySaleCategoryId($id);
 
             foreach ($assignedSaleProductDataList as $assignedSaleProductData) {
-                $saleProductsId = ArrayHelper::arrayGet($assignedSaleProductData, 'sale_products_id');
+                $saleProductsId = ArrayHelper::arrayGet($assignedSaleProductData, 'sale_product_id');
                 $assignedSaleProductList[$saleProductsId] = $assignedSaleProductData;
             }
 
@@ -120,7 +120,7 @@ class SaleCategory_admin extends CI_Controller
 
         $data = array(
             'menu'    => $this->load->view(MENU_ADMIN, '', true),
-            'content' => $this->load->view('admin/sale_categories/edit', $this->data, true));
+            'content' => $this->load->view('admin/sale_category/edit', $this->data, true));
 
         $this->load->view('layout_admin', $data);
     }
@@ -130,8 +130,8 @@ class SaleCategory_admin extends CI_Controller
     {
         $data                      = $params = array();
         $id                        = ArrayHelper::arrayGet($_REQUEST, 'id');
-        $assignedNewSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'new_sale_products_id', array());
-        $assignedOldSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'old_sale_products_id', array());
+        $assignedNewSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'new_sale_product_id', array());
+        $assignedOldSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'old_sale_product_id', array());
 
         try {
             $data['name'] = ArrayHelper::arrayGet($_REQUEST, 'name');
@@ -171,9 +171,9 @@ class SaleCategory_admin extends CI_Controller
             'newSourceIdArr'  => $assignedNewSaleProductIds,
             'oldSourceIdArr'  => $assignedOldSaleProductIds,
             'assignId'        => $id,
-            'assignFieldName' => 'sale_categories_id',
-            'sourceFieldName' => 'sale_products_id',
-            'table'           => 'sale_categories_sale_products_assignment'
+            'assignFieldName' => 'sale_category_id',
+            'sourceFieldName' => 'sale_product_id',
+            'table'           => 'sale_category_sale_product_assignment'
         );
 
         $this->assign_model->setAssignArr($assignsArr);
@@ -198,8 +198,8 @@ class SaleCategory_admin extends CI_Controller
             if ($assignedSaleProductDataList) {
                 foreach ($assignedSaleProductDataList as $assignedSaleProductsData) {
                     $this->saleCategory_model->delFromTable(
-                        ArrayHelper::arrayGet($assignedSaleProductsData, 'sale_categories_sale_products_assignment_id'),
-                        'sale_categories_sale_products_assignment'
+                        ArrayHelper::arrayGet($assignedSaleProductsData, 'sale_category_sale_product_assignment_id'),
+                        'sale_category_sale_product_assignment'
                     );
                 }
             }

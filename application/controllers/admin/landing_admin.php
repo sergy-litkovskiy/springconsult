@@ -182,10 +182,10 @@ class Landing_admin extends CI_Controller
     }
 
 
-    ////////////////////////////////LANDING ARTICLES//////////////////////////
+    ////////////////////////////////LANDING article//////////////////////////
     public function landing_articles_list()
     {
-        $title          = "Редактировать landing articles";
+        $title          = "Редактировать landing article";
         $landingList    = $this->index_model->getListFromTable('landing_articles');
         $landingsArr    = $this->index_model->getFromTableByParams(array('status' => STATUS_ON),'landing_page');
 

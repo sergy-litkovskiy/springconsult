@@ -9,7 +9,7 @@ class Blog_model extends Crud
         parent::__construct();
 
         $this->idkey = 'id';
-        $this->table = 'articles';
+        $this->table = 'article';
     }
 
     public function getCountArticlesForTopicByParams($topicId, $params)
@@ -50,8 +50,8 @@ class Blog_model extends Crud
         $this->db->select($this->table . '.*');
         $this->db->where($params);
         $this->db->join(
-            'topics_articles_assignment as taa',
-            $this->table . '.id = taa.articles_id AND taa.topics_id = ' . $topicId,
+            'topic_article_assignment as taa',
+            $this->table . '.id = taa.article_id AND taa.topic_id = ' . $topicId,
             'INNER'
         );
     }
@@ -59,16 +59,16 @@ class Blog_model extends Crud
     public function getAssignedArticleListByGiftId($giftId)
     {
         $sqlSelect = '
-            gaa.id as gift_articles_assignment_id,
-            articles.id as article_id,
-            articles.title as article_title,
-            articles.status as article_status
+            gaa.id as gift_article_assignment_id,
+            article.id as article_id,
+            article.title as article_title,
+            article.status as article_status
         ';
 
         $this->db->select($sqlSelect);
         $this->db->join(
-            'gift_articles_assignment as gaa',
-            $this->table . '.id = gaa.articles_id AND gaa.gift_id = ' . $giftId,
+            'gift_article_assignment as gaa',
+            $this->table . '.id = gaa.article_id AND gaa.gift_id = ' . $giftId,
             'INNER'
         );
 
@@ -81,16 +81,16 @@ class Blog_model extends Crud
     public function getAssignedArticleListByTopicId($giftId)
     {
         $sqlSelect = '
-            taa.id as topics_articles_assignment_id,
-            articles.id as article_id,
-            articles.title as article_title,
-            articles.status as article_status
+            taa.id as topic_article_assignment_id,
+            article.id as article_id,
+            article.title as article_title,
+            article.status as article_status
         ';
 
         $this->db->select($sqlSelect);
         $this->db->join(
-            'topics_articles_assignment as taa',
-            $this->table . '.id = taa.articles_id AND taa.topics_id = ' . $giftId,
+            'topic_article_assignment as taa',
+            $this->table . '.id = taa.article_id AND taa.topic_id = ' . $giftId,
             'INNER'
         );
 

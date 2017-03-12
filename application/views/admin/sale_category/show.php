@@ -35,12 +35,12 @@
                     <ul>
                         <?php if(isset($map['sale_product_list']) && count($map['sale_product_list'])){
                             foreach ($map['sale_product_list'] as $saleProductData):?>
-                                <?php if($saleProductData['sale_products_title']){
-                                    $status = ($saleProductData['sale_products_status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
+                                <?php if($saleProductData['sale_product_title']){
+                                    $status = ($saleProductData['sale_product_status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
                                     <li>
-                                        <?php  echo $saleProductData['sale_products_title'].' - '.$status;?>
-                                        <form action="<?php echo base_url().'backend/sale_products_number_edit/'.$saleProductData['sale_products_id'] ?>" method="PUT">
-                                            <input name="sequence_num" value="<?php echo $saleProductData['sale_products_sequence_num'];?>"/>
+                                        <?php  echo $saleProductData['sale_product_title'].' - '.$status;?>
+                                        <form action="<?php echo base_url().'backend/sale_product_number_edit/'.$saleProductData['sale_product_id'] ?>" method="PUT">
+                                            <input name="sequence_num" value="<?php echo $saleProductData['sale_product_sequence_num'];?>"/>
                                             <button type="submit">Save</button>
                                         </form>
                                     </li>
@@ -61,7 +61,7 @@
                 </td>
 
                 <td colspan="2" class="status-change" style="text-align: center">
-                    <form id="<?php echo $categoryId;?>" data-table="sale_categories">
+                    <form id="<?php echo $categoryId;?>" data-table="sale_category">
                         <input type="radio" name="status" value="1" <?php echo ($map['data']['status'] == '1') ? 'checked="checked"': null;?>/>
                         <img src="<?php echo base_url()?>img/img_main/on.png"/>
                         &nbsp;&nbsp;

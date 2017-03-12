@@ -22,10 +22,10 @@
                     <p><?php echo $item['payment_date'];?></p>
                 </td>
                 <td class="article_table">
-                    <p><?php echo $item['sale_products_title'];?></p>
+                    <p><?php echo $item['sale_product_title'];?></p>
                 </td>
                 <td class="article_table">
-                    <p><?php echo $item['sale_products_price'];?></p>
+                    <p><?php echo $item['sale_product_price'];?></p>
                 </td>
                 <td class="article_table">
                     <p><?php echo $item['recipients_name'];?></p>
@@ -35,7 +35,7 @@
                     <p><?php echo $item['payment_trans_id'];?></p>
                 </td>
                 <td class="article_table">
-                    <p><?php echo $item['payment_system'];?></p>
+<!--                    <p>--><?php //echo $item['payment_system'];?><!--</p>-->
                 </td>
                 <td class="article_table">
                     <p><?php echo $item['payment_state'];?></p>

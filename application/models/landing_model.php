@@ -46,7 +46,7 @@ class Landing_model extends Crud
         $query = $this->db->query("SELECT
                                 spec_mailer_history.*,
                                 landing_page.title AS landing_page_title,
-                                articles.title AS articles_title
+                                article.title AS articles_title
                             FROM
                                 spec_mailer_history
                             LEFT JOIN
@@ -54,9 +54,9 @@ class Landing_model extends Crud
                             ON
                                 landing_page.id = spec_mailer_history.landing_page_id
                             LEFT JOIN
-                                articles
+                                article
                             ON
-                                articles.id = spec_mailer_history.articles_id
+                                article.id = spec_mailer_history.article_id
                             WHERE
                                 spec_mailer_history.landing_page_id = $landingPageId
                             ORDER BY

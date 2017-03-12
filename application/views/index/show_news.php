@@ -49,7 +49,7 @@
                     <?php echo @$item['text'];?>
                     <span class='article_id' id="article_<?php echo $key;?>"><?php echo @$item['id'];?></span>
                 </div>
-            <p><a class="comments_count" href="<?php echo base_url();?>articles/<?php echo @$item['id'];?>#disqus_thread" data-disqus-identifier="article_<?php echo @$item['id'];?>_identifier"></a></p>
+            <p><a class="comments_count" href="<?php echo base_url();?>article/<?php echo @$item['id'];?>#disqus_thread" data-disqus-identifier="article_<?php echo @$item['id'];?>_identifier"></a></p>
         <?php endforeach;?>
     </div>
     <div class="clear">&nbsp;</div>

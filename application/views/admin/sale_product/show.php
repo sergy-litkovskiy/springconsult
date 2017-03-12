@@ -1,9 +1,9 @@
 <script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/article_list_container.js"></script>
-<script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/sale_product_letter_container.js"></script>
+<script  type="text/javascript" src="<?php echo base_url();?>js/spring/modules/sale_products_letter_container.js"></script>
 <h2><?php echo @$title;?></h2>
     <div class="add_new">
          <p>
-            <a title="add new" href="<?php echo base_url().'backend/sale_products_edit'?>">
+            <a title="add new" href="<?php echo base_url().'backend/sale_product_edit'?>">
                 <img src="<?php echo base_url()?>img/img_main/add.png"/>&nbsp;Создать продукт
             </a>
         </p>
@@ -48,8 +48,8 @@
                     </ul>
                 </td>
                 <td>
-                    <?php if($item['sale_products_letters']){?>
-                        <span class="edit_sale_products_letters" data-sale-products-letters="<?php echo base64_encode(json_encode($item['sale_products_letters']));?>">
+                    <?php if($item['sale_product_letter']){?>
+                        <span class="edit_sale_products_letters" data-sale-products-letters="<?php echo base64_encode(json_encode($item['sale_product_letter']));?>">
                             <img src="<?php echo base_url()?>img/img_main/mail_edit.png"/>
                         </span>
                     <?php } else {?>
@@ -59,18 +59,18 @@
                     <?php }?>
                 </td>
                 <td>
-                    <a title="edit" href="<?php echo base_url().'backend/sale_products_edit/'.$item['id'];?>">
+                    <a title="edit" href="<?php echo base_url().'backend/sale_product_edit/'.$item['id'];?>">
                         <img src="<?php echo base_url()?>img/img_main/edit.png"/>
                     </a>
                 </td>
                 <td>
-                    <a class="drop" title="Удалить" href="#" data-email="<?php echo base_url().'backend/sale_products_drop/'.$item['id'];?>">
+                    <a class="drop" title="Удалить" href="#" data-email="<?php echo base_url().'backend/sale_product_drop/'.$item['id'];?>">
                         <img src="<?php echo base_url()?>img/img_main/del.png"/>
                     </a>
                 </td>
 
                 <td colspan="2" class="status-change">
-                    <form id="<?php echo @$item['id'];?>" data-table="sale_products">
+                    <form id="<?php echo @$item['id'];?>" data-table="sale_product">
                         <input type="radio" name="status" value="1" <?php echo ($item['status'] == '1') ? 'checked="checked"': null;?>/>
                         <img src="<?php echo base_url()?>img/img_main/on.png"/>
                         &nbsp;&nbsp;

@@ -23,7 +23,7 @@
                     <p><?php echo $item['text'];?></p>
                 </td> 
                 <td class="article_table title">
-                    <p><b><?php echo $item['articles_title'];?></b></p>
+                    <p><b><?php echo $item['article_title'];?></b></p>
                 </td>                
                 <td class="article_table title">
                     <p><b><?php echo $item['landing_page_title'];?></b></p>

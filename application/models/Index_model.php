@@ -10,7 +10,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Index_model extends Crud
 {
     public $idkey = 'id';
-    public $table = 'articles';
+    public $table = 'article';
     protected $params, $key, $tableName ;
 //    protected $table = 'content';
 
@@ -26,11 +26,11 @@ class Index_model extends Crud
     public function getCountArticles($slug)
     {
         $query_parent = $this->db->query("SELECT
-                                                articles.id
+                                                article.id
                                             FROM
-                                                articles
+                                                article
                                             INNER JOIN
-                                                assign_articles ON assign_articles.articles_id = articles.id
+                                                assign_articles ON assign_articles.article_id = article.id
                                             INNER JOIN
                                                 menu ON menu.id = assign_articles.menu_id
                                             WHERE
@@ -38,7 +38,7 @@ class Index_model extends Crud
                                             AND
                                                 menu.status = ".STATUS_ON."
                                             AND
-                                                articles.status = ".STATUS_ON);
+                                                article.status = ".STATUS_ON);
         return $query_parent->num_rows();
     }
 
@@ -46,15 +46,15 @@ class Index_model extends Crud
     public function getCountArticlesByTagId($tagMasterId)
     {
         $query_parent = $this->db->query("SELECT
-                                                articles.id
+                                                article.id
                                             FROM
-                                                articles
+                                                article
                                             INNER JOIN
-                                                articles_tag ON articles_tag.articles_id = articles.id
+                                                articles_tag ON articles_tag.article_id = article.id
                                             WHERE
                                                 articles_tag.tag_master_id = '".$tagMasterId."'
                                             AND
-                                                articles.status = ".STATUS_ON);
+                                                article.status = ".STATUS_ON);
         return $query_parent->num_rows();
     }
     
@@ -66,20 +66,20 @@ class Index_model extends Crud
             $currentPage  = $pagerParam['current_page'] > 0 ? $pagerParam['current_page'] : 1;
             $startPage    = $pagerParam['per_page']*($currentPage -1 );
             $this->params['limit']        = " LIMIT ".$startPage.", ".$pagerParam['per_page'];
-            $this->params['status']       = " AND articles.status = ".STATUS_ON." ";
+            $this->params['status']       = " AND article.status = ".STATUS_ON." ";
         }
         
         $sql_query = $this->db->query("SELECT
-                                            articles.*
+                                            article.*
                                         FROM
-                                            articles
+                                            article
                                         LEFT JOIN
-                                            articles_tag ON articles_tag.articles_id = articles.id
+                                            articles_tag ON articles_tag.article_id = article.id
                                         WHERE
                                             articles_tag.tag_master_id = '".$tagMasterId."'
                                             ".$this->params['status']."
                                         ORDER by
-                                            articles.date DESC, articles.time DESC
+                                            article.date DESC, article.time DESC
                                         ".$this->params['limit']."");
  
         return $sql_query->result_array();
@@ -93,7 +93,7 @@ class Index_model extends Crud
             $currentPage  = $pagerParam['current_page'] > 0 ? $pagerParam['current_page'] : 1;
             $startPage    = $pagerParam['per_page']*($currentPage -1 );
             $this->params['limit']        = " LIMIT ".$startPage.", ".$pagerParam['per_page'];
-            $this->params['status']       = " AND articles.status = ".STATUS_ON." ";
+            $this->params['status']       = " AND article.status = ".STATUS_ON." ";
         }
 
         $sql_query = $this->db->query($this->_prepareSqlForNewsList());
@@ -111,17 +111,17 @@ class Index_model extends Crud
     private function _prepareSqlForNewsList()
     {
         return "SELECT
-                    articles.*
+                    article.*
                     , menu_child.title AS slug_title
                     , menu_parent.title AS slug_title_parent
                     , menu_child.meta_keywords AS menu_meta_keywords
                     , menu_child.meta_description AS menu_meta_description
                 FROM
-                    articles
+                    article
                 LEFT JOIN
                     assign_articles
                 ON
-                    assign_articles.articles_id = articles.id
+                    assign_articles.article_id = article.id
                 LEFT JOIN
                     menu AS menu_child
                 ON
@@ -134,7 +134,7 @@ class Index_model extends Crud
                     menu_child.slug = 'news'
                 ".$this->params['status']."
                 ORDER by
-                    articles.date DESC, articles.time DESC
+                    article.date DESC, article.time DESC
                 ".$this->params['limit']."";
     }
 
@@ -142,15 +142,15 @@ class Index_model extends Crud
     private function _prepareSqlForNewsListAdmin()
     {
         return "SELECT
-                    articles.*
+                    article.*
                     , menu_child.title AS slug_title
                     , menu_parent.title AS slug_title_parent
                 FROM
-                    articles
+                    article
                 LEFT JOIN
                     assign_articles
                 ON
-                    assign_articles.articles_id = articles.id
+                    assign_articles.article_id = article.id
                 LEFT JOIN
                     menu AS menu_child
                 ON
@@ -160,7 +160,7 @@ class Index_model extends Crud
                 ON
                     menu_parent.id = assign_articles.menu_id
                 ORDER by
-                    articles.date DESC, articles.time DESC";
+                    article.date DESC, article.time DESC";
     }
 
 
@@ -240,19 +240,19 @@ class Index_model extends Crud
 
     public function getDetailContent($articleId)
     {
-        return $this->getFromTableByParams(array('id' => $articleId, 'status' => STATUS_ON), 'articles');
+        return $this->getFromTableByParams(array('id' => $articleId, 'status' => STATUS_ON), 'article');
     }
 
 
     public function getDetailContentAdmin($articleId)
     {
-        return $this->getFromTableByParams(array('id' => $articleId), 'articles');
+        return $this->getFromTableByParams(array('id' => $articleId), 'article');
     }
 
 
     public function getAssignArticlesByArticleIdAdmin($articleId)
     {
-        return $this->getFromTableByParams(array('articles_id' => $articleId), 'assign_articles');
+        return $this->getFromTableByParams(array('article_id' => $articleId), 'assign_articles');
     }
 
 
@@ -390,7 +390,7 @@ class Index_model extends Crud
 
     public function getArticlesForRssByParams($params)
     {
-        $qweryResult = $this->db->query("SELECT * FROM `articles` WHERE status = ".STATUS_ON." ORDER BY date DESC LIMIT ".$params['limit']);
+        $qweryResult = $this->db->query("SELECT * FROM `article` WHERE status = ".STATUS_ON." ORDER BY date DESC LIMIT ".$params['limit']);
         $articelsArr = $qweryResult->result_array();
         
         return $articelsArr ? $articelsArr : null;
@@ -438,7 +438,7 @@ class Index_model extends Crud
                                         AND 
                                         recipients_id = '".$paymentUpdateRules['recipients_id']."'
                                         AND
-                                        sale_products_id = '".$paymentUpdateRules['sale_products_id']."'");
+                                        sale_product_id = '".$paymentUpdateRules['sale_product_id']."'");
         
         return $result;        
     }
@@ -551,15 +551,15 @@ class Index_model extends Crud
 //    public function getAssignedArticleListByTopicId($id)
 //    {
 //        $sql = "SELECT
-//                    topics_articles_assignment.id as topics_articles_assignment_id,
-//                    articles.id as article_id,
-//                    articles.title as article_title,
-//                    articles.status as article_status
+//                    topic_article_assignment.id as topic_article_assignment_id,
+//                    article.id as article_id,
+//                    article.title as article_title,
+//                    article.status as article_status
 //                FROM
-//                    articles
+//                    article
 //                INNER JOIN
-//                    topics_articles_assignment ON topics_articles_assignment.articles_id = articles.id";
-//        $sql .= " AND topics_articles_assignment.topics_id = ".$id;
+//                    topic_article_assignment ON topic_article_assignment.article_id = article.id";
+//        $sql .= " AND topic_article_assignment.topic_id = ".$id;
 //
 //        $query = $this->db->query($sql);
 //

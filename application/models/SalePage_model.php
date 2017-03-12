@@ -16,11 +16,11 @@ class SalePage_model extends Crud
     public function getSalePageWithAssignedProducts($id)
     {
         $sql  = $this->_getSelectSql();
-        $sql .= " LEFT JOIN sale_products ON sale_products.id = assign_sale.sale_products_id";
-        $sql .= " AND sale_products.status = ".STATUS_ON;
+        $sql .= " LEFT JOIN sale_product ON sale_product.id = assign_sale.sale_product_id";
+        $sql .= " AND sale_product.status = ".STATUS_ON;
         $sql .= " WHERE ".$this->table.".id = '".$id."'
                 AND ".$this->table.".status = ".STATUS_ON."
-                ORDER BY sale_products.sequence_num";
+                ORDER BY sale_product.sequence_num";
         $query = $this->db->query($sql);
 
         return $query->result_array();
@@ -30,13 +30,13 @@ class SalePage_model extends Crud
     {
         return sprintf("SELECT
                     %s.*,
-                    sale_products.id as sale_products_id,
-                    sale_products.title as sale_products_title,
-                    sale_products.label as sale_products_label,
-                    sale_products.status as sale_products_status,
-                    sale_products.price as sale_products_price,
-                    sale_products.description as sale_products_description,
-                    sale_products.image as sale_products_image
+                    sale_product.id as sale_product_id,
+                    sale_product.title as sale_product_title,
+                    sale_product.label as sale_product_label,
+                    sale_product.status as sale_product_status,
+                    sale_product.price as sale_product_price,
+                    sale_product.description as sale_product_description,
+                    sale_product.image as sale_product_image
                 FROM
                     %s
                 LEFT JOIN

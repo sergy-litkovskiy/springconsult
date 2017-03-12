@@ -48,7 +48,7 @@ function SaleProductLetterContainerModule() {
         var _fillSaleProductsLetterForm   = function(data){
             $('input[name=theme]', $overlayContainer).val(data.subject);
             $('textarea#spec-mailer-lp', $overlayContainer).val(data.text);
-            $('input[name=sale_products_id]', $overlayContainer).val(data.sale_products_id);
+            $('input[name=sale_product_id]', $overlayContainer).val(data.sale_product_id);
             $('input[name=id]', $overlayContainer).val(data.id||'');
         };
 
@@ -60,7 +60,7 @@ function SaleProductLetterContainerModule() {
             $overlayContainer = sb.UI.showOverlay(params);
             _initTinymce();
             if(data.id ){
-                $('input[name=sale_products_id]', $overlayContainer).val(data.id);
+                $('input[name=sale_product_id]', $overlayContainer).val(data.id);
                 $('input[name=id]', $overlayContainer).val('');
             }
 
@@ -76,7 +76,7 @@ function SaleProductLetterContainerModule() {
             return {             
                 subject         : $('input[name=theme]', $overlayContainer).val(),
                 text            : _text,
-                saleProductsId  : $('input[name=sale_products_id]', $overlayContainer).val(),
+                saleProductsId  : $('input[name=sale_product_id]', $overlayContainer).val(),
                 id              : $('input[name=id]', $overlayContainer).val()
             };
         };

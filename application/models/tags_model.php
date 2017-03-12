@@ -36,7 +36,7 @@ class Tags_model extends Crud
 
     public function deleteArticlesTagByTagIdAndArticlesId($tagMasterId, $id)
     {
-        return $this->db->query("DELETE FROM articles_tag WHERE tag_master_id = " . $tagMasterId . " AND articles_id = " . $id . "");
+        return $this->db->query("DELETE FROM articles_tag WHERE tag_master_id = " . $tagMasterId . " AND article_id = " . $id . "");
     }
 
 
@@ -52,11 +52,11 @@ class Tags_model extends Crud
                                       ON
                                             articles_tag.tag_master_id = tag_master.id
                                       INNER JOIN 
-                                            articles 
+                                            article 
                                       ON
-                                            articles.id = articles_tag.articles_id  
+                                            article.id = articles_tag.article_id  
                                       WHERE
-                                            articles.status = " . STATUS_ON . "
+                                            article.status = " . STATUS_ON . "
                                       GROUP BY
                                             tag_master.id");
         $arrTagMaster = $tagMaster->result_array();

@@ -81,7 +81,7 @@ class Index extends CI_Controller
         $this->dataMenu = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr) - 1]);
         $contentArr     = $this->index_model->getContent($slug);
         $itemId         = ArrayHelper::arrayGet($contentArr, '0.id');
-        $articlesArr    = $this->index_model->getContentFromTableByMenuId('articles', $itemId);
+        $articlesArr    = $this->index_model->getContentFromTableByMenuId('article', $itemId);
         $materialsArr   = $this->index_model->getContentFromTableByMenuId('materials', $itemId);
         $slug           = ArrayHelper::arrayGet($contentArr, '0.slug');
         $text           = ArrayHelper::arrayGet($contentArr, '0.text');
@@ -93,7 +93,7 @@ class Index extends CI_Controller
             'titleFB'      => $fbTitle,
             'imgFB'        => $fbImage,
             'content'      => ArrayHelper::arrayGet($contentArr, 0),
-            'articles'     => $articlesArr,
+            'article'     => $articlesArr,
             'materials'    => $materialsArr,
             'contact_form' => $slug == 'contacts' ? $this->load->view('blocks/contact_form', $this->contactFormArr, true) : null,
             'is_article'   => false,
@@ -154,7 +154,7 @@ class Index extends CI_Controller
                 'titleFB'      => $fbTitle
                 , 'imgFB'      => $fbImage
                 , 'content'    => ArrayHelper::arrayGet($contentArr, 0)
-                , 'articles'   => null
+                , 'article'   => null
                 , 'materials'  => null
                 , 'is_article' => true
                 , 'disqus'     => show_disqus()
@@ -444,7 +444,7 @@ class Index extends CI_Controller
         $this->dataMenu          = array('menu' => $this->arrMenu, 'current_url' => $this->urlArr[count($this->urlArr) - 1]);
         $recipientData           = $this->index_model->getRecipientById($finishSubscribeProcessDataArr['recipient_id']);
         $subscribeId             = ArrayHelper::arrayGet($finishSubscribeProcessDataArr, 'subscribe_id');
-        $finishSubscribeTemplate = $subscribeId > 0 ? 'index/finish_free_product_subscribe' : 'index/finish_articles_subscribe';
+        $finishSubscribeTemplate = $subscribeId > 0 ? 'index/finish_free_product_subscribe' : 'index/finish_article_subscribe';
 
         $this->data = array(
             'title'              => SITE_TITLE . ' - subscribe'

@@ -12,8 +12,8 @@
     <?php if(isset($content['articlesArr'])){
         foreach($content['articlesArr'] as $articles){?>
         <div class="search_result">
-            <h2 class="search"><a href="/articles/<?php echo $articles['id'];?>"><?php echo $articles['title'];?></a></h2>
-            <p><a href="/articles/<?php echo $articles['id'];?>"><?php echo $articles['text'];?></a></p>
+            <h2 class="search"><a href="/article/<?php echo $articles['id'];?>"><?php echo $articles['title'];?></a></h2>
+            <p><a href="/article/<?php echo $articles['id'];?>"><?php echo $articles['text'];?></a></p>
         </div>
     <?php }}?>
     <?php if(isset($content['materialsArr'])){

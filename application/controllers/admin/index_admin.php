@@ -228,8 +228,8 @@ class Index_admin extends CI_Controller
             'oldSourceIdArr'  => $assignedOldArticleIds,
             'assignId'        => $id,
             'assignFieldName' => 'gift_id',
-            'sourceFieldName' => 'articles_id',
-            'table'           => 'gift_articles_assignment'
+            'sourceFieldName' => 'article_id',
+            'table'           => 'gift_article_assignment'
         );
 
         $this->assign_model->setAssignArr($assignsArr);
@@ -292,8 +292,8 @@ class Index_admin extends CI_Controller
             if ($assignArticles) {
                 foreach ($assignArticles as $assignArticleData) {
                     $this->index_model->delFromTable(
-                        ArrayHelper::arrayGet($assignArticleData, 'gift_articles_assignment_id'),
-                        'gift_articles_assignment'
+                        ArrayHelper::arrayGet($assignArticleData, 'gift_article_assignment_id'),
+                        'gift_article_assignment'
                     );
                 }
             }
@@ -370,7 +370,7 @@ class Index_admin extends CI_Controller
         $errLogData = array();
         $data       = array('theme' => $_REQUEST['theme']
         , 'text'                    => $_REQUEST['text']
-        , 'articles_id'             => $_REQUEST['articleId']
+        , 'article_id'             => $_REQUEST['articleId']
         , 'landing_page_id'         => $_REQUEST['landingPageId']);
         try {
             $this->_assertSpecMailerData($data);
@@ -382,8 +382,8 @@ class Index_admin extends CI_Controller
             $specMailerHistoryId = $this->index_model->addInTable($data, 'spec_mailer_history');
             Common::assertTrue($specMailerHistoryId, 'Ошибка! Информация об отправке писем по спецрассылке НЕ вставлена в БД');
 
-            $data['articles_title'] = $_REQUEST['articleTitle'];
-            $data['article_link']   = $_REQUEST['isLanding'] ? base_url() . "landing_articles/" . $data['articles_id'] : base_url() . "articles/" . $data['articles_id'];
+            $data['article_title'] = $_REQUEST['articleTitle'];
+            $data['article_link']   = $_REQUEST['isLanding'] ? base_url() . "landing_articles/" . $data['article_id'] : base_url() . "article/" . $data['article_id'];
 
             $sentMailCounter = $this->_sendSpecMailer($recipientsSpecMailerArr, $data);
             Common::assertTrue($sentMailCounter > 0, 'Ошибка! Не было отправлено ни одного письма');
@@ -424,7 +424,7 @@ class Index_admin extends CI_Controller
                 $sentMailCounter++;
             } catch (Exception $e) {
                 $errLogData['resource_id'] = ERROR_SRC_SPEC_MAILER;
-                $errLogData['text']        = $e->getMessage() . " - Название статьи: " . $data['articles_title'];
+                $errLogData['text']        = $e->getMessage() . " - Название статьи: " . $data['article_title'];
                 $errLogData['created_at']  = Common::getDateTime('Y-m-d H:i:s');
                 $this->index_model->addInTable($errLogData, 'error_log');
             }

@@ -41,7 +41,7 @@ class Search_model extends Crud
 
     private function _getSearchArticlesSql($searchingText)
     {
-        $sql  = $this->_prepareSearchMainSqlSelect('articles');
+        $sql  = $this->_prepareSearchMainSqlSelect('article');
         $sql .= $this->_prepareSearchMainSqlWhere($searchingText);
         $queryArticles = $this->db->query($sql);
 

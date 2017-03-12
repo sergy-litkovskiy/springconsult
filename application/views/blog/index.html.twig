@@ -28,25 +28,25 @@
                             {% for article in articleList %}
                                 <article class="post">
                                     <figure class="post_img">
-                                        <a href="{{ base_url() }}articles/{{ article.id }}">
+                                        <a href="{{ base_url() }}article/{{ article.id }}">
                                             <img class="img-thumbnail img-responsive" src="{{ base_url() }}img/blog/{{ article.image }}" alt="blog post">
                                         </a>
                                     </figure>
                                     <div class="post_content">
                                         <div class="post_meta">
                                             <h2>
-                                                <a href="{{ base_url() }}articles/{{ article.id }}">
+                                                <a href="{{ base_url() }}article/{{ article.id }}">
                                                     {{ article.title }}
                                                 </a>
                                             </h2>
                                         </div>
                                         <p>{{ article.description[:250]|raw }}...</p>
                                         <div class="metaInfo">
-                                            <a class="btn btn-small btn-default" href="{{ base_url() }}articles/{{ article.id }}">
+                                            <a class="btn btn-small btn-default" href="{{ base_url() }}article/{{ article.id }}">
                                                 Подробнее
                                             </a>
                                             <span>
-                                                <i class="fa fa-comments"></i> <a href="{{ base_url() }}articles/{{ article.id }}#disqus_thread" data-disqus-identifier="article_{{ article.id }}_identifier"></a>
+                                                <i class="fa fa-comments"></i> <a href="{{ base_url() }}article/{{ article.id }}#disqus_thread" data-disqus-identifier="article_{{ article.id }}_identifier"></a>
                                             </span>
                                         </div>
                                     </div>

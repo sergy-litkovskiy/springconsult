@@ -155,23 +155,23 @@ class Menu_model extends Crud
         $sql = sprintf(
             '
             SELECT 
-                articles.id,
-                articles.title,
-                articles.image,
-                articles.date,
-                articles.slug
+                article.id,
+                article.title,
+                article.image,
+                article.date,
+                article.slug
             FROM 
-                articles 
+                article 
             INNER JOIN 
                 assign_articles as aa
             ON 
-                aa.articles_id = articles.id 
+                aa.article_id = article.id 
             AND 
-                articles.status = %s    
+                article.status = %s    
             AND 
                 aa.menu_id = %s
             ORDER BY 
-                articles.date DESC  
+                article.date DESC  
             %s 
             ',
             STATUS_ON,

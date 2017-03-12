@@ -5,7 +5,7 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Articles_admin extends CI_Controller
+class Article_admin extends CI_Controller
 {
     public $emptyArticleArr = array();
     private $data = array();
@@ -68,10 +68,10 @@ class Articles_admin extends CI_Controller
         if ($id) {
             $contentItems = $this->index_model->getDetailContentAdmin($id);
             $assignArtArr = $this->index_model->getAssignArticlesByArticleIdAdmin($id);
-            $assignTagArr = $this->index_model->getAssignTagArr($id, 'articles_tag', 'articles_id');
+            $assignTagArr = $this->index_model->getAssignTagArr($id, 'articles_tag', 'article_id');
 
             foreach ($assignArtArr as $assignArt) {
-                $assignArticles[$assignArt['articles_id']][] = $assignArt['menu_id'];
+                $assignArticles[$assignArt['article_id']][] = $assignArt['menu_id'];
             }
             if ($assignArticles) {
                 $assignArticles = $assignArticles[$id];
@@ -128,7 +128,7 @@ class Articles_admin extends CI_Controller
 
                 if (count($arrArticlesTag)) {
                     /** @var Tags_model $this->tags_model */
-                    $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
+                    $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'article_id');
                 }
 
                 $this->_update($data, $params);
@@ -149,7 +149,7 @@ class Articles_admin extends CI_Controller
                 }
 
                 if (count($arrArticlesTag)) {
-                    $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'articles_id');
+                    $this->tags_model->tagProcess($arrArticlesTag, $id, 'articles_tag', 'article_id');
                 }
 
                 redirect('backend/news');
@@ -167,7 +167,7 @@ class Articles_admin extends CI_Controller
             'newSourceIdArr' => $assignMenuIdArr
         , 'oldSourceIdArr'   => $oldAssignMenuId
         , 'assignId'         => $id
-        , 'assignFieldName'  => 'articles_id'
+        , 'assignFieldName'  => 'article_id'
         , 'sourceFieldName'  => 'menu_id'
         , 'table'            => 'assign_articles');
 
@@ -264,7 +264,7 @@ class Articles_admin extends CI_Controller
 //                $unsubscribeLink = $this->index_model->unsubscribeHashProcess($recipient['id']);
 //                Common::assertTrue($unsubscribeLink, 'Ошибка! Не был сформирован url для отказа от подписки');
 //
-//                $data = array('articles_id'    => $articleDetail['id']
+//                $data = array('article_id'    => $articleDetail['id']
 //                            ,'recipients_id'   => $recipient['id']
 //                            ,'date'            => date('Y-m-d')
 //                            ,'time'            => date('H:i:s'));
@@ -343,19 +343,19 @@ class Articles_admin extends CI_Controller
 
     private function _updateArticleStatusIsMailSent($articleId)
     {
-        return $this->index_model->updateInTable($articleId, array('is_sent_mail' => STATUS_ON), 'articles');
+        return $this->index_model->updateInTable($articleId, array('is_sent_mail' => STATUS_ON), 'article');
     }
 
 
     private function _add($data)
     {
-        return $this->index_model->addInTable($data, 'articles');
+        return $this->index_model->addInTable($data, 'article');
     }
 
 
     private function _update($data, $params)
     {
-        if ($this->index_model->updateInTable($params['id'], $data, 'articles')) {
+        if ($this->index_model->updateInTable($params['id'], $data, 'article')) {
             redirect('backend/news');
         } else {
             throw new Exception('Not updated');
@@ -366,8 +366,8 @@ class Articles_admin extends CI_Controller
     public function drop($id)
     {
         try {
-            $this->index_model->delFromTable($id, 'articles');
-            $assignArticlesArr = $this->index_model->getFromTableByParams(array('articles_id' => $id), 'assign_articles');
+            $this->index_model->delFromTable($id, 'article');
+            $assignArticlesArr = $this->index_model->getFromTableByParams(array('article_id' => $id), 'assign_articles');
 
             if (count($assignArticlesArr)) {
                 foreach ($assignArticlesArr as $assignArticles) {

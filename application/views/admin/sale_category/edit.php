@@ -10,7 +10,7 @@
     <ul class="topic-article-list" style="float: left; margin-left: 2em;">
         <?php foreach($saleProductList as $saleProduct):?>
             <li style="float: left; list-style-type: none;">
-                <input type="checkbox" class="edit_detail" name="new_sale_products_id[]" value="<?php echo $saleProduct['id']?>"
+                <input type="checkbox" class="edit_detail" name="new_sale_product_id[]" value="<?php echo $saleProduct['id']?>"
                     <?php
                         echo $assignedSaleProductList && array_key_exists($saleProduct['id'], $assignedSaleProductList) ?
                         'checked="checked"':
@@ -24,7 +24,7 @@
     <input id="id" name="id" type="hidden" value="<?php echo set_value('id', $content['id']);?>"/>
     <input id="status" name="status" type="hidden" value="<?php echo set_value('status', $content['status']);?>"/>
     <?php foreach($assignedSaleProductList as $assignedSaleProductId => $saleProductData):?>
-        <input name="old_sale_products_id[]" type="hidden" value="<?php echo set_value('old_sale_products_id', $assignedSaleProductId);?>">
+        <input name="old_sale_product_id[]" type="hidden" value="<?php echo set_value('old_sale_product_id', $assignedSaleProductId);?>">
     <?php endforeach;?>
     <div style="width:600px; clear:both">&nbsp;</div>
     

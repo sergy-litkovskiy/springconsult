@@ -11,7 +11,7 @@
     <li><a id='cat_name' href='/backend/sale_page_list'>Sale page</a></li>
     <li><a id='cat_name' href='/backend/review'>Отзывы</a></li>
     <li><a id='cat_name' href='/backend/sale_category'>Sale categories</a></li>
-    <li><a id='cat_name' href='/backend/sale_products_list'>Sale products</a></li>
-    <li><a id='cat_name' href='/backend/sale_products_statistic'>Sale statistic</a></li>
+    <li><a id='cat_name' href='/backend/sale_product_list'>Sale products</a></li>
+    <li><a id='cat_name' href='/backend/sale_product_statistic'>Sale statistic</a></li>
     <li><a id='cat_name' href='/backend/announce_list'>Анонсы</a></li>
 </ul>

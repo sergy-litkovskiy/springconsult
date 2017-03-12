@@ -88,7 +88,7 @@ SPRING.Sandbox = function(core, module_selector){
                 _self.request('/admin/index_admin/ajax_send_spec_mailer', data, onSuccess, onError);
             },
             sendSubscribersMail : function(data, onSuccess, onError) {
-                _self.request('/admin/articles_admin/ajax_send_article_to_subscribers', data, onSuccess, onError);
+                _self.request('/admin/article_admin/ajax_send_article_to_subscribers', data, onSuccess, onError);
             }
         },
         Landing : {
@@ -130,7 +130,7 @@ SPRING.Sandbox = function(core, module_selector){
         },
         SaleProducts : {
             addOrUpdate : function(data, onSuccess, onError) {
-                _self.request('/admin/sale_admin/ajax_sale_products_letters_edit', data, onSuccess, onError);
+                _self.request('/admin/sale_admin/ajax_sale_product_letter_edit', data, onSuccess, onError);
             }
         },
         JSON:{

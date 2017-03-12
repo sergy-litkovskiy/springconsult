@@ -2,7 +2,7 @@
 <h2><?php echo $title." '".$content['title']."'";?></h2>
 <?php echo @$message; ?>
 <?php echo validation_errors(); ?>
-<form id="back_form_sale_products" class="add_new" action='<?php echo base_url()?>backend/sale_products_save' method='post' name='edit_text' enctype='multipart/form-data'>
+<form id="back_form_sale_products" class="add_new" action='<?php echo base_url()?>backend/sale_product_save' method='post' name='edit_text' enctype='multipart/form-data'>
     <p><b>Название:</b></p>
     <p><input type="text" class="main_inputs" id='title' name='title' value="<?php echo $content['title'];?>"/></p>
     <br/>
@@ -46,7 +46,7 @@
     <?php endforeach;?>
     <div style="width:600px; clear:both">&nbsp;</div>
     
-    <input id='button' name='edit_sale_products' type='submit' value='Сохранить'/>
+    <input id='button' name='edit_sale_product' type='submit' value='Сохранить'/>
 </form>
 <script>
         SPRING.Core.registerModule("sale-products-mce", TinymceInitModule()); 
