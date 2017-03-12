@@ -15,9 +15,27 @@
     <p><b>Подарок:</b></p>
     <p><input type="text" class="main_inputs" id='gift' name='gift' value="<?php echo $content['gift'];?>"/></p>
     <br/>
-    <p><b>Image:</b></p>
-    <p><input type="text" id='image' name='image' value="<?php echo $content['image'];?>"/></p>
-    <br/>
+        <?php if($content['image_list']) {?>
+            <?php $count = (5 - count($content['image_list']));?>
+            <?php foreach($content['image_list'] as $imageData):?>
+                <p><b><?php if($imageData['is_main']) { echo 'Main'; } ?> Image:</b></p>
+                <p><input type="text" name='image[<?php echo $imageData['id'];?>]' value="<?php echo $imageData['image'];?>"/></p>
+                <br/>
+            <?php endforeach;?>
+            <?php if($count) {?>
+                <?php for($i=0; $i < $count; $i++):?>
+                    <p><b>Image:</b></p>
+                    <p><input type="text" name='image[<?php echo '#'.$i;?>]' value=""/></p>
+                    <br/>
+                <?php endfor;?>
+            <?php }?>
+        <?php } else {?>
+            <?php for($i=0; $i < 5; $i++):?>
+                <p><b><?php if($i==0) { echo 'Main'; } ?> Image:</b></p>
+                <p><input type="text" name='image[<?php echo '#'.$i;?>]' value=""/></p>
+                <br/>
+            <?php endfor;?>
+        <?php }?>
     <p><b>Описание:</b></p>
     <textarea id="sale-products-mce" style='width:100%' name='description' cols='80' rows='8'><?php echo $content['description'];?></textarea>
     <br/>

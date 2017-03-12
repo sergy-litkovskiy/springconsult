@@ -24,6 +24,8 @@ class Sale_admin extends CI_Controller
     public $edit_menu_model;
     /** @var  Assign_model */
     public $assign_model;
+    /** @var  SaleProductImage_model */
+    public $saleProductImage_model;
     /** @var  CI_Form_validation */
     public $form_validation;
     /** @var  CI_Session */
@@ -50,15 +52,15 @@ class Sale_admin extends CI_Controller
             'id'             => null
             , 'title'        => null
             , 'label'        => null
-            , 'slug'        => null
+            , 'slug'         => null
             , 'description'  => null
             , 'price'        => null
-            , 'gift'        => null
+            , 'gift'         => null
             , 'sale_page_id' => null
-            , 'sale_page'    => array()
+            , 'sale_page'    => []
             , 'sequence_num' => null
             , 'status'       => null
-            , 'image'        => null
+            , 'image_list'   => []
             , 'created_at'   => null
         );
 
@@ -75,20 +77,20 @@ class Sale_admin extends CI_Controller
         $saleArr     = array();
 
         foreach ($salePageArr as $salePage) {
-            $saleArr[$salePage['id']]['id']                                                     = $salePage['id'];
-            $saleArr[$salePage['id']]['slug']                                                   = $salePage['slug'];
-            $saleArr[$salePage['id']]['title']                                                  = $salePage['title'];
-            $saleArr[$salePage['id']]['text1']                                                  = $salePage['text1'];
-            $saleArr[$salePage['id']]['text2']                                                  = $salePage['text2'];
-            $saleArr[$salePage['id']]['status']                                                 = $salePage['status'];
-            $saleArr[$salePage['id']]['created_at']                                             = $salePage['created_at'];
+            $saleArr[$salePage['id']]['id']                                                   = $salePage['id'];
+            $saleArr[$salePage['id']]['slug']                                                 = $salePage['slug'];
+            $saleArr[$salePage['id']]['title']                                                = $salePage['title'];
+            $saleArr[$salePage['id']]['text1']                                                = $salePage['text1'];
+            $saleArr[$salePage['id']]['text2']                                                = $salePage['text2'];
+            $saleArr[$salePage['id']]['status']                                               = $salePage['status'];
+            $saleArr[$salePage['id']]['created_at']                                           = $salePage['created_at'];
             $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['id']     = $salePage['sale_product_id'];
             $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['title']  = $salePage['sale_product_title'];
-            $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['slug']  = $salePage['sale_product_slug'];
+            $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['slug']   = $salePage['sale_product_slug'];
             $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['label']  = $salePage['sale_product_label'];
             $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['status'] = $salePage['sale_product_status'];
             $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['image']  = $salePage['sale_product_image'];
-            $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['gift']  = $salePage['sale_product_gift'];
+            $saleArr[$salePage['id']]['sale_product'][$salePage['sale_product_id']]['gift']   = $salePage['sale_product_gift'];
         }
 
         $contentData = array(
@@ -238,16 +240,16 @@ class Sale_admin extends CI_Controller
             $saleProductsId      = ArrayHelper::arrayGet($saleProducts, 'id');
             $saleProductsLetters = ArrayHelper::arrayGet($saleProductsLetterArrMap, $saleProductsId);
 
-            $saleArr[$saleProducts['id']]['created_at']            = $saleProducts['created_at'];
-            $saleArr[$saleProducts['id']]['id']                    = $saleProducts['id'];
-            $saleArr[$saleProducts['id']]['title']                 = $saleProducts['title'];
-            $saleArr[$saleProducts['id']]['slug']                 = $saleProducts['slug'];
-            $saleArr[$saleProducts['id']]['label']                 = $saleProducts['label'];
-            $saleArr[$saleProducts['id']]['price']                 = $saleProducts['price'];
-            $saleArr[$saleProducts['id']]['gift']                 = $saleProducts['gift'];
-            $saleArr[$saleProducts['id']]['description']           = $saleProducts['description'];
-            $saleArr[$saleProducts['id']]['status']                = $saleProducts['status'];
-            $saleArr[$saleProducts['id']]['image']                 = $saleProducts['image'];
+            $saleArr[$saleProducts['id']]['created_at']          = $saleProducts['created_at'];
+            $saleArr[$saleProducts['id']]['id']                  = $saleProducts['id'];
+            $saleArr[$saleProducts['id']]['title']               = $saleProducts['title'];
+            $saleArr[$saleProducts['id']]['slug']                = $saleProducts['slug'];
+            $saleArr[$saleProducts['id']]['label']               = $saleProducts['label'];
+            $saleArr[$saleProducts['id']]['price']               = $saleProducts['price'];
+            $saleArr[$saleProducts['id']]['gift']                = $saleProducts['gift'];
+            $saleArr[$saleProducts['id']]['description']         = $saleProducts['description'];
+            $saleArr[$saleProducts['id']]['status']              = $saleProducts['status'];
+            $saleArr[$saleProducts['id']]['image']               = $saleProducts['image'];
             $saleArr[$saleProducts['id']]['sale_product_letter'] = $saleProductsLetters;
 
             if ($saleProducts['sale_page_id']) {
@@ -287,13 +289,15 @@ class Sale_admin extends CI_Controller
 
     public function sale_product_edit($id = null)
     {
-        $saleProductArr = null;
-        $title          = "Создать sale produst";
+        $saleProductArr       = null;
+        $saleProductImageList = [];
+        $title                = "Создать sale product";
 
         if ($id) {
-            $saleProductArr      = $this->sale_model->getSaleProductWithAssignedSalePageById($id);
-            $title               = "Редактировать sale product";
-            $assignedSalePageArr = array();
+            $saleProductArr       = $this->sale_model->getSaleProductWithAssignedSalePageById($id);
+            $saleProductImageList = $this->saleProductImage_model->getSaleProductImageBySaleProductId($id);
+            $title                = "Редактировать sale product";
+            $assignedSalePageArr  = array();
             foreach ($saleProductArr as $saleProduct) {
                 $assignedSalePageArr[] = ArrayHelper::arrayGet($saleProduct, 'sale_page_id');
             }
@@ -301,10 +305,11 @@ class Sale_admin extends CI_Controller
             $saleProductArr[0]['sale_page'] = $assignedSalePageArr;
         }
 
-        $salePageArr       = $this->index_model->getListFromTable('sale_page');
-        $contentArr        = ArrayHelper::arrayGet($saleProductArr, 0, $this->emptySaleProductArr);
-        $url               = $this->index_model->prepareUrl($this->urlArr);
-        $contentArr['url'] = $url;
+        $salePageArr              = $this->index_model->getListFromTable('sale_page');
+        $contentArr               = ArrayHelper::arrayGet($saleProductArr, 0, $this->emptySaleProductArr);
+        $url                      = $this->index_model->prepareUrl($this->urlArr);
+        $contentArr['url']        = $url;
+        $contentArr['image_list'] = $saleProductImageList;
 
         $contentData = array(
             'title'         => $title
@@ -326,19 +331,18 @@ class Sale_admin extends CI_Controller
     {
         $data             = $params = array();
         $id               = ArrayHelper::arrayGet($_REQUEST, 'id');
-        $newSalePageIdArr = ArrayHelper::arrayGet($_REQUEST, 'new_sale_page_id', array());
-        $oldSalePageIdArr = ArrayHelper::arrayGet($_REQUEST, 'old_sale_page_id', array());
+        $newSalePageIdArr = ArrayHelper::arrayGet($_REQUEST, 'new_sale_page_id', []);
+        $oldSalePageIdArr = ArrayHelper::arrayGet($_REQUEST, 'old_sale_page_id', []);
 
         try {
             $this->_formSaleProductsValidation();
             $dataMain = array(
                 'title'       => ArrayHelper::arrayGet($_REQUEST, 'title'),
                 'label'       => ArrayHelper::arrayGet($_REQUEST, 'label'),
-                'slug'       => ArrayHelper::arrayGet($_REQUEST, 'slug'),
+                'slug'        => ArrayHelper::arrayGet($_REQUEST, 'slug'),
                 'description' => ArrayHelper::arrayGet($_REQUEST, 'description'),
                 'price'       => ArrayHelper::arrayGet($_REQUEST, 'price'),
-                'gift'       => ArrayHelper::arrayGet($_REQUEST, 'gift'),
-                'image'       => ArrayHelper::arrayGet($_REQUEST, 'image'),
+                'gift'        => ArrayHelper::arrayGet($_REQUEST, 'gift')
             );
 
             if ($id) {
@@ -364,8 +368,32 @@ class Sale_admin extends CI_Controller
                 if (count($newSalePageIdArr)) {
                     $this->_assignProcess($newSalePageIdArr, $oldSalePageIdArr, $id);
                 }
-                redirect('backend/sale_product_list');
             }
+
+            $imageList = ArrayHelper::arrayGet($_REQUEST, 'image', []);
+
+            $imageList = array_filter($imageList, function ($value) {
+                //do not handle empty value for NON existing image
+                return !empty($value);
+            });
+
+            if ($imageList) {
+                $this->saleProductImage_model->deleteByParams(['sale_product_id' => $id]);
+                $imageList = array_values($imageList);
+
+                foreach ($imageList as $key => $imageData) {
+                    $this->saleProductImage_model->add(
+                        [
+                            'sale_product_id' => $id,
+                            'image'           => $imageData,
+                            'is_main'         => (int)($key == 0),
+                            'sequence_num'    => $key,
+                        ]
+                    );
+                }
+            }
+
+            redirect('backend/sale_product_list');
         } catch (Exception $e) {
             $this->message = $e->getMessage();
             $this->sale_product_edit($id);
@@ -415,7 +443,6 @@ class Sale_admin extends CI_Controller
     {
         $isUpdated = $this->index_model->updateInTable(ArrayHelper::arrayGet($params, 'id'), $data, 'sale_product');
         Common::assertTrue($isUpdated, 'Not updated');
-        redirect('backend/sale_product_list');
     }
 
 
@@ -454,8 +481,8 @@ class Sale_admin extends CI_Controller
             Common::assertTrue($saleProductsId, 'Не установлен ID продукта');
             $data = array(
                 'sale_product_id' => $saleProductsId,
-                'text'             => ArrayHelper::arrayGet($_REQUEST, 'text'),
-                'subject'          => ArrayHelper::arrayGet($_REQUEST, 'subject')
+                'text'            => ArrayHelper::arrayGet($_REQUEST, 'text'),
+                'subject'         => ArrayHelper::arrayGet($_REQUEST, 'subject')
             );
 
             if ($id) {

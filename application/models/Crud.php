@@ -6,7 +6,7 @@ class Crud extends CI_Model
 {
     protected $table;
     protected $idkey;
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -29,8 +29,7 @@ class Crud extends CI_Model
     public function update($id, $data)
     {
         $this->db->where($this->idkey, $id);
-        if(!$this->db->update($this->table, $data))
-        {
+        if (!$this->db->update($this->table, $data)) {
             return false;
         }
 
@@ -41,7 +40,7 @@ class Crud extends CI_Model
     {
         $this->db->where($this->idkey, $id);
 
-        if(!$this->db->update($table, $data)) {
+        if (!$this->db->update($table, $data)) {
             return false;
         }
 
@@ -51,7 +50,7 @@ class Crud extends CI_Model
     public function del($id)
     {
         $this->db->where($this->idkey, $id);
-        if(!$this->db->delete($this->table)) {
+        if (!$this->db->delete($this->table)) {
             return false;
         }
         return true;
@@ -60,9 +59,20 @@ class Crud extends CI_Model
     public function delFromTable($id, $table)
     {
         $this->db->where($this->idkey, $id);
-        if(!$this->db->delete($table)) {
+        if (!$this->db->delete($table)) {
             return false;
         }
+        return true;
+    }
+
+    public function deleteByParams($params)
+    {
+        $this->db->where($params);
+
+        if (!$this->db->delete($this->table)) {
+            return false;
+        }
+
         return true;
     }
 
@@ -102,10 +112,10 @@ class Crud extends CI_Model
         $limitParams = []
     )
     {
-        $orderBy = ArrayHelper::arrayGet($orderParams, 'orderBy', ORDER_BY_DEFAULT);
+        $orderBy        = ArrayHelper::arrayGet($orderParams, 'orderBy', ORDER_BY_DEFAULT);
         $orderDirection = ArrayHelper::arrayGet($orderParams, 'orderDirection', ORDER_DIRECTION_ASC);
 
-        $limit = ArrayHelper::arrayGet($limitParams, 'limit', 0);
+        $limit  = ArrayHelper::arrayGet($limitParams, 'limit', 0);
         $offset = ArrayHelper::arrayGet($limitParams, 'offset', 0);
 
         $this->db->where($params);
@@ -146,24 +156,24 @@ class Crud extends CI_Model
 
     public function getArrWhere($table, $params, $limit, $orderBy = false)
     {
-        $orderBy = $orderBy ? " ORDER BY ".$orderBy : false;
-        $sqlLimit = $limit ? " LIMIT ".$limit : false;
+        $orderBy  = $orderBy ? " ORDER BY " . $orderBy : false;
+        $sqlLimit = $limit ? " LIMIT " . $limit : false;
         $sqlWhere = count($params) ? $this->_makeSqlWhereFromParams($params) : null;
 
-        $query = $this->db->query("SELECT * FROM ".$table.$sqlWhere.$orderBy.$sqlLimit);
+        $query = $this->db->query("SELECT * FROM " . $table . $sqlWhere . $orderBy . $sqlLimit);
         return $query->result_array();
     }
 
 
     private function _makeSqlWhereFromParams(array $params)
     {
-        $sqlWhere = " WHERE";
+        $sqlWhere    = " WHERE";
         $paramsCount = count($params);
-        $count = 1;
+        $count       = 1;
 
-        foreach($params as $col => $val){
-            $sqlAnd = ( $count < $paramsCount ) ? "AND" : null;
-            $sqlWhere .= " " . $col ." = '". $val ."' ".$sqlAnd;
+        foreach ($params as $col => $val) {
+            $sqlAnd = ($count < $paramsCount) ? "AND" : null;
+            $sqlWhere .= " " . $col . " = '" . $val . "' " . $sqlAnd;
             $count++;
         }
 

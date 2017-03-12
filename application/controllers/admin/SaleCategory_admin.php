@@ -95,7 +95,7 @@ class SaleCategory_admin extends CI_Controller
 
         if ($id) {
             $categoryData                   = $this->saleCategory_model->getFromTableByParams(['id' => $id], 'sale_category');
-            $assignedSaleProductDataList = $this->sale_model->getAssignedASaleProductListBySaleCategoryId($id);
+            $assignedSaleProductDataList = $this->sale_model->getSaleProductListBySaleCategoryId($id);
 
             foreach ($assignedSaleProductDataList as $assignedSaleProductData) {
                 $saleProductsId = ArrayHelper::arrayGet($assignedSaleProductData, 'sale_product_id');
@@ -193,7 +193,7 @@ class SaleCategory_admin extends CI_Controller
     {
         try {
             $this->saleCategory_model->del($id);
-            $assignedSaleProductDataList = $this->sale_model->getAssignedASaleProductListBySaleCategoryId($id);
+            $assignedSaleProductDataList = $this->sale_model->getSaleProductListBySaleCategoryId($id);
 
             if ($assignedSaleProductDataList) {
                 foreach ($assignedSaleProductDataList as $assignedSaleProductsData) {

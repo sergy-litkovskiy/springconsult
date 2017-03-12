@@ -109,32 +109,39 @@ class Sale_model extends Crud
                 LEFT JOIN
                     sale_page_sale_product_assignment ON sale_page_sale_product_assignment.sale_product_id = sale_product.id
                 LEFT JOIN
-                    sale_page ON sale_page.id = sale_page_sale_product_assignment.sale_page_id
+                    sale_page ON sale_page.id = sale_page_sale_product_assignment.sale_page_id                   
                 WHERE
                     sale_product.id = ".$saleProductsId." 
                 ORDER by sale_product.sequence_num";
 
         $query = $this->db->query($sql);
+
         return $query->result_array();
     }
 
-    public function getAssignedASaleProductListBySaleCategoryId($saleCategoryId)
+    public function getSaleProductListBySaleCategoryId($saleCategoryId)
     {
-        $sql = "SELECT
-                    sale_category_sale_product_assignment.id as sale_category_sale_product_assignment_id,
-                    sale_product.id as sale_product_id,
-                    sale_product.title as sale_product_title,
-                    sale_product.label as sale_product_label,
-                    sale_product.slug as sale_product_slug,
-                    sale_product.status as sale_product_status,
-                    sale_product.gift as sale_product_gift
-                FROM
-                    sale_product
-                INNER JOIN
-                    sale_category_sale_product_assignment ON sale_category_sale_product_assignment.sale_product_id = sale_product.id";
-        $sql .= " AND sale_category_sale_product_assignment.sale_category_id = ".$saleCategoryId." ORDER by sale_product.sequence_num";
+        $sqlSelect = sprintf('
+            sale_category_sale_product_assignment.id as sale_category_sale_product_assignment_id,
+            %s.id as sale_product_id,
+            %s.title as sale_product_title,
+            %s.label as sale_product_label,
+            %s.slug as sale_product_slug,
+            %s.status as sale_product_status,
+            %s.gift as sale_product_gift
+        ', $this->table, $this->table, $this->table, $this->table, $this->table, $this->table);
 
-        $query = $this->db->query($sql);
+        $this->db->select($sqlSelect);
+
+        $this->db->join(
+            'sale_category_sale_product_assignment as scspa',
+            sprintf('scspa.sale_product_id = %s.id AND scspa.sale_category_id = %s', $this->table, $saleCategoryId),
+            'INNER'
+        );
+
+        $this->db->order_by('sale_product.sequence_num');
+
+        $query = $this->db->get($this->table);
 
         return $query->result_array();
     }
@@ -144,7 +151,7 @@ class Sale_model extends Crud
         $this->db->select($this->table . '.*');
         $this->db->join(
             'menu_sale_product_assignment as mspa',
-            'mspa.sale_product_id = sale_product.id AND mspa.menu_id = ' . $menuId,
+            sprintf('mspa.sale_product_id = sale_product.id AND mspa.menu_id = %s', $menuId),
             'INNER'
         );
 

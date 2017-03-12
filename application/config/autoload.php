@@ -59,19 +59,19 @@ $autoload['packages'] = array(APPPATH.'third_party');
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 
-$autoload['libraries'] = array('database'
-//                                , 'firephp'
-                                , 'form_validation'
-                                , 'fileloader'
-                                , 'session'
-                                , 'common'
-                                , 'arrayHelper'
-                                , 'menuHelper'
-                                , 'imageHelper'
-                                , 'pagination'
-                                , 'twig'
-//                                , 'security'
-                                , 'email');
+$autoload['libraries'] = [
+        'database',
+        'form_validation',
+        'fileloader',
+        'session',
+        'common',
+        'arrayHelper',
+        'menuHelper',
+        'imageHelper',
+        'pagination',
+        'twig',
+        'email'
+    ];
 
 /*
 | -------------------------------------------------------------------
@@ -86,7 +86,7 @@ $autoload['libraries'] = array('database'
 |
 |	$autoload['drivers'] = array('cache');
 */
-$autoload['drivers'] = array('pdo', 'mysqli');
+$autoload['drivers'] = ['pdo', 'mysqli'];
 
 /*
 | -------------------------------------------------------------------
@@ -96,21 +96,22 @@ $autoload['drivers'] = array('pdo', 'mysqli');
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url'
-                            ,'form'
-                            ,'head_htm'
-                            ,'head_htm_backend'
-                            ,'tinymce'
-                            ,'email'
-                            ,'directory'
-                            ,'text'
-                            ,'cookie'
-                            ,'date'
-                            ,'pager'
-                            ,'security'
-                            ,'disqus'
-//                            ,'firephp'
-                            ,'unisender_curl');
+$autoload['helper'] = [
+        'url',
+        'form',
+        'head_htm',
+        'head_htm_backend',
+        'tinymce',
+        'email',
+        'directory',
+        'text',
+        'cookie',
+        'date',
+        'pager',
+        'security',
+        'disqus',
+        'unisender_curl'
+    ];
 
 /*
 | -------------------------------------------------------------------
@@ -168,6 +169,7 @@ $autoload['model'] = [
     'menu_model',
     'topic_model',
     'sale_model',
+    'saleProductImage_model',
     'salePage_model',
     'saleCategory_model',
     'saleHistory_model',
