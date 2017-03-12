@@ -30,9 +30,9 @@ class Index_model extends Crud
                                             FROM
                                                 article
                                             INNER JOIN
-                                                assign_articles ON assign_articles.article_id = article.id
+                                                menu_article_assignment ON menu_article_assignment.article_id = article.id
                                             INNER JOIN
-                                                menu ON menu.id = assign_articles.menu_id
+                                                menu ON menu.id = menu_article_assignment.menu_id
                                             WHERE
                                                 menu.slug = '".$slug."'
                                             AND
@@ -119,17 +119,17 @@ class Index_model extends Crud
                 FROM
                     article
                 LEFT JOIN
-                    assign_articles
+                    menu_article_assignment
                 ON
-                    assign_articles.article_id = article.id
+                    menu_article_assignment.article_id = article.id
                 LEFT JOIN
                     menu AS menu_child
                 ON
-                    menu_child.id = assign_articles.menu_id
+                    menu_child.id = menu_article_assignment.menu_id
                 LEFT JOIN
                     menu AS menu_parent
                 ON
-                    menu_parent.id = assign_articles.menu_id
+                    menu_parent.id = menu_article_assignment.menu_id
                 WHERE
                     menu_child.slug = 'news'
                 ".$this->params['status']."
@@ -148,17 +148,17 @@ class Index_model extends Crud
                 FROM
                     article
                 LEFT JOIN
-                    assign_articles
+                    menu_article_assignment
                 ON
-                    assign_articles.article_id = article.id
+                    menu_article_assignment.article_id = article.id
                 LEFT JOIN
                     menu AS menu_child
                 ON
-                    menu_child.id = assign_articles.menu_id
+                    menu_child.id = menu_article_assignment.menu_id
                 LEFT JOIN
                     menu AS menu_parent
                 ON
-                    menu_parent.id = assign_articles.menu_id
+                    menu_parent.id = menu_article_assignment.menu_id
                 ORDER by
                     article.date DESC, article.time DESC";
     }
@@ -252,7 +252,7 @@ class Index_model extends Crud
 
     public function getAssignArticlesByArticleIdAdmin($articleId)
     {
-        return $this->getFromTableByParams(array('article_id' => $articleId), 'assign_articles');
+        return $this->getFromTableByParams(array('article_id' => $articleId), 'menu_article_assignment');
     }
 
 

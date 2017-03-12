@@ -15,7 +15,7 @@ class Sale_model extends Crud
     public function getSalePageArrWithProducts($slug)
     {
         $sql  = $this->_getSelectSql();
-        $sql .= " LEFT JOIN sale_product ON sale_product.id = assign_sale.sale_product_id";
+        $sql .= " LEFT JOIN sale_product ON sale_product.id = sale_page_sale_product_assignment.sale_product_id";
         $sql .= " AND sale_product.status = ".STATUS_ON;
         $sql .= " WHERE sale_page.slug = '".$slug."'
                 AND sale_page.status = ".STATUS_ON."
@@ -52,7 +52,7 @@ class Sale_model extends Crud
     public function getSalePageArrWithProductsAdmin()
     {
         $sql = $this->_getSelectSql();
-        $sql .= " LEFT JOIN sale_product ON sale_product.id = assign_sale.sale_product_id";
+        $sql .= " LEFT JOIN sale_product ON sale_product.id = sale_page_sale_product_assignment.sale_product_id";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
@@ -69,9 +69,9 @@ class Sale_model extends Crud
                 FROM
                     sale_product
                 LEFT JOIN
-                    assign_sale ON assign_sale.sale_product_id = sale_product.id
+                    sale_page_sale_product_assignment ON sale_page_sale_product_assignment.sale_product_id = sale_product.id
                 LEFT JOIN
-                    sale_page ON sale_page.id = assign_sale.sale_page_id
+                    sale_page ON sale_page.id = sale_page_sale_product_assignment.sale_page_id
                 ORDER by sale_product.sequence_num";
 
         $query = $this->db->query($sql);
@@ -95,7 +95,7 @@ class Sale_model extends Crud
                 FROM
                     sale_page
                 LEFT JOIN
-                    assign_sale ON assign_sale.sale_page_id = sale_page.id";
+                    sale_page_sale_product_assignment ON sale_page_sale_product_assignment.sale_page_id = sale_page.id";
     }
 
 
@@ -107,9 +107,9 @@ class Sale_model extends Crud
                 FROM
                     sale_product
                 LEFT JOIN
-                    assign_sale ON assign_sale.sale_product_id = sale_product.id
+                    sale_page_sale_product_assignment ON sale_page_sale_product_assignment.sale_product_id = sale_product.id
                 LEFT JOIN
-                    sale_page ON sale_page.id = assign_sale.sale_page_id
+                    sale_page ON sale_page.id = sale_page_sale_product_assignment.sale_page_id
                 WHERE
                     sale_product.id = ".$saleProductsId." 
                 ORDER by sale_product.sequence_num";

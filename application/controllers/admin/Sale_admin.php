@@ -108,11 +108,11 @@ class Sale_admin extends CI_Controller
     {
         try {
             $this->index_model->delFromTable($id, 'sale_page');
-            $assignSaleArr = $this->index_model->getFromTableByParams(array('sale_page_id' => $id), 'assign_sale');
+            $assignSaleArr = $this->index_model->getFromTableByParams(array('sale_page_id' => $id), 'sale_page_sale_product_assignment');
 
             if (count($assignSaleArr)) {
                 foreach ($assignSaleArr as $assignSale) {
-                    $this->index_model->delFromTable($assignSale['id'], 'assign_sale');
+                    $this->index_model->delFromTable($assignSale['id'], 'sale_page_sale_product_assignment');
                 }
             }
             $result['success'] = true;
@@ -273,11 +273,11 @@ class Sale_admin extends CI_Controller
     public function sale_product_drop($id)
     {
         $this->index_model->delFromTable($id, 'sale_product');
-        $assignSaleArr = $this->index_model->getFromTableByParams(array('sale_product_id' => $id), 'assign_sale');
+        $assignSaleArr = $this->index_model->getFromTableByParams(array('sale_product_id' => $id), 'sale_page_sale_product_assignment');
 
         if (count($assignSaleArr)) {
             foreach ($assignSaleArr as $assignSale) {
-                $this->index_model->delFromTable(ArrayHelper::arrayGet($assignSale, 'id'), 'assign_sale');
+                $this->index_model->delFromTable(ArrayHelper::arrayGet($assignSale, 'id'), 'sale_page_sale_product_assignment');
             }
         }
 
@@ -381,7 +381,7 @@ class Sale_admin extends CI_Controller
             , 'assignId'        => $saleProductId
             , 'assignFieldName' => 'sale_product_id'
             , 'sourceFieldName' => 'sale_page_id'
-            , 'table'           => 'assign_sale');
+            , 'table'           => 'sale_page_sale_product_assignment');
 
         $this->assign_model->setAssignArr($assignedArr);
         $this->assign_model->addOrDeleteAssigns();

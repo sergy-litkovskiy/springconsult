@@ -163,7 +163,7 @@ class Menu_model extends Crud
             FROM 
                 article 
             INNER JOIN 
-                assign_articles as aa
+                menu_article_assignment as aa
             ON 
                 aa.article_id = article.id 
             AND 

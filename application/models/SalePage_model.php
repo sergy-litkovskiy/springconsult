@@ -16,7 +16,7 @@ class SalePage_model extends Crud
     public function getSalePageWithAssignedProducts($id)
     {
         $sql  = $this->_getSelectSql();
-        $sql .= " LEFT JOIN sale_product ON sale_product.id = assign_sale.sale_product_id";
+        $sql .= " LEFT JOIN sale_product ON sale_product.id = sale_page_sale_product_assignment.sale_product_id";
         $sql .= " AND sale_product.status = ".STATUS_ON;
         $sql .= " WHERE ".$this->table.".id = '".$id."'
                 AND ".$this->table.".status = ".STATUS_ON."
@@ -40,7 +40,7 @@ class SalePage_model extends Crud
                 FROM
                     %s
                 LEFT JOIN
-                    assign_sale ON assign_sale.sale_page_id = %s.id", $this->table, $this->table, $this->table);
+                    sale_page_sale_product_assignment ON sale_page_sale_product_assignment.sale_page_id = %s.id", $this->table, $this->table, $this->table);
     }
 
     public function getAssignedSalePageListByReviewId($reviewId)

@@ -169,7 +169,7 @@ class Article_admin extends CI_Controller
         , 'assignId'         => $id
         , 'assignFieldName'  => 'article_id'
         , 'sourceFieldName'  => 'menu_id'
-        , 'table'            => 'assign_articles');
+        , 'table'            => 'menu_article_assignment');
 
         $this->assign_model->setAssignArr($assignsArr);
         $this->assign_model->addOrDeleteAssigns();
@@ -367,11 +367,11 @@ class Article_admin extends CI_Controller
     {
         try {
             $this->index_model->delFromTable($id, 'article');
-            $assignArticlesArr = $this->index_model->getFromTableByParams(array('article_id' => $id), 'assign_articles');
+            $assignArticlesArr = $this->index_model->getFromTableByParams(array('article_id' => $id), 'menu_article_assignment');
 
             if (count($assignArticlesArr)) {
                 foreach ($assignArticlesArr as $assignArticles) {
-                    $this->index_model->delFromTable($assignArticles['id'], 'assign_articles');
+                    $this->index_model->delFromTable($assignArticles['id'], 'menu_article_assignment');
                 }
             }
             $this->result['success'] = true;
