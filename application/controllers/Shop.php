@@ -28,21 +28,28 @@ class Shop extends MY_Controller
         $this->twig->display($this->entityName . '/index.html', $data);
     }
 
-    public function show($salePageId)
+    public function show($saleProductId)
     {
-        $salePageData = $this->salePage_model->getSalePageWithAssignedProducts($salePageId);
-        $metaData     = $this->prepareMetaData(ArrayHelper::arrayGet($salePageData, 0, []));
+        $saleProductData = $this->sale_model->get($saleProductId);
+        $saleProductImageList = $this->saleProductImage_model->getSaleProductImageBySaleProductId($saleProductId);
+        $reviewList = $this->review_model->getReviewListBySalePageId($saleProductId);
+        $metaData = $this->prepareMetaData(ArrayHelper::arrayGet($saleProductData, 0, []));
+        $productData = ArrayHelper::arrayGet(array_values($saleProductData), 0);
 
-        $salePageData = $this->_makeMainDataToProductMap($salePageData, 'makeSalePageMainData');
+        //get only main image
+        $imageData = array_filter($saleProductImageList, function ($imageData) {
+            return (bool)ArrayHelper::arrayGet($imageData, 'is_main');
+        });
 
-        $reviewList = $this->review_model->getReviewListBySalePageId($salePageId);;
+        $productData['image'] = ArrayHelper::arrayGet($imageData, 0);
 
         $data = [
-            'currentItemName' => 'salePage',
+            'currentItemName' => 'saleProduct',
             'metaData'        => $metaData,
             'reviewList'      => $reviewList,
-            'data'            => ArrayHelper::arrayGet(array_values($salePageData), 0),
-            'pageTitle'       => ArrayHelper::arrayGet($salePageData, '0.title')
+            'saleProductImageList' => $saleProductImageList,
+            'data'            => $productData,
+            'pageTitle'       => ArrayHelper::arrayGet($saleProductData, '0.title')
         ];
 
         $data = array_merge($data, $this->baseResult);
@@ -100,12 +107,10 @@ class Shop extends MY_Controller
             'id'           => ArrayHelper::arrayGet($categoryData, 'sale_product_id'),
             'title'        => ArrayHelper::arrayGet($categoryData, 'sale_product_title'),
             'label'        => ArrayHelper::arrayGet($categoryData, 'sale_product_label'),
-            'image'        => ArrayHelper::arrayGet($categoryData, 'sale_product_image'),
             'description'  => ArrayHelper::arrayGet($categoryData, 'sale_product_description'),
             'price'        => ArrayHelper::arrayGet($categoryData, 'sale_product_price'),
             'gift'         => ArrayHelper::arrayGet($categoryData, 'sale_product_gift'),
-            'salePageSlug' => ArrayHelper::arrayGet($categoryData, 'sale_page_slug'),
-            'salePageId'   => ArrayHelper::arrayGet($categoryData, 'sale_page_id'),
+            'slug' => ArrayHelper::arrayGet($categoryData, 'sale_product_slug'),
         ];
     }
 

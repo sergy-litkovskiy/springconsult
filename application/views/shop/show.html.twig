@@ -14,82 +14,71 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="page_title">
-                            <h2>{{ data.data.title }} {{ data.data.label }}</h2>
+                            <h2>{{ data.title }} {{ data.label }}</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="content blog">
+        <section class="content about">
             <div class="container">
-                <div class="row">
-                    {#<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">#}
-                        <div class="blog_single">
-                            <article class="post">
-                                <div class="">
-                                    {{ data.data.text1|raw }}
-                                </div>
-                            </article>
-                        </div>
-                        <div class="row sub_content">
-                            <div class="pricingBlock theme-color-pt">
-                                {% for product in data.productList %}
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
-                                        <div class="pricingTable">
-                                            <div class="pricingTable-header">
-                                                <img src="{{ base_url() }}img/sale_product/{{ product.image }}"/>
-                                                <span class="heading">
-                                                    {{ product.title }}
-                                                    {% if product.label|length %}
-                                                        <br/>{{ product.label }}
-                                                    {% endif %}
-                                                </span>
-                                                <span class="price-value">UAH<span>{{ product.price }}</span></span>
-                                            </div>
+                <div class="row sub_content">
+                    <div class="who">
+                        <div class="col-lg-8 col-sm-8">
+                            <div class="col-lg-4 col-sm-4">
+                                <img src="{{ base_url() }}img/sale_product/{{ data.image.image }}"/>
+                            </div>
+                            <div class="col-lg-8 col-sm-8">
+                                {{ data.description|raw }}
+                                {% if data.gift|length %}
+                                    <i class="fa fa-gift price"></i> {{ data.gift|raw }}
+                                {% endif %}
 
-                                            <div class="pricingContent">
-                                                {{ product.description|raw }}
-                                                {% if product.gift|length %}
-                                                    <i class="fa fa-gift price"></i> {{ product.gift|raw }}
-                                                {% endif %}
-                                            </div>
-
-                                            <div class="pricingTable-sign-up">
-                                                <a href="#" class="btn btn-block btn-default">ЗАКАЗАТЬ</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
+                                <span
+                                    class="btn btn-default product-cart"
+                                    data-price="{{ data.price }}"
+                                    data-product-id="{{ data.id }}"
+                                    data-title="{{ data.title }}"
+                                >
+                                <i class="fa fa-shopping-cart"></i> Купить
+                                </span>
                             </div>
                         </div>
-                        <div class="blog_single">
-                            <article class="post">
-                                <div class="">
-                                    {{ data.data.text2|raw }}
+
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="sidebar">
+                                <div class="widget">
+                                    <div class="widget_title">
+                                        <h4><span>Доставка</span></h4>
+                                    </div>
+                                    <ul class="list_style circle">
+                                        <li>
+                                            <span><strong>Новая почта</strong> 1-2 дня</span>
+                                        </li>
+                                        <li>
+                                            <span><strong>Укрпочта</strong> 5-7 дней</span>
+                                        </li>
+                                        <li>
+                                            <span><strong>Самовывоз</strong> Киев Оболонь</span>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </article>
-                        </div>
-                        <div class="blog_single">
-                            <div class="widget_title">
-                                <h4><span>Отзывы</span></h4>
+                                <div class="widget">
+                                    <div class="widget_title">
+                                        <h4><span>Оплата</span></h4>
+                                    </div>
+                                    <ul class="list_style circle">
+                                        <li>
+                                            <span><strong>Наличными</strong> на месте при самовывозе</span>
+                                        </li>
+                                        <li>
+                                            <span><strong>Безналичный расчет</strong> на карту ПриватБанка</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            {% for review in reviewList %}
-                                <div class="about_author">
-                                    <div class="author_desc">
-                                        <img src="{{ base_url() }}img/review/{{ review.image }}" alt="about author">
-                                    </div>
-                                    <div class="author_bio">
-                                        <h3 class="author_name">
-                                            {{ review.author }}
-                                        </h3>
-                                        <p class="author_det shorten-review">
-                                            {{ review.text }}
-                                        </p>
-                                    </div>
-                                </div>
-                            {% endfor %}
                         </div>
-                    {#</div>#}
+                    </div>
                 </div>
             </div>
         </section>
@@ -105,8 +94,8 @@
     <script type="text/javascript">
         $('.shorten-review').shorten({
             showChars: 350,
-            moreText: '<i class="fa fa-angle-down"></i>',
-            lessText: '<i class="fa fa-angle-up"></i>'
+            moreText : '<i class="fa fa-angle-down"></i>',
+            lessText : '<i class="fa fa-angle-up"></i>'
         });
     </script>
 {% endblock %}

@@ -16,7 +16,6 @@ class SaleCategory_model extends Crud
     public function getCategoryListWithProductList()
     {
         $sql  = $this->_getSqlSelect();
-        $sql .= ' , sale_page.id as sale_page_id, sale_page.slug as sale_page_slug';
 
         $this->db->select($sql);
 
@@ -30,12 +29,6 @@ class SaleCategory_model extends Crud
             'sale_product',
             sprintf('sale_product.id = scspa.sale_product_id AND sale_product.status = %s', STATUS_ON),
             'INNER'
-        );
-
-        $this->db->join(
-            'sale_page',
-            sprintf('sale_page.id = sale_product.sale_page_id AND sale_page.status = %s', STATUS_ON),
-            'LEFT'
         );
 
         $this->db->join(
@@ -99,6 +92,7 @@ class SaleCategory_model extends Crud
             sale_product.status as sale_product_status,
             sale_product.price as sale_product_price,
             sale_product.gift as sale_product_gift,
+            sale_product.slug as sale_product_slug,
             sale_product_image.image as sale_product_image,
             sale_product.sequence_num as sale_product_sequence_num,
             sale_product.description as sale_product_description
