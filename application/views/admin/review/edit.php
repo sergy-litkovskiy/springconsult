@@ -15,7 +15,7 @@
         </textarea>
     </p>
     <br/>
-    <p><b>Выбрать sale pages:</b></p>
+    <p><b>Выбрать sale products:</b></p>
     <br/>
     <ul class="topic-article-list" style="float: left; margin-left: 2em;">
         <?php foreach($saleProductList as $saleProduct):?>
