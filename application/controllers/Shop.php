@@ -108,6 +108,7 @@ class Shop extends MY_Controller
             'title'        => ArrayHelper::arrayGet($categoryData, 'sale_product_title'),
             'label'        => ArrayHelper::arrayGet($categoryData, 'sale_product_label'),
             'description'  => ArrayHelper::arrayGet($categoryData, 'sale_product_description'),
+            'image'  => ArrayHelper::arrayGet($categoryData, 'sale_product_image'),
             'price'        => ArrayHelper::arrayGet($categoryData, 'sale_product_price'),
             'gift'         => ArrayHelper::arrayGet($categoryData, 'sale_product_gift'),
             'slug' => ArrayHelper::arrayGet($categoryData, 'sale_product_slug'),
