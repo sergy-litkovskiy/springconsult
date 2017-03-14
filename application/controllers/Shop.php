@@ -32,7 +32,7 @@ class Shop extends MY_Controller
     {
         $saleProductData = $this->sale_model->get($saleProductId);
         $saleProductImageList = $this->saleProductImage_model->getSaleProductImageBySaleProductId($saleProductId);
-        $reviewList = $this->review_model->getReviewListBySalePageId($saleProductId);
+        $reviewList = $this->review_model->getReviewListBySaleProductId($saleProductId);
         $metaData = $this->prepareMetaData(ArrayHelper::arrayGet($saleProductData, 0, []));
         $productData = ArrayHelper::arrayGet(array_values($saleProductData), 0);
 

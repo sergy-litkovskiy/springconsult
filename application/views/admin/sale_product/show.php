@@ -14,7 +14,6 @@
                 <td>Название</td>
                 <td>Описание</td>
                 <td>Цена</td>
-                <td style="width:180px">Продающая страница</td>
                 <td>Письмо</td>
                 <td><p>edit<p></td>
                 <td><p>del</p></td>
@@ -34,18 +33,6 @@
                 </td>
                 <td class="article_table">
                     <p><b><?php echo $item['price'];?></b></p>
-                </td>
-                <td class="article_table">
-                    <ul>
-                        <?php if(isset($item['sale_page']) && count($item['sale_page'])){
-                            foreach ($item['sale_page'] as $sale_page):?>
-                                <?php if($sale_page['title']){
-                                    $status = ($sale_page['status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
-                                    <li><?php  echo $sale_page['title'].' - '.$status;?></li>
-                                <?php };?>
-                            <?php endforeach;
-                        }?>
-                    </ul>
                 </td>
                 <td>
                     <?php if($item['sale_product_letter']){?>

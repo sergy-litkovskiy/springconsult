@@ -188,8 +188,6 @@ a:focus{
 .top-info li:hover a.my-tweet       {background:#3ABDD1;}
 .top-info li:hover a.my-facebook    {background:#648CD5;}
 .top-info li:hover a.my-skype       {background:#00AFFF;}
-/*.top-info li:hover a.my-pint        {background:#DE5656;}*/
-/*.top-info li:hover a.my-rss         {background:#EF8D1F;}*/
 .top-info li:hover a.my-google      {background:#E73904;}
 
 /* Logo
@@ -5142,7 +5140,8 @@ ul{
     margin-right: 5px;
 }
 
-.fa.fa-gift.price {
+.fa.fa-gift.price,
+h3.price {
     font-size: 24px;
     color: #449d44;
 }
@@ -5194,4 +5193,8 @@ ul{
     margin: -15px 0 10px 0;
     position: absolute;
     line-height: 10px;
+}
+
+h3.price {
+    margin: 20px 0 20px 0;
 }

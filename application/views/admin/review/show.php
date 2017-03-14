@@ -14,7 +14,7 @@
                 <td>Автор</td>
                 <td>Фото</td>
                 <td>Текст</td>
-                <td>Sale page list</td>
+                <td>Sale product list</td>
                 <td>Разделы</td>
                 <td><p>edit<p></td>
                 <td><p>del</p></td>
@@ -36,11 +36,11 @@
                 </td>
                 <td class="article_table" style="padding: 1em">
                     <ul>
-                        <?php if(isset($map['sale_page_list']) && count($map['sale_page_list'])){
-                            foreach ($map['sale_page_list'] as $salePageData):?>
-                                <?php if($salePageData['sale_page_status']){
-                                    $status = ($salePageData['sale_page_status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
-                                    <li><?php  echo $salePageData['sale_page_title'].' - '.$status;?></li>
+                        <?php if(isset($map['sale_product_list']) && count($map['sale_product_list'])){
+                            foreach ($map['sale_product_list'] as $saleProductData):?>
+                                <?php if($saleProductData['sale_product_status']){
+                                    $status = ($saleProductData['sale_product_status'] == 1) ? '<b style="color:green">вкл</b>': '<b style="color:red">октл</b>';?>
+                                    <li><?php  echo $saleProductData['sale_product_title'].'|'.$saleProductData['sale_product_label'].' - '.$status;?></li>
                                 <?php };?>
                             <?php endforeach;
                         }?>

@@ -29,19 +29,32 @@
                                 <img src="{{ base_url() }}img/sale_product/{{ data.image.image }}"/>
                             </div>
                             <div class="col-lg-8 col-sm-8">
-                                {{ data.description|raw }}
-                                {% if data.gift|length %}
-                                    <i class="fa fa-gift price"></i> {{ data.gift|raw }}
-                                {% endif %}
-
+                                <div>
+                                    {{ data.description|raw }}
+                                    {% if data.gift|length %}
+                                        <i class="fa fa-gift price"></i> {{ data.gift|raw }}
+                                    {% endif %}
+                                </div>
+                                <h3 class="price">
+                                    {{ data.price }} грн
+                                </h3>
                                 <span
-                                    class="btn btn-default product-cart"
+                                    class="btn btn-default btn-lg product-cart"
                                     data-price="{{ data.price }}"
                                     data-product-id="{{ data.id }}"
                                     data-title="{{ data.title }}"
                                 >
-                                <i class="fa fa-shopping-cart"></i> Купить
+                                    <i class="fa fa-shopping-cart"></i> Купить
                                 </span>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 col-sm-12">
+                                <div class="project_description">
+                                    <div class="widget_title">
+                                        <h4><span>Описание</span></h4>
+                                    </div>
+                                    {{ data.text|raw }}
+                                </div>
                             </div>
                         </div>
 
@@ -76,6 +89,27 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <div class="widget">
+                                    <div class="widget_title">
+                                        <h4><span>Отзывы</span></h4>
+                                    </div>
+                                    {% for review in reviewList %}
+                                        <div class="about_author">
+                                            <div class="author_desc">
+                                                <img src="{{ base_url() }}img/review/{{ review.image }}" alt="about author">
+                                            </div>
+                                            <div class="author_bio">
+                                                <h5 class="author_name">
+                                                    {{ review.author }}
+                                                </h5>
+                                                <p class="author_det">
+                                                    {{ review.text[:95]|raw }}
+                                                    <span class="show-more" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ review.text }}"> ...<i class="fa fa-search-plus"></i></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,10 +126,9 @@
 {% block footer %}
     {{ parent() }}
     <script type="text/javascript">
-        $('.shorten-review').shorten({
-            showChars: 350,
-            moreText : '<i class="fa fa-angle-down"></i>',
-            lessText : '<i class="fa fa-angle-up"></i>'
+        $('[data-toggle="popover"]').popover({
+            placement : 'top',
+            trigger : 'hover'
         });
     </script>
 {% endblock %}

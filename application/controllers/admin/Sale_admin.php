@@ -54,6 +54,7 @@ class Sale_admin extends CI_Controller
             , 'label'        => null
             , 'slug'         => null
             , 'description'  => null
+            , 'text'  => null
             , 'price'        => null
             , 'gift'         => null
             , 'sale_page_id' => null
@@ -248,14 +249,15 @@ class Sale_admin extends CI_Controller
             $saleArr[$saleProducts['id']]['price']               = $saleProducts['price'];
             $saleArr[$saleProducts['id']]['gift']                = $saleProducts['gift'];
             $saleArr[$saleProducts['id']]['description']         = $saleProducts['description'];
+            $saleArr[$saleProducts['id']]['text']         = $saleProducts['text'];
             $saleArr[$saleProducts['id']]['status']              = $saleProducts['status'];
             $saleArr[$saleProducts['id']]['image']               = $saleProducts['image'];
             $saleArr[$saleProducts['id']]['sale_product_letter'] = $saleProductsLetters;
 
-            if ($saleProducts['sale_page_id']) {
-                $saleArr[$saleProducts['id']]['sale_page'][$saleProducts['sale_page_id']]['title']  = $saleProducts['sale_page_title'];
-                $saleArr[$saleProducts['id']]['sale_page'][$saleProducts['sale_page_id']]['status'] = $saleProducts['sale_page_status'];
-            }
+//            if ($saleProducts['sale_page_id']) {
+//                $saleArr[$saleProducts['id']]['sale_page'][$saleProducts['sale_page_id']]['title']  = $saleProducts['sale_page_title'];
+//                $saleArr[$saleProducts['id']]['sale_page'][$saleProducts['sale_page_id']]['status'] = $saleProducts['sale_page_status'];
+//            }
         }
 
         $contentData = array(
@@ -275,13 +277,13 @@ class Sale_admin extends CI_Controller
     public function sale_product_drop($id)
     {
         $this->index_model->delFromTable($id, 'sale_product');
-        $assignSaleArr = $this->index_model->getFromTableByParams(array('sale_product_id' => $id), 'sale_page_sale_product_assignment');
-
-        if (count($assignSaleArr)) {
-            foreach ($assignSaleArr as $assignSale) {
-                $this->index_model->delFromTable(ArrayHelper::arrayGet($assignSale, 'id'), 'sale_page_sale_product_assignment');
-            }
-        }
+//        $assignSaleArr = $this->index_model->getFromTableByParams(array('sale_product_id' => $id), 'sale_page_sale_product_assignment');
+//
+//        if (count($assignSaleArr)) {
+//            foreach ($assignSaleArr as $assignSale) {
+//                $this->index_model->delFromTable(ArrayHelper::arrayGet($assignSale, 'id'), 'sale_page_sale_product_assignment');
+//            }
+//        }
 
         redirect('backend/sale_product_list');
     }
@@ -289,24 +291,17 @@ class Sale_admin extends CI_Controller
 
     public function sale_product_edit($id = null)
     {
-        $saleProductArr       = null;
+        $saleProductData       = null;
         $saleProductImageList = [];
         $title                = "Создать sale product";
 
         if ($id) {
-            $saleProductArr       = $this->sale_model->getSaleProductWithAssignedSalePageById($id);
+            $saleProductData       = $this->sale_model->getOneByParams(['id' => $id]);
             $saleProductImageList = $this->saleProductImage_model->getSaleProductImageBySaleProductId($id);
             $title                = "Редактировать sale product";
-            $assignedSalePageArr  = array();
-            foreach ($saleProductArr as $saleProduct) {
-                $assignedSalePageArr[] = ArrayHelper::arrayGet($saleProduct, 'sale_page_id');
-            }
-
-            $saleProductArr[0]['sale_page'] = $assignedSalePageArr;
         }
 
-        $salePageArr              = $this->index_model->getListFromTable('sale_page');
-        $contentArr               = ArrayHelper::arrayGet($saleProductArr, 0, $this->emptySaleProductArr);
+        $contentArr               = $saleProductData ?: $this->emptySaleProductArr;
         $url                      = $this->index_model->prepareUrl($this->urlArr);
         $contentArr['url']        = $url;
         $contentArr['image_list'] = $saleProductImageList;
@@ -314,7 +309,6 @@ class Sale_admin extends CI_Controller
         $contentData = array(
             'title'         => $title
             , 'content'     => $contentArr
-            , 'salePageArr' => $salePageArr
             , 'menu_items'  => $this->edit_menu_model->childs
             , 'message'     => $this->message
         );
@@ -331,8 +325,8 @@ class Sale_admin extends CI_Controller
     {
         $data             = $params = array();
         $id               = ArrayHelper::arrayGet($_REQUEST, 'id');
-        $newSalePageIdArr = ArrayHelper::arrayGet($_REQUEST, 'new_sale_page_id', []);
-        $oldSalePageIdArr = ArrayHelper::arrayGet($_REQUEST, 'old_sale_page_id', []);
+//        $newSalePageIdArr = ArrayHelper::arrayGet($_REQUEST, 'new_sale_page_id', []);
+//        $oldSalePageIdArr = ArrayHelper::arrayGet($_REQUEST, 'old_sale_page_id', []);
 
         try {
             $this->_formSaleProductsValidation();
@@ -341,6 +335,7 @@ class Sale_admin extends CI_Controller
                 'label'       => ArrayHelper::arrayGet($_REQUEST, 'label'),
                 'slug'        => ArrayHelper::arrayGet($_REQUEST, 'slug'),
                 'description' => ArrayHelper::arrayGet($_REQUEST, 'description'),
+                'text' => ArrayHelper::arrayGet($_REQUEST, 'text'),
                 'price'       => ArrayHelper::arrayGet($_REQUEST, 'price'),
                 'gift'        => ArrayHelper::arrayGet($_REQUEST, 'gift')
             );
@@ -354,7 +349,7 @@ class Sale_admin extends CI_Controller
                     )
                 );
 
-                $this->_assignProcess($newSalePageIdArr, $oldSalePageIdArr, $id);
+//                $this->_assignProcess($newSalePageIdArr, $oldSalePageIdArr, $id);
 
                 $this->_updateSaleProducts($data, $params);
             } else {
@@ -365,9 +360,9 @@ class Sale_admin extends CI_Controller
                 );
 
                 $id = $this->_addSaleProducts($data);
-                if (count($newSalePageIdArr)) {
-                    $this->_assignProcess($newSalePageIdArr, $oldSalePageIdArr, $id);
-                }
+//                if (count($newSalePageIdArr)) {
+//                    $this->_assignProcess($newSalePageIdArr, $oldSalePageIdArr, $id);
+//                }
             }
 
             $imageList = ArrayHelper::arrayGet($_REQUEST, 'image', []);
@@ -401,19 +396,19 @@ class Sale_admin extends CI_Controller
     }
 
 
-    private function _assignProcess($newSalePageIdArr, $oldSalePageIdArr, $saleProductId)
-    {
-        $assignedArr = array(
-            'newSourceIdArr'    => $newSalePageIdArr
-            , 'oldSourceIdArr'  => $oldSalePageIdArr
-            , 'assignId'        => $saleProductId
-            , 'assignFieldName' => 'sale_product_id'
-            , 'sourceFieldName' => 'sale_page_id'
-            , 'table'           => 'sale_page_sale_product_assignment');
-
-        $this->assign_model->setAssignArr($assignedArr);
-        $this->assign_model->addOrDeleteAssigns();
-    }
+//    private function _assignProcess($newSalePageIdArr, $oldSalePageIdArr, $saleProductId)
+//    {
+//        $assignedArr = array(
+//            'newSourceIdArr'    => $newSalePageIdArr
+//            , 'oldSourceIdArr'  => $oldSalePageIdArr
+//            , 'assignId'        => $saleProductId
+//            , 'assignFieldName' => 'sale_product_id'
+//            , 'sourceFieldName' => 'sale_page_id'
+//            , 'table'           => 'sale_page_sale_product_assignment');
+//
+//        $this->assign_model->setAssignArr($assignedArr);
+//        $this->assign_model->addOrDeleteAssigns();
+//    }
 
 
     private function _formSaleProductsValidation()

@@ -102,14 +102,9 @@ class Sale_model extends Crud
     public function getSaleProductWithAssignedSalePageById($saleProductsId)
     {
         $sql = "SELECT
-                  sale_product.*,
-                  sale_page.id as sale_page_id
+                  sale_product.*
                 FROM
-                    sale_product
-                LEFT JOIN
-                    sale_page_sale_product_assignment ON sale_page_sale_product_assignment.sale_product_id = sale_product.id
-                LEFT JOIN
-                    sale_page ON sale_page.id = sale_page_sale_product_assignment.sale_page_id                   
+                    sale_product                
                 WHERE
                     sale_product.id = ".$saleProductsId." 
                 ORDER by sale_product.sequence_num";
@@ -152,6 +147,42 @@ class Sale_model extends Crud
         $this->db->join(
             'menu_sale_product_assignment as mspa',
             sprintf('mspa.sale_product_id = sale_product.id AND mspa.menu_id = %s', $menuId),
+            'INNER'
+        );
+
+        $query = $this->db->get($this->table);
+
+        return $query->result_array();
+    }
+
+    public function getAssignedSaleProductIdListByReviewId($reviewId)
+    {
+        $this->db->select('sale_product_review_assignment.sale_product_id');
+        $this->db->where(['sale_product_review_assignment.review_id' => $reviewId]);
+        $query = $this->db->get('sale_product_review_assignment');
+
+        return $query->result_array();
+    }
+
+    public function getAssignedSaleProductListByReviewId($reviewId)
+    {
+        $sqlSelect = sprintf('
+            sale_product_review_assignment.id as sale_product_review_assignment_id,
+            %s.id as sale_product_id,
+            %s.title as sale_product_title,
+            %s.label as sale_product_label,
+            %s.slug as sale_product_slug,
+            %s.status as sale_product_status
+        ', $this->table, $this->table, $this->table, $this->table, $this->table);
+
+        $this->db->select($sqlSelect);
+        $this->db->join(
+            'sale_product_review_assignment',
+            sprintf(
+                'sale_product_review_assignment.sale_product_id = %s.id AND sale_product_review_assignment.review_id = %s',
+                $this->table,
+                $reviewId
+            ),
             'INNER'
         );
 

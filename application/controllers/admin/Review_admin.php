@@ -73,11 +73,11 @@ class Review_admin extends CI_Controller
         $map = array();
 
         foreach ($reviewListWithPageList as $reviewData) {
-            $salePageId = ArrayHelper::arrayGet($reviewData, 'sale_page_id');
+            $saleProductId = ArrayHelper::arrayGet($reviewData, 'sale_product_id');
             $menuId = ArrayHelper::arrayGet($reviewData, 'menu_id');
 
             $map[ArrayHelper::arrayGet($reviewData, 'id')]['data']                = $reviewData;
-            $map[ArrayHelper::arrayGet($reviewData, 'id')]['sale_page_list'][$salePageId] = $reviewData;
+            $map[ArrayHelper::arrayGet($reviewData, 'id')]['sale_product_list'][$saleProductId] = $reviewData;
             $map[ArrayHelper::arrayGet($reviewData, 'id')]['menu_list'][$menuId] = $reviewData;
         }
 
@@ -86,23 +86,22 @@ class Review_admin extends CI_Controller
 
     public function edit($id = null)
     {
-        $reviewData              = array();
-        $assignedSalePageList = array();
-        $assignedMenuList = array();
+        $reviewData              = [];
+        $assignedMenuList = [];
+        $assignedSaleProductIdList = [];
         $title                   = "Добавить отзыв";
 
-        $salePageList = $this->sale_model->getListFromTable('sale_page');
+        $saleProductList = $this->sale_model->getList();
         $menuList = $this->sale_model->getListFromTable('menu');
 
         if ($id) {
             $reviewData                  = $this->review_model->get($id);
-            $assignedSalePageDataList = $this->salePage_model->getAssignedSalePageListByReviewId($id);
+            $assignedSaleProductIdList = $this->sale_model->getAssignedSaleProductIdListByReviewId($id);
             $assignedMenuDataList = $this->edit_menu_model->getAssignedMenuListByReviewId($id);
 
-            foreach ($assignedSalePageDataList as $assignedSalePageData) {
-                $salePageId = ArrayHelper::arrayGet($assignedSalePageData, 'sale_page_id');
-                $assignedSalePageList[$salePageId] = $assignedSalePageData;
-            }
+            $assignedSaleProductIdList = array_map(function ($assignedSaleProductData) {
+                return ArrayHelper::arrayGet($assignedSaleProductData, 'sale_product_id');
+            }, $assignedSaleProductIdList);
 
             foreach ($assignedMenuDataList as $assignedMenuData) {
                 $menuId = ArrayHelper::arrayGet($assignedMenuData, 'id');
@@ -121,9 +120,9 @@ class Review_admin extends CI_Controller
             'title'                   => $title,
             'content'                 => $content,
             'menu_items'              => $this->edit_menu_model->childs,
-            'assignedSalePageList' => $assignedSalePageList,
+            'assignedSaleProductIdList' => $assignedSaleProductIdList,
             'assignedMenuList' => $assignedMenuList,
-            'salePageList'         => $salePageList,
+            'saleProductList'         => $saleProductList,
             'menuList'         => $menuList,
             'message'                 => $this->message
         );
@@ -138,11 +137,11 @@ class Review_admin extends CI_Controller
 
     public function save()
     {
-        $data = $params = $salePageDataToAssign = $menuDataToAssign = [];
+        $data = $params = $saleProductDataToAssign = $menuDataToAssign = [];
         $id   = ArrayHelper::arrayGet($_REQUEST, 'id');
 
-        $assignedNewSalePageIds = ArrayHelper::arrayGet($_REQUEST, 'new_sale_page_id', []);
-        $assignedOldSalePageIds = ArrayHelper::arrayGet($_REQUEST, 'old_sale_page_id', []);
+        $assignedNewSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'new_sale_product_id', []);
+        $assignedOldSaleProductIds = ArrayHelper::arrayGet($_REQUEST, 'old_sale_product_id', []);
 
         $assignedNewMenuIds = ArrayHelper::arrayGet($_REQUEST, 'new_menu_id', []);
         $assignedOldMenuIds = ArrayHelper::arrayGet($_REQUEST, 'old_menu_id', []);
@@ -153,11 +152,11 @@ class Review_admin extends CI_Controller
             $data['image']  = ArrayHelper::arrayGet($_REQUEST, 'image');
             $data['date']   = ArrayHelper::arrayGet($_REQUEST, 'date', date('Y-m-d H:i:s'));
 
-            if ($assignedNewSalePageIds) {
-                $salePageDataToAssign = [
+            if ($assignedNewSaleProductIds) {
+                $saleProductDataToAssign = [
                     'assignFieldName' => 'review_id',
-                    'sourceFieldName' => 'sale_page_id',
-                    'table'           => 'sale_page_review_assignment'
+                    'sourceFieldName' => 'sale_product_id',
+                    'table'           => 'sale_product_review_assignment'
                 ];
             }
 
@@ -174,10 +173,10 @@ class Review_admin extends CI_Controller
 
                 $data = array_merge($data, $dataUpdate);
 
-                if ($salePageDataToAssign) {
-                    $dataToAssign = array_merge($salePageDataToAssign, ['assignId' => $id]);
+                if ($saleProductDataToAssign) {
+                    $dataToAssign = array_merge($saleProductDataToAssign, ['assignId' => $id]);
 
-                    $this->_assignProcess($assignedNewSalePageIds, $assignedOldSalePageIds, $dataToAssign);
+                    $this->_assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $dataToAssign);
                 }
 
                 if ($menuDataToAssign) {
@@ -195,10 +194,10 @@ class Review_admin extends CI_Controller
                 $id = $this->review_model->add($data);
                 Common::assertTrue($id, 'Форма заполнена неверно');
 
-                if ($salePageDataToAssign) {
-                    $dataToAssign = array_merge($salePageDataToAssign, ['assignId' => $id]);
+                if ($saleProductDataToAssign) {
+                    $dataToAssign = array_merge($saleProductDataToAssign, ['assignId' => $id]);
 
-                    $this->_assignProcess($assignedNewSalePageIds, $assignedOldSalePageIds, $dataToAssign);
+                    $this->_assignProcess($assignedNewSaleProductIds, $assignedOldSaleProductIds, $dataToAssign);
                 }
 
                 if ($menuDataToAssign) {
@@ -241,13 +240,13 @@ class Review_admin extends CI_Controller
     {
         try {
             $this->review_model->del($id);
-            $assignedSalePageDataList = $this->salePage_model->getAssignedSalePageListByReviewId($id);
+            $assignedSaleProductDataList = $this->sale_model->getAssignedSaleProductListByReviewId($id);
 
-            if ($assignedSalePageDataList) {
-                foreach ($assignedSalePageDataList as $assignedSalePageData) {
+            if ($assignedSaleProductDataList) {
+                foreach ($assignedSaleProductDataList as $assignedSaleProductData) {
                     $this->review_model->delFromTable(
-                        ArrayHelper::arrayGet($assignedSalePageData, 'sale_page_review_assignment_id'),
-                        'sale_page_review_assignment'
+                        ArrayHelper::arrayGet($assignedSaleProductData, 'sale_product_review_assignment_id'),
+                        'sale_product_review_assignment'
                     );
                 }
             }

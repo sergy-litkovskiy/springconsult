@@ -6,8 +6,7 @@ function EditSaleProductsFormModule() {
 
         var _init = function(){
             sb.publish({
-                type : 'init-advanced-mce-for-element',
-                data : 'sale-products-mce'
+                type : 'init-advanced-mce-for-all-textarea'
             });
         }; 
         

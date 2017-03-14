@@ -14,44 +14,60 @@ class Review_model extends Crud
 
     public function getReviewListWithAssignedItemsAdmin()
     {
-        $sql = "SELECT
-                    review.*,
-                    sale_page.id as sale_page_id,
-                    sale_page.title as sale_page_title,
-                    sale_page.status as sale_page_status,
-                    
-                    menu.id as menu_id,
-                    menu.title as menu_title,
-                    menu.status as menu_status
-                FROM
-                    review
-                LEFT JOIN
-                    sale_page_review_assignment ON sale_page_review_assignment.review_id = review.id
-                LEFT JOIN 
-                    sale_page ON sale_page.id = sale_page_review_assignment.sale_page_id                    
-                LEFT JOIN
-                    menu_review_assignment ON menu_review_assignment.review_id = review.id
-                LEFT JOIN 
-                    menu ON menu.id = menu_review_assignment.menu_id"
-        ;
+        $sqlSelect = sprintf(
+            '%s.*,
+            sale_product.id as sale_product_id,
+            sale_product.title as sale_product_title,
+            sale_product.label as sale_product_label,
+            sale_product.status as sale_product_status,
+            
+            menu.id as menu_id,
+            menu.title as menu_title,
+            menu.status as menu_status',
+            $this->table
+        );
 
-        $query = $this->db->query($sql);
+        $this->db->select($sqlSelect);
+
+        $this->db->join(
+            'sale_product_review_assignment as spra',
+            $this->table . '.id = spra.review_id',
+            'LEFT'
+        );
+
+        $this->db->join(
+            'sale_product',
+            'sale_product.id = spra.sale_product_id',
+            'LEFT'
+        );
+
+        $this->db->join(
+            'menu_review_assignment as mra',
+            $this->table . '.id = mra.review_id',
+            'LEFT'
+        );
+
+        $this->db->join(
+            'menu',
+            'menu.id = mra.menu_id',
+            'LEFT'
+        );
+
+        $query = $this->db->get($this->table);
 
         return $query->result_array();
     }
 
-    public function getReviewListBySalePageId($salePageId)
+    public function getReviewListBySaleProductId($saleProductId)
     {
-        $sql = "SELECT
-                    sale_page_review_assignment.id as sale_page_review_assignment_id,
-                    review.*
-                FROM
-                    review
-                INNER JOIN
-                    sale_page_review_assignment ON sale_page_review_assignment.review_id = review.id";
-        $sql .= " AND sale_page_review_assignment.sale_page_id = ".$salePageId;
+        $this->db->select($this->table . '.*');
+        $this->db->join(
+            'sale_product_review_assignment as spra',
+            $this->table . '.id = spra.review_id AND spra.sale_product_id = ' . $saleProductId,
+            'INNER'
+        );
 
-        $query = $this->db->query($sql);
+        $query = $this->db->get($this->table);
 
         return $query->result_array();
     }
