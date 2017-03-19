@@ -98,43 +98,43 @@
         // ============================
         //  = Scroll event function =
         //  ===========================
-        var goScrolling = function(elem) {
-            var docViewTop = $(window).scrollTop();
-            var docViewBottom = docViewTop + $(window).height();
-            var elemTop = elem.offset().top;
-            var elemBottom = elemTop + elem.height();
-            return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-        };
+        // var goScrolling = function(elem) {
+        //     var docViewTop = $(window).scrollTop();
+        //     var docViewBottom = docViewTop + $(window).height();
+        //     var elemTop = elem.offset().top;
+        //     var elemBottom = elemTop + elem.height();
+        //     return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+        // };
 
         //  =======================
         //  = Progress bars =
         //  =======================
-        $('.progress_skill .bar').data('width', $(this).width()).css({
-            width : 0,
-            height:0
-        });
-        $(window).scroll(function() {
-            $('.progress_skill .bar').each(function() {
-                if (goScrolling($(this))) {
-                    $(this).css({
-                        width : $(this).attr('data-value') + '%',
-                        height : $(this).attr('data-height') + '%'
-                    });
-                }
-            });
-        });
+        // $('.progress_skill .bar').data('width', $(this).width()).css({
+        //     width : 0,
+        //     height:0
+        // });
+        // $(window).scroll(function() {
+        //     $('.progress_skill .bar').each(function() {
+        //         if (goScrolling($(this))) {
+        //             $(this).css({
+        //                 width : $(this).attr('data-value') + '%',
+        //                 height : $(this).attr('data-height') + '%'
+        //             });
+        //         }
+        //     });
+        // });
 
         /*===========================================================*/
         /*	Flickr Gallery
         /*===========================================================*/
-        $('#flickrFeed').jflickrfeed({
-            limit: 9,
-            qstrings: {
-                //id: '124787947@N07' our id //
-                id: '124787947@N07'
-            },
-            itemTemplate: '<li><a class="mfp-gallery" title="{{title}}" href="{{image_b}}"><i class="fa fa-search"></i><div class="hover"></div></a><img src="{{image_s}}" alt="{{title}}" /></li>'
-        });
+        // $('#flickrFeed').jflickrfeed({
+        //     limit: 9,
+        //     qstrings: {
+        //         //id: '124787947@N07' our id //
+        //         id: '124787947@N07'
+        //     },
+        //     itemTemplate: '<li><a class="mfp-gallery" title="{{title}}" href="{{image_b}}"><i class="fa fa-search"></i><div class="hover"></div></a><img src="{{image_s}}" alt="{{title}}" /></li>'
+        // });
 
         /*===========================================================*/
         /*	Isotope Portfolio
@@ -177,32 +177,32 @@
         /*----------------------------------------------------*/
         /*	Magnific Popup
         /*----------------------------------------------------*/
-        $('body').magnificPopup({
-            type: 'image',
-            delegate: 'a.mfp-gallery',
-            fixedContentPos: true,
-            fixedBgPos: true,
-            overflowY: 'auto',
-            closeBtnInside: true,
-            preloader: true,
-            removalDelay: 0,
-            mainClass: 'mfp-fade',
-            gallery:{enabled:true},
-            callbacks: {
-                buildControls: function() {
-                    console.log('inside'); this.contentContainer.append(this.arrowLeft.add(this.arrowRight));
-                }
-            }
-        });
-
-        $('.mfp-image').magnificPopup({
-            type: 'image',
-            closeOnContentClick: true,
-            mainClass: 'mfp-fade',
-            image: {
-                verticalFit: true
-            }
-        });
+        // $('body').magnificPopup({
+        //     type: 'image',
+        //     delegate: 'a.mfp-gallery',
+        //     fixedContentPos: true,
+        //     fixedBgPos: true,
+        //     overflowY: 'auto',
+        //     closeBtnInside: true,
+        //     preloader: true,
+        //     removalDelay: 0,
+        //     mainClass: 'mfp-fade',
+        //     gallery:{enabled:true},
+        //     callbacks: {
+        //         buildControls: function() {
+        //             console.log('inside'); this.contentContainer.append(this.arrowLeft.add(this.arrowRight));
+        //         }
+        //     }
+        // });
+        //
+        // $('.mfp-image').magnificPopup({
+        //     type: 'image',
+        //     closeOnContentClick: true,
+        //     mainClass: 'mfp-fade',
+        //     image: {
+        //         verticalFit: true
+        //     }
+        // });
 
         // $('.mfp-youtube, .mfp-vimeo, .mfp-gmaps').magnificPopup({
         //     disableOn: 700,
@@ -241,7 +241,7 @@
         /*----------------------------------------------------*/
         /*	Popover
         /*----------------------------------------------------*/
-        $('[data-toggle="popover"]').popover()
+        // $('[data-toggle="popover"]').popover()
         /* ------------------ End Document ------------------ */
 
         $("body").tooltip({

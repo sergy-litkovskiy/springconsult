@@ -27,6 +27,26 @@
                         <div class="col-lg-8 col-sm-8">
                             <div class="col-lg-4 col-sm-4">
                                 <img src="{{ base_url() }}img/sale_product/{{ data.image.image }}"/>
+                                <div class="widget_content">
+                                    <div class="flickr">
+                                        {% if saleProductImageList|length %}
+                                            <ul class="flickr-feed">
+                                                {% for saleProductImage in saleProductImageList %}
+                                                    {% if saleProductImage.is_main < 1 %}
+                                                        {% set imageData = saleProductImage.image|split('.') %}
+                                                        <li>
+                                                            <a class="mfp-gallery" title="origin" href="{{ base_url() }}img/sale_product/additional/{{ saleProductImage.image }}">
+                                                                <i class="fa fa-search"></i>
+                                                                <div class="hover"></div>
+                                                            </a>
+                                                            <img src="{{ base_url() }}img/sale_product/additional/{{ imageData[0] }}_s.{{ imageData[1] }}" alt="small">
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-lg-8 col-sm-8">
                                 <div>
@@ -50,10 +70,12 @@
                             <div class="clearfix"></div>
                             <div class="col-lg-12 col-sm-12">
                                 <div class="project_description">
-                                    <div class="widget_title">
-                                        <h4><span>Описание</span></h4>
-                                    </div>
-                                    {{ data.text|raw }}
+                                    {% if data.text|length %}
+                                        <div class="widget_title">
+                                            <h4><span>Описание</span></h4>
+                                        </div>
+                                        {{ data.text|raw }}
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -89,7 +111,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="widget">
+                                {% if reviewList|length %}
+                                    <div class="widget">
                                     <div class="widget_title">
                                         <h4><span>Отзывы</span></h4>
                                     </div>
@@ -110,6 +133,7 @@
                                         </div>
                                     {% endfor %}
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -130,5 +154,44 @@
             placement : 'top',
             trigger : 'hover'
         });
+
+        {#$('#flickrFeed').jflickrfeed({#}
+            {#limit: 6,#}
+            {#qstrings: {#}
+                {#//id: '124787947@N07' our id //#}
+                {#id: '124787947@N07'#}
+            {#},#}
+            {#itemTemplate: '<li><a class="mfp-gallery" title="{{title}}" href="{{image_b}}"><i class="fa fa-search"></i><div class="hover"></div></a><img src="{{image_s}}" alt="{{title}}" /></li>'#}
+        {#});#}
+
+        /*----------------------------------------------------*/
+        /*	Magnific Popup
+         /*----------------------------------------------------*/
+         $('body').magnificPopup({
+             type: 'image',
+             delegate: 'a.mfp-gallery',
+             fixedContentPos: true,
+             fixedBgPos: true,
+             overflowY: 'auto',
+             closeBtnInside: true,
+             preloader: true,
+             removalDelay: 0,
+             mainClass: 'mfp-fade',
+             gallery:{enabled:true},
+             callbacks: {
+                 buildControls: function() {
+                     console.log('inside'); this.contentContainer.append(this.arrowLeft.add(this.arrowRight));
+                 }
+             }
+         });
+
+         $('.mfp-image').magnificPopup({
+             type: 'image',
+             closeOnContentClick: true,
+             mainClass: 'mfp-fade',
+             image: {
+                 verticalFit: true
+             }
+         });
     </script>
 {% endblock %}

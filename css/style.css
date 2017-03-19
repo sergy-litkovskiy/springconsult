@@ -786,7 +786,8 @@ ul.sm li *,ul.sm li *:before,ul.sm li *:after{-moz-box-sizing:content-box;-webki
     display: block;
     float: left;
     height: 100%;
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
+    margin-bottom: 5px;
     position: relative;
     width: 100%;
 }
