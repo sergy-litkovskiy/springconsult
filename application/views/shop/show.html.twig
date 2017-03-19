@@ -155,15 +155,6 @@
             trigger : 'hover'
         });
 
-        {#$('#flickrFeed').jflickrfeed({#}
-            {#limit: 6,#}
-            {#qstrings: {#}
-                {#//id: '124787947@N07' our id //#}
-                {#id: '124787947@N07'#}
-            {#},#}
-            {#itemTemplate: '<li><a class="mfp-gallery" title="{{title}}" href="{{image_b}}"><i class="fa fa-search"></i><div class="hover"></div></a><img src="{{image_s}}" alt="{{title}}" /></li>'#}
-        {#});#}
-
         /*----------------------------------------------------*/
         /*	Magnific Popup
          /*----------------------------------------------------*/
@@ -194,4 +185,5 @@
              }
          });
     </script>
+    {% include 'blocks/popup_payment.html.twig' %}
 {% endblock %}
