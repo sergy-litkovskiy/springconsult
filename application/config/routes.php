@@ -177,36 +177,3 @@ $route['gift/list'] = 'gift/ajaxGetGiftList';
 $route['gift/subscribe'] = 'gift/ajaxGiftSubscribe';
 $route['gift/finishsubscribe/(:num)/(:num)'] = 'gift/outputSubscribe/$1/$2';
 $route['finishsubscribe/(:any)'] = 'gift/finishSubscribe/$1';
-
-
-
-//$route['contact_form/send'] = 'index/ajaxSendContactForm';
-//$route['search']            = 'search/search_result';
-//$route['rss']               = 'rss/show_rss';
-//$route['sitemap']           = 'index/sitemap';
-//$route['free']              = 'index/freeProductShow';
-//$route['show/news']         = 'index';
-//$route['show/free']         = 'index/freeProductShow';
-////$route['frontend/unsubscribe/re/(:num)']                    = 'index/unsubscribe_finish/$1';
-//$route['cloudtag/(:num)']             = 'index/cloudTagList/$1';
-//$route['cloudtag/(:num)/page/(:num)'] = 'index/cloudTagList/$1/$2';
-//
-//$route['unsubscribe/(:any)'] = 'index/unsubscribeProcess/$1';
-////$route['subscribe/send']                                    = 'index/ajax_send_subscribe';
-//$route['frontend/finishsubscribe/(:num)/recip/(:num)'] = 'index/outputSubscribe/$1/$2';
-//$route['news/page/(:num)']                             = 'index/index/$1';
-//$route['finishsubscribe/(:any)']                       = 'index/finishSubscribe/$1';
-//$route['show/(:any)']                                  = 'index/show/$1';
-//$route['ajax_get_landing_mp3']                         = 'landing/ajax_get_landing_mp3';
-//$route['landing/(:any)']                               = 'landing/show_landing_page/$1';
-//$route['landing_subscribe']                            = 'landing/ajax_landing_subscribe';
-//$route['landing_article/(:any)']                      = 'landing/show_landing_article/$1';
-//$route['payment/response']                             = 'sale/payment_response';
-//$route['ajax_payment_registration']                    = 'sale/ajax_payment_registration';
-//$route['sale/(:any)']                                  = 'sale/sale_show/$1';
-//
-//$route['salestatus/(:any)'] = 'sale/sale_payment/$1';
-//$route['success/sale']      = 'sale/success_sale';
-//$route['faild/sale']        = 'sale/faild_sale';
-//
-//$route['(:any)/(:num)'] = 'index/showDetail/$1/$2';

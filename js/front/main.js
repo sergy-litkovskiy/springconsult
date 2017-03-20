@@ -33,108 +33,6 @@
                 });
             });
         }
-        /*----------------------------------------------------*/
-        /*	EasyPie Chart Effects
-         /*----------------------------------------------------*/
-        // if(jQuery.isFunction(jQuery.fn.easyPieChart)){
-        //
-        //     // Big EasyPie Chart Effects;
-        //     $('.circular-chart-big').easyPieChart({
-        //         animate : 2000,
-        //         barColor: "#727CB6",
-        //         trackColor : '#f9f9f9',
-        //         scaleColor: false,
-        //         lineWidth: 11,
-        //         size: 180,
-        //         onStep: function(from, to, percent) {
-        //             $(this.el).find('.percent').text(Math.round(percent)+'%');
-        //         }
-        //     });
-        //
-        //     // Small EasyPie Chart Effects;
-        //     $('.circular-chart-small').easyPieChart({
-        //         size : 120,
-        //         animate : 2000,
-        //         lineWidth : 7,
-        //         lineCap : 'square',
-        //         barColor : '#727CB6',
-        //         trackColor : '#f9f9f9',
-        //         scaleColor : false,
-        //         onStep: function(from, to, percent) {
-        //             $(this.el).find('.percent').text(Math.round(percent)+'%');
-        //         }
-        //     });
-        // }
-
-        /*----------------------------------------------------*/
-        /*	Owl Carousel
-        /*----------------------------------------------------*/
-        // if(jQuery.isFunction(jQuery.fn.owlCarousel)){
-        //
-        //     // Recent Work Slider
-        //     $("#recent-work-slider").owlCarousel({
-        //         navigation : true,
-        //         pagination : false,
-        //         items : 5,
-        //         itemsDesktop:[1199,4],
-        //         itemsTablet : [768, 3],
-        //         itemsDesktopSmall : [992, 3],
-        //         itemsMobile : [480,1],
-        //         navigationText : ["",""]
-        //     });
-        //
-        //     // Post News Slider
-        //     $("#post-slider").owlCarousel({
-        //         navigation : true,
-        //         pagination : false,
-        //         items : 4,
-        //         itemsDesktop:[1199,3],
-        //         itemsDesktopSmall:[980,2],
-        //         itemsMobile : [479,1],
-        //         navigationText : ["",""]
-        //     });
-        // }
-
-        // ============================
-        //  = Scroll event function =
-        //  ===========================
-        // var goScrolling = function(elem) {
-        //     var docViewTop = $(window).scrollTop();
-        //     var docViewBottom = docViewTop + $(window).height();
-        //     var elemTop = elem.offset().top;
-        //     var elemBottom = elemTop + elem.height();
-        //     return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-        // };
-
-        //  =======================
-        //  = Progress bars =
-        //  =======================
-        // $('.progress_skill .bar').data('width', $(this).width()).css({
-        //     width : 0,
-        //     height:0
-        // });
-        // $(window).scroll(function() {
-        //     $('.progress_skill .bar').each(function() {
-        //         if (goScrolling($(this))) {
-        //             $(this).css({
-        //                 width : $(this).attr('data-value') + '%',
-        //                 height : $(this).attr('data-height') + '%'
-        //             });
-        //         }
-        //     });
-        // });
-
-        /*===========================================================*/
-        /*	Flickr Gallery
-        /*===========================================================*/
-        // $('#flickrFeed').jflickrfeed({
-        //     limit: 9,
-        //     qstrings: {
-        //         //id: '124787947@N07' our id //
-        //         id: '124787947@N07'
-        //     },
-        //     itemTemplate: '<li><a class="mfp-gallery" title="{{title}}" href="{{image_b}}"><i class="fa fa-search"></i><div class="hover"></div></a><img src="{{image_s}}" alt="{{title}}" /></li>'
-        // });
 
         /*===========================================================*/
         /*	Isotope Portfolio
@@ -175,45 +73,6 @@
         }
 
         /*----------------------------------------------------*/
-        /*	Magnific Popup
-        /*----------------------------------------------------*/
-        // $('body').magnificPopup({
-        //     type: 'image',
-        //     delegate: 'a.mfp-gallery',
-        //     fixedContentPos: true,
-        //     fixedBgPos: true,
-        //     overflowY: 'auto',
-        //     closeBtnInside: true,
-        //     preloader: true,
-        //     removalDelay: 0,
-        //     mainClass: 'mfp-fade',
-        //     gallery:{enabled:true},
-        //     callbacks: {
-        //         buildControls: function() {
-        //             console.log('inside'); this.contentContainer.append(this.arrowLeft.add(this.arrowRight));
-        //         }
-        //     }
-        // });
-        //
-        // $('.mfp-image').magnificPopup({
-        //     type: 'image',
-        //     closeOnContentClick: true,
-        //     mainClass: 'mfp-fade',
-        //     image: {
-        //         verticalFit: true
-        //     }
-        // });
-
-        // $('.mfp-youtube, .mfp-vimeo, .mfp-gmaps').magnificPopup({
-        //     disableOn: 700,
-        //     type: 'iframe',
-        //     mainClass: 'mfp-fade',
-        //     removalDelay: 0,
-        //     preloader: false,
-        //     fixedContentPos: false
-        // });
-
-        /*----------------------------------------------------*/
         /*	Swipe Slider
          /*----------------------------------------------------*/
         window.mySwipe = new Swipe(document.getElementById('slider'), {
@@ -231,18 +90,12 @@
         /*	Accordians & Toggles
          /*----------------------------------------------------*/
 
-        $('.panel-group').on('shown.bs.collapse', function (e) {
-            $(e.target).parent().addClass('active_acc');
-        });
-        $('.panel-group').on('hidden.bs.collapse', function (e) {
-            $(e.target).parent().removeClass('active_acc');
-        });
-
-        /*----------------------------------------------------*/
-        /*	Popover
-        /*----------------------------------------------------*/
-        // $('[data-toggle="popover"]').popover()
-        /* ------------------ End Document ------------------ */
+        // $('.panel-group').on('shown.bs.collapse', function (e) {
+        //     $(e.target).parent().addClass('active_acc');
+        // });
+        // $('.panel-group').on('hidden.bs.collapse', function (e) {
+        //     $(e.target).parent().removeClass('active_acc');
+        // });
 
         $("body").tooltip({
             selector: '[data-toggle="tooltip"]'
@@ -251,56 +104,6 @@
 })(this.jQuery);
 
 $(document).ready(function() {
-
-    /*=================
-     *	Contact Form
-     * #contact
-     ===================*/
-
-    // try{
-    //     jQuery('#contact').validate({
-    //         submitHandler: function(form) {
-    //             jQuery('#contact .message').hide();
-    //             var ajaxurl = 'contact.php';
-    //             var data = {
-    //                 action: 'contact_us',
-    //                 datas: jQuery(form).serialize()
-    //             };
-    //
-    //             jQuery.ajax({
-    //                 type: 'POST',
-    //                 url: ajaxurl,
-    //                 data: data,
-    //                 success: function(response){
-    //                     jQuery('#contact .message').text(response.error).css({'display' : 'inline-block'});
-    //                 },
-    //                 dataType: 'json'
-    //             });
-    //             return false;
-    //         },
-    //         rules: {
-    //             c_name: {
-    //                 required: true,
-    //                 minlength: 3
-    //             },
-    //             c_mail: {
-    //                 required: true,
-    //                 email: true
-    //             },
-    //             c_subject: {
-    //                 required: true,
-    //                 minlength: 6
-    //             },
-    //             c_message:{
-    //                 required: true,
-    //                 minlength: 20
-    //             }
-    //         }
-    //     });
-    // }catch(e){
-    //
-    // }
-
     /*============
      BUTTON UP
      * ===========*/
