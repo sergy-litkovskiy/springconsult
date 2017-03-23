@@ -158,11 +158,6 @@
 {% block footer %}
     {{ parent() }}
     <script type="text/javascript">
-        $('[data-toggle="popover"]').popover({
-            placement : 'top',
-            trigger : 'hover'
-        });
-
         $('.shorten-education').shorten({
             showChars: 650,
             moreText: '<i class="fa fa-angle-down"></i>',

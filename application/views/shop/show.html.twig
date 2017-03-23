@@ -149,41 +149,8 @@
 
 {% block footer %}
     {{ parent() }}
-    <script type="text/javascript">
-        $('[data-toggle="popover"]').popover({
-            placement : 'top',
-            trigger : 'hover'
-        });
 
-        /*----------------------------------------------------*/
-        /*	Magnific Popup
-         /*----------------------------------------------------*/
-         $('body').magnificPopup({
-             type: 'image',
-             delegate: 'a.mfp-gallery',
-             fixedContentPos: true,
-             fixedBgPos: true,
-             overflowY: 'auto',
-             closeBtnInside: true,
-             preloader: true,
-             removalDelay: 0,
-             mainClass: 'mfp-fade',
-             gallery:{enabled:true},
-             callbacks: {
-                 buildControls: function() {
-                     console.log('inside'); this.contentContainer.append(this.arrowLeft.add(this.arrowRight));
-                 }
-             }
-         });
-
-         $('.mfp-image').magnificPopup({
-             type: 'image',
-             closeOnContentClick: true,
-             mainClass: 'mfp-fade',
-             image: {
-                 verticalFit: true
-             }
-         });
-    </script>
     {% include 'blocks/popup_payment.html.twig' %}
+    <script type="text/javascript" src="/js/front/magnific_popup.js"></script>
+    <script type="text/javascript" src="/js/front/payment_popup.js"></script>
 {% endblock %}

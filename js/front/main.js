@@ -15,49 +15,10 @@
             $('.same-height').matchHeight();
         }
 
-        /*----------------------------------------------------*/
-        /*	Fraction Slider
-        /*----------------------------------------------------*/
-        if(jQuery.isFunction(jQuery.fn.fractionSlider)){
-            $(window).load(function(){
-                $('.slider').fractionSlider({
-                    'fullWidth': 			true,
-                    'controls': 			true,
-                    'responsive': 			true,
-                    'dimensions': 			"1920,450",
-                    'timeout' :             5000,
-                    'increase': 			true,
-                    'pauseOnHover': 		true,
-                    'slideEndAnimation': 	false,
-                    'autoChange':           true
-                });
-            });
-        }
-
-        /*===========================================================*/
-        /*	Isotope Portfolio
-        /*===========================================================*/
-        if(jQuery.isFunction(jQuery.fn.isotope)){
-            jQuery('.portfolio_list').isotope({
-                itemSelector : '.list_item',
-                layoutMode : 'fitRows',
-                animationEngine : 'jquery'
-            });
-
-            /* ---- Filtering ----- */
-            jQuery('#filter li').click(function(){
-                var $this = jQuery(this);
-                if ( $this.hasClass('selected') ) {
-                    return false;
-                } else {
-                    jQuery('#filter .selected').removeClass('selected');
-                    var selector = $this.attr('data-filter');
-                    $this.parent().next().isotope({ filter: selector });
-                    $this.addClass('selected');
-                    return false;
-                }
-            });
-        }
+        $('[data-toggle="popover"]').popover({
+            placement : 'top',
+            trigger : 'hover'
+        });
 
         /*===========================================================*/
         /*	Image Hover Effect - HoverDirection.js
@@ -71,31 +32,6 @@
                 $box.filter('[class*="-leave-"]').hoverDirection('removeClass');
             });
         }
-
-        /*----------------------------------------------------*/
-        /*	Swipe Slider
-         /*----------------------------------------------------*/
-        window.mySwipe = new Swipe(document.getElementById('slider'), {
-            startSlide: 2,
-            speed: 400,
-            auto: 3000,
-            continuous: true,
-            disableScroll: false,
-            stopPropagation: false,
-            callback: function(index, elem) {},
-            transitionEnd: function(index, elem) {}
-        });
-
-        /*----------------------------------------------------*/
-        /*	Accordians & Toggles
-         /*----------------------------------------------------*/
-
-        // $('.panel-group').on('shown.bs.collapse', function (e) {
-        //     $(e.target).parent().addClass('active_acc');
-        // });
-        // $('.panel-group').on('hidden.bs.collapse', function (e) {
-        //     $(e.target).parent().removeClass('active_acc');
-        // });
 
         $("body").tooltip({
             selector: '[data-toggle="tooltip"]'
