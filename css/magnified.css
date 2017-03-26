@@ -89,7 +89,7 @@
 	left: 50%;
 	width: 24px;
 	height: 24px;
-	background: url('../images/preloader-dark.gif') center center no-repeat;
+	background: url('../img/preloader.gif') center center no-repeat;
 	text-align: center;
 	margin-top: -12px;
 	margin-left: -12px;
@@ -151,7 +151,7 @@ button::-moz-focus-inner {
 	top: 20px;
 	padding-right: 6px;
 	width: 100%;
-	background-image: url(../images/mfp-close.png);
+	background-image: url(../img/mfp-close.png);
 	background-repeat: no-repeat;
 	background-position: 100% 50%;
 	text-indent: 9999px;
