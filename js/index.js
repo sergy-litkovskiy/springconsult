@@ -1,3 +1,5 @@
+'use strict';
+
 $(document).ready(function(){
     (function() {
         $('#logo-bar').scrollToFixed(); // Fixed Navigation Bar
