@@ -83,6 +83,7 @@
 
 {% block footer %}
     {{ parent() }}
+    <script type="text/javascript" src="{{ base_url() }}js/front/jquery.magnific-popup.min.js"></script>
     {% include 'blocks/popup_payment.html.twig' %}
     <script src="assets/shop.js"></script>
 {% endblock %}
