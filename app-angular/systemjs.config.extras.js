@@ -1,11 +1,3 @@
-
-// (function (global) {
-//   System.config({
-//     packages: {
-//       // add packages here
-//     }
-//   });
-// })(this);
 (function (global) {
   System.config({
     paths: {
