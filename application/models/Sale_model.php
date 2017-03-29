@@ -91,6 +91,8 @@ class Sale_model extends Crud
                     sale_product.price as sale_product_price,
                     sale_product.gift as sale_product_gift,
                     sale_product.description as sale_product_description,
+                    sale_product.delivery as sale_product_delivery,
+                    sale_product.payment as sale_product_payment,
                     sale_product.image as sale_product_image
                 FROM
                     sale_page

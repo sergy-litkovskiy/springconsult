@@ -42,6 +42,12 @@
     <p><b>Описание основное:</b></p>
     <textarea style='width:100%' name='text' cols='80' rows='8'><?php echo $content['text'];?></textarea>
     <br/>
+    <p><b>Доставка:</b></p>
+    <textarea style='width:100%' name='delivery' cols='80' rows='5'><?php echo $content['delivery'];?></textarea>
+    <br/>
+    <p><b>Оплата:</b></p>
+    <textarea style='width:100%' name='payment' cols='80' rows='5'><?php echo $content['payment'];?></textarea>
+    <br/>
     <p><b>Цена:</b></p>
     <p><input type="text" id='price' name='price' value="<?php echo $content['price'];?>"/></p>
     <br/>

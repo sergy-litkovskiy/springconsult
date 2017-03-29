@@ -55,6 +55,8 @@ class Sale_admin extends CI_Controller
             , 'slug'         => null
             , 'description'  => null
             , 'text'  => null
+            , 'delivery'      => null
+            , 'payment'      => null
             , 'price'        => null
             , 'gift'         => null
             , 'sale_page_id' => null
@@ -250,6 +252,8 @@ class Sale_admin extends CI_Controller
             $saleArr[$saleProducts['id']]['gift']                = $saleProducts['gift'];
             $saleArr[$saleProducts['id']]['description']         = $saleProducts['description'];
             $saleArr[$saleProducts['id']]['text']         = $saleProducts['text'];
+            $saleArr[$saleProducts['id']]['delivery']         = $saleProducts['delivery'];
+            $saleArr[$saleProducts['id']]['payment']         = $saleProducts['payment'];
             $saleArr[$saleProducts['id']]['status']              = $saleProducts['status'];
             $saleArr[$saleProducts['id']]['image']               = $saleProducts['image'];
             $saleArr[$saleProducts['id']]['sale_product_letter'] = $saleProductsLetters;
@@ -336,6 +340,8 @@ class Sale_admin extends CI_Controller
                 'slug'        => ArrayHelper::arrayGet($_REQUEST, 'slug'),
                 'description' => ArrayHelper::arrayGet($_REQUEST, 'description'),
                 'text' => ArrayHelper::arrayGet($_REQUEST, 'text'),
+                'delivery' => ArrayHelper::arrayGet($_REQUEST, 'delivery'),
+                'payment' => ArrayHelper::arrayGet($_REQUEST, 'payment'),
                 'price'       => ArrayHelper::arrayGet($_REQUEST, 'price'),
                 'gift'        => ArrayHelper::arrayGet($_REQUEST, 'gift')
             );
