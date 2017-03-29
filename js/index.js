@@ -1,5 +1,9 @@
 'use strict';
 
+require('../app-angular/node_modules/core-js/client/shim.min.js');
+require('../app-angular/node_modules/zone.js/dist/zone.min.js');
+require('../app-angular/node_modules/reflect-metadata/Reflect.js');
+
 $(document).ready(function(){
     (function() {
         $('#logo-bar').scrollToFixed(); // Fixed Navigation Bar
