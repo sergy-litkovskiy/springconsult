@@ -13,6 +13,8 @@
             <tr class="table_title_row">
                 <td>Название</td>
                 <td>Описание</td>
+                <td>Доставка</td>
+                <td>Оплата</td>
                 <td>Цена</td>
                 <td>Письмо</td>
                 <td><p>edit<p></td>
@@ -30,6 +32,12 @@
                 </td>
                 <td class="article_table">
                     <p><?php echo $item['description'];?></p>
+                </td>
+                <td class="article_table">
+                    <p><?php echo $item['delivery'];?></p>
+                </td>
+                <td class="article_table">
+                    <p><?php echo $item['payment'];?></p>
                 </td>
                 <td class="article_table">
                     <p><b><?php echo $item['price'];?></b></p>
