@@ -1,10 +1,10 @@
 <noindex>
     <ul class="shares">
         <li class="shareslabel">
-            <h3>Поделитесь с друзьями</h3>
+            <{{ titleTag }}>Поделитесь с друзьями</{{ titleTag }}>
         </li>
         <li class="share-box">
-            <div class="fb-like" data-href="{{ base_url() }}{{ entity }}/{{ data.id }}" data-send="true" data-layout="button_count" data-width="215" data-show-faces="false"></div>
+            <div class="fb-like" data-href="{{ current_url()|raw }}" data-send="true" data-layout="button_count" data-width="215" data-show-faces="false"></div>
         </li>
         <li class="share-box">
             <div>

@@ -29,4 +29,14 @@ class ImageHelper
 
         return $text;
     }
+
+    /**
+     * @param string $path has to contain '/' as tail
+     * @param string $imageName
+     * @return string
+     */
+    public static function makeFbImage($path = 'img/', $imageName = DEFAULT_FB_IMAGE)
+    {
+        return sprintf('%s%s%s', base_url(), $path, $imageName);
+    }
 }

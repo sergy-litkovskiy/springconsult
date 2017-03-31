@@ -25,6 +25,18 @@
                 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
                 <![endif]-->
 
+                <meta property="og:type" content="website"/>
+                <meta property="og:title" content="{{ metaData.fbTitle }}"/>
+                <meta property="og:description" content="{{ metaData.metaDescription }}"/>
+                <meta property="og:keywords" content="{{ metaData.metaKeywords }}"/>
+                <meta property="og:image" content="{{ metaData.fbImg }}"/>
+                <meta property="og:url" content="{{ current_url() }}"/>
+                <meta property="og:site_name" content="Springconsult"/>
+                <meta property="fb:app_id" content="124735281036290"/>
+
+                <link rel="icon" href="{{ base_url() }}favicon.ico" type="image/x-icon">
+                <link rel="shortcut icon" href="{{ base_url() }}favicon.ico" type="image/x-icon">
+
                 {% include 'blocks/header_social_scripts.html.twig' %}
             {% endblock %}
         </head>

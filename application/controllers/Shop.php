@@ -33,7 +33,6 @@ class Shop extends MY_Controller
         $saleProductData = $this->sale_model->get($saleProductId);
         $saleProductImageList = $this->saleProductImage_model->getSaleProductImageBySaleProductId($saleProductId);
         $reviewList = $this->review_model->getReviewListBySaleProductId($saleProductId);
-        $metaData = $this->prepareMetaData(ArrayHelper::arrayGet($saleProductData, 0, []));
         $productData = ArrayHelper::arrayGet(array_values($saleProductData), 0);
 
         //get only main image
@@ -42,6 +41,11 @@ class Shop extends MY_Controller
         });
 
         $productData['image'] = ArrayHelper::arrayGet($imageData, 0);
+        $mainImage = ArrayHelper::arrayGet($productData, 'image.image');
+
+        ArrayHelper::arraySet($saleProductData, '0.image', $mainImage);
+
+        $metaData = $this->prepareMetaData(ArrayHelper::arrayGet($saleProductData, 0, []));
 
         $data = [
             'currentItemName' => 'saleProduct',
@@ -202,5 +206,17 @@ class Shop extends MY_Controller
         }
 
         return true;
+    }
+
+    protected function makeFbImage($data)
+    {
+        $imageName = ArrayHelper::arrayGet($data, 'image');
+
+        if (is_null($imageName)) {
+            //return default fbImage
+            return parent::makeFbImage($data);
+        }
+
+        return ImageHelper::makeFbImage('img/sale_product/', $imageName);
     }
 }

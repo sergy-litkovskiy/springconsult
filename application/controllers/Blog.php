@@ -153,4 +153,16 @@ class Blog extends MY_Controller
 
         return [$orderParams, $limitParams];
     }
+
+    protected function makeFbImage($data)
+    {
+        $imageName = ImageHelper::getFirstImgFromText(ArrayHelper::arrayGet($data, 'text'), null);
+
+        if (is_null($imageName)) {
+            //return default fbImage
+            return parent::makeFbImage($data);
+        }
+
+        return ImageHelper::makeFbImage('img/blog/', $imageName);
+    }
 }

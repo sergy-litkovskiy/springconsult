@@ -109,11 +109,13 @@ abstract class MY_Controller extends CI_Controller
         $metaData['metaDescription'] = ArrayHelper::arrayGet($data, 'meta_description');
         $metaData['metaKeywords']    = ArrayHelper::arrayGet($data, 'meta_keywords');
         $metaData['fbTitle']         = sprintf('%s - %s', SITE_TITLE, ArrayHelper::arrayGet($data, 'title'));
-        $metaData['fbImg']           = ImageHelper::getFirstImgFromText(
-            ArrayHelper::arrayGet($data, 'text'),
-            DEFAULT_FB_IMAGE
-        );
+        $metaData['fbImg']           = $this->makeFbImage($data);
 
         return $metaData;
+    }
+
+    protected function makeFbImage($data)
+    {
+        return ImageHelper::makeFbImage();
     }
 }
