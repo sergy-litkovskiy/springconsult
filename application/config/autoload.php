@@ -98,6 +98,7 @@ $autoload['drivers'] = ['pdo', 'mysqli'];
 */
 $autoload['helper'] = [
         'url',
+        'cdn_url',
         'form',
         'head_htm_backend',
         'tinymce',

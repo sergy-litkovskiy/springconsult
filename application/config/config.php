@@ -511,3 +511,17 @@ $config['rewrite_short_tags'] = TRUE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| KeyCDN URL
+|--------------------------------------------------------------------------
+|
+| Loading content like .js, .png, .css files from KeyCDN.
+|
+|  http://demo-1.kxcdn.com/
+|
+| Still use the base_url() function to upload assets on your origin.
+|
+*/
+$config['keycdn_url']   = 'http://gzthd3epk4kmjf0dkzeifn66nwltcqcg.cdn-freehost.com.ua/';
