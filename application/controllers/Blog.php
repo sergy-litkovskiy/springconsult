@@ -154,6 +154,11 @@ class Blog extends MY_Controller
         return [$orderParams, $limitParams];
     }
 
+    /**
+     * Generate path to image for FB using article inside article text
+     * @param $data
+     * @return string
+     */
     protected function makeFbImage($data)
     {
         $imageName = ImageHelper::getFirstImgFromText(ArrayHelper::arrayGet($data, 'text'), null);
@@ -164,5 +169,10 @@ class Blog extends MY_Controller
         }
 
         return ImageHelper::makeFbImage('img/blog/', $imageName);
+    }
+
+    protected function makeMetaType()
+    {
+        return 'article';
     }
 }

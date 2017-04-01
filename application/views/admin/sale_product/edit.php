@@ -12,6 +12,15 @@
     <p><b>Alias (slug):</b></p>
     <p><input type="text" class="main_inputs" id='slug' name='slug' value="<?php echo $content['slug'];?>"/></p>
     <br/>
+    <p><b>Meta description:</b></p>
+    <textarea  style="width: 100%" name='meta_description' cols='60' rows='4'><?php echo $content['meta_description'];?></textarea>
+    <br/>
+    <p><b>Meta keywords:</b></p>
+    <p><input type="text" id='meta_keywords' name='meta_keywords' value="<?php echo $content['meta_keywords'];?>"/></p>
+    <br/>
+    <p><b>Цена:</b></p>
+    <p><input type="text" id='price' name='price' value="<?php echo $content['price'];?>"/></p>
+    <br/>
     <p><b>Подарок:</b></p>
     <p><input type="text" class="main_inputs" id='gift' name='gift' value="<?php echo $content['gift'];?>"/></p>
     <br/>
@@ -37,19 +46,16 @@
             <?php endfor;?>
         <?php }?>
     <p><b>Описание короткое:</b></p>
-    <textarea style='width:100%' name='description' cols='80' rows='8'><?php echo $content['description'];?></textarea>
+    <textarea style='width:100%' id="description-box" name='description' cols='80' rows='8'><?php echo $content['description'];?></textarea>
     <br/>
     <p><b>Описание основное:</b></p>
-    <textarea style='width:100%' name='text' cols='80' rows='8'><?php echo $content['text'];?></textarea>
+    <textarea style='width:100%' id="text-box" name='text' cols='80' rows='8'><?php echo $content['text'];?></textarea>
     <br/>
     <p><b>Доставка:</b></p>
-    <textarea style='width:100%' name='delivery' cols='80' rows='5'><?php echo $content['delivery'];?></textarea>
+    <textarea style='width:100%' id="delivery-box" name='delivery' cols='80' rows='5'><?php echo $content['delivery'];?></textarea>
     <br/>
     <p><b>Оплата:</b></p>
-    <textarea style='width:100%' name='payment' cols='80' rows='5'><?php echo $content['payment'];?></textarea>
-    <br/>
-    <p><b>Цена:</b></p>
-    <p><input type="text" id='price' name='price' value="<?php echo $content['price'];?>"/></p>
+    <textarea style='width:100%' id="payment-box" name='payment' cols='80' rows='5'><?php echo $content['payment'];?></textarea>
     <br/>
 
     <input id="id" name="id" type="hidden" value="<?php echo set_value('id', $content['id']);?>"/>
@@ -58,7 +64,7 @@
     <input id="created_at" name="created_at" type="hidden" value="<?php echo set_value('created_at', $content['created_at']);?>"/>
 
     <div style="width:600px; clear:both">&nbsp;</div>
-    
+
     <input id='button' name='edit_sale_product' type='submit' value='Сохранить'/>
 </form>
 <script>

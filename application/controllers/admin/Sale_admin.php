@@ -252,6 +252,8 @@ class Sale_admin extends CI_Controller
             $saleArr[$saleProducts['id']]['gift']                = $saleProducts['gift'];
             $saleArr[$saleProducts['id']]['description']         = $saleProducts['description'];
             $saleArr[$saleProducts['id']]['text']         = $saleProducts['text'];
+            $saleArr[$saleProducts['id']]['meta_description'] = $saleProducts['meta_description'];
+            $saleArr[$saleProducts['id']]['meta_keywords'] = $saleProducts['meta_keywords'];
             $saleArr[$saleProducts['id']]['delivery']         = $saleProducts['delivery'];
             $saleArr[$saleProducts['id']]['payment']         = $saleProducts['payment'];
             $saleArr[$saleProducts['id']]['status']              = $saleProducts['status'];
@@ -340,6 +342,8 @@ class Sale_admin extends CI_Controller
                 'slug'        => ArrayHelper::arrayGet($_REQUEST, 'slug'),
                 'description' => ArrayHelper::arrayGet($_REQUEST, 'description'),
                 'text' => ArrayHelper::arrayGet($_REQUEST, 'text'),
+                'meta_description' => ArrayHelper::arrayGet($_REQUEST, 'meta_description'),
+                'meta_keywords' => ArrayHelper::arrayGet($_REQUEST, 'meta_keywords'),
                 'delivery' => ArrayHelper::arrayGet($_REQUEST, 'delivery'),
                 'payment' => ArrayHelper::arrayGet($_REQUEST, 'payment'),
                 'price'       => ArrayHelper::arrayGet($_REQUEST, 'price'),

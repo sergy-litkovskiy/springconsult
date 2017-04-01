@@ -110,6 +110,7 @@ abstract class MY_Controller extends CI_Controller
         $metaData['metaKeywords']    = ArrayHelper::arrayGet($data, 'meta_keywords');
         $metaData['fbTitle']         = sprintf('%s - %s', SITE_TITLE, ArrayHelper::arrayGet($data, 'title'));
         $metaData['fbImg']           = $this->makeFbImage($data);
+        $metaData['metaType']        = $this->makeMetaType();
 
         return $metaData;
     }
@@ -117,5 +118,10 @@ abstract class MY_Controller extends CI_Controller
     protected function makeFbImage($data)
     {
         return ImageHelper::makeFbImage();
+    }
+
+    protected function makeMetaType()
+    {
+        return 'website';
     }
 }

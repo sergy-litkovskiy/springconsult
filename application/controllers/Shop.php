@@ -43,6 +43,7 @@ class Shop extends MY_Controller
         $productData['image'] = ArrayHelper::arrayGet($imageData, 0);
         $mainImage = ArrayHelper::arrayGet($productData, 'image.image');
 
+        //extend main data for page with main image to create metaData for FB
         ArrayHelper::arraySet($saleProductData, '0.image', $mainImage);
 
         $metaData = $this->prepareMetaData(ArrayHelper::arrayGet($saleProductData, 0, []));
@@ -208,6 +209,11 @@ class Shop extends MY_Controller
         return true;
     }
 
+    /**
+     * Generate path to image for FB using product's images
+     * @param $data
+     * @return string
+     */
     protected function makeFbImage($data)
     {
         $imageName = ArrayHelper::arrayGet($data, 'image');
@@ -218,5 +224,10 @@ class Shop extends MY_Controller
         }
 
         return ImageHelper::makeFbImage('img/sale_product/', $imageName);
+    }
+
+    protected function makeMetaType()
+    {
+        return 'product';
     }
 }

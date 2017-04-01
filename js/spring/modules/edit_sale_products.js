@@ -6,7 +6,8 @@ function EditSaleProductsFormModule() {
 
         var _init = function(){
             sb.publish({
-                type : 'init-advanced-mce-for-all-textarea'
+                type : 'init-advanced-mce-for-element-list',
+                data : 'description-box, text-box, delivery-box, payment-box'
             });
         }; 
         
