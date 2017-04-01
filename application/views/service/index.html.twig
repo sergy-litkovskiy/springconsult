@@ -27,10 +27,16 @@
                         <div class="col-md-3 col-sm-6">
                             <div class="serviceBox_2 {{ serviceToReviewsItem.data.color_class }}">
                                 <div class="service-icon">
-                                    <i class="fa {{ serviceToReviewsItem.data.icon_class }}"></i>
+                                    <a href="{{ base_url() }}service/{{ serviceToReviewsItem.data.id }}/{{ serviceToReviewsItem.data.slug }}">
+                                        <i class="fa {{ serviceToReviewsItem.data.icon_class }}"></i>
+                                    </a>
                                 </div>
                                 <div class="service-content">
-                                    <h3>{{ serviceToReviewsItem.data.title }}</h3>
+                                    <h3>
+                                        <a href="{{ base_url() }}service/{{ serviceToReviewsItem.data.id }}/{{ serviceToReviewsItem.data.slug }}">
+                                            {{ serviceToReviewsItem.data.title }}
+                                        </a>
+                                    </h3>
                                     <div>
                                         {{ serviceToReviewsItem.data.description[:150]|raw }}
                                         <span class="show-more" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ serviceToReviewsItem.data.description }}"> ...<i class="fa fa-search-plus"></i></span>

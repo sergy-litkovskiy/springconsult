@@ -3129,7 +3129,9 @@ section.parallax h2 {
     font-weight: 600;
     margin-top: 0;
 }
-
+.serviceBox_2 .service-content h3 a{
+    color: hsl(0, 0%, 20%)!important;
+}
 .serviceBox_2 .service-content p{
     color:hsl(0, 0%, 47%);
     line-height: 2;
