@@ -44,7 +44,7 @@
                                 <ul class="arrows_list list_style">
                                     {% for topic in topicList %}
                                         <li>
-                                            <a href="{{ base_url() }}blog/topic/{{ topic.id }}">
+                                            <a href="{{ base_url() }}blog/topic/{{ topic.id }}/{{ topic.slug }}">
                                                 {{ topic.name }} ({{ topic.articles_count }})
                                             </a>
                                         </li>
