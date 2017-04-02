@@ -37,7 +37,7 @@
                             {% for review in reviewList %}
                                 <div class="about_author">
                                     <div class="author_desc">
-                                        <img src="{{ base_url() }}img/review/{{ review.image }}" alt="about author">
+                                        <img src="{{ cdn_url() }}img/review/{{ review.image }}" alt="about author">
                                     </div>
                                     <div class="author_bio">
                                         <h3 class="author_name">
@@ -102,7 +102,7 @@
                                         <li>
                                             <span>
                                                 <a href="{{ base_url() }}article/{{ article.id }}">
-                                                    <img src="{{ base_url() }}img/blog/{{ article.image }}" alt="" />
+                                                    <img src="{{ cdn_url() }}img/blog/{{ article.image }}" alt="" />
                                                 </a>
                                             </span>
                                             <a href="{{ base_url() }}article/{{ article.id }}">
