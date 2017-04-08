@@ -35,11 +35,11 @@
                                                     {% if saleProductImage.is_main < 1 %}
                                                         {% set imageData = saleProductImage.image|split('.') %}
                                                         <li>
-                                                            <a class="mfp-gallery" title="origin" href="{{ cdn_url() }}img/sale_product/additional/{{ saleProductImage.image }}">
+                                                            <a class="mfp-gallery" title="origin" href="{{ getCurrentDomain() }}img/sale_product/additional/{{ saleProductImage.image }}">
                                                                 <i class="fa fa-search"></i>
                                                                 <div class="hover"></div>
                                                             </a>
-                                                            <img src="{{ cdn_url() }}img/sale_product/additional/{{ imageData[0] }}_s.{{ imageData[1] }}" alt="small">
+                                                            <img src="{{ getCurrentDomain() }}img/sale_product/additional/{{ imageData[0] }}_s.{{ imageData[1] }}" alt="small">
                                                         </li>
                                                     {% endif %}
                                                 {% endfor %}
@@ -107,7 +107,7 @@
                                     {% for review in reviewList %}
                                         <div class="about_author">
                                             <div class="author_desc">
-                                                <img src="{{ cdn_url() }}img/review/{{ review.image }}" alt="about author">
+                                                <img src="{{ getCurrentDomain() }}img/review/{{ review.image }}" alt="about author">
                                             </div>
                                             <div class="author_bio">
                                                 <h5 class="author_name">
@@ -137,7 +137,7 @@
 
 {% block footer %}
     {{ parent() }}
-    <script type="text/javascript" src="{{ cdn_url() }}js/front/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="{{ getCurrentDomain() }}js/front/jquery.magnific-popup.min.js"></script>
     {% include 'blocks/popup_payment.html.twig' %}
-    <script src="{{ cdn_url() }}assets/shop.js"></script>
+    <script src="{{ getCurrentDomain() }}assets/shop.js"></script>
 {% endblock %}

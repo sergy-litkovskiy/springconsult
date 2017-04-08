@@ -8,3 +8,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteCond $1 !^(index\.php|images|robots\.txt)
 RewriteRule ^(.*)$ /index.php/$1 [L]
+
+SetEnv CI_ENV testing

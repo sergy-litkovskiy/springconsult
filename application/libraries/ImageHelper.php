@@ -37,6 +37,6 @@ class ImageHelper
      */
     public static function makeFbImage($path = 'img/', $imageName = DEFAULT_FB_IMAGE)
     {
-        return sprintf('%s%s%s', cdn_url(), $path, $imageName);
+        return sprintf('%s%s%s', getCurrentDomain(), $path, $imageName);
     }
 }

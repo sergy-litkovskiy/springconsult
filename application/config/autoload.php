@@ -110,7 +110,8 @@ $autoload['helper'] = [
         'pager',
         'security',
         'disqus',
-        'unisender_curl'
+        'unisender_curl',
+        'environment'
     ];
 
 /*
