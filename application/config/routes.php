@@ -56,6 +56,9 @@ $route['404_override']       = 'errorController/index';
 $route['message/send']        = 'index/ajax_message';
 $route['(:any)/message/send'] = 'index/ajax_message';
 
+////////////////////NEW ADMIN////////////////////////////
+$route['adm'] = "admin/index";
+
 ////////////////////ADMIN////////////////////////////
 
 $route['backend']        = "admin/login";
