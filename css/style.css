@@ -3517,6 +3517,13 @@ ul.client_items .img{
     text-align:center;
     font-weight:400;
 }
+
+.pricingTable .heading a {
+    color: #333;
+}
+.pricingTable .price-value a {
+    color: white;
+}
 .pricingTable-sign-up {
     /*padding:20px;*/
     padding:10px;

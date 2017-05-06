@@ -119,7 +119,7 @@ class Sale_model extends Crud
     public function getSaleProductListBySaleCategoryId($saleCategoryId)
     {
         $sqlSelect = sprintf('
-            sale_category_sale_product_assignment.id as sale_category_sale_product_assignment_id,
+            scspa.id as sale_category_sale_product_assignment_id,
             %s.id as sale_product_id,
             %s.title as sale_product_title,
             %s.label as sale_product_label,

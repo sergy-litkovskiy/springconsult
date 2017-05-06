@@ -36,14 +36,22 @@
                                 <li id="product-{{ product.id }}" class="col-lg-3 col-md-3 col-sm-3"  style="height: 520px">
                                     <div class="pricingTable">
                                         <div class="pricingTable-header">
-                                            <img src="{{ getCurrentDomain() }}img/sale_product/{{ product.image }}"/>
+                                            <a href="{{ base_url() }}shop/sale/{{ product.id }}/{{ product.slug }}">
+                                                <img src="{{ getCurrentDomain() }}img/sale_product/{{ product.image }}"/>
+                                            </a>
                                             <span class="heading">
-                                                {{ product.title }}
-                                                {% if product.label|length %}
-                                                    <br/>{{ product.label }}
-                                                {% endif %}
+                                                <a href="{{ base_url() }}shop/sale/{{ product.id }}/{{ product.slug }}">
+                                                    {{ product.title }}
+                                                    {% if product.label|length %}
+                                                        <br/>{{ product.label }}
+                                                    {% endif %}
+                                                </a>
                                             </span>
-                                            <span class="price-value">UAH<span>{{ product.price }}</span></span>
+                                            <span class="price-value">
+                                                <a href="{{ base_url() }}shop/sale/{{ product.id }}/{{ product.slug }}">
+                                                    UAH<span>{{ product.price }}</span>
+                                                </a>
+                                            </span>
                                         </div>
 
                                         <div class="pricingContent">
