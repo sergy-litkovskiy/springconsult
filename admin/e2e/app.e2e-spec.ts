@@ -1,14 +1,14 @@
-import { MyAppPage } from './app.po';
+import { AdminAppPage } from './app.po';
 
-describe('my-app App', function() {
-  let page: MyAppPage;
-
-  beforeEach(() => {
-    page = new MyAppPage();
-  });
-
-  it('should display message saying app works', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
-  });
-});
+// describe('admin-app App', () => {
+//   let page: AdminAppPage;
+//
+//   beforeEach(() => {
+//     page = new AdminAppPage();
+//   });
+//
+//   it('should display message saying app works', () => {
+//     page.navigateTo();
+//     expect(page.getParagraphText()).toEqual('app works!');
+//   });
+// });

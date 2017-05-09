@@ -524,4 +524,5 @@ $config['proxy_ips'] = '';
 | Still use the base_url() function to upload assets on your origin.
 |
 */
-$config['keycdn_url']   = 'http://gzthd3epk4kmjf0dkzeifn66nwltcqcg.cdn-freehost.com.ua/';
+//$config['keycdn_url']   = 'http://gzthd3epk4kmjf0dkzeifn66nwltcqcg.cdn-freehost.com.ua/';
+$config['keycdn_url']   = 'http://xvsdxgpkg59kc4oczoky5n54qcbzqgos.cdn-freehost.com.ua/';

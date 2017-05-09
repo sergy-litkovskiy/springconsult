@@ -50,12 +50,12 @@
             {% block footer %}
                 <div>FOOTER</div>
                 <!-- Polyfills -->
-                {#<script src="{{ getCurrentDomain() }}admin/node_modules/systemjs/dist/system.js"></script>#}
                 <script src="{{ getCurrentDomain() }}admin/node_modules/core-js/client/shim.js"></script>
-                <script src="{{ getCurrentDomain() }}admin/node_modules/systemjs/dist/system.js"></script>
+
                 <script src="{{ getCurrentDomain() }}admin/node_modules/zone.js/dist/zone.min.js"></script>
                 <script src="{{ getCurrentDomain() }}admin/node_modules/reflect-metadata/Reflect.js"></script>
 
+                <script src="{{ getCurrentDomain() }}admin/node_modules/systemjs/dist/system.js"></script>
                 <script src="{{ getCurrentDomain() }}admin/src/systemjs.config.js"></script>
 
                 <script>

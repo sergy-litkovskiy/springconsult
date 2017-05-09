@@ -10,7 +10,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
-var app_component_1 = require("./app.component");
+var app_main_panel_1 = require("./app.main-panel");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -19,7 +19,7 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         declarations: [
-            app_component_1.AppComponent
+            app_main_panel_1.AppMainPanel
         ],
         imports: [
             platform_browser_1.BrowserModule,
@@ -27,7 +27,7 @@ AppModule = __decorate([
             http_1.HttpModule
         ],
         providers: [],
-        bootstrap: [app_component_1.AppComponent]
+        bootstrap: [app_main_panel_1.AppMainPanel]
     })
 ], AppModule);
 exports.AppModule = AppModule;
