@@ -1,1 +1,0 @@
-{"version":3,"file":"app.main-panel.js","sourceRoot":"","sources":["app.main-panel.ts"],"names":[],"mappings":";;;;;;;;AAAA,sCAA0C;AAQ1C,IAAa,YAAY;IANzB;QAOE,UAAK,GAAG,YAAY,CAAC;IACvB,CAAC;IAAD,mBAAC;AAAD,CAAC,AAFD,IAEC;AAFY,YAAY;IANxB,gBAAS,CAAC;QACT,QAAQ,EAAE,WAAW;QACrB,WAAW,EAAE,oCAAoC;QACjD,IAAI;QACJ,oCAAoC;KACrC,CAAC;GACW,YAAY,CAExB;AAFY,oCAAY"}

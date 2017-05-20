@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppMainPanel } from './app.main-panel';
+import { AppMainComponent } from './main/app.main.component';
 
 @NgModule({
   declarations: [
-    AppMainPanel
+    AppMainComponent
   ],
   imports: [
     BrowserModule,
@@ -15,6 +15,6 @@ import { AppMainPanel } from './app.main-panel';
     HttpModule
   ],
   providers: [],
-  bootstrap: [AppMainPanel]
+  bootstrap: [AppMainComponent]
 })
 export class AppModule { }
