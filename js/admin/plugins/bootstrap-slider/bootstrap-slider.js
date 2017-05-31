@@ -250,7 +250,7 @@
 
 				/* Create tooltip elements */
 				var sliderTooltip = document.createElement("div");
-				sliderTooltip.className = "tooltip tooltip-main";
+				sliderTooltip.className = "tooltip tooltip-menu";
 				createAndAppendTooltipSubElements(sliderTooltip);
 
 				var sliderTooltipMin = document.createElement("div");
@@ -327,7 +327,7 @@
 
 			this.touchCapable = 'ontouchstart' in window || (window.DocumentTouch && document instanceof window.DocumentTouch);
 
-			this.tooltip = this.sliderElem.querySelector('.tooltip-main');
+			this.tooltip = this.sliderElem.querySelector('.tooltip-menu');
 			this.tooltipInner = this.tooltip.querySelector('.tooltip-inner');
 
 			this.tooltip_min = this.sliderElem.querySelector('.tooltip-min');

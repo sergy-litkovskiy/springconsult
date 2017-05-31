@@ -61,7 +61,7 @@ defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREA
 | leaving room for others to be defined in future versions and user
 | applications.
 |
-| The three main conventions used for determining exit status codes
+| The three menu conventions used for determining exit status codes
 | are as follows:
 |
 |    Standard C/C++ Library (stdlibc):

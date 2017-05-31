@@ -10,7 +10,8 @@ var platform_browser_1 = require("@angular/platform-browser");
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
-var app_main_component_1 = require("./main/app.main.component");
+var app_main_component_1 = require("./app.main.component");
+var app_routing_module_1 = require("./app.routing.module");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -24,7 +25,8 @@ AppModule = __decorate([
         imports: [
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
-            http_1.HttpModule
+            http_1.HttpModule,
+            app_routing_module_1.AppRoutingModule
         ],
         providers: [],
         bootstrap: [app_main_component_1.AppMainComponent]

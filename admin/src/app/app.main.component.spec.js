@@ -1,7 +1,6 @@
-import { TestBed, async } from '@angular/core/testing';
-
-// import { AppMainPanel } from './app.main';
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+// import { AppMainPanel } from './app.menu';
 // describe('AppComponent', () => {
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
@@ -30,3 +29,4 @@ import { TestBed, async } from '@angular/core/testing';
 //     expect(compiled.querySelector('h1').textContent).toContain('app works!');
 //   }));
 // });
+//# sourceMappingURL=app.main.component.spec.js.map

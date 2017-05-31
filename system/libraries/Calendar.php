@@ -277,7 +277,7 @@ class CI_Calendar {
 
 		$out .= "\n".$this->replacements['week_row_end']."\n";
 
-		// Build the main body of the calendar
+		// Build the menu body of the calendar
 		while ($day <= $total_days)
 		{
 			$out .= "\n".$this->replacements['cal_row_start']."\n";

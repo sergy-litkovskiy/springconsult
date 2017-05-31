@@ -73,7 +73,7 @@ class CI_DB_Cache {
 	 */
 	public function __construct(&$db)
 	{
-		// Assign the main CI object to $this->CI and load the file helper since we use it a lot
+		// Assign the site-menu CI object to $this->CI and load the file helper since we use it a lot
 		$this->CI =& get_instance();
 		$this->db =& $db;
 		$this->CI->load->helper('file');

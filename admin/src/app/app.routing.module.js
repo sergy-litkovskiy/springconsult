@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var app_main_component_1 = require("../main/app.main.component");
+var menu_list_component_1 = require("./menu/menu-list/menu-list.component");
 var routes = [
-    { path: '', redirectTo: '/main', pathMatch: 'full' },
-    { path: 'main', component: app_main_component_1.AppMainComponent },
+    { path: '', redirectTo: '/menu-list', pathMatch: 'full' },
+    { path: 'menu-list', component: menu_list_component_1.AppMenuComponent },
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

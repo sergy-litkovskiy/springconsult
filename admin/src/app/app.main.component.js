@@ -9,16 +9,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var AppMainComponent = (function () {
     function AppMainComponent() {
-        this.title = 'Admin';
+        this.loadedFeature = 'menu-list';
     }
+    AppMainComponent.prototype.onNavigate = function (feature) {
+        this.loadedFeature = feature;
+    };
     return AppMainComponent;
 }());
 AppMainComponent = __decorate([
     core_1.Component({
         selector: 'adm-panel',
-        templateUrl: '/admin/src/app/main/app.main.component.html'
+        templateUrl: '/admin/src/app/app.main.component.html'
         // ,
-        // styleUrls: ['app.main.css']
+        // styleUrls: ['app.menu.css']
     })
 ], AppMainComponent);
 exports.AppMainComponent = AppMainComponent;

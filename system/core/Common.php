@@ -227,7 +227,7 @@ if ( ! function_exists('is_loaded'))
 if ( ! function_exists('get_config'))
 {
 	/**
-	 * Loads the main config.php file
+	 * Loads the site-menu config.php file
 	 *
 	 * This function lets us grab the config file even if the Config class
 	 * hasn't been instantiated yet
@@ -588,7 +588,7 @@ if ( ! function_exists('_error_handler'))
 	 * Error Handler
 	 *
 	 * This is the custom error handler that is declared at the (relative)
-	 * top of CodeIgniter.php. The main reason we use this is to permit
+	 * top of CodeIgniter.php. The site-menu reason we use this is to permit
 	 * PHP errors to be logged in our own log files since the user may
 	 * not have access to server logs. Since this function effectively
 	 * intercepts PHP errors, however, we also need to display errors
@@ -680,7 +680,7 @@ if ( ! function_exists('_shutdown_handler'))
 	 * Shutdown Handler
 	 *
 	 * This is the shutdown handler that is declared at the top
-	 * of CodeIgniter.php. The main reason we use this is to simulate
+	 * of CodeIgniter.php. The site-menu reason we use this is to simulate
 	 * a complete custom exception handler.
 	 *
 	 * E_STRICT is purposively neglected because such events may have

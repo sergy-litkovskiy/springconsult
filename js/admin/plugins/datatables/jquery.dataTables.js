@@ -10992,7 +10992,7 @@
 		"sTableId": "",
 		
 		/**
-		 * The TABLE node for the main table
+		 * The TABLE node for the menu table
 		 *  @type node
 		 *  @default null
 		 */

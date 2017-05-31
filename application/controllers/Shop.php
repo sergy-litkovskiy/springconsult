@@ -35,7 +35,7 @@ class Shop extends MY_Controller
         $reviewList = $this->review_model->getReviewListBySaleProductId($saleProductId);
         $productData = ArrayHelper::arrayGet(array_values($saleProductData), 0);
 
-        //get only main image
+        //get only menu image
         $imageData = array_filter($saleProductImageList, function ($imageData) {
             return (bool)ArrayHelper::arrayGet($imageData, 'is_main');
         });
@@ -43,7 +43,7 @@ class Shop extends MY_Controller
         $productData['image'] = ArrayHelper::arrayGet($imageData, 0);
         $mainImage = ArrayHelper::arrayGet($productData, 'image.image');
 
-        //extend main data for page with main image to create metaData for FB
+        //extend menu data for page with menu image to create metaData for FB
         ArrayHelper::arraySet($saleProductData, '0.image', $mainImage);
 
         $metaData = $this->prepareMetaData(ArrayHelper::arrayGet($saleProductData, 0, []));

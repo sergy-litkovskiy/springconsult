@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppMainComponent } from './main/app.main.component';
+import { AppMainComponent } from './app.main.component';
+import {AppRoutingModule} from "./app.routing.module";
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { AppMainComponent } from './main/app.main.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppMainComponent]

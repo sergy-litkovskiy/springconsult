@@ -123,7 +123,7 @@ class Review_admin extends CI_Controller
             'assignedSaleProductIdList' => $assignedSaleProductIdList,
             'assignedMenuList' => $assignedMenuList,
             'saleProductList'         => $saleProductList,
-            'menuList'         => $menuList,
+            'menuItemList'         => $menuList,
             'message'                 => $this->message
         );
 

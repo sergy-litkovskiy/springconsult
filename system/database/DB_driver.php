@@ -718,7 +718,7 @@ abstract class CI_DB_driver {
 	 * Simple Query
 	 * This is a simplified version of the query() function. Internally
 	 * we only use it when running transaction commands since they do
-	 * not require all the features of the main query() function.
+	 * not require all the features of the menu query() function.
 	 *
 	 * @param	string	the sql query
 	 * @return	mixed

@@ -21,7 +21,7 @@ if (typeof jQuery === "undefined") {
 /* AdminLTE
  *
  * @type Object
- * @description $.AdminLTE is the main object for the template's app.
+ * @description $.AdminLTE is the menu object for the template's app.
  *				It's used for implementing functions and options related
  *				to the template. Keeping everything wrapped in an object
  *				prevents conflict with other plugins and is a better
@@ -185,13 +185,13 @@ $.AdminLTE.layout = {
   },
   fix: function () {
     //Get window height and the wrapper height
-    var neg = $('.main-header').outerHeight() + $('.main-footer').outerHeight();
+    var neg = $('.menu-header').outerHeight() + $('.menu-footer').outerHeight();
     var window_height = $(window).height();
     var sidebar_height = $(".sidebar").height();
     //Set the min-height of the content and sidebar based on the
     //the height of the document.
     if ($("body").hasClass("fixed")) {
-      $(".content-wrapper, .right-side").css('min-height', window_height - $('.main-footer').outerHeight());
+      $(".content-wrapper, .right-side").css('min-height', window_height - $('.menu-footer').outerHeight());
     } else {
       if (window_height >= sidebar_height) {
         $(".content-wrapper, .right-side").css('min-height', window_height - neg);
@@ -217,7 +217,7 @@ $.AdminLTE.layout = {
         $(".sidebar").slimScroll({destroy: true}).height("auto");
         //Add slimscroll
         $(".sidebar").slimscroll({
-          height: ($(window).height() - $(".main-header").height()) + "px",
+          height: ($(window).height() - $(".menu-header").height()) + "px",
           color: "rgba(0,0,0,0.2)",
           size: "3px"
         });
@@ -305,7 +305,7 @@ $.AdminLTE.tree = function (menu) {
  *
  * @type Object
  * @usage $.AdminLTE.boxWidget.activate()
- *								Set all of your option in the main $.AdminLTE.options object
+ *								Set all of your option in the menu $.AdminLTE.options object
  */
 $.AdminLTE.boxWidget = {
   activate: function () {

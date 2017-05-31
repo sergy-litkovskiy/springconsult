@@ -6295,7 +6295,7 @@ $.widget( "ui.menu", {
 			var currentMenu = all ? this.element :
 				$( event && event.target ).closest( this.element.find( ".ui-menu" ) );
 
-			// If we found no valid submenu ancestor, use the main menu to close all sub menus anyway
+			// If we found no valid submenu ancestor, use the menu menu to close all sub menus anyway
 			if ( !currentMenu.length ) {
 				currentMenu = this.element;
 			}
@@ -8043,7 +8043,7 @@ $.effects.effect.explode = function( o, done ) {
 			left = offset.left + j * width;
 			mx = j - ( cells - 1 ) / 2 ;
 
-			// Create a clone of the now hidden main element that will be absolute positioned
+			// Create a clone of the now hidden menu element that will be absolute positioned
 			// within a wrapper div off the -left and -top equal to size of our pieces
 			el
 				.clone()

@@ -261,7 +261,7 @@
 
                 for (var i = 0; i < totalRows; ++i) {
 
-                    /** Add the table data to main data array */
+                    /** Add the table data to menu data array */
                     var c = $(table.tBodies[0].rows[i]),
                         cols = [];
 

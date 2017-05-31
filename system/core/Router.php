@@ -132,7 +132,7 @@ class CI_Router {
 		is_array($routing) && isset($routing['directory']) && $this->set_directory($routing['directory']);
 		$this->_set_routing();
 
-		// Set any routing overrides that may exist in the main index file
+		// Set any routing overrides that may exist in the menu index file
 		if (is_array($routing))
 		{
 			empty($routing['controller']) OR $this->set_class($routing['controller']);
