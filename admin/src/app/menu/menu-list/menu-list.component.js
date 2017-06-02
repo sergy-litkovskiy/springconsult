@@ -29,7 +29,8 @@ var AppMenuComponent = (function () {
 AppMenuComponent = __decorate([
     core_1.Component({
         selector: 'menu-list',
-        templateUrl: '/admin/src/app/menu/menu-list.component.html'
+        // templateUrl: '/admin/src/app/menu/menu-list.component.html'
+        template: "\n        <div class=\"content-wrapper\" style=\"width: 100%; height: 50px; border: solid 1px red\">\n            <div class=\"row\">\n                <div class=\"col-xs-12\">\n                    <button class=\"btn btn-success\" (click)=\"onNewMenuItem()\">New Item</button>\n                </div>\n            </div>\n            <hr>\n            <div class=\"row\">\n                <div class=\"col-xs-12\">\n                    <!--<app-menu-item-->\n                            <!--*ngFor=\"let menuItem of menuItemList; let i = index\"-->\n                            <!--[menuItem]=\"menuItem\"-->\n                            <!--[index]=\"i\"></app-menu-item>-->\n                </div>\n            </div>\n        </div>"
         // ,
         // styleUrls: ['app.menu.css']
     }),

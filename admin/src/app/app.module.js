@@ -12,6 +12,9 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_main_component_1 = require("./app.main.component");
 var app_routing_module_1 = require("./app.routing.module");
+var menu_list_component_1 = require("./menu/menu-list/menu-list.component");
+var menu_service_1 = require("./menu/menu.service");
+var common_1 = require("@angular/common");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -20,7 +23,8 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         declarations: [
-            app_main_component_1.AppMainComponent
+            app_main_component_1.AppMainComponent,
+            menu_list_component_1.AppMenuComponent
         ],
         imports: [
             platform_browser_1.BrowserModule,
@@ -28,7 +32,7 @@ AppModule = __decorate([
             http_1.HttpModule,
             app_routing_module_1.AppRoutingModule
         ],
-        providers: [],
+        providers: [menu_service_1.MenuService, { provide: common_1.APP_BASE_HREF, useValue: '/adm' }],
         bootstrap: [app_main_component_1.AppMainComponent]
     })
 ], AppModule);
