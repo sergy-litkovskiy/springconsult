@@ -66,6 +66,13 @@ class Service extends MY_Controller
             $map[$menuId]['reviewList'][$reviewId] = $reviewId ? $this->makeReviewsData($serviceData) : [];
         }
 
+        array_walk($map, function ($data) {
+            $reviewList = ArrayHelper::arrayGet($data, 'reviewList');
+            shuffle($reviewList);
+
+            $data['reviewList'] = $reviewList;
+        });
+
         return $map;
     }
 

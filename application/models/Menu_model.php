@@ -112,7 +112,7 @@ class Menu_model extends Crud
             AND 
                 menu.status = %s 
             ORDER by 
-                menu.num_sequence
+                menu.num_sequence ASC, review.id DESC
             ',
             STATUS_ON,
             $id,

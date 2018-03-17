@@ -7,9 +7,10 @@ apt-get -y install git vim rsync curl
 
 echo "Installing Apache2..."
 apt-get install -y apache2
-cp ${SOURCE_PATH}/bin/vagrant/configs/springconsult.loc /etc/apache2/sites-available/springconsult.loc.conf
+cp ${SOURCE_PATH}/vagrant/configs/springconsult.loc /etc/apache2/sites-available/springconsult.loc.conf
 ln -s /etc/apache2/sites-available/springconsult.loc.conf /etc/apache2/sites-enabled/
 apt-get install -y apache2-mpm-itk
+sudo a2enmod rewrite
 service apache2 restart
 
 echo "Installing PHP..."
@@ -24,21 +25,6 @@ apt-get  install -y mysql-server mysql-client
 echo "Installing Composer..."
 curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
-
-#echo "Installing phpUnit..."
-#wget https://phar.phpunit.de/phpunit.phar
-#chmod +x phpunit.phar
-#mv phpunit.phar /usr/local/bin/phpunit
-
-#echo "Installing redis"
-#apt-add-repository ppa:chris-lea/redis-server
-#apt-get update
-#apt-get install -y redis-server
-
-#echo "Installing gearmand"
-#apt-get -y install gearman
-#sudo pecl install gearman
-#sudo gearmand -d
 
 HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
 

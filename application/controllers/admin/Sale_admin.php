@@ -65,6 +65,8 @@ class Sale_admin extends CI_Controller
             , 'status'       => null
             , 'image_list'   => []
             , 'created_at'   => null
+            , 'meta_keywords'   => null
+            , 'meta_description'   => null
         );
 
         $this->urlArr  = explode('/', $_SERVER['REQUEST_URI']);
