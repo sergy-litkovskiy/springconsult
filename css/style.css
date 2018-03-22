@@ -5186,6 +5186,11 @@ h3.price {
     padding: 0 0 20px 40px;
 }
 
+.blog_single ul.list_style.circle {
+    list-style: none;
+    padding: 0 0 20px 20px;
+}
+
 .blog_single ul.shares {
     list-style: none;
     padding: 0;
